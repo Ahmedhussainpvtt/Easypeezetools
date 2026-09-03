@@ -106,7 +106,7 @@ a:hover { text-decoration: underline; }
   border-radius: 0;
   box-shadow: none;
   object-fit: contain;
-  background: #fff;
+  background: transparent;
 }
 .brand-lockup__name {
   position: absolute;
@@ -274,7 +274,7 @@ a:hover { text-decoration: underline; }
   gap: 36px;
   align-items: center;
   padding: 56px 0 40px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .hero__glow {
@@ -333,14 +333,19 @@ a:hover { text-decoration: underline; }
 .hero__visual {
   display: flex;
   justify-content: center;
+  min-width: 0;
+  overflow: visible;
 }
 .hero__visual img {
-  width: min(420px, 100%);
+  width: auto;
+  max-width: 100%;
   height: auto;
+  max-height: min(640px, 78vh);
   border-radius: 0;
   box-shadow: none;
   object-fit: contain;
-  background: #fff;
+  object-position: center;
+  background: transparent;
 }
 
 /* —— Trust strip —— */
@@ -660,7 +665,7 @@ a:hover { text-decoration: underline; }
   max-width: 240px;
   border-radius: 0;
   object-fit: contain;
-  background: #fff;
+  background: transparent;
 }
 .site-footer__brand span {
   position: absolute;
@@ -928,7 +933,7 @@ footer:not(.site-footer) {
     padding-top: 36px;
   }
   .hero__visual { order: -1; }
-  .hero__visual img { width: min(220px, 70vw); }
+  .hero__visual img { width: min(280px, 85vw); height: auto; max-height: none; }
   .feature-grid { grid-template-columns: 1fr 1fr; }
   .trust__list { grid-template-columns: 1fr 1fr; }
 }
@@ -1569,11 +1574,6 @@ footer:not(.site-footer) {
 .hero__lead { color: var(--muted); margin: 0 0 18px; }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 12px; }
 .hero__meta { margin: 0; color: var(--hint); font-size: 0.9rem; font-weight: 600; }
-.hero__visual img {
-  width: 100%;
-  border-radius: 22px;
-  box-shadow: var(--shadow);
-}
 .trust {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
