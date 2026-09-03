@@ -106,7 +106,7 @@ a:hover { text-decoration: underline; }
   border-radius: 0;
   box-shadow: none;
   object-fit: contain;
-  background: #fff;
+  background: transparent;
 }
 .brand-lockup__name {
   position: absolute;
@@ -345,7 +345,7 @@ a:hover { text-decoration: underline; }
   box-shadow: none;
   object-fit: contain;
   object-position: center;
-  background: #fff;
+  background: transparent;
 }
 
 /* —— Trust strip —— */
@@ -665,7 +665,7 @@ a:hover { text-decoration: underline; }
   max-width: 240px;
   border-radius: 0;
   object-fit: contain;
-  background: #fff;
+  background: transparent;
 }
 .site-footer__brand span {
   position: absolute;
