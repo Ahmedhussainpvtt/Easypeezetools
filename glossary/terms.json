@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "merge-pdf",
+    "term": "Merge PDF",
+    "definition": "Combine two or more PDF files into a single document."
+  },
+  {
+    "slug": "split-pdf",
+    "term": "Split PDF",
+    "definition": "Divide a PDF into separate files or extract page ranges."
+  },
+  {
+    "slug": "compress-pdf",
+    "term": "Compress PDF",
+    "definition": "Reduce PDF file size for email, WhatsApp, and upload portals."
+  },
+  {
+    "slug": "ocr-pdf",
+    "term": "OCR PDF",
+    "definition": "Optical character recognition that makes scanned PDFs searchable."
+  },
+  {
+    "slug": "esign-pdf",
+    "term": "eSign PDF",
+    "definition": "Placing a drawn or uploaded signature on a PDF document."
+  },
+  {
+    "slug": "pdf-editor",
+    "term": "PDF editor",
+    "definition": "Software to edit, annotate, organize, or convert PDF files."
+  },
+  {
+    "slug": "searchable-pdf",
+    "term": "Searchable PDF",
+    "definition": "A PDF with a text layer so you can find words with Ctrl+F."
+  },
+  {
+    "slug": "pdf-metadata",
+    "term": "PDF metadata",
+    "definition": "Title, author, subject, and keywords stored in PDF properties for discovery."
+  },
+  {
+    "slug": "unlock-pdf",
+    "term": "Unlock PDF",
+    "definition": "Remove a PDF password when you are authorized and know the password."
+  },
+  {
+    "slug": "jpg-to-pdf",
+    "term": "JPG to PDF",
+    "definition": "Convert image files into a PDF document."
+  },
+  {
+    "slug": "adobe-acrobat-alternative",
+    "term": "Adobe Acrobat alternative",
+    "definition": "A PDF app that covers everyday edit/merge/sign tasks without Acrobat Pro pricing."
+  },
+  {
+    "slug": "desktop-pdf-editor",
+    "term": "Desktop PDF editor",
+    "definition": "A Windows (or Mac) app that processes PDFs locally instead of in the browser."
+  }
+]
