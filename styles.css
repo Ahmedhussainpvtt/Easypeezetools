@@ -90,6 +90,7 @@ a:hover { text-decoration: underline; }
 }
 
 .brand-lockup {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -97,24 +98,26 @@ a:hover { text-decoration: underline; }
   line-height: 1;
 }
 .brand-lockup img {
-  width: 40px;
-  height: 40px;
+  width: auto;
+  height: 56px;
+  max-width: min(280px, 62vw);
   display: block;
   flex-shrink: 0;
-  border-radius: 11px;
+  border-radius: 0;
   box-shadow: none;
+  object-fit: contain;
+  background: #fff;
 }
 .brand-lockup__name {
-  font-size: 1.2rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.3;
-  padding-bottom: 0.14em;
-  background: linear-gradient(315deg, var(--primary) 35%, var(--secondary));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .site-nav {
@@ -641,6 +644,7 @@ a:hover { text-decoration: underline; }
   gap: 14px;
 }
 .site-footer__brand {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -648,20 +652,19 @@ a:hover { text-decoration: underline; }
   line-height: 1;
 }
 .site-footer__brand img {
-  width: 32px;
-  height: 32px;
-  border-radius: 9px;
+  width: auto;
+  height: 44px;
+  max-width: 220px;
+  border-radius: 0;
+  object-fit: contain;
+  background: #fff;
 }
 .site-footer__brand span {
-  font-size: 1.05rem;
-  letter-spacing: -0.02em;
-  line-height: 1.25;
-  padding-bottom: 0.1em;
-  background: linear-gradient(315deg, var(--primary) 35%, var(--secondary));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
 }
 .site-footer nav {
   display: flex;
