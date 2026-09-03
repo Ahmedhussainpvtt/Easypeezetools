@@ -1402,6 +1402,57 @@ footer:not(.site-footer) {
 .prose h2 { margin: 28px 0 10px; font-size: 1.35rem; }
 .prose p, .prose li { color: var(--muted); }
 .prose a { font-weight: 600; }
+.prose-figure {
+  margin: 0 0 28px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.prose-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 14 / 9;
+  object-fit: cover;
+}
+.prose-figure figcaption {
+  padding: 8px 12px 12px;
+  font-size: 0.8rem;
+  color: var(--hint);
+}
+.feature-card__media {
+  margin: -20px -22px 14px;
+  overflow: hidden;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.feature-card__media img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+.compare-band { padding-top: 8px; }
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.compare-table th, .compare-table td {
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.compare-table thead th { background: var(--primary); color: #fff; font-weight: 600; }
+.compare-table tbody th { width: 28%; color: var(--primary); }
+.compare-table tbody tr:last-child th,
+.compare-table tbody tr:last-child td { border-bottom: 0; }
 
 .glossary-alpha {
   display: flex;

@@ -1,14 +1,79 @@
 [
   {
-    "slug": "best-pdf-editor-windows-india",
-    "title": "Best PDF editor for Windows in India (2026)",
-    "description": "Compare Adobe Acrobat, free online PDF editors, and desktop apps. Why Pdf Buddy by Easy Peeze Tools fits Indian students and SMEs.",
-    "date": "2026-09-01",
-    "url": "/blog/best-pdf-editor-windows-india/",
-    "image": "/og-image.jpg",
+    "slug": "ocr-scanned-pdf-searchable",
+    "title": "Make a scanned PDF searchable with OCR",
+    "description": "Turn image-only scans into searchable PDFs with OCR on Windows. Pdf Buddy OCR for invoices and photocopies.",
+    "date": "2026-09-03",
+    "url": "/blog/ocr-scanned-pdf-searchable/",
+    "image": "/images/blog-ocr.jpg",
+    "tags": [
+      "OCR PDF",
+      "searchable PDF"
+    ]
+  },
+  {
+    "slug": "pdf-seo-metadata-filenames",
+    "title": "PDF SEO: metadata, filenames, and landing pages",
+    "description": "How to optimize PDFs for Google: title/subject/keywords metadata, hyphenated filenames, and HTML landing pages that outrank raw PDFs.",
+    "date": "2026-09-03",
+    "url": "/blog/pdf-seo-metadata-filenames/",
+    "image": "/images/blog-seo.jpg",
+    "tags": [
+      "PDF SEO",
+      "metadata"
+    ]
+  },
+  {
+    "slug": "online-pdf-editor-privacy",
+    "title": "Why upload-based online PDF editors are risky",
+    "description": "Privacy risks of free online PDF editors. Prefer a local Windows PDF editor for ID proofs, bank statements, and contracts.",
+    "date": "2026-09-03",
+    "url": "/blog/online-pdf-editor-privacy/",
+    "image": "/images/blog-privacy.jpg",
+    "tags": [
+      "privacy",
+      "online PDF editor"
+    ]
+  },
+  {
+    "slug": "pdf-buddy-vs-online-editors",
+    "title": "Pdf Buddy vs iLovePDF, Smallpdf, Sejda & pdfFiller",
+    "description": "When to use a local Windows PDF editor instead of iLovePDF, Smallpdf, Sejda, or pdfFiller \u2014 India pricing, privacy, and portal uploads.",
+    "date": "2026-09-03",
+    "url": "/blog/pdf-buddy-vs-online-editors/",
+    "image": "/images/blog-compare.jpg",
     "tags": [
       "PDF editor",
-      "Windows",
+      "iLovePDF",
+      "Smallpdf",
+      "Sejda",
+      "pdfFiller"
+    ]
+  },
+  {
+    "slug": "fill-and-type-on-pdf-windows",
+    "title": "Type on a PDF and fill forms on Windows (without Acrobat)",
+    "description": "How to type on a PDF, fill AcroForm fields, and overlay text on scans using a desktop editor \u2014 plus when you still need Acrobat or a cloud form tool.",
+    "date": "2026-09-03",
+    "url": "/blog/fill-and-type-on-pdf-windows/",
+    "image": "/images/blog-forms.jpg",
+    "tags": [
+      "type on PDF",
+      "fill PDF form",
+      "Windows"
+    ]
+  },
+  {
+    "slug": "pdf-pack-for-indian-portals",
+    "title": "Build a PDF pack that Indian portals will actually accept",
+    "description": "Checklist for GST, college, bank, and job portals: page order, MB limits, orientation, OCR, and filenames \u2014 using a local Windows PDF editor.",
+    "date": "2026-09-03",
+    "url": "/blog/pdf-pack-for-indian-portals/",
+    "image": "/images/hero-tools.jpg",
+    "tags": [
+      "GST",
+      "KYC",
+      "compress PDF",
       "India"
     ]
   },
@@ -18,7 +83,7 @@
     "description": "Step-by-step guide to merge PDF, split PDF pages, and compress PDF size for email and portals \u2014 without uploading files.",
     "date": "2026-09-02",
     "url": "/blog/merge-split-compress-pdf-guide/",
-    "image": "/og-image.jpg",
+    "image": "/images/blog-merge-guide.jpg",
     "tags": [
       "merge PDF",
       "split PDF",
@@ -31,7 +96,7 @@
     "description": "eSign-style PDF signatures on Windows: draw or place a signature locally with Pdf Buddy \u2014 no Acrobat subscription.",
     "date": "2026-09-02",
     "url": "/blog/sign-pdf-without-adobe/",
-    "image": "/og-image.jpg",
+    "image": "/images/sign-contract.jpg",
     "tags": [
       "sign PDF",
       "eSign",
@@ -39,39 +104,16 @@
     ]
   },
   {
-    "slug": "ocr-scanned-pdf-searchable",
-    "title": "Make a scanned PDF searchable with OCR",
-    "description": "Turn image-only scans into searchable PDFs with OCR on Windows. Pdf Buddy OCR for invoices and photocopies.",
-    "date": "2026-09-03",
-    "url": "/blog/ocr-scanned-pdf-searchable/",
-    "image": "/og-image.jpg",
+    "slug": "best-pdf-editor-windows-india",
+    "title": "Best PDF editor for Windows in India (2026)",
+    "description": "Compare Adobe Acrobat, free online PDF editors, and desktop apps. Why Pdf Buddy by Easy Peeze Tools fits Indian students and SMEs.",
+    "date": "2026-09-01",
+    "url": "/blog/best-pdf-editor-windows-india/",
+    "image": "/images/blog-india-office.jpg",
     "tags": [
-      "OCR PDF",
-      "searchable PDF"
-    ]
-  },
-  {
-    "slug": "pdf-seo-metadata-filenames",
-    "title": "PDF SEO: metadata, filenames, and landing pages",
-    "description": "How to optimize PDFs for Google: title/subject/keywords metadata, hyphenated filenames, and HTML landing pages that outrank raw PDFs.",
-    "date": "2026-09-03",
-    "url": "/blog/pdf-seo-metadata-filenames/",
-    "image": "/og-image.jpg",
-    "tags": [
-      "PDF SEO",
-      "metadata"
-    ]
-  },
-  {
-    "slug": "online-pdf-editor-privacy",
-    "title": "Why upload-based online PDF editors are risky",
-    "description": "Privacy risks of free online PDF editors. Prefer a local Windows PDF editor for ID proofs, bank statements, and contracts.",
-    "date": "2026-09-03",
-    "url": "/blog/online-pdf-editor-privacy/",
-    "image": "/og-image.jpg",
-    "tags": [
-      "privacy",
-      "online PDF editor"
+      "PDF editor",
+      "Windows",
+      "India"
     ]
   }
 ]
