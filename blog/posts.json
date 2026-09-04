@@ -1,5 +1,57 @@
 [
   {
+    "slug": "easy-peeze-tools-pdf-buddy-kharch-log",
+    "title": "Easy Peeze Tools: Pdf Buddy + Kharch Log under one brand",
+    "description": "What Easy Peeze Tools is, how Pdf Buddy and Kharch Log fit together, and who each app is for \u2014 students, freelancers, SMEs in India.",
+    "date": "2026-09-04",
+    "url": "/blog/easy-peeze-tools-pdf-buddy-kharch-log/",
+    "image": "/images/blog-india-office.jpg",
+    "tags": [
+      "Easy Peeze Tools",
+      "Pdf Buddy",
+      "Kharch Log"
+    ]
+  },
+  {
+    "slug": "rotate-pdf-pages-windows",
+    "title": "Rotate PDF pages on Windows before you merge",
+    "description": "Fix sideways phone-scan PDFs on Windows before merge or portal upload. Why orientation matters for KYC and college forms.",
+    "date": "2026-09-04",
+    "url": "/blog/rotate-pdf-pages-windows/",
+    "image": "/images/edit-desk.jpg",
+    "tags": [
+      "rotate PDF",
+      "merge PDF",
+      "Windows"
+    ]
+  },
+  {
+    "slug": "password-protect-pdf-before-email",
+    "title": "Password-protect a PDF before you email it",
+    "description": "When to lock a PDF with a password on Windows, how unlock differs, and why you should not use random online unlock sites on files you own.",
+    "date": "2026-09-04",
+    "url": "/blog/password-protect-pdf-before-email/",
+    "image": "/images/unlock-lock.jpg",
+    "tags": [
+      "protect PDF",
+      "unlock PDF",
+      "privacy"
+    ]
+  },
+  {
+    "slug": "whatsapp-pdf-size-limit-india",
+    "title": "WhatsApp PDF size limits: compress without wrecking text",
+    "description": "How to compress PDFs for WhatsApp and Indian portals so invoices and KYC packs stay readable under common MB caps.",
+    "date": "2026-09-04",
+    "url": "/blog/whatsapp-pdf-size-limit-india/",
+    "image": "/images/compress-send.jpg",
+    "tags": [
+      "compress PDF",
+      "WhatsApp",
+      "India"
+    ]
+  },
+  {
     "slug": "ocr-scanned-pdf-searchable",
     "title": "Make a scanned PDF searchable with OCR",
     "description": "Turn image-only scans into searchable PDFs with OCR on Windows. Pdf Buddy OCR for invoices and photocopies.",

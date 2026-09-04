@@ -58,5 +58,45 @@
     "slug": "desktop-pdf-editor",
     "term": "Desktop PDF editor",
     "definition": "A Windows (or Mac) app that processes PDFs locally instead of in the browser."
+  },
+  {
+    "slug": "easy-peeze-tools",
+    "term": "Easy Peeze Tools",
+    "definition": "India-first product brand behind Pdf Buddy (Windows PDF editor) and Kharch Log (Android expense tracker)."
+  },
+  {
+    "slug": "pdf-buddy",
+    "term": "Pdf Buddy",
+    "definition": "Desktop PDF editor for Windows by Easy Peeze Tools \u2014 merge, split, compress, sign, OCR, unlock, convert."
+  },
+  {
+    "slug": "kharch-log",
+    "term": "Kharch Log",
+    "definition": "Android expense tracker by Easy Peeze Tools with SMS auto-capture and Google Sheets sync."
+  },
+  {
+    "slug": "kyc-pdf-pack",
+    "term": "KYC PDF pack",
+    "definition": "A single PDF combining photo, ID, address proof, and signature pages for portal uploads."
+  },
+  {
+    "slug": "upi-expense-tracker",
+    "term": "UPI expense tracker",
+    "definition": "An app that turns UPI debit SMS into logged expenses \u2014 Kharch Log\u2019s core workflow."
+  },
+  {
+    "slug": "local-first-pdf",
+    "term": "Local-first PDF",
+    "definition": "Processing PDFs on your device instead of uploading them to a cloud editor."
+  },
+  {
+    "slug": "pdf-whiteout",
+    "term": "PDF whiteout",
+    "definition": "Covering part of a PDF with a white rectangle. Hides pixels but is not forensic redaction."
+  },
+  {
+    "slug": "form-16-pdf",
+    "term": "Form 16 PDF",
+    "definition": "Employer-issued tax certificate PDF often split, compressed, or merged for ITR / loan packs."
   }
 ]
