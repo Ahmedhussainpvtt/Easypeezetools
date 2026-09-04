@@ -85,11 +85,15 @@
     </div>
     <section class="section" style="max-width:480px;">
       <p class="pay-price" id="pay-price">₹299 <span class="pay-once" id="pay-once">/ year</span></p>
+      <label class="pay-label" for="firstName">First name</label>
+      <input class="pay-input" id="firstName" type="text" autocomplete="given-name" placeholder="First name" required />
+      <label class="pay-label" for="lastName">Last name</label>
+      <input class="pay-input" id="lastName" type="text" autocomplete="family-name" placeholder="Last name" required />
       <label class="pay-label" for="email">Google email</label>
       <input class="pay-input" id="email" type="email" autocomplete="email" placeholder="you@gmail.com" required />
       <label class="pay-label" for="phone">Phone (optional, for receipt)</label>
       <input class="pay-input" id="phone" type="tel" inputmode="numeric" maxlength="10" placeholder="10-digit mobile" />
-      <p class="pay-email-check">Free tier is still available: download and use 3 edits/day with no subscription.</p>
+      <p class="pay-email-check">Free tier is still available: download and use 3 actions/day with no subscription.</p>
       <button class="pay-btn btn" type="button" id="payBtn">Continue to pay</button>
       <p class="pay-status" id="status" aria-live="polite"></p>
       <p class="pay-fine"><a href="../download/" rel="noopener">Download free instead</a> · <a href="../pricing/">Back to pricing</a></p>

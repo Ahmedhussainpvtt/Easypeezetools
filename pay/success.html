@@ -90,6 +90,10 @@
       var api = 'https://kharchlog-license-u4rcttr3nq-el.a.run.app';
       var body = {
         email: q.get('email') || '',
+        phone: q.get('phone') || '',
+        firstName: q.get('firstName') || '',
+        lastName: q.get('lastName') || '',
+        name: [q.get('firstName') || '', q.get('lastName') || ''].filter(Boolean).join(' '),
         paymentId: q.get('payment_id') || '',
         orderId: q.get('order_id') || '',
         subscriptionId: q.get('subscription_id') || '',
