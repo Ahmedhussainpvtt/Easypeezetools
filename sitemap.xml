@@ -37,6 +37,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://easypeeze.com/pay/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://easypeeze.com/faq/</loc>
     <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
