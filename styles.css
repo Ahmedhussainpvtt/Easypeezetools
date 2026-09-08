@@ -1,27 +1,28 @@
 :root {
-  --bg: #EAF3FC;
-  --bg-end: #E6F9F4;
+  --bg: #F8FAFC;
+  --bg-end: #E8F7F3;
   --surface: #FFFFFF;
-  --text: #0B1220;
-  --muted: #4A5568;
-  --hint: #718096;
-  --primary: #067BFC;
-  --primary-dark: #0456B0;
-  --secondary: #01BC99;
-  --secondary-dark: #018D73;
-  --secondary-soft: #CCF5EC;
-  --primary-soft: #D9EBFE;
-  --tertiary: #FCBC02;
-  --tertiary-dark: #C99602;
+  --text: #1F2937;
+  --muted: #6B7280;
+  --hint: #6B7280;
+  --primary: #0085FF;
+  --primary-dark: #0066CC;
+  --secondary: #00C49A;
+  --secondary-dark: #00A884;
+  --secondary-soft: #D0F7EF;
+  --primary-soft: #D6EBFF;
+  --tertiary: #FFC107;
+  --tertiary-dark: #E6AC00;
   --tertiary-soft: #FFF4CC;
-  --income: #2EAE6B;
+  --accent-light: #00A2FF;
+  --success: #00D1A3;
+  --income: #00D1A3;
   --expense: #E25C4A;
-  --line: rgba(6, 123, 252, 0.12);
-  --shadow: 0 12px 32px rgba(6, 123, 252, 0.14);
+  --line: #E5E7EB;
+  --shadow: 0 12px 32px rgba(0, 133, 255, 0.14);
   --radius: 18px;
   --max: 1080px;
   --font: "Manrope", "Segoe UI", system-ui, sans-serif;
-  /* legacy aliases used by pay / legal pages */
   --card: var(--surface);
   --bg2: var(--bg-end);
   --accent: var(--tertiary);
@@ -39,8 +40,8 @@ html, body {
   font-family: var(--font);
   line-height: 1.65;
   background:
-    radial-gradient(900px 420px at 12% -8%, rgba(1, 188, 153, 0.18), transparent 55%),
-    radial-gradient(800px 380px at 100% 0%, rgba(6, 123, 252, 0.14), transparent 50%),
+    radial-gradient(900px 420px at 12% -8%, rgba(0, 196, 154, 0.16), transparent 55%),
+    radial-gradient(800px 380px at 100% 0%, rgba(0, 133, 255, 0.12), transparent 50%),
     linear-gradient(165deg, var(--bg), var(--bg-end));
 }
 
