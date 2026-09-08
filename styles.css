@@ -1,27 +1,30 @@
 :root {
-  --bg: #EAF0F6;
-  --bg-end: #E6F7F6;
+  --bg: #EAF3FC;
+  --bg-end: #E6F9F4;
   --surface: #FFFFFF;
   --text: #0B1220;
   --muted: #4A5568;
   --hint: #718096;
-  --primary: #0F2A43;
-  --primary-dark: #08192A;
-  --secondary: #14B8A6;
-  --secondary-dark: #0D9488;
-  --secondary-soft: #CCFBF1;
-  --primary-soft: #D6E1EC;
+  --primary: #067BFC;
+  --primary-dark: #0456B0;
+  --secondary: #01BC99;
+  --secondary-dark: #018D73;
+  --secondary-soft: #CCF5EC;
+  --primary-soft: #D9EBFE;
+  --tertiary: #FCBC02;
+  --tertiary-dark: #C99602;
+  --tertiary-soft: #FFF4CC;
   --income: #2EAE6B;
   --expense: #E25C4A;
-  --line: rgba(15, 42, 67, 0.10);
-  --shadow: 0 12px 32px rgba(15, 42, 67, 0.12);
+  --line: rgba(6, 123, 252, 0.12);
+  --shadow: 0 12px 32px rgba(6, 123, 252, 0.14);
   --radius: 18px;
   --max: 1080px;
   --font: "Manrope", "Segoe UI", system-ui, sans-serif;
   /* legacy aliases used by pay / legal pages */
   --card: var(--surface);
   --bg2: var(--bg-end);
-  --accent: var(--income);
+  --accent: var(--tertiary);
 }
 
 * { box-sizing: border-box; }
@@ -36,8 +39,8 @@ html, body {
   font-family: var(--font);
   line-height: 1.65;
   background:
-    radial-gradient(900px 420px at 12% -8%, rgba(20, 184, 166, 0.18), transparent 55%),
-    radial-gradient(800px 380px at 100% 0%, rgba(15, 42, 67, 0.12), transparent 50%),
+    radial-gradient(900px 420px at 12% -8%, rgba(1, 188, 153, 0.18), transparent 55%),
+    radial-gradient(800px 380px at 100% 0%, rgba(6, 123, 252, 0.14), transparent 50%),
     linear-gradient(165deg, var(--bg), var(--bg-end));
 }
 
@@ -107,6 +110,14 @@ a:hover { text-decoration: underline; }
   box-shadow: none;
   object-fit: contain;
   background: transparent;
+  padding: 0;
+}
+.logo-on-dark,
+.brand-lockup--on-dark img {
+  background: #fff !important;
+  padding: 5px !important;
+  border-radius: 10px;
+  box-sizing: content-box;
 }
 .brand-lockup__name {
   position: absolute;
@@ -1547,16 +1558,18 @@ footer:not(.site-footer) {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
+  background: transparent;
   border-radius: 14px;
   min-height: 180px;
-  padding: 12px;
+  padding: 8px;
 }
 .product-card__media img {
   width: auto;
   max-width: 100%;
   max-height: 220px;
   object-fit: contain;
+  background: transparent;
+  padding: 0;
 }
 .product-card__kicker {
   margin: 0 0 6px;

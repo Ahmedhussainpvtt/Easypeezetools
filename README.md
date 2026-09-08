@@ -25,4 +25,4 @@ Then GitHub → **Easypeezetools** → Settings → Pages → Custom domain: `ea
 
 ## Brand
 - Easy Peeze Tools / Pdf Buddy
-- Colors: navy `#0F2A43` + teal `#14B8A6` (Manrope)
+- Colors: navy `#067BFC` + teal `#01BC99` (Manrope)

@@ -53,7 +53,7 @@
           product: 'pdfbuddy',
           planType: plan.planType
         },
-        theme: { color: '#0F2A43' },
+        theme: { color: '#067BFC' },
         handler: function (response) {
           var q = new URLSearchParams();
           q.set('email', buyer.email);
