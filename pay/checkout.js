@@ -25,6 +25,63 @@
     statusEl.className = 'pay-status' + (isError ? ' pay-status-error' : '');
   }
 
+  var NAME_BLOCKLIST = {
+    test: 1, asdf: 1, asdfgh: 1, qwerty: 1, qwertyuiop: 1, abc: 1, abcd: 1, abcde: 1,
+    xyz: 1, xxx: 1, aaa: 1, bbb: 1, ccc: 1, name: 1, fname: 1, lname: 1, firstname: 1,
+    lastname: 1, user: 1, username: 1, admin: 1, null: 1, undefined: 1, none: 1, na: 1,
+    foo: 1, bar: 1, baz: 1, spam: 1, fake: 1, guest: 1, demo: 1, sample: 1, zxcvbn: 1,
+    hjkl: 1, anon: 1, anonymous: 1, me: 1, you: 1, hi: 1, hey: 1, ok: 1, idk: 1
+  };
+
+  function normalizeName(value) {
+    return String(value || '').trim().replace(/\s+/g, ' ');
+  }
+
+  function isRealPersonName(value) {
+    var name = normalizeName(value);
+    if (name.length < 2 || name.length > 40) return false;
+    if (
+      !/^[A-Za-z\u00C0-\u024F\u0900-\u097F](?:[A-Za-z\u00C0-\u024F\u0900-\u097F\s'.-]{0,38}[A-Za-z\u00C0-\u024F\u0900-\u097F])?$/.test(
+        name
+      )
+    ) {
+      return false;
+    }
+    var compact = name.replace(/[\s'.-]/g, '');
+    if (compact.length < 2) return false;
+    if (/^(.)\1+$/i.test(compact)) return false;
+    if (/(.)\1{2,}/i.test(compact)) return false;
+    var key = compact.toLowerCase();
+    if (NAME_BLOCKLIST[key]) return false;
+    if (/^[A-Za-z]+$/.test(compact) && !/[aeiouy]/i.test(compact)) return false;
+    return true;
+  }
+
+  function normalizePhone(raw) {
+    var s = String(raw || '').trim();
+    if (!s) return null;
+    var digits = s.replace(/\D/g, '');
+    if (!digits) return null;
+    if (digits.length === 10 && /^[6-9]\d{9}$/.test(digits)) {
+      digits = '91' + digits;
+    } else if (digits.length === 11 && digits.charAt(0) === '0' && /^[6-9]\d{9}$/.test(digits.slice(1))) {
+      digits = '91' + digits.slice(1);
+    }
+    if (digits.length < 11 || digits.length > 15) return null;
+    if (/^(\d)\1+$/.test(digits)) return null;
+    if (digits.indexOf('91') === 0 && digits.length === 12 && !/^91[6-9]\d{9}$/.test(digits)) {
+      return null;
+    }
+    if (
+      /^91(0{10}|1{10}|2{10}|3{10}|4{10}|5{10}|6{10}|7{10}|8{10}|9{10}|1234567890|0123456789|9876543210)$/.test(
+        digits
+      )
+    ) {
+      return null;
+    }
+    return '+' + digits;
+  }
+
   function apiBase() {
     return String(cfg.trackerUrl || '').replace(/\/$/, '');
   }
@@ -61,7 +118,7 @@
           q.set('lastName', buyer.lastName);
           q.set('product', 'pdfbuddy');
           q.set('plan', plan.planType);
-          if (buyer.phone) q.set('phone', buyer.phone);
+          q.set('phone', buyer.phone || '');
           if (response.razorpay_payment_id) q.set('payment_id', response.razorpay_payment_id);
           if (response.razorpay_order_id) q.set('order_id', response.razorpay_order_id);
           if (response.razorpay_subscription_id) q.set('subscription_id', response.razorpay_subscription_id);
@@ -88,28 +145,38 @@
 
   if (payBtn) {
     payBtn.addEventListener('click', function () {
-      var firstName = ((firstNameInput && firstNameInput.value) || '').trim();
-      var lastName = ((lastNameInput && lastNameInput.value) || '').trim();
+      var firstName = normalizeName((firstNameInput && firstNameInput.value) || '');
+      var lastName = normalizeName((lastNameInput && lastNameInput.value) || '');
       var email = (emailInput.value || '').trim().toLowerCase();
-      var phone = ((phoneInput && phoneInput.value) || '').replace(/\D/g, '').slice(-10);
-      if (!firstName) { setStatus('First name is required', true); if (firstNameInput) firstNameInput.focus(); return; }
-      if (!email || email.indexOf('@') < 1) {
-        setStatus('Enter the Google email you use in Pdf Buddy', true);
+      var phone = normalizePhone((phoneInput && phoneInput.value) || '');
+      if (!isRealPersonName(firstName)) {
+        setStatus('Enter a real first name (letters only, not junk like “test” / “asdf”)', true);
+        if (firstNameInput) firstNameInput.focus();
         return;
       }
-      if (phone && phone.length !== 10) {
-        setStatus('Enter a valid 10-digit phone, or leave it blank', true);
+      if (lastName && !isRealPersonName(lastName)) {
+        setStatus('Enter a real last name, or leave it blank', true);
+        if (lastNameInput) lastNameInput.focus();
+        return;
+      }
+      if (!email || email.indexOf('@') < 1 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        setStatus('Enter the Google email you use in Pdf Buddy', true);
+        if (emailInput) emailInput.focus();
+        return;
+      }
+      if (!phone) {
+        setStatus('Enter a valid phone with country code (e.g. +91 98765 43210)', true);
         if (phoneInput) phoneInput.focus();
         return;
       }
       var buyer = { firstName: firstName, lastName: lastName, email: email, phone: phone };
       var displayName = [firstName, lastName].filter(Boolean).join(' ');
-      if (!window.confirm('Pay for ' + (plan.label || 'Pdf Buddy') + ' with:\n\n' + displayName + '\n' + email + '\n\nContinue?')) return;
+      if (!window.confirm('Pay for ' + (plan.label || 'Pdf Buddy') + ' with:\n\n' + displayName + '\n' + email + '\n' + phone + '\n\nContinue?')) return;
       setStatus('Creating checkout…');
       payBtn.disabled = true;
       createOrder({
         email: email,
-        phone: phone || '',
+        phone: phone,
         firstName: firstName,
         lastName: lastName,
         name: displayName,

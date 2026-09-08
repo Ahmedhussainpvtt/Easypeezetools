@@ -91,8 +91,8 @@
       <input class="pay-input" id="lastName" type="text" autocomplete="family-name" placeholder="Last name" />
       <label class="pay-label" for="email">Google email <span class="req" aria-hidden="true">*</span></label>
       <input class="pay-input" id="email" type="email" autocomplete="email" placeholder="you@gmail.com" required />
-      <label class="pay-label" for="phone">Phone <span class="opt">(optional, for receipt)</span></label>
-      <input class="pay-input" id="phone" type="tel" inputmode="numeric" maxlength="10" placeholder="10-digit mobile" />
+      <label class="pay-label" for="phone">Phone <span class="req" aria-hidden="true">*</span></label>
+      <input class="pay-input" id="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="+91 98765 43210" required />
       <p class="pay-email-check">Free tier is still available: download and use 3 actions/day with no subscription.</p>
       <button class="pay-btn btn" type="button" id="payBtn">Continue to pay</button>
       <p class="pay-status" id="status" aria-live="polite"></p>
