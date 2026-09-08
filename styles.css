@@ -877,6 +877,16 @@ a:hover { text-decoration: underline; }
   color: var(--muted);
   font-weight: 600;
 }
+.pay-label .req {
+  color: #c0392b;
+  font-weight: 700;
+  margin-left: 2px;
+}
+.pay-label .opt {
+  color: var(--muted);
+  font-weight: 500;
+  opacity: 0.85;
+}
 .pay-input {
   width: 100%;
   padding: 12px 14px;

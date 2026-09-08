@@ -93,13 +93,18 @@
       var email = (emailInput.value || '').trim().toLowerCase();
       var phone = ((phoneInput && phoneInput.value) || '').replace(/\D/g, '').slice(-10);
       if (!firstName) { setStatus('First name is required', true); if (firstNameInput) firstNameInput.focus(); return; }
-      if (!lastName) { setStatus('Last name is required', true); if (lastNameInput) lastNameInput.focus(); return; }
       if (!email || email.indexOf('@') < 1) {
         setStatus('Enter the Google email you use in Pdf Buddy', true);
         return;
       }
+      if (phone && phone.length !== 10) {
+        setStatus('Enter a valid 10-digit phone, or leave it blank', true);
+        if (phoneInput) phoneInput.focus();
+        return;
+      }
       var buyer = { firstName: firstName, lastName: lastName, email: email, phone: phone };
-      if (!window.confirm('Pay for ' + (plan.label || 'Pdf Buddy') + ' with:\\n\\n' + firstName + ' ' + lastName + '\\n' + email + '\\n\\nContinue?')) return;
+      var displayName = [firstName, lastName].filter(Boolean).join(' ');
+      if (!window.confirm('Pay for ' + (plan.label || 'Pdf Buddy') + ' with:\n\n' + displayName + '\n' + email + '\n\nContinue?')) return;
       setStatus('Creating checkout…');
       payBtn.disabled = true;
       createOrder({
@@ -107,7 +112,7 @@
         phone: phone || '',
         firstName: firstName,
         lastName: lastName,
-        name: firstName + ' ' + lastName,
+        name: displayName,
         product: cfg.product || 'pdfbuddy',
         planType: plan.planType
       })
