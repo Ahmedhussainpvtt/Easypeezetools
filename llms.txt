@@ -1,0 +1,99 @@
+# Easy Peeze Tools
+
+> Easy Peeze Tools makes simple privacy-first apps: Pdf Buddy (100% local Windows PDF editor, 3 free actions/day, then INR 299/year or INR 999 lifetime) and Kharch Log (Android expense tracker on Google Sheets, INR 149 lifetime). Site: easypeeze.com - expenses product also at kharchlog.in.
+
+Last updated: 2026-09-08
+Canonical site: https://easypeeze.com/
+Sitemap: https://easypeeze.com/sitemap.xml
+Full corpus: https://easypeeze.com/llms-full.txt
+Contact: easypeezetools@gmail.com
+
+## Key facts
+
+- Brand: Easy Peeze Tools
+- Pdf Buddy: Windows 10/11 desktop PDF editor, local-first (no upload required for edits)
+- Pdf Buddy free: 3 actions/day; paid: INR 299/year or INR 999 lifetime
+- Kharch Log: Android UPI/SMS expense tracker -> your Google Sheet; INR 149 lifetime
+- Support: easypeezetools@gmail.com
+- Kharch site: https://kharchlog.in/
+
+## Product
+
+- [Home](https://easypeeze.com/): Easy Peeze Tools — Pdf Buddy (local Windows PDF editor) and Kharch Log (Android expenses).
+- [Products](https://easypeeze.com/products/): Product hub for Pdf Buddy and Kharch Log.
+- [All features](https://easypeeze.com/features/): Pdf Buddy tools: edit, merge, split, compress, sign, OCR, unlock, convert.
+- [Blog index](https://easypeeze.com/blog/): PDF how-tos for Windows India: compress, OCR, e-sign, privacy vs online editors.
+- [Guides index](https://easypeeze.com/guides/): Long-form guides: free PDF editors, OCR scans, form fill & sign, alternatives.
+- [Pricing](https://easypeeze.com/pricing/): Pdf Buddy INR 299/year or INR 999 lifetime; free tier 3 actions/day.
+- [Download Pdf Buddy](https://easypeeze.com/download/): Download Pdf Buddy for Windows 10/11.
+- [FAQ](https://easypeeze.com/faq/): FAQ for Pdf Buddy licensing, free tier, and local-first privacy.
+- [Glossary index](https://easypeeze.com/glossary/): PDF and product glossary (OCR, e-sign, merge, local-first, etc.).
+
+## Features
+
+- [Edit Pdf](https://easypeeze.com/features/edit-pdf/): Edit PDF text and pages offline on Windows.
+- [Merge Pdf](https://easypeeze.com/features/merge-pdf/): Merge multiple PDFs into one file locally.
+- [Split Pdf](https://easypeeze.com/features/split-pdf/): Split PDF pages into separate files.
+- [Compress Pdf](https://easypeeze.com/features/compress-pdf/): Compress PDFs for WhatsApp / portal size limits.
+- [Sign Pdf](https://easypeeze.com/features/sign-pdf/): Draw or place signatures without Adobe.
+- [Ocr Pdf](https://easypeeze.com/features/ocr-pdf/): OCR scanned PDFs into searchable text.
+- [Unlock Pdf](https://easypeeze.com/features/unlock-pdf/): Unlock password-protected PDFs you own.
+- [Convert Pdf](https://easypeeze.com/features/convert-pdf/): Convert images and Office files to PDF.
+
+## Guides
+
+- [Best Free Pdf Editor Windows](https://easypeeze.com/guides/best-free-pdf-editor-windows/): Guide: Best Free Pdf Editor Windows.
+- [Edit Pdf Online Vs No Signup](https://easypeeze.com/guides/edit-pdf-online-vs-no-signup/): Guide: Edit Pdf Online Vs No Signup.
+- [Convert Pdf To Editable Word](https://easypeeze.com/guides/convert-pdf-to-editable-word/): Guide: Convert Pdf To Editable Word.
+- [Pdf Signature Form Filler](https://easypeeze.com/guides/pdf-signature-form-filler/): Guide: Pdf Signature Form Filler.
+- [Edit Scanned Pdf Ocr](https://easypeeze.com/guides/edit-scanned-pdf-ocr/): Guide: Edit Scanned Pdf Ocr.
+- [Pdf Editor Alternatives Compared](https://easypeeze.com/guides/pdf-editor-alternatives-compared/): Guide: Pdf Editor Alternatives Compared.
+- [Pdf Editor Mac Android Iphone](https://easypeeze.com/guides/pdf-editor-mac-android-iphone/): Guide: Pdf Editor Mac Android Iphone.
+- [Edit Pdf Text Replace Same Font](https://easypeeze.com/guides/edit-pdf-text-replace-same-font/): Guide: Edit Pdf Text Replace Same Font.
+
+## Blog
+
+- [Easy Peeze Tools Pdf Buddy Kharch Log](https://easypeeze.com/blog/easy-peeze-tools-pdf-buddy-kharch-log/): Blog: Easy Peeze Tools Pdf Buddy Kharch Log.
+- [Rotate Pdf Pages Windows](https://easypeeze.com/blog/rotate-pdf-pages-windows/): Blog: Rotate Pdf Pages Windows.
+- [Password Protect Pdf Before Email](https://easypeeze.com/blog/password-protect-pdf-before-email/): Blog: Password Protect Pdf Before Email.
+- [Whatsapp Pdf Size Limit India](https://easypeeze.com/blog/whatsapp-pdf-size-limit-india/): Blog: Whatsapp Pdf Size Limit India.
+- [Ocr Scanned Pdf Searchable](https://easypeeze.com/blog/ocr-scanned-pdf-searchable/): Blog: Ocr Scanned Pdf Searchable.
+- [Pdf Seo Metadata Filenames](https://easypeeze.com/blog/pdf-seo-metadata-filenames/): Blog: Pdf Seo Metadata Filenames.
+- [Online Pdf Editor Privacy](https://easypeeze.com/blog/online-pdf-editor-privacy/): Blog: Online Pdf Editor Privacy.
+- [Pdf Buddy Vs Online Editors](https://easypeeze.com/blog/pdf-buddy-vs-online-editors/): Blog: Pdf Buddy Vs Online Editors.
+- [Fill And Type On Pdf Windows](https://easypeeze.com/blog/fill-and-type-on-pdf-windows/): Blog: Fill And Type On Pdf Windows.
+- [Pdf Pack For Indian Portals](https://easypeeze.com/blog/pdf-pack-for-indian-portals/): Blog: Pdf Pack For Indian Portals.
+- [Merge Split Compress Pdf Guide](https://easypeeze.com/blog/merge-split-compress-pdf-guide/): Blog: Merge Split Compress Pdf Guide.
+- [Sign Pdf Without Adobe](https://easypeeze.com/blog/sign-pdf-without-adobe/): Blog: Sign Pdf Without Adobe.
+- [Best Pdf Editor Windows India](https://easypeeze.com/blog/best-pdf-editor-windows-india/): Blog: Best Pdf Editor Windows India.
+
+## Glossary
+
+- [Merge Pdf](https://easypeeze.com/glossary/merge-pdf/): Glossary: what “Merge Pdf” means and how it relates to the product.
+- [Split Pdf](https://easypeeze.com/glossary/split-pdf/): Glossary: what “Split Pdf” means and how it relates to the product.
+- [Compress Pdf](https://easypeeze.com/glossary/compress-pdf/): Glossary: what “Compress Pdf” means and how it relates to the product.
+- [Ocr Pdf](https://easypeeze.com/glossary/ocr-pdf/): Glossary: what “Ocr Pdf” means and how it relates to the product.
+- [Esign Pdf](https://easypeeze.com/glossary/esign-pdf/): Glossary: what “Esign Pdf” means and how it relates to the product.
+- [Pdf Editor](https://easypeeze.com/glossary/pdf-editor/): Glossary: what “Pdf Editor” means and how it relates to the product.
+- [Searchable Pdf](https://easypeeze.com/glossary/searchable-pdf/): Glossary: what “Searchable Pdf” means and how it relates to the product.
+- [Pdf Metadata](https://easypeeze.com/glossary/pdf-metadata/): Glossary: what “Pdf Metadata” means and how it relates to the product.
+- [Unlock Pdf](https://easypeeze.com/glossary/unlock-pdf/): Glossary: what “Unlock Pdf” means and how it relates to the product.
+- [Jpg To Pdf](https://easypeeze.com/glossary/jpg-to-pdf/): Glossary: what “Jpg To Pdf” means and how it relates to the product.
+- [Adobe Acrobat Alternative](https://easypeeze.com/glossary/adobe-acrobat-alternative/): Glossary: what “Adobe Acrobat Alternative” means and how it relates to the product.
+- [Desktop Pdf Editor](https://easypeeze.com/glossary/desktop-pdf-editor/): Glossary: what “Desktop Pdf Editor” means and how it relates to the product.
+- [Easy Peeze Tools](https://easypeeze.com/glossary/easy-peeze-tools/): Glossary: what “Easy Peeze Tools” means and how it relates to the product.
+- [Pdf Buddy](https://easypeeze.com/glossary/pdf-buddy/): Glossary: what “Pdf Buddy” means and how it relates to the product.
+- [Kharch Log](https://easypeeze.com/glossary/kharch-log/): Glossary: what “Kharch Log” means and how it relates to the product.
+- [Kyc Pdf Pack](https://easypeeze.com/glossary/kyc-pdf-pack/): Glossary: what “Kyc Pdf Pack” means and how it relates to the product.
+- [Upi Expense Tracker](https://easypeeze.com/glossary/upi-expense-tracker/): Glossary: what “Upi Expense Tracker” means and how it relates to the product.
+- [Local First Pdf](https://easypeeze.com/glossary/local-first-pdf/): Glossary: what “Local First Pdf” means and how it relates to the product.
+- [Pdf Whiteout](https://easypeeze.com/glossary/pdf-whiteout/): Glossary: what “Pdf Whiteout” means and how it relates to the product.
+- [Form 16 Pdf](https://easypeeze.com/glossary/form-16-pdf/): Glossary: what “Form 16 Pdf” means and how it relates to the product.
+
+## Optional
+
+- [Contact](https://easypeeze.com/contact/): Support: easypeezetools@gmail.com.
+- [Privacy](https://easypeeze.com/privacy/): Privacy policy — Pdf Buddy runs locally; Kharch Log uses your Google Sheet.
+- [Terms](https://easypeeze.com/terms/): Terms of use for Easy Peeze Tools products.
+- [robots.txt](https://easypeeze.com/robots.txt): Crawl rules and sitemap pointer.
+- [llms-full.txt](https://easypeeze.com/llms-full.txt): Compact product corpus for AI agents.
