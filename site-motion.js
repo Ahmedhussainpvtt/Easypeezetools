@@ -9,56 +9,38 @@
   const pointerFine = window.matchMedia('(pointer: fine)').matches;
   const body = document.body;
 
-  const directionalGroups = [
-    '.feature-grid > *',
-    '.product-grid > *',
-    '.showcase__grid > *',
-    '.blog-grid > *',
-    '.feature-links > *'
+  // Feature / product boxes: alternate left <-> right as they enter viewport
+  const slideGroups = [
+    '.feature-grid',
+    '.product-grid',
+    '.feature-links',
+    '.blog-grid'
   ];
 
-  const revealSelectors = [
-    '.feature',
-    '.feature-card',
-    '.product-card',
-    '.pricing-tease',
-    '.blog-card',
-    '.showcase',
-    '.seo-block',
-    '.faq details',
-    '.compare-table',
-    '.contact-card',
-    '.page-hero',
-    '.precision',
-    '.section__head',
-    '.trust > *',
-    '.checklist li',
-    '.steps li',
-    '.guide-card',
-    '.glossary-card',
-    '.term-card',
-    '.product-grid > *',
-    '.feature-grid > *',
-    '.blog-grid > *'
-  ];
-
-  const seen = new Set();
   const revealNodes = [];
-  revealSelectors.forEach((selector) => {
-    document.querySelectorAll(selector).forEach((node) => {
-      if (seen.has(node)) return;
-      seen.add(node);
-      node.classList.add('motion-reveal');
-      revealNodes.push(node);
+  const seen = new Set();
+
+  slideGroups.forEach((groupSelector) => {
+    document.querySelectorAll(groupSelector).forEach((group) => {
+      [...group.children].forEach((node, index) => {
+        if (seen.has(node)) return;
+        seen.add(node);
+        node.classList.add('motion-reveal');
+        node.classList.add(index % 2 === 0 ? 'motion-enter-left' : 'motion-enter-right');
+        node.style.setProperty('--reveal-delay', `${Math.min(index, 5) * 70}ms`);
+        revealNodes.push(node);
+      });
     });
   });
-  directionalGroups.forEach((selector) => {
-    document.querySelectorAll(selector).forEach((node, index) => {
-      node.classList.add(index % 2 === 0 ? 'motion-enter-left' : 'motion-enter-right');
-    });
-  });
-  revealNodes.forEach((node, index) => {
-    node.style.setProperty('--reveal-delay', `${Math.min(index % 8, 7) * 55}ms`);
+
+  // Showcase rows: copy from one side, media from the other
+  document.querySelectorAll('.showcase').forEach((showcase, index) => {
+    if (seen.has(showcase)) return;
+    seen.add(showcase);
+    showcase.classList.add('motion-reveal');
+    showcase.classList.add(index % 2 === 0 ? 'motion-enter-left' : 'motion-enter-right');
+    showcase.style.setProperty('--reveal-delay', '0ms');
+    revealNodes.push(showcase);
   });
 
   const reveal = new IntersectionObserver(
@@ -69,7 +51,7 @@
         reveal.unobserve(entry.target);
       });
     },
-    { threshold: 0.14, rootMargin: '0px 0px -8% 0px' }
+    { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }
   );
   revealNodes.forEach((node) => reveal.observe(node));
 
