@@ -98,5 +98,30 @@
     "slug": "form-16-pdf",
     "term": "Form 16 PDF",
     "definition": "Employer-issued tax certificate PDF often split, compressed, or merged for ITR / loan packs."
+  },
+  {
+    "slug": "offline-pdf-editor",
+    "term": "Offline PDF editor",
+    "definition": "A desktop PDF editor that works without uploading files to a cloud processor \u2014 Pdf Buddy on Windows."
+  },
+  {
+    "slug": "whatsapp-pdf-limit",
+    "term": "WhatsApp PDF limit",
+    "definition": "Practical size caps when sending PDFs on WhatsApp; usually solved by compress + fewer pages."
+  },
+  {
+    "slug": "fillable-pdf",
+    "term": "Fillable PDF",
+    "definition": "A PDF you can type into \u2014 either true form fields or text overlays on a flat page."
+  },
+  {
+    "slug": "dsc-digital-signature",
+    "term": "DSC digital signature",
+    "definition": "India Class 2/3 digital signature certificate used for MCA / Income Tax \u2014 different from a drawn PDF signature."
+  },
+  {
+    "slug": "aadhaar-pdf-privacy",
+    "term": "Aadhaar PDF privacy",
+    "definition": "Treat Aadhaar and ID PDFs as sensitive: prefer local desktop editors over random online upload tools."
   }
 ]

@@ -110,7 +110,7 @@
           product: 'pdfbuddy',
           planType: plan.planType
         },
-        theme: { color: '#067BFC' },
+        theme: { color: '#0085FF' },
         handler: function (response) {
           var q = new URLSearchParams();
           q.set('email', buyer.email);
@@ -171,7 +171,7 @@
       }
       var buyer = { firstName: firstName, lastName: lastName, email: email, phone: phone };
       var displayName = [firstName, lastName].filter(Boolean).join(' ');
-      if (!window.confirm('Pay for ' + (plan.label || 'Pdf Buddy') + ' with:\n\n' + displayName + '\n' + email + '\n' + phone + '\n\nContinue?')) return;
+      if (!window.confirm('Pay for ' + (plan.label || 'Pdf Buddy') + ' with:\\n\\n' + displayName + '\\n' + email + '\\n' + phone + '\\n\\nContinue?')) return;
       setStatus('Creating checkout…');
       payBtn.disabled = true;
       createOrder({
