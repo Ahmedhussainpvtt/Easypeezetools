@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Super Admin — Easy Peeze Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css" />
+  <link rel="icon" href="/favicon.png" type="image/png" />
+</head>
+<body>
+  <div id="login-view" class="login-shell hidden">
+    <form class="login-card" id="login-form" autocomplete="on">
+      <img class="login-logo" src="/logo.png" alt="" width="48" height="48" />
+      <h1>Super Admin</h1>
+      <p class="login-sub">Easy Peeze Tools · customers, plans &amp; blog</p>
+      <label>Email
+        <input id="login-email" type="email" name="email" required value="easypeezetools@gmail.com" autocomplete="username" />
+      </label>
+      <label>Password
+        <input id="login-password" type="password" name="password" required autocomplete="current-password" />
+      </label>
+      <p id="login-error" class="form-error" hidden></p>
+      <button type="submit" class="btn btn-primary btn-block" id="login-btn">Sign in</button>
+    </form>
+  </div>
+
+  <div id="app-view" class="app-shell hidden">
+    <header class="app-top">
+      <div>
+        <p class="eyebrow">Easy Peeze Tools</p>
+        <h1>Super Admin Settings</h1>
+      </div>
+      <div class="app-top__right">
+        <span id="admin-email-label" class="muted"></span>
+        <button type="button" class="btn btn-ghost" id="logout-btn">Log out</button>
+      </div>
+    </header>
+
+    <nav class="tabs" role="tablist">
+      <button type="button" class="tab is-active" data-tab="customers">Customers</button>
+      <button type="button" class="tab" data-tab="blog">Blog</button>
+    </nav>
+
+    <section id="tab-customers" class="tab-panel">
+      <div class="panel-actions">
+        <button type="button" class="btn btn-outline" id="btn-new-user">+ New customer</button>
+        <button type="button" class="btn btn-ghost" id="btn-refresh">Refresh</button>
+      </div>
+
+      <div class="kpi-row" id="kpi-row">
+        <article class="kpi"><p class="kpi__label">Total</p><p class="kpi__value" id="kpi-total">—</p></article>
+        <article class="kpi"><p class="kpi__label">Active</p><p class="kpi__value" id="kpi-active">—</p></article>
+        <article class="kpi"><p class="kpi__label">Inactive</p><p class="kpi__value" id="kpi-inactive">—</p></article>
+        <article class="kpi"><p class="kpi__label">Kharch Log</p><p class="kpi__value" id="kpi-kharch">—</p></article>
+        <article class="kpi"><p class="kpi__label">Pdf Buddy</p><p class="kpi__value" id="kpi-pdf">—</p></article>
+      </div>
+
+      <div class="table-card">
+        <div class="table-card__head">
+          <h2>Total customers (<span id="table-count">0</span>)</h2>
+          <input type="search" id="search-users" placeholder="Search customers" />
+        </div>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Status</th>
+                <th>Kharch Log</th>
+                <th>Pdf Buddy</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="users-tbody"></tbody>
+          </table>
+        </div>
+        <p id="users-empty" class="empty" hidden>No customers found</p>
+      </div>
+    </section>
+
+    <section id="tab-blog" class="tab-panel hidden">
+      <div class="split">
+        <form class="form-card" id="blog-form">
+          <h2>Publish blog post</h2>
+          <p class="muted">Publishes to kharchlog.com (GitHub Pages).</p>
+          <label>Title <input id="blog-title" required /></label>
+          <label>Slug <input id="blog-slug" placeholder="auto-from-title" /></label>
+          <label>Summary <textarea id="blog-summary" rows="2"></textarea></label>
+          <label>Body (HTML or markdown-ish paragraphs)
+            <textarea id="blog-body" rows="10" required></textarea>
+          </label>
+          <p id="blog-msg" class="form-msg" hidden></p>
+          <button type="submit" class="btn btn-primary">Publish</button>
+        </form>
+        <form class="form-card" id="blog-delete-form">
+          <h2>Delete blog post</h2>
+          <label>Slug <input id="blog-del-slug" required placeholder="my-post-slug" /></label>
+          <p id="blog-del-msg" class="form-msg" hidden></p>
+          <button type="submit" class="btn btn-danger">Delete post</button>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <dialog id="user-modal" class="modal">
+    <form method="dialog" id="user-form" class="modal__card">
+      <h2 id="user-modal-title">Customer</h2>
+      <label>Email <input id="u-email" type="email" required /></label>
+      <label>Name <input id="u-name" /></label>
+      <label>Product
+        <select id="u-product">
+          <option value="kharchlog">Kharch Log</option>
+          <option value="pdfbuddy">Pdf Buddy</option>
+        </select>
+      </label>
+      <label>Plan
+        <select id="u-plan">
+          <option value="lifetime">Lifetime</option>
+          <option value="yearly">Yearly</option>
+        </select>
+      </label>
+      <label>Notes <input id="u-notes" /></label>
+      <p id="user-modal-error" class="form-error" hidden></p>
+      <div class="modal__actions">
+        <button type="button" class="btn btn-ghost" id="user-cancel">Cancel</button>
+        <button type="submit" class="btn btn-primary" value="save">Save / grant</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="admin.js"></script>
+</body>
+</html>

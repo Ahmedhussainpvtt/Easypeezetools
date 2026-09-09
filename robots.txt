@@ -2,6 +2,7 @@ User-agent: *
 Allow: /
 
 # Thin / utility pages — keep crawl budget on product + content
+Disallow: /admin/
 Disallow: /pay/
 Disallow: /pay/success.html
 
