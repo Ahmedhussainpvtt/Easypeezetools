@@ -1479,8 +1479,8 @@ footer:not(.site-footer) {
 .feature-detail ol.steps-inline li {
   counter-increment: feat-step;
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 14px;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px 14px;
   align-items: start;
   padding: 16px;
   background: var(--surface);
@@ -1488,13 +1488,26 @@ footer:not(.site-footer) {
   border-radius: 14px;
   color: var(--muted);
 }
+.feature-detail ol.steps-inline li > * {
+  grid-column: 2;
+  min-width: 0;
+}
 .feature-detail ol.steps-inline li strong {
   display: block;
-  margin-bottom: 4px;
+  margin: 0;
   color: var(--text);
+  font-size: 1.02rem;
+  line-height: 1.35;
+}
+.feature-detail ol.steps-inline li span {
+  display: block;
+  margin: 0;
+  line-height: 1.55;
 }
 .feature-detail ol.steps-inline li::before {
   content: counter(feat-step);
+  grid-column: 1;
+  grid-row: 1 / span 8;
   width: 32px;
   height: 32px;
   border-radius: 10px;
