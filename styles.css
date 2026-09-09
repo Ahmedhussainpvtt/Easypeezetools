@@ -623,6 +623,25 @@ a:hover { text-decoration: underline; }
 .steps h3 { margin: 0 0 4px; font-size: 1.05rem; }
 .steps p { margin: 0; color: var(--muted); }
 
+/* Plain <ol class="steps"> (no .steps__num cards) — numbered list, not broken 2-col grid */
+.steps:not(:has(.steps__num)) {
+  list-style: decimal;
+  margin: 0;
+  padding: 0 0 0 1.35rem;
+  display: block;
+  color: var(--muted);
+}
+.steps:not(:has(.steps__num)) li {
+  display: list-item;
+  grid-template-columns: unset;
+  gap: unset;
+  align-items: unset;
+  padding: 6px 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+}
+
 .why-list {
   list-style: none;
   margin: 0;
@@ -1401,33 +1420,86 @@ footer:not(.site-footer) {
 .feature-deep > p {
   color: var(--muted);
 }
+.compare-wrap,
 .feature-compare-wrap {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   margin: 16px 0 8px;
   border: 1px solid var(--line);
   border-radius: 14px;
   background: var(--surface);
 }
+.compare-table,
 .feature-compare {
   width: 100%;
+  min-width: 520px;
   border-collapse: collapse;
+  table-layout: fixed;
   font-size: 0.92rem;
 }
+.compare-table th,
+.compare-table td,
 .feature-compare th,
 .feature-compare td {
   padding: 12px 14px;
   text-align: left;
   vertical-align: top;
   border-bottom: 1px solid var(--line);
+  word-break: break-word;
 }
+.compare-table thead th,
+.feature-compare thead th,
+.feature-compare > tr > th,
 .feature-compare th {
   background: rgba(15, 42, 67, 0.04);
   font-weight: 700;
   color: var(--primary);
 }
-.feature-compare tr:last-child td { border-bottom: none; }
-.feature-compare td { color: var(--muted); }
-.feature-compare td:first-child { font-weight: 600; color: var(--text); }
+.compare-table th:first-child,
+.compare-table td:first-child,
+.feature-compare th:first-child,
+.feature-compare td:first-child {
+  width: 26%;
+  font-weight: 600;
+  color: var(--text);
+  background: transparent;
+}
+.compare-table td,
+.feature-compare td {
+  color: var(--muted);
+  font-weight: 400;
+}
+.compare-table tbody th {
+  background: transparent;
+  color: var(--text);
+  font-weight: 600;
+}
+.compare-table tr:last-child th,
+.compare-table tr:last-child td,
+.feature-compare tr:last-child td {
+  border-bottom: none;
+}
+/* Unwrapped compare-table (homepage / older pages) still looks like a card */
+.compare-band > .compare-table,
+.prose > .compare-table,
+.section > .compare-table {
+  display: table;
+  margin: 16px 0 8px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+}
+.compare-band > .compare-table th:first-child,
+.compare-band > .compare-table td:first-child,
+.prose > .compare-table th:first-child,
+.prose > .compare-table td:first-child,
+.section > .compare-table th:first-child,
+.section > .compare-table td:first-child {
+  border-left: none;
+}
 .feature-related {
   display: flex;
   flex-wrap: wrap;
@@ -1449,7 +1521,7 @@ footer:not(.site-footer) {
 }
 .feature-detail__grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
   margin: 20px 0 28px;
 }
@@ -1468,7 +1540,7 @@ footer:not(.site-footer) {
   color: var(--muted);
   font-size: 0.94rem;
 }
-.feature-detail ol.steps-inline {
+ol.steps-inline {
   list-style: none;
   margin: 16px 0 28px;
   padding: 0;
@@ -1476,7 +1548,7 @@ footer:not(.site-footer) {
   gap: 12px;
   counter-reset: feat-step;
 }
-.feature-detail ol.steps-inline li {
+ol.steps-inline li {
   counter-increment: feat-step;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
@@ -1488,23 +1560,23 @@ footer:not(.site-footer) {
   border-radius: 14px;
   color: var(--muted);
 }
-.feature-detail ol.steps-inline li > * {
+ol.steps-inline li > * {
   grid-column: 2;
   min-width: 0;
 }
-.feature-detail ol.steps-inline li strong {
+ol.steps-inline li strong {
   display: block;
   margin: 0;
   color: var(--text);
   font-size: 1.02rem;
   line-height: 1.35;
 }
-.feature-detail ol.steps-inline li span {
+ol.steps-inline li span {
   display: block;
   margin: 0;
   line-height: 1.55;
 }
-.feature-detail ol.steps-inline li::before {
+ol.steps-inline li::before {
   content: counter(feat-step);
   grid-column: 1;
   grid-row: 1 / span 8;
@@ -1629,7 +1701,7 @@ footer:not(.site-footer) {
 
 .blog-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
 .blog-card {
@@ -1782,8 +1854,16 @@ footer:not(.site-footer) {
 
 .feature-links {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
+}
+.pricing-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.pricing-grid--narrow {
+  max-width: 420px;
 }
 .feature-links a {
   display: block;
@@ -1843,13 +1923,7 @@ footer:not(.site-footer) {
   font-size: 0.95rem;
 }
 .section-lead { color: var(--muted); max-width: 40rem; }
-.steps {
-  display: grid;
-  gap: 14px;
-  padding-left: 1.2rem;
-  color: var(--muted);
-}
-.steps li { padding-left: 6px; }
+/* .steps plain-list reset lives in shared core (:not(:has(.steps__num))) */
 .hero__copy { max-width: 36rem; }
 .hero {
   display: grid;
