@@ -9,6 +9,14 @@
   const pointerFine = window.matchMedia('(pointer: fine)').matches;
   const body = document.body;
 
+  const directionalGroups = [
+    '.feature-grid > *',
+    '.product-grid > *',
+    '.showcase__grid > *',
+    '.blog-grid > *',
+    '.feature-links > *'
+  ];
+
   const revealSelectors = [
     '.feature',
     '.feature-card',
@@ -42,6 +50,11 @@
       seen.add(node);
       node.classList.add('motion-reveal');
       revealNodes.push(node);
+    });
+  });
+  directionalGroups.forEach((selector) => {
+    document.querySelectorAll(selector).forEach((node, index) => {
+      node.classList.add(index % 2 === 0 ? 'motion-enter-left' : 'motion-enter-right');
     });
   });
   revealNodes.forEach((node, index) => {
@@ -87,41 +100,142 @@
   }
 
   if (pointerFine) {
-    const trail = document.createElement('div');
-    trail.className = 'mouse-tail';
-    trail.innerHTML = '<span></span><span></span><span></span>';
-    body.appendChild(trail);
-    const dots = [...trail.children];
-    const pos = dots.map(() => ({ x: window.innerWidth / 2, y: window.innerHeight / 2 }));
-    let mouseX = pos[0].x;
-    let mouseY = pos[0].y;
+    const canvas = document.createElement('canvas');
+    canvas.className = 'mouse-tail';
+    body.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const resize = () => {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.floor(window.innerWidth * dpr);
+      canvas.height = Math.floor(window.innerHeight * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    const hexToRgb = (hex) => {
+      const match = String(hex || '').trim().match(/^#?([0-9a-f]{6})$/i);
+      if (!match) return [0, 133, 255];
+      const value = parseInt(match[1], 16);
+      return [(value >> 16) & 255, (value >> 8) & 255, value & 255];
+    };
+
+    let c1 = [0, 133, 255];
+    let c2 = [0, 196, 154];
+    const readColors = () => {
+      const css = getComputedStyle(doc);
+      c1 = hexToRgb(css.getPropertyValue('--primary'));
+      c2 = hexToRgb(css.getPropertyValue('--secondary'));
+    };
+    readColors();
+
+    const mix = (p) => [
+      Math.round(c1[0] + (c2[0] - c1[0]) * p),
+      Math.round(c1[1] + (c2[1] - c1[1]) * p),
+      Math.round(c1[2] + (c2[2] - c1[2]) * p)
+    ];
+
+    const TRAIL_MS = 620;
+    const MAX_W = 9;
+    const STEP_PX = 2.5;
+    const pts = [];
+    let have = false;
+    let raf = null;
     let shown = false;
+    let lastMove = 0;
+
+    const addTrailPoint = (x, y, t) => {
+      const last = pts[pts.length - 1];
+      if (last) {
+        const dx = x - last.x;
+        const dy = y - last.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist > STEP_PX) {
+          const n = Math.ceil(dist / STEP_PX);
+          for (let i = 1; i < n; i += 1) {
+            const f = i / n;
+            pts.push({ x: last.x + dx * f, y: last.y + dy * f, t: last.t + (t - last.t) * f });
+          }
+        } else if (dist < 0.4) {
+          return;
+        }
+      }
+      pts.push({ x, y, t });
+      while (pts.length > 240) pts.shift();
+    };
+
+    const livePts = (now) => {
+      while (pts.length && now - pts[0].t > TRAIL_MS) pts.shift();
+      return pts;
+    };
+
+    const draw = () => {
+      const now = performance.now();
+      if (now - lastMove > 80) have = false;
+      const live = livePts(now);
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      if (live.length > 1) {
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.globalCompositeOperation = 'lighter';
+        for (let i = 1; i < live.length; i += 1) {
+          const a = live[i - 1];
+          const b = live[i];
+          const p = i / (live.length - 1);
+          const age = 1 - (now - b.t) / TRAIL_MS;
+          if (age <= 0) continue;
+          const w = Math.max(1.5, MAX_W * p * age);
+          const c = mix(p);
+          ctx.lineWidth = w;
+          ctx.strokeStyle = `rgba(${c[0]}, ${c[1]}, ${c[2]}, ${0.72 * age})`;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+        ctx.globalCompositeOperation = 'source-over';
+      }
+      if (live.length || have) {
+        raf = requestAnimationFrame(draw);
+      } else {
+        raf = null;
+      }
+    };
+
+    const wake = () => {
+      if (!raf) raf = requestAnimationFrame(draw);
+    };
+
+    const clearTrail = () => {
+      if (pts.length) {
+        pts.length = 0;
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      }
+      have = false;
+      if (shown) {
+        shown = false;
+        canvas.classList.remove('is-visible');
+      }
+    };
 
     window.addEventListener(
       'pointermove',
       (event) => {
-        mouseX = event.clientX;
-        mouseY = event.clientY;
+        lastMove = performance.now();
+        have = true;
+        addTrailPoint(event.clientX, event.clientY, lastMove);
         if (!shown) {
-          trail.classList.add('is-visible');
           shown = true;
+          canvas.classList.add('is-visible');
+          readColors();
         }
+        wake();
       },
       { passive: true }
     );
 
-    const tick = () => {
-      pos[0].x += (mouseX - pos[0].x) * 0.26;
-      pos[0].y += (mouseY - pos[0].y) * 0.26;
-      for (let i = 1; i < pos.length; i += 1) {
-        pos[i].x += (pos[i - 1].x - pos[i].x) * 0.24;
-        pos[i].y += (pos[i - 1].y - pos[i].y) * 0.24;
-      }
-      dots.forEach((dot, index) => {
-        dot.style.transform = `translate(${pos[index].x}px, ${pos[index].y}px) scale(${1 - index * 0.18})`;
-      });
-      requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
+    document.addEventListener('mouseleave', clearTrail);
+    window.addEventListener('blur', clearTrail);
   }
 })();
