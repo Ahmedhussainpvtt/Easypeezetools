@@ -103,12 +103,12 @@
       return [(value >> 16) & 255, (value >> 8) & 255, value & 255];
     };
 
-    let c1 = [255, 193, 7];
-    let c2 = [255, 243, 176];
+    let c1 = [0, 133, 255];
+    let c2 = [0, 196, 154];
     const readColors = () => {
       const css = getComputedStyle(doc);
-      c1 = hexToRgb(css.getPropertyValue('--tertiary')) || [255, 193, 7];
-      c2 = [255, 243, 176]; // bright tip of the tertiary yellow trail
+      c1 = hexToRgb(css.getPropertyValue('--primary')) || [0, 133, 255];
+      c2 = hexToRgb(css.getPropertyValue('--secondary')) || [0, 196, 154];
     };
     readColors();
 
