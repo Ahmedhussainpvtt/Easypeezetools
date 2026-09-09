@@ -24,6 +24,7 @@ Contact: easypeezetools@gmail.com
 - [All features](https://easypeeze.com/features/): Pdf Buddy tools: edit, merge, split, compress, sign, OCR, unlock, convert.
 - [Blog index](https://easypeeze.com/blog/): PDF how-tos for Windows India: compress, OCR, e-sign, privacy vs online editors.
 - [Guides index](https://easypeeze.com/guides/): Long-form guides: free PDF editors, OCR scans, form fill & sign, alternatives.
+- [Install guides](https://easypeeze.com/install/): Install Pdf Buddy (SmartScreen) and Kharch Log (Play Protect) — official downloads only.
 - [Pricing](https://easypeeze.com/pricing/): Pdf Buddy INR 299/year or INR 999 lifetime; free tier 3 actions/day.
 - [Download Pdf Buddy](https://easypeeze.com/download/): Download Pdf Buddy for Windows 10/11.
 - [FAQ](https://easypeeze.com/faq/): FAQ for Pdf Buddy licensing, free tier, and local-first privacy.

@@ -37,6 +37,10 @@ PDF how-tos for Windows India: compress, OCR, e-sign, privacy vs online editors.
 URL: https://easypeeze.com/guides/
 Long-form guides: free PDF editors, OCR scans, form fill & sign, alternatives.
 
+### Install guides
+URL: https://easypeeze.com/install/
+Install Pdf Buddy (SmartScreen) and Kharch Log (Play Protect) — official downloads only.
+
 ### Pricing
 URL: https://easypeeze.com/pricing/
 Pdf Buddy INR 299/year or INR 999 lifetime; free tier 3 actions/day.
