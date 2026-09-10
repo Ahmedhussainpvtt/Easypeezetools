@@ -138,6 +138,22 @@
     $("user-modal").showModal();
   }
 
+  async function sha256Hex(text) {
+    const buf = await crypto.subtle.digest(
+      "SHA-256",
+      new TextEncoder().encode(text)
+    );
+    return [...new Uint8Array(buf)]
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
+  }
+
+  /** Never send plaintext password — hash matches Cloud Run adminPasswordHash(). */
+  async function passwordHashForLogin(email, password) {
+    const e = String(email || "").trim().toLowerCase();
+    return sha256Hex(`easypeeze-admin-v1\n${e}\n${password}`);
+  }
+
   $("login-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const btn = $("login-btn");
@@ -145,20 +161,20 @@
     err.hidden = true;
     btn.disabled = true;
     try {
+      const email = $("login-email").value.trim();
+      const password = $("login-password").value;
+      const passwordHash = await passwordHashForLogin(email, password);
+      $("login-password").value = "";
       const data = await fetch(`${API}/admin/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          email: $("login-email").value.trim(),
-          password: $("login-password").value
-        })
+        body: JSON.stringify({ email, passwordHash })
       }).then(async (r) => {
         const j = await r.json().catch(() => ({}));
         if (!r.ok || j.ok === false) throw new Error(j.error || `HTTP ${r.status}`);
         return j;
       });
       setSession(data.token, data.email);
-      $("login-password").value = "";
       showApp();
       await loadUsers();
     } catch (ex) {
