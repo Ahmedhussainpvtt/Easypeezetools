@@ -4,6 +4,7 @@ Allow: /
 # Thin / utility pages — keep crawl budget on product + content
 Disallow: /pay/
 Disallow: /pay/success.html
+Disallow: /staging/
 
 # Private ops UI — NEVER sitemap / llms / nav / internal links.
 # Path is intentionally obscure. Do not rename into sitemap generators.
