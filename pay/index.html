@@ -73,7 +73,9 @@
         <a href="../install/">Install</a>
         <a href="../pricing/">Pricing</a>
         <a href="../faq/">FAQ</a>
+        <a href="../refund/">Refunds</a>
         <a href="../privacy/">Privacy</a>
+        <a href="../about/">About</a>
         <a href="../contact/">Contact</a>
         <a class="nav-cta" href="../pricing/">Pricing — from ₹149</a>
       </nav>
@@ -88,6 +90,10 @@
     </div>
     <section class="section" style="max-width:480px;">
       <p class="pay-price" id="pay-price">₹299 <span class="pay-once" id="pay-once">/ year</span></p>
+      <div class="pay-currency" role="group" aria-label="Currency">
+        <button type="button" class="pay-currency__btn is-active" data-currency="INR" id="currencyInr">Pay in ₹ INR</button>
+        <button type="button" class="pay-currency__btn" data-currency="USD" id="currencyUsd">Pay in $ USD</button>
+      </div>
       <label class="pay-label" for="firstName">First name <span class="req" aria-hidden="true">*</span></label>
       <input class="pay-input" id="firstName" type="text" autocomplete="given-name" placeholder="First name" required />
       <label class="pay-label" for="lastName">Last name <span class="opt">(optional)</span></label>
@@ -107,8 +113,20 @@
         razorpayKeyId: 'rzp_live_TVqX95CxZTFsuk',
         product: 'pdfbuddy',
         plans: {
-          yearly: { planType: 'yearly', amountInr: 299, label: 'Pdf Buddy Yearly', once: '/ year' },
-          lifetime: { planType: 'lifetime', amountInr: 999, label: 'Pdf Buddy Lifetime', once: 'one-time' }
+          yearly: {
+            planType: 'yearly',
+            amountInr: 299,
+            amountUsd: 5,
+            label: 'Pdf Buddy Yearly',
+            once: '/ year'
+          },
+          lifetime: {
+            planType: 'lifetime',
+            amountInr: 999,
+            amountUsd: 15,
+            label: 'Pdf Buddy Lifetime',
+            once: 'one-time'
+          }
         }
       };
     </script>
@@ -132,7 +150,9 @@
         <a href="../install/">Install</a>
         <a href="../pricing/">Pricing</a>
         <a href="../glossary/">Glossary</a>
+        <a href="../about/">About</a>
         <a href="../contact/">Contact</a>
+        <a href="../refund/">Refunds</a>
         <a href="../privacy/">Privacy</a>
         <a href="../terms/">Terms</a>
         <a href="mailto:easypeezetools@gmail.com">Support</a>

@@ -1126,6 +1126,30 @@ a:hover { text-decoration: underline; }
   font-weight: 600;
   color: var(--muted);
 }
+.pay-currency {
+  display: flex;
+  gap: 8px;
+  margin: 0 0 16px;
+  flex-wrap: wrap;
+}
+.pay-currency__btn {
+  flex: 1;
+  min-width: 120px;
+  padding: 10px 12px;
+  border: 1px solid var(--border, #d0d7de);
+  background: #fff;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.pay-currency__btn.is-active {
+  border-color: var(--primary, #0085FF);
+  color: var(--primary, #0085FF);
+  box-shadow: inset 0 0 0 1px var(--primary, #0085FF);
+}
 .pay-btn {
   width: 100%;
   text-align: center;

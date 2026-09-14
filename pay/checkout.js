@@ -4,6 +4,7 @@
   var planKey = (params.get('plan') || 'yearly').toLowerCase();
   if (planKey !== 'lifetime') planKey = 'yearly';
   var plan = (cfg.plans && cfg.plans[planKey]) || cfg.plans.yearly;
+  var currency = (params.get('currency') || 'INR').toUpperCase() === 'USD' ? 'USD' : 'INR';
   var firstNameInput = document.getElementById('firstName');
   var lastNameInput = document.getElementById('lastName');
   var emailInput = document.getElementById('email');
@@ -13,11 +14,32 @@
   var priceEl = document.getElementById('pay-price');
   var titleEl = document.getElementById('pay-title');
 
-  if (priceEl && plan) {
-    priceEl.innerHTML = '₹' + plan.amountInr + ' <span class="pay-once" id="pay-once">' + (plan.once || '') + '</span>';
+  function priceLabel() {
+    if (!plan) return '';
+    if (currency === 'USD') return '$' + plan.amountUsd;
+    return '₹' + plan.amountInr;
   }
+
+  function syncPrice() {
+    if (priceEl && plan) {
+      priceEl.innerHTML =
+        priceLabel() + ' <span class="pay-once" id="pay-once">' + (plan.once || '') + '</span>';
+    }
+    document.querySelectorAll('.pay-currency__btn').forEach(function (btn) {
+      btn.classList.toggle('is-active', btn.getAttribute('data-currency') === currency);
+    });
+  }
+
+  syncPrice();
   if (titleEl && plan) titleEl.textContent = plan.label || 'Unlock Pdf Buddy';
   if (params.get('email') && emailInput) emailInput.value = params.get('email');
+
+  document.querySelectorAll('.pay-currency__btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      currency = btn.getAttribute('data-currency') === 'USD' ? 'USD' : 'INR';
+      syncPrice();
+    });
+  });
 
   function setStatus(msg, isError) {
     if (!statusEl) return;
@@ -171,7 +193,22 @@
       }
       var buyer = { firstName: firstName, lastName: lastName, email: email, phone: phone };
       var displayName = [firstName, lastName].filter(Boolean).join(' ');
-      if (!window.confirm('Pay for ' + (plan.label || 'Pdf Buddy') + ' with:\\n\\n' + displayName + '\\n' + email + '\\n' + phone + '\\n\\nContinue?')) return;
+      if (
+        !window.confirm(
+          'Pay ' +
+            priceLabel() +
+            ' for ' +
+            (plan.label || 'Pdf Buddy') +
+            ' with:\n\n' +
+            displayName +
+            '\n' +
+            email +
+            '\n' +
+            phone +
+            '\n\nContinue?'
+        )
+      )
+        return;
       setStatus('Creating checkout…');
       payBtn.disabled = true;
       createOrder({
@@ -181,7 +218,8 @@
         lastName: lastName,
         name: displayName,
         product: cfg.product || 'pdfbuddy',
-        planType: plan.planType
+        planType: plan.planType,
+        currency: currency
       })
         .then(function (data) {
           if (!data || !data.ok) throw new Error((data && data.error) || 'Could not start checkout');
