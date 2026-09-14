@@ -1,6 +1,6 @@
 # Easy Peeze Tools — llms-full.txt
 
-Generated: 2026-09-12
+Generated: 2026-09-14
 Source: https://easypeeze.com/
 Index: https://easypeeze.com/llms.txt
 
@@ -52,6 +52,10 @@ Download Pdf Buddy for Windows 10/11.
 ### FAQ
 URL: https://easypeeze.com/faq/
 FAQ for Pdf Buddy licensing, free tier, and local-first privacy.
+
+### About
+URL: https://easypeeze.com/about/
+About.
 
 ### Glossary index
 URL: https://easypeeze.com/glossary/
