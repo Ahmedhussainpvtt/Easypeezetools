@@ -1171,11 +1171,18 @@ a:hover { text-decoration: underline; }
 }
 .pricing-currency {
   justify-content: center;
-  max-width: 280px;
-  margin: 0 auto 28px;
+  max-width: 260px;
+  margin: 16px auto 0;
 }
 .pricing-currency .pay-currency__btn {
   min-width: 0;
+  padding: 8px 10px;
+}
+.page-hero--pricing {
+  padding-bottom: 16px;
+}
+.section--pricing-plans {
+  padding-top: 20px;
 }
 .pay-btn {
   width: 100%;
