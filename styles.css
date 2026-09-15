@@ -1169,6 +1169,14 @@ a:hover { text-decoration: underline; }
   color: var(--primary, #0085FF);
   box-shadow: inset 0 0 0 1px var(--primary, #0085FF);
 }
+.pricing-currency {
+  justify-content: center;
+  max-width: 280px;
+  margin: 0 auto 28px;
+}
+.pricing-currency .pay-currency__btn {
+  min-width: 0;
+}
 .pay-btn {
   width: 100%;
   text-align: center;
