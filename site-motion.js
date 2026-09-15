@@ -221,3 +221,96 @@
     window.addEventListener('blur', clearTrail);
   }
 })();
+
+/* Feature tornado — conical helix (not a flat circle); one card flies front per beat */
+(() => {
+  const tornado = document.querySelector('.feature-tornado');
+  if (!tornado) return;
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const desktop = window.matchMedia('(min-width: 901px)').matches;
+  if (reduce || !desktop) {
+    tornado.classList.add('is-ready');
+    return;
+  }
+
+  const track = tornado.querySelector('.feature-tornado__track');
+  const stage = tornado.querySelector('#tornado-stage');
+  const label = tornado.querySelector('#tornado-active-label');
+  const cards = stage ? [...stage.querySelectorAll('[data-tornado-card]')] : [];
+  if (!track || !cards.length) return;
+
+  const n = cards.length;
+  const TAU = Math.PI * 2;
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const easeOut = (t) => 1 - Math.pow(1 - t, 2.6);
+  let raf = 0;
+  let focusIdx = -1;
+
+  const paint = () => {
+    raf = 0;
+    const total = Math.max(1, track.offsetHeight - window.innerHeight);
+    const top = track.getBoundingClientRect().top;
+    const p = clamp(-top / total, 0, 1);
+    const focus = p * (n - 1);
+    const idx = Math.round(clamp(focus, 0, n - 1));
+    /* Extra spin so the funnel keeps winding as you scroll */
+    const spin = p * TAU * 2.1;
+    const stageH = stage.clientHeight || 420;
+    /* Vertical step — large on purpose so it reads as a column spiral, not a ring */
+    const yStep = Math.min(78, stageH * 0.14);
+
+    cards.forEach((card, i) => {
+      const rel = i - focus;
+      const abs = Math.abs(rel);
+      /* 1 = this card is the one flying to front */
+      const pull = easeOut(clamp(1 - abs, 0, 1));
+
+      /*
+        Conical helix:
+        - angle advances per card (multi-turn spiral)
+        - y stacks cards up/down the funnel
+        - radius flares with |rel| (wide away from eye, tight near center)
+        - pull collapses the active card into center-front
+      */
+      const angle = rel * 1.22 + spin;
+      const helixY = rel * yStep;
+      const coneR = 48 + abs * 82 + Math.min(abs, 3) * 10;
+      const r = coneR * (1 - pull);
+
+      const x = Math.sin(angle) * r;
+      const y = helixY * (1 - pull * 0.9);
+      const zOrbit = Math.cos(angle) * r * 0.65;
+      const z = pull * 340 + zOrbit * (1 - pull) - abs * 28;
+
+      const rotY = ((angle * 180) / Math.PI) * 0.4 * (1 - pull);
+      const rotX = (14 + Math.cos(angle) * 10) * (1 - pull);
+      const rotZ = Math.sin(angle) * 22 * (1 - pull) + rel * 4 * (1 - pull);
+      const scale = 0.38 + pull * 0.72;
+      const opacity = clamp(0.55 + pull * 0.45 - Math.max(0, abs - 2.4) * 0.1, 0.32, 1);
+
+      card.style.opacity = String(opacity);
+      card.style.zIndex = String(Math.round(10 + pull * 50 - abs * 2));
+      card.style.transform =
+        `translate3d(calc(-50% + ${x.toFixed(1)}px), calc(-50% + ${y.toFixed(1)}px), ${z.toFixed(1)}px)` +
+        ` rotateX(${rotX.toFixed(1)}deg) rotateY(${rotY.toFixed(1)}deg) rotateZ(${rotZ.toFixed(1)}deg)` +
+        ` scale(${scale.toFixed(3)})`;
+      card.classList.toggle('is-focus', i === idx);
+      card.style.pointerEvents = pull > 0.6 ? 'auto' : 'none';
+    });
+
+    if (idx !== focusIdx) {
+      focusIdx = idx;
+      if (label) label.textContent = cards[idx].getAttribute('data-label') || '';
+    }
+  };
+
+  const onScroll = () => {
+    if (!raf) raf = requestAnimationFrame(paint);
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  paint();
+  tornado.classList.add('is-ready');
+})();

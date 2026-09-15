@@ -2,7 +2,7 @@
 
 > Easy Peeze Tools makes simple privacy-first apps: Pdf Buddy (100% local Windows PDF editor, 3 free actions/day, then INR 299/year or INR 999 lifetime) and Kharch Log (Android expense tracker on Google Sheets, INR 149 lifetime). Site: easypeeze.com - expenses product also at kharchlog.com.
 
-Last updated: 2026-09-14
+Last updated: 2026-09-15
 Canonical site: https://easypeeze.com/
 Sitemap: https://easypeeze.com/sitemap.xml
 Full corpus: https://easypeeze.com/llms-full.txt
@@ -78,6 +78,12 @@ Contact: easypeezetools@gmail.com
 - [Merge Split Compress Pdf Guide](https://easypeeze.com/blog/merge-split-compress-pdf-guide/): Blog: Merge Split Compress Pdf Guide.
 - [Sign Pdf Without Adobe](https://easypeeze.com/blog/sign-pdf-without-adobe/): Blog: Sign Pdf Without Adobe.
 - [Best Pdf Editor Windows India](https://easypeeze.com/blog/best-pdf-editor-windows-india/): Blog: Best Pdf Editor Windows India.
+- [Merge Aadhaar Pan Salary Slip Kyc Pdf](https://easypeeze.com/blog/merge-aadhaar-pan-salary-slip-kyc-pdf/): Blog: Merge Aadhaar Pan Salary Slip Kyc Pdf.
+- [Image To Pdf Indian Portal Upload](https://easypeeze.com/blog/image-to-pdf-indian-portal-upload/): Blog: Image To Pdf Indian Portal Upload.
+- [Split Bank Statement Pdf Pages](https://easypeeze.com/blog/split-bank-statement-pdf-pages/): Blog: Split Bank Statement Pdf Pages.
+- [Redact Sensitive Info Pdf Before Sharing](https://easypeeze.com/blog/redact-sensitive-info-pdf-before-sharing/): Blog: Redact Sensitive Info Pdf Before Sharing.
+- [Pdf Size Limits Epfo Bank Portals India](https://easypeeze.com/blog/pdf-size-limits-epfo-bank-portals-india/): Blog: Pdf Size Limits Epfo Bank Portals India.
+- [Offline Pdf Editor Vs Browser Local Tools](https://easypeeze.com/blog/offline-pdf-editor-vs-browser-local-tools/): Blog: Offline Pdf Editor Vs Browser Local Tools.
 
 ## Glossary
 

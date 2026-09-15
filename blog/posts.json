@@ -1,8 +1,88 @@
 [
   {
+    "slug": "offline-pdf-editor-vs-browser-local-tools",
+    "title": "Offline Windows PDF editor vs in-browser “no upload” tools",
+    "description": "Browser WebAssembly tools can stay on-device — but a desktop app still wins for daily KYC packs, batch compress, and working without the tab dying.",
+    "date": "2026-09-15",
+    "url": "/blog/offline-pdf-editor-vs-browser-local-tools/",
+    "image": "/images/blog-compare.jpg",
+    "tags": [
+      "offline PDF editor",
+      "privacy",
+      "Windows"
+    ]
+  },
+  {
+    "slug": "pdf-size-limits-epfo-bank-portals-india",
+    "title": "PDF size limits for EPFO, bank & gov portals (practical compress)",
+    "description": "Common Indian portal caps sit around 500KB–2MB. A local compress checklist that keeps text readable for verification teams.",
+    "date": "2026-09-14",
+    "url": "/blog/pdf-size-limits-epfo-bank-portals-india/",
+    "image": "/images/compress-send.jpg",
+    "tags": [
+      "compress PDF",
+      "EPFO",
+      "portal limits",
+      "India"
+    ]
+  },
+  {
+    "slug": "redact-sensitive-info-pdf-before-sharing",
+    "title": "Cover sensitive lines on a PDF before you share it",
+    "description": "Sharing a statement or ID scan? Cover Aadhaar digits, account numbers, and addresses locally on Windows before email or WhatsApp.",
+    "date": "2026-09-13",
+    "url": "/blog/redact-sensitive-info-pdf-before-sharing/",
+    "image": "/images/edit-desk.jpg",
+    "tags": [
+      "PDF privacy",
+      "edit PDF",
+      "Aadhaar"
+    ]
+  },
+  {
+    "slug": "split-bank-statement-pdf-pages",
+    "title": "Split bank statement PDF pages before you upload",
+    "description": "Portals rarely want a 40-page passbook PDF. Split the pages you need, keep the rest offline, and avoid uploading full statements to random tools.",
+    "date": "2026-09-12",
+    "url": "/blog/split-bank-statement-pdf-pages/",
+    "image": "/images/split-pages.jpg",
+    "tags": [
+      "split PDF",
+      "bank statement",
+      "privacy"
+    ]
+  },
+  {
+    "slug": "image-to-pdf-indian-portal-upload",
+    "title": "Image to PDF for Indian portal uploads (size + clarity)",
+    "description": "Portals reject heavy JPGs and unreadable scans. Convert images to PDF on Windows, keep stamps readable, and hit common KB/MB limits.",
+    "date": "2026-09-11",
+    "url": "/blog/image-to-pdf-indian-portal-upload/",
+    "image": "/images/convert-office.jpg",
+    "tags": [
+      "image to PDF",
+      "portal upload",
+      "compress PDF"
+    ]
+  },
+  {
+    "slug": "merge-aadhaar-pan-salary-slip-kyc-pdf",
+    "title": "Merge Aadhaar, PAN & salary slip into one KYC PDF (locally)",
+    "description": "Banks and NBFCs want one KYC pack. How to merge Aadhaar, PAN, and salary slips on Windows without uploading IDs to a random online editor.",
+    "date": "2026-09-10",
+    "url": "/blog/merge-aadhaar-pan-salary-slip-kyc-pdf/",
+    "image": "/images/merge-files.jpg",
+    "tags": [
+      "KYC PDF",
+      "merge PDF",
+      "Aadhaar",
+      "India"
+    ]
+  },
+  {
     "slug": "cheap-adobe-acrobat-alternative-india",
     "title": "Cheap Adobe Acrobat alternative for India (honest take)",
-    "description": "When Pdf Buddy at \u20b9299/year beats Acrobat for KYC packs, WhatsApp compress, and offline edit \u2014 and when you still need Acrobat or a DSC.",
+    "description": "When Pdf Buddy at ₹299/year beats Acrobat for KYC packs, WhatsApp compress, and offline edit — and when you still need Acrobat or a DSC.",
     "date": "2026-09-09",
     "url": "/blog/cheap-adobe-acrobat-alternative-india/",
     "image": "/images/blog-compare.jpg",
@@ -15,7 +95,7 @@
   {
     "slug": "aadhaar-kyc-pdf-do-not-upload",
     "title": "Aadhaar & KYC PDFs: do not upload to random editors",
-    "description": "Why Aadhaar, PAN, and bank statement PDFs should stay on your PC \u2014 and how a local Windows PDF editor fits Indian KYC packs.",
+    "description": "Why Aadhaar, PAN, and bank statement PDFs should stay on your PC — and how a local Windows PDF editor fits Indian KYC packs.",
     "date": "2026-09-09",
     "url": "/blog/aadhaar-kyc-pdf-do-not-upload/",
     "image": "/images/blog-privacy.jpg",
@@ -43,7 +123,7 @@
   {
     "slug": "college-admission-pdf-checklist-india",
     "title": "College admission PDF checklist (India portals)",
-    "description": "Photo, ID, marksheet, signature \u2014 merge and compress under common Indian admission portal limits without uploading to random sites.",
+    "description": "Photo, ID, marksheet, signature — merge and compress under common Indian admission portal limits without uploading to random sites.",
     "date": "2026-09-09",
     "url": "/blog/college-admission-pdf-checklist-india/",
     "image": "/images/blog-india-office.jpg",
@@ -57,7 +137,7 @@
   {
     "slug": "easy-peeze-tools-pdf-buddy-kharch-log",
     "title": "Easy Peeze Tools: Pdf Buddy + Kharch Log under one brand",
-    "description": "What Easy Peeze Tools is, how Pdf Buddy and Kharch Log fit together, and who each app is for \u2014 students, freelancers, SMEs in India.",
+    "description": "What Easy Peeze Tools is, how Pdf Buddy and Kharch Log fit together, and who each app is for — students, freelancers, SMEs in India.",
     "date": "2026-09-04",
     "url": "/blog/easy-peeze-tools-pdf-buddy-kharch-log/",
     "image": "/images/blog-india-office.jpg",
@@ -145,7 +225,7 @@
   {
     "slug": "pdf-buddy-vs-online-editors",
     "title": "Pdf Buddy vs iLovePDF, Smallpdf, Sejda & pdfFiller",
-    "description": "When to use a local Windows PDF editor instead of iLovePDF, Smallpdf, Sejda, or pdfFiller \u2014 India pricing, privacy, and portal uploads.",
+    "description": "When to use a local Windows PDF editor instead of iLovePDF, Smallpdf, Sejda, or pdfFiller — India pricing, privacy, and portal uploads.",
     "date": "2026-09-03",
     "url": "/blog/pdf-buddy-vs-online-editors/",
     "image": "/images/blog-compare.jpg",
@@ -160,7 +240,7 @@
   {
     "slug": "fill-and-type-on-pdf-windows",
     "title": "Type on a PDF and fill forms on Windows (without Acrobat)",
-    "description": "How to type on a PDF, fill AcroForm fields, and overlay text on scans using a desktop editor \u2014 plus when you still need Acrobat or a cloud form tool.",
+    "description": "How to type on a PDF, fill AcroForm fields, and overlay text on scans using a desktop editor — plus when you still need Acrobat or a cloud form tool.",
     "date": "2026-09-03",
     "url": "/blog/fill-and-type-on-pdf-windows/",
     "image": "/images/blog-forms.jpg",
@@ -173,7 +253,7 @@
   {
     "slug": "pdf-pack-for-indian-portals",
     "title": "Build a PDF pack that Indian portals will actually accept",
-    "description": "Checklist for GST, college, bank, and job portals: page order, MB limits, orientation, OCR, and filenames \u2014 using a local Windows PDF editor.",
+    "description": "Checklist for GST, college, bank, and job portals: page order, MB limits, orientation, OCR, and filenames — using a local Windows PDF editor.",
     "date": "2026-09-03",
     "url": "/blog/pdf-pack-for-indian-portals/",
     "image": "/images/hero-tools.jpg",
@@ -187,7 +267,7 @@
   {
     "slug": "merge-split-compress-pdf-guide",
     "title": "How to merge, split, and compress PDFs on Windows",
-    "description": "Step-by-step guide to merge PDF, split PDF pages, and compress PDF size for email and portals \u2014 without uploading files.",
+    "description": "Step-by-step guide to merge PDF, split PDF pages, and compress PDF size for email and portals — without uploading files.",
     "date": "2026-09-02",
     "url": "/blog/merge-split-compress-pdf-guide/",
     "image": "/images/blog-merge-guide.jpg",
@@ -200,7 +280,7 @@
   {
     "slug": "sign-pdf-without-adobe",
     "title": "Sign a PDF without Adobe Acrobat Pro",
-    "description": "eSign-style PDF signatures on Windows: draw or place a signature locally with Pdf Buddy \u2014 no Acrobat subscription.",
+    "description": "eSign-style PDF signatures on Windows: draw or place a signature locally with Pdf Buddy — no Acrobat subscription.",
     "date": "2026-09-02",
     "url": "/blog/sign-pdf-without-adobe/",
     "image": "/images/sign-contract.jpg",
