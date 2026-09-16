@@ -1,3 +1,69 @@
+/* Mobile nav — a kebab button that collapses the header links into a panel.
+   Runs before any motion code because navigation must work even when the
+   visitor asks for reduced motion. */
+(() => {
+  const header = document.querySelector('.site-header');
+  const inner = header && header.querySelector('.site-header__inner');
+  const nav = inner && inner.querySelector('.site-nav');
+  if (!nav) return;
+
+  // The CTA stays visible in the bar; the rest of the links collapse.
+  const actions = document.createElement('div');
+  actions.className = 'nav-bar-actions';
+  const cta = nav.querySelector('.nav-cta');
+  if (cta) actions.appendChild(cta);
+
+  const toggle = document.createElement('button');
+  toggle.type = 'button';
+  toggle.className = 'nav-toggle';
+  toggle.setAttribute('aria-label', 'Open menu');
+  toggle.setAttribute('aria-expanded', 'false');
+  toggle.setAttribute('aria-controls', 'site-nav-panel');
+  toggle.innerHTML = '<span></span><span></span><span></span>';
+  actions.appendChild(toggle);
+  inner.appendChild(actions);
+
+  if (!nav.id) nav.id = 'site-nav-panel';
+  // Only adopt the collapsed layout once the toggle exists, so a no-JS
+  // visitor keeps the plain inline links.
+  header.classList.add('nav-ready');
+  // Enable the open/close transition a frame later, so collapsing on load
+  // is instant rather than an animated flash of the full menu.
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => header.classList.add('nav-anim'));
+  });
+
+  const isOpen = () => header.classList.contains('nav-open');
+  const setOpen = (open) => {
+    header.classList.toggle('nav-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+
+  toggle.addEventListener('click', (event) => {
+    event.stopPropagation();
+    setOpen(!isOpen());
+  });
+
+  // Tapping a link, tapping outside, or Escape all dismiss the panel.
+  nav.addEventListener('click', (event) => {
+    if (event.target.closest('a')) setOpen(false);
+  });
+  document.addEventListener('click', (event) => {
+    if (!isOpen()) return;
+    if (!nav.contains(event.target) && !toggle.contains(event.target)) setOpen(false);
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && isOpen()) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+  window.addEventListener('resize', () => {
+    if (isOpen() && window.innerWidth > 820) setOpen(false);
+  });
+})();
+
 (() => {
   const doc = document.documentElement;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
