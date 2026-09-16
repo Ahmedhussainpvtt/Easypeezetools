@@ -247,23 +247,26 @@
           </div>
         </div>
 
-        <div class="modal__fields">
-          <label id="u-email-wrap" class="field-span">
-            <span>Email</span>
-            <input id="u-email" type="email" required placeholder="name@example.com" />
-          </label>
-          <label>
-            <span>Name</span>
-            <input id="u-name" placeholder="Optional display name" />
-          </label>
-          <label>
-            <span>Notes</span>
-            <input id="u-notes" placeholder="Optional internal note" />
-          </label>
+        <div class="modal__section">
+          <p class="modal__section-title">Customer details</p>
+          <div class="modal__fields">
+            <label id="u-email-wrap" class="field-span">
+              <span>Email</span>
+              <input id="u-email" type="email" required placeholder="name@example.com" />
+            </label>
+            <label>
+              <span>Name</span>
+              <input id="u-name" placeholder="Optional display name" />
+            </label>
+            <label>
+              <span>Notes</span>
+              <input id="u-notes" placeholder="Optional internal note" />
+            </label>
+          </div>
         </div>
 
-        <fieldset class="modal__grant">
-          <legend>Grant / update access</legend>
+        <div class="modal__section">
+          <p class="modal__section-title">Grant / update access</p>
           <div class="modal__grid">
             <label>
               <span>Product</span>
@@ -280,7 +283,7 @@
               </select>
             </label>
           </div>
-        </fieldset>
+        </div>
 
         <p id="user-modal-error" class="form-error" hidden></p>
       </div>
