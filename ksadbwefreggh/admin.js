@@ -4,9 +4,12 @@
     "https://kharchlog-license-u4rcttr3nq-el.a.run.app";
   const TOKEN_KEY = "easypeeze_admin_token";
   const EMAIL_KEY = "easypeeze_admin_email";
+  const EXPIRES_KEY = "easypeeze_admin_expires";
+  const SESSION_MS = 30 * 60 * 1000;
 
   const $ = (id) => document.getElementById(id);
   let usersCache = [];
+  let sessionTimer = null;
 
   const esc = (v) =>
     String(v ?? "").replace(/[&<>"']/g, (c) =>
@@ -30,16 +33,71 @@
   function token() {
     return sessionStorage.getItem(TOKEN_KEY) || "";
   }
-  function setSession(tok, email) {
+
+  function sessionExpiresAt() {
+    const raw = Number(sessionStorage.getItem(EXPIRES_KEY) || 0);
+    return Number.isFinite(raw) ? raw : 0;
+  }
+
+  function isSessionAlive() {
+    const tok = token();
+    if (!tok) return false;
+    const exp = sessionExpiresAt();
+    // Older sessions without expiry metadata are treated as expired.
+    if (!exp) return false;
+    return Date.now() < exp;
+  }
+
+  function clearSessionTimer() {
+    if (sessionTimer) {
+      clearTimeout(sessionTimer);
+      sessionTimer = null;
+    }
+  }
+
+  function armSessionTimer() {
+    clearSessionTimer();
+    const exp = sessionExpiresAt();
+    if (!exp) return;
+    const wait = Math.max(0, exp - Date.now());
+    sessionTimer = setTimeout(() => {
+      expireSession("Session expired — sign in again");
+    }, wait);
+  }
+
+  function expireSession(message) {
+    clearSession();
+    showLogin();
+    if (message) {
+      const err = $("login-error");
+      if (err) {
+        err.textContent = message;
+        err.hidden = false;
+      }
+      toast(message, "error");
+    }
+  }
+
+  function setSession(tok, email, expiresAtMs) {
+    const exp = Number(expiresAtMs) || Date.now() + SESSION_MS;
     sessionStorage.setItem(TOKEN_KEY, tok);
     sessionStorage.setItem(EMAIL_KEY, email || "");
+    sessionStorage.setItem(EXPIRES_KEY, String(exp));
+    armSessionTimer();
   }
+
   function clearSession() {
+    clearSessionTimer();
     sessionStorage.removeItem(TOKEN_KEY);
     sessionStorage.removeItem(EMAIL_KEY);
+    sessionStorage.removeItem(EXPIRES_KEY);
   }
 
   async function api(path, opts = {}) {
+    if (!isSessionAlive()) {
+      expireSession("Session expired — sign in again");
+      throw new Error("session expired");
+    }
     const headers = Object.assign(
       { Accept: "application/json", "Content-Type": "application/json" },
       opts.headers || {}
@@ -55,8 +113,7 @@
       data = { ok: false, error: text || "bad response" };
     }
     if (res.status === 401) {
-      clearSession();
-      showLogin();
+      expireSession("Session expired — sign in again");
       throw new Error(data?.error || "unauthorized");
     }
     if (!res.ok || data?.ok === false) {
@@ -234,17 +291,22 @@
     const editing = !!(user && user.email);
     const summary = $("user-modal-summary");
     const emailWrap = $("u-email-wrap");
+    const emailInput = $("u-email");
     const title = $("user-modal-title");
     const eyebrow = $("user-modal-eyebrow");
     const saveBtn = $("user-save-btn");
 
-    eyebrow.textContent = editing ? "Edit customer" : "New customer";
-    title.textContent = editing ? user.name || user.email : "Grant access";
+    eyebrow.textContent = editing ? "Customer" : "New customer";
+    title.textContent = editing ? "Edit customer" : "Grant access";
     saveBtn.textContent = editing ? "Grant / update" : "Grant access";
 
-    $("u-email").value = user?.email || "";
-    $("u-email").readOnly = editing;
+    emailInput.value = user?.email || "";
+    emailInput.readOnly = editing;
+    // required only when creating — otherwise a hidden field can block submit
+    emailInput.required = !editing;
     emailWrap.hidden = editing;
+    emailWrap.classList.toggle("is-hidden", editing);
+
     $("u-name").value = user?.name || "";
     $("u-notes").value = user?.notes || "";
     $("user-modal-error").hidden = true;
@@ -262,27 +324,23 @@
       fillProductStatus("u-kh", user.kharchlog);
       fillProductStatus("u-pdf", user.pdfbuddy);
 
-      // Prefer granting the product that still needs attention.
       const kh = user.kharchlog || {};
       const pdf = user.pdfbuddy || {};
-      if (kh.status === "active") {
+      if (kh.status === "active" && pdf.status !== "active") {
         $("u-product").value = "pdfbuddy";
         $("u-plan").value = pdf.plan === "yearly" ? "yearly" : "lifetime";
       } else {
         $("u-product").value = "kharchlog";
         $("u-plan").value = kh.plan === "yearly" ? "yearly" : "lifetime";
       }
-      $("u-grant-hint").textContent =
-        "Current plans are above. Choose a product and plan below to grant or renew.";
     } else {
       summary.hidden = true;
       $("u-product").value = "kharchlog";
       $("u-plan").value = "lifetime";
-      $("u-grant-hint").textContent = "Pick a product and plan to grant.";
     }
 
     $("user-modal").showModal();
-    (editing ? $("u-name") : $("u-email")).focus();
+    (editing ? $("u-name") : emailInput).focus();
   }
 
   async function sha256Hex(text) {
@@ -321,7 +379,11 @@
         if (!r.ok || j.ok === false) throw new Error(j.error || `HTTP ${r.status}`);
         return j;
       });
-      setSession(data.token, data.email);
+      setSession(
+        data.token,
+        data.email,
+        data.expiresAt || Date.now() + SESSION_MS
+      );
       showApp();
       await loadUsers();
     } catch (ex) {
@@ -470,17 +532,18 @@
   });
 
   async function boot() {
-    if (!token()) {
+    if (!isSessionAlive()) {
+      clearSession();
       showLogin();
       return;
     }
+    armSessionTimer();
     showApp();
     try {
       await api("/admin/me");
       await loadUsers();
     } catch {
-      clearSession();
-      showLogin();
+      expireSession("Session expired — sign in again");
     }
   }
 

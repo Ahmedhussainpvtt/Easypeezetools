@@ -223,66 +223,68 @@
         </button>
       </div>
 
-      <div id="user-modal-summary" class="modal__summary" hidden>
-        <div class="modal__who">
-          <span class="avatar" id="u-avatar">—</span>
-          <div>
-            <p class="modal__who-name" id="u-display-name">—</p>
-            <p class="modal__who-mail cell-mono" id="u-display-email">—</p>
+      <div class="modal__body">
+        <div id="user-modal-summary" class="modal__summary" hidden>
+          <div class="modal__who">
+            <span class="avatar" id="u-avatar">—</span>
+            <div class="modal__who-text">
+              <p class="modal__who-name" id="u-display-name">—</p>
+              <p class="modal__who-mail cell-mono" id="u-display-email">—</p>
+            </div>
+            <span id="u-display-state" class="badge badge-off">Free</span>
           </div>
-          <span id="u-display-state" class="badge badge-off">Free</span>
+          <div class="product-status-grid">
+            <article class="product-status" data-product="kharchlog">
+              <p class="product-status__label">Kharch Log</p>
+              <p class="product-status__plan" id="u-kh-plan">—</p>
+              <p class="product-status__meta" id="u-kh-meta"></p>
+            </article>
+            <article class="product-status" data-product="pdfbuddy">
+              <p class="product-status__label">Pdf Buddy</p>
+              <p class="product-status__plan" id="u-pdf-plan">—</p>
+              <p class="product-status__meta" id="u-pdf-meta"></p>
+            </article>
+          </div>
         </div>
-        <div class="product-status-grid">
-          <article class="product-status" data-product="kharchlog">
-            <p class="product-status__label">Kharch Log</p>
-            <p class="product-status__plan" id="u-kh-plan">—</p>
-            <p class="product-status__meta" id="u-kh-meta"></p>
-          </article>
-          <article class="product-status" data-product="pdfbuddy">
-            <p class="product-status__label">Pdf Buddy</p>
-            <p class="product-status__plan" id="u-pdf-plan">—</p>
-            <p class="product-status__meta" id="u-pdf-meta"></p>
-          </article>
-        </div>
-      </div>
 
-      <div class="modal__fields">
-        <label id="u-email-wrap">
-          <span>Email</span>
-          <input id="u-email" type="email" required placeholder="name@example.com" />
-        </label>
-        <label>
-          <span>Name</span>
-          <input id="u-name" placeholder="Optional display name" />
-        </label>
-        <label>
-          <span>Notes</span>
-          <input id="u-notes" placeholder="Optional internal note" />
-        </label>
-      </div>
-
-      <fieldset class="modal__grant">
-        <legend>Grant / update access</legend>
-        <p class="field-hint" id="u-grant-hint">Pick a product and plan to grant or renew.</p>
-        <div class="modal__grid">
-          <label>
-            <span>Product</span>
-            <select id="u-product">
-              <option value="kharchlog">Kharch Log</option>
-              <option value="pdfbuddy">Pdf Buddy</option>
-            </select>
+        <div class="modal__fields">
+          <label id="u-email-wrap" class="field-span">
+            <span>Email</span>
+            <input id="u-email" type="email" required placeholder="name@example.com" />
           </label>
           <label>
-            <span>Plan</span>
-            <select id="u-plan">
-              <option value="lifetime">Lifetime</option>
-              <option value="yearly">Yearly</option>
-            </select>
+            <span>Name</span>
+            <input id="u-name" placeholder="Optional display name" />
+          </label>
+          <label>
+            <span>Notes</span>
+            <input id="u-notes" placeholder="Optional internal note" />
           </label>
         </div>
-      </fieldset>
 
-      <p id="user-modal-error" class="form-error" hidden></p>
+        <fieldset class="modal__grant">
+          <legend>Grant / update access</legend>
+          <div class="modal__grid">
+            <label>
+              <span>Product</span>
+              <select id="u-product">
+                <option value="kharchlog">Kharch Log</option>
+                <option value="pdfbuddy">Pdf Buddy</option>
+              </select>
+            </label>
+            <label>
+              <span>Plan</span>
+              <select id="u-plan">
+                <option value="lifetime">Lifetime</option>
+                <option value="yearly">Yearly</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+
+        <p id="user-modal-error" class="form-error" hidden></p>
+      </div>
+
       <div class="modal__actions">
         <button type="button" class="btn btn-ghost" id="user-cancel-btn">Cancel</button>
         <button type="submit" class="btn btn-primary" id="user-save-btn" value="save">Grant access</button>
