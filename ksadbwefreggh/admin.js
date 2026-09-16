@@ -93,8 +93,23 @@
 
   function planCell(slice) {
     const label = planLabel(slice);
-    const cls = label === "—" ? "plan-pill plan-pill--none" : "plan-pill";
+    let cls = "plan-pill";
+    if (label === "—") cls += " plan-pill--none";
+    else if (slice.status === "expired") cls += " plan-pill--expired";
     return `<span class="${cls}">${esc(label)}</span>`;
+  }
+
+  const STATE_BADGE = {
+    active: { cls: "badge-ok", text: "Active" },
+    expired: { cls: "badge-warn", text: "Expired" },
+    none: { cls: "badge-off", text: "Free" }
+  };
+
+  /** `state` is authoritative; `active` is kept for older API responses. */
+  function stateCell(u) {
+    const key = u.state || (u.active ? "active" : "none");
+    const badge = STATE_BADGE[key] || STATE_BADGE.none;
+    return `<span class="badge ${badge.cls}">${badge.text}</span>`;
   }
 
   /** Placeholder rows so the table never flashes an empty/"not found" state. */
@@ -116,7 +131,16 @@
     const filtered = !q
       ? list
       : list.filter((u) =>
-          [u.email, u.name, u.phone, u.kharchlog?.plan, u.pdfbuddy?.plan]
+          [
+            u.email,
+            u.name,
+            u.phone,
+            u.state,
+            u.kharchlog?.plan,
+            u.kharchlog?.status,
+            u.pdfbuddy?.plan,
+            u.pdfbuddy?.status
+          ]
             .join(" ")
             .toLowerCase()
             .includes(q)
@@ -137,9 +161,7 @@
         </td>
         <td data-label="Email" class="cell-mono">${mail}</td>
         <td data-label="Phone" class="cell-mono">${esc(u.phone || "—")}</td>
-        <td data-label="Status"><span class="badge ${
-          u.active ? "badge-ok" : "badge-off"
-        }">${u.active ? "Active" : "Inactive"}</span></td>
+        <td data-label="Status">${stateCell(u)}</td>
         <td data-label="Kharch Log">${planCell(u.kharchlog)}</td>
         <td data-label="Pdf Buddy">${planCell(u.pdfbuddy)}</td>
         <td data-label="Actions" class="col-actions">
@@ -159,6 +181,7 @@
   function setKpis(stats) {
     $("kpi-total").textContent = stats?.total ?? "—";
     $("kpi-active").textContent = stats?.active ?? "—";
+    $("kpi-expired").textContent = stats?.expired ?? "—";
     $("kpi-inactive").textContent = stats?.inactive ?? "—";
     $("kpi-kharch").textContent = stats?.kharchlogActive ?? "—";
     $("kpi-pdf").textContent = stats?.pdfbuddyActive ?? "—";

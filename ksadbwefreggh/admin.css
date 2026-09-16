@@ -323,7 +323,7 @@ select {
 
 .kpi-row {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 14px;
 }
 .kpi {
@@ -344,6 +344,7 @@ select {
 }
 .kpi--total::before { background: var(--primary); }
 .kpi--active::before { background: var(--ok); }
+.kpi--expired::before { background: var(--warn); }
 .kpi--inactive::before { background: #94a3b8; }
 .kpi--kharch::before { background: var(--accent); }
 .kpi--pdf::before { background: var(--warn); }
@@ -474,6 +475,7 @@ select {
   background: currentColor;
 }
 .badge-ok { background: var(--ok-soft); color: var(--ok); }
+.badge-warn { background: var(--warn-soft); color: var(--warn); }
 .badge-off { background: var(--bg-deep); color: #64748b; }
 
 .plan-pill {
@@ -487,6 +489,7 @@ select {
   white-space: nowrap;
 }
 .plan-pill--none { background: var(--bg-deep); color: var(--muted); }
+.plan-pill--expired { background: var(--warn-soft); color: var(--warn); }
 
 .row-actions { display: inline-flex; gap: 6px; }
 
