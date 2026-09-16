@@ -287,6 +287,31 @@
     }
   }
 
+  /** Kharch Log is lifetime-only; Pdf Buddy offers yearly + lifetime. */
+  function syncPlanOptions(preferred) {
+    const product = $("u-product").value;
+    const planEl = $("u-plan");
+    const want =
+      product === "kharchlog"
+        ? "lifetime"
+        : preferred === "yearly"
+          ? "yearly"
+          : preferred === "lifetime"
+            ? "lifetime"
+            : planEl.value || "lifetime";
+    const options =
+      product === "kharchlog"
+        ? [["lifetime", "Lifetime"]]
+        : [
+            ["lifetime", "Lifetime"],
+            ["yearly", "Yearly"]
+          ];
+    planEl.innerHTML = options
+      .map(([v, label]) => `<option value="${v}">${label}</option>`)
+      .join("");
+    planEl.value = want === "yearly" && product !== "kharchlog" ? "yearly" : "lifetime";
+  }
+
   function openUserModal(user) {
     const editing = !!(user && user.email);
     const summary = $("user-modal-summary");
@@ -328,15 +353,15 @@
       const pdf = user.pdfbuddy || {};
       if (kh.status === "active" && pdf.status !== "active") {
         $("u-product").value = "pdfbuddy";
-        $("u-plan").value = pdf.plan === "yearly" ? "yearly" : "lifetime";
+        syncPlanOptions(pdf.plan === "yearly" ? "yearly" : "lifetime");
       } else {
         $("u-product").value = "kharchlog";
-        $("u-plan").value = kh.plan === "yearly" ? "yearly" : "lifetime";
+        syncPlanOptions("lifetime");
       }
     } else {
       summary.hidden = true;
       $("u-product").value = "kharchlog";
-      $("u-plan").value = "lifetime";
+      syncPlanOptions("lifetime");
     }
 
     $("user-modal").showModal();
@@ -442,6 +467,7 @@
     }
   });
 
+  $("u-product").addEventListener("change", () => syncPlanOptions());
   $("user-cancel").addEventListener("click", () => $("user-modal").close());
   $("user-cancel-btn").addEventListener("click", () => $("user-modal").close());
   $("user-form").addEventListener("submit", async (e) => {
