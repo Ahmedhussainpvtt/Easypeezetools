@@ -1171,12 +1171,39 @@ a:hover { text-decoration: underline; }
 }
 .pricing-currency {
   justify-content: center;
-  max-width: 260px;
+  max-width: 340px;
   margin: 16px auto 0;
 }
 .pricing-currency .pay-currency__btn {
   min-width: 0;
   padding: 8px 10px;
+}
+/* USD disabled until international payments go live */
+.pay-currency__btn--soon,
+.pay-currency__btn--soon:hover {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  cursor: not-allowed;
+  opacity: 0.75;
+  background: #f6f8fa;
+  border-style: dashed;
+  box-shadow: none;
+}
+.pay-currency__soon {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #8a94a0;
+}
+.pay-currency__note {
+  margin: -6px auto 16px;
+  max-width: 460px;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--muted);
 }
 .page-hero--pricing {
   padding-bottom: 16px;

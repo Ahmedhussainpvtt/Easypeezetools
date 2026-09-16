@@ -4,7 +4,10 @@
   var planKey = (params.get('plan') || 'yearly').toLowerCase();
   if (planKey !== 'lifetime') planKey = 'yearly';
   var plan = (cfg.plans && cfg.plans[planKey]) || cfg.plans.yearly;
-  var currency = (params.get('currency') || 'INR').toUpperCase() === 'USD' ? 'USD' : 'INR';
+  // Flip to true when international payments go live on the gateway.
+  var USD_ENABLED = false;
+  var requestedCurrency = (params.get('currency') || 'INR').toUpperCase();
+  var currency = USD_ENABLED && requestedCurrency === 'USD' ? 'USD' : 'INR';
   var firstNameInput = document.getElementById('firstName');
   var lastNameInput = document.getElementById('lastName');
   var emailInput = document.getElementById('email');
@@ -26,7 +29,18 @@
         priceLabel() + ' <span class="pay-once" id="pay-once">' + (plan.once || '') + '</span>';
     }
     document.querySelectorAll('.pay-currency__btn').forEach(function (btn) {
-      btn.classList.toggle('is-active', btn.getAttribute('data-currency') === currency);
+      var isUsd = btn.getAttribute('data-currency') === 'USD';
+      btn.classList.toggle('is-active', !isUsd && currency === 'INR');
+      if (isUsd && !USD_ENABLED) {
+        btn.disabled = true;
+        btn.setAttribute('aria-disabled', 'true');
+        btn.classList.add('pay-currency__btn--soon');
+        btn.title = 'International payments are not live yet';
+        if (btn.querySelector('.pay-currency__soon') === null) {
+          btn.innerHTML =
+            'Pay in $ USD <span class="pay-currency__soon">Coming soon</span>';
+        }
+      }
     });
   }
 
@@ -36,6 +50,7 @@
 
   document.querySelectorAll('.pay-currency__btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
+      if (btn.disabled || btn.getAttribute('aria-disabled') === 'true') return;
       currency = btn.getAttribute('data-currency') === 'USD' ? 'USD' : 'INR';
       syncPrice();
     });
