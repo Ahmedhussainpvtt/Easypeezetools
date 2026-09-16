@@ -41,6 +41,9 @@
     <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
       <circle cx="12" cy="12" r="9" /><path d="M12 7v6M12 16.5v.5" />
     </symbol>
+    <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+      <path d="M6 6l12 12M18 6 6 18" />
+    </symbol>
   </svg>
 
   <div id="login-view" class="login-shell hidden">
@@ -58,7 +61,6 @@
       </label>
       <p id="login-error" class="form-error" hidden></p>
       <button type="submit" class="btn btn-primary btn-block" id="login-btn">Sign in</button>
-      <p class="login-foot">Session-only access · nothing is stored on this device</p>
     </form>
   </div>
 
@@ -211,39 +213,79 @@
 
   <dialog id="user-modal" class="modal">
     <form method="dialog" id="user-form" class="modal__card">
-      <h2 id="user-modal-title">Customer</h2>
-      <label>
-        <span>Email</span>
-        <input id="u-email" type="email" required placeholder="name@example.com" />
-      </label>
-      <label>
-        <span>Name</span>
-        <input id="u-name" placeholder="Optional" />
-      </label>
-      <div class="modal__grid">
-        <label>
-          <span>Product</span>
-          <select id="u-product">
-            <option value="kharchlog">Kharch Log</option>
-            <option value="pdfbuddy">Pdf Buddy</option>
-          </select>
+      <div class="modal__head">
+        <div>
+          <p class="eyebrow" id="user-modal-eyebrow">Customer</p>
+          <h2 id="user-modal-title">Customer</h2>
+        </div>
+        <button type="button" class="icon-btn modal__close" id="user-cancel" aria-label="Close">
+          <svg aria-hidden="true"><use href="#i-close" /></svg>
+        </button>
+      </div>
+
+      <div id="user-modal-summary" class="modal__summary" hidden>
+        <div class="modal__who">
+          <span class="avatar" id="u-avatar">—</span>
+          <div>
+            <p class="modal__who-name" id="u-display-name">—</p>
+            <p class="modal__who-mail cell-mono" id="u-display-email">—</p>
+          </div>
+          <span id="u-display-state" class="badge badge-off">Free</span>
+        </div>
+        <div class="product-status-grid">
+          <article class="product-status" data-product="kharchlog">
+            <p class="product-status__label">Kharch Log</p>
+            <p class="product-status__plan" id="u-kh-plan">—</p>
+            <p class="product-status__meta" id="u-kh-meta"></p>
+          </article>
+          <article class="product-status" data-product="pdfbuddy">
+            <p class="product-status__label">Pdf Buddy</p>
+            <p class="product-status__plan" id="u-pdf-plan">—</p>
+            <p class="product-status__meta" id="u-pdf-meta"></p>
+          </article>
+        </div>
+      </div>
+
+      <div class="modal__fields">
+        <label id="u-email-wrap">
+          <span>Email</span>
+          <input id="u-email" type="email" required placeholder="name@example.com" />
         </label>
         <label>
-          <span>Plan</span>
-          <select id="u-plan">
-            <option value="lifetime">Lifetime</option>
-            <option value="yearly">Yearly</option>
-          </select>
+          <span>Name</span>
+          <input id="u-name" placeholder="Optional display name" />
+        </label>
+        <label>
+          <span>Notes</span>
+          <input id="u-notes" placeholder="Optional internal note" />
         </label>
       </div>
-      <label>
-        <span>Notes</span>
-        <input id="u-notes" placeholder="Optional internal note" />
-      </label>
+
+      <fieldset class="modal__grant">
+        <legend>Grant / update access</legend>
+        <p class="field-hint" id="u-grant-hint">Pick a product and plan to grant or renew.</p>
+        <div class="modal__grid">
+          <label>
+            <span>Product</span>
+            <select id="u-product">
+              <option value="kharchlog">Kharch Log</option>
+              <option value="pdfbuddy">Pdf Buddy</option>
+            </select>
+          </label>
+          <label>
+            <span>Plan</span>
+            <select id="u-plan">
+              <option value="lifetime">Lifetime</option>
+              <option value="yearly">Yearly</option>
+            </select>
+          </label>
+        </div>
+      </fieldset>
+
       <p id="user-modal-error" class="form-error" hidden></p>
       <div class="modal__actions">
-        <button type="button" class="btn btn-ghost" id="user-cancel">Cancel</button>
-        <button type="submit" class="btn btn-primary" value="save">Save / grant</button>
+        <button type="button" class="btn btn-ghost" id="user-cancel-btn">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="user-save-btn" value="save">Grant access</button>
       </div>
     </form>
   </dialog>

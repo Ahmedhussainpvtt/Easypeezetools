@@ -201,16 +201,88 @@
     }
   }
 
+  function fillProductStatus(prefix, slice) {
+    const planEl = $(`${prefix}-plan`);
+    const metaEl = $(`${prefix}-meta`);
+    const card = planEl.closest(".product-status");
+    if (!slice || slice.plan === "none" || !slice.plan) {
+      planEl.textContent = "No plan";
+      metaEl.textContent = "Free / not granted";
+      card.dataset.state = "none";
+      return;
+    }
+    const plan = String(slice.plan);
+    const status = String(slice.status || "none");
+    planEl.textContent = plan.charAt(0).toUpperCase() + plan.slice(1);
+    if (status === "active") {
+      metaEl.textContent = slice.expiresAt
+        ? `Active · expires ${String(slice.expiresAt).slice(0, 10)}`
+        : "Active";
+      card.dataset.state = "active";
+    } else if (status === "expired") {
+      metaEl.textContent = slice.expiresAt
+        ? `Expired · ${String(slice.expiresAt).slice(0, 10)}`
+        : "Expired";
+      card.dataset.state = "expired";
+    } else {
+      metaEl.textContent = status;
+      card.dataset.state = "none";
+    }
+  }
+
   function openUserModal(user) {
-    $("user-modal-title").textContent = user ? "Edit customer" : "New customer";
+    const editing = !!(user && user.email);
+    const summary = $("user-modal-summary");
+    const emailWrap = $("u-email-wrap");
+    const title = $("user-modal-title");
+    const eyebrow = $("user-modal-eyebrow");
+    const saveBtn = $("user-save-btn");
+
+    eyebrow.textContent = editing ? "Edit customer" : "New customer";
+    title.textContent = editing ? user.name || user.email : "Grant access";
+    saveBtn.textContent = editing ? "Grant / update" : "Grant access";
+
     $("u-email").value = user?.email || "";
-    $("u-email").readOnly = !!user;
+    $("u-email").readOnly = editing;
+    emailWrap.hidden = editing;
     $("u-name").value = user?.name || "";
-    $("u-product").value = "kharchlog";
-    $("u-plan").value = "lifetime";
     $("u-notes").value = user?.notes || "";
     $("user-modal-error").hidden = true;
+
+    if (editing) {
+      summary.hidden = false;
+      $("u-avatar").textContent = initials(user.name, user.email);
+      $("u-display-name").textContent = user.name || "—";
+      $("u-display-email").textContent = user.email;
+      const key = user.state || (user.active ? "active" : "none");
+      const badge = STATE_BADGE[key] || STATE_BADGE.none;
+      const stateEl = $("u-display-state");
+      stateEl.className = `badge ${badge.cls}`;
+      stateEl.textContent = badge.text;
+      fillProductStatus("u-kh", user.kharchlog);
+      fillProductStatus("u-pdf", user.pdfbuddy);
+
+      // Prefer granting the product that still needs attention.
+      const kh = user.kharchlog || {};
+      const pdf = user.pdfbuddy || {};
+      if (kh.status === "active") {
+        $("u-product").value = "pdfbuddy";
+        $("u-plan").value = pdf.plan === "yearly" ? "yearly" : "lifetime";
+      } else {
+        $("u-product").value = "kharchlog";
+        $("u-plan").value = kh.plan === "yearly" ? "yearly" : "lifetime";
+      }
+      $("u-grant-hint").textContent =
+        "Current plans are above. Choose a product and plan below to grant or renew.";
+    } else {
+      summary.hidden = true;
+      $("u-product").value = "kharchlog";
+      $("u-plan").value = "lifetime";
+      $("u-grant-hint").textContent = "Pick a product and plan to grant.";
+    }
+
     $("user-modal").showModal();
+    (editing ? $("u-name") : $("u-email")).focus();
   }
 
   async function sha256Hex(text) {
@@ -309,27 +381,30 @@
   });
 
   $("user-cancel").addEventListener("click", () => $("user-modal").close());
+  $("user-cancel-btn").addEventListener("click", () => $("user-modal").close());
   $("user-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const err = $("user-modal-error");
-    const save = $("user-form").querySelector('button[type="submit"]');
+    const save = $("user-save-btn");
     err.hidden = true;
     save.disabled = true;
     try {
       const email = $("u-email").value.trim();
+      const product = $("u-product").value;
+      const planType = $("u-plan").value;
       await api("/admin/grant-access", {
         method: "POST",
         body: JSON.stringify({
           email,
           name: $("u-name").value.trim(),
-          product: $("u-product").value,
-          planType: $("u-plan").value,
+          product,
+          planType,
           notes: $("u-notes").value.trim()
         })
       });
       $("user-modal").close();
       await loadUsers();
-      toast(`Access granted to ${email}`, "ok");
+      toast(`Granted ${planType} on ${product} to ${email}`, "ok");
     } catch (ex) {
       err.textContent = ex.message;
       err.hidden = false;

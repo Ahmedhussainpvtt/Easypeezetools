@@ -211,12 +211,6 @@ select {
 .login-sub { color: var(--muted); font-size: 0.9rem; margin-top: -6px; }
 .login-card label { display: grid; gap: 6px; }
 .login-card .btn { margin-top: 6px; padding: 12px 16px; }
-.login-foot {
-  margin-top: 4px;
-  font-size: 0.78rem;
-  color: var(--muted);
-  text-align: center;
-}
 
 /* ---------- App shell ---------- */
 
@@ -535,28 +529,142 @@ select {
   border: 0;
   padding: 0;
   background: transparent;
-  width: min(460px, calc(100% - 32px));
+  width: min(560px, calc(100% - 28px));
+  max-height: calc(100vh - 40px);
 }
 .modal::backdrop {
-  background: rgba(15, 27, 45, 0.45);
-  backdrop-filter: blur(2px);
+  background: rgba(15, 27, 45, 0.5);
+  backdrop-filter: blur(3px);
 }
 .modal__card {
   background: var(--surface);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
-  padding: 24px;
+  padding: 22px 22px 18px;
   display: grid;
-  gap: 14px;
+  gap: 16px;
+  max-height: calc(100vh - 40px);
+  overflow: auto;
 }
-.modal__card h2 { font-size: 1.15rem; letter-spacing: -0.02em; }
-.modal__card label { display: grid; gap: 6px; }
+.modal__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.modal__head .eyebrow {
+  margin: 0 0 2px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.modal__card h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  max-width: 24rem;
+  overflow-wrap: anywhere;
+}
+.modal__close { flex: none; }
+.modal__fields {
+  display: grid;
+  gap: 12px;
+}
+.modal__fields label,
+.modal__grant label { display: grid; gap: 6px; }
 .modal__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.modal__summary {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+}
+.modal__who {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.modal__who .avatar {
+  width: 40px;
+  height: 40px;
+  font-size: 0.85rem;
+}
+.modal__who-name {
+  margin: 0;
+  font-weight: 700;
+  font-size: 0.98rem;
+}
+.modal__who-mail {
+  margin: 2px 0 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.modal__who .badge { margin-left: auto; flex: none; }
+
+.product-status-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.product-status {
+  padding: 12px 12px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--line-strong);
+}
+.product-status[data-state="active"] { border-left-color: var(--ok); }
+.product-status[data-state="expired"] { border-left-color: var(--warn); }
+.product-status[data-state="none"] { border-left-color: #cbd5e1; }
+.product-status__label {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.product-status__plan {
+  margin: 6px 0 2px;
+  font-size: 1.05rem;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+}
+.product-status__meta {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.modal__grant {
+  margin: 0;
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  display: grid;
+  gap: 10px;
+  background: linear-gradient(180deg, rgba(0, 133, 255, 0.04), transparent);
+}
+.modal__grant legend {
+  padding: 0 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+.modal__grant .field-hint { margin: 0; }
+
 .modal__actions {
   display: flex;
   justify-content: flex-end;
   gap: 8px;
-  margin-top: 6px;
+  margin-top: 2px;
   padding-top: 14px;
   border-top: 1px solid var(--line);
 }
@@ -615,7 +723,8 @@ select {
   .user-chip span:not(.user-chip__dot) { display: none; }
   .kpi-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .kpi__value { font-size: 1.4rem; }
-  .modal__grid { grid-template-columns: 1fr; }
+  .modal__grid,
+  .product-status-grid { grid-template-columns: 1fr; }
 
   /* Table → stacked cards */
   .table-scroll { overflow: visible; }
