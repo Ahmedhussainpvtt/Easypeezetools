@@ -4,7 +4,7 @@
   var planKey = (params.get('plan') || 'yearly').toLowerCase();
   if (planKey !== 'lifetime') planKey = 'yearly';
   var plan = (cfg.plans && cfg.plans[planKey]) || cfg.plans.yearly;
-  // Flip to true when international payments go live on the gateway.
+  // Currency: INR only for now.
   var USD_ENABLED = false;
   var requestedCurrency = (params.get('currency') || 'INR').toUpperCase();
   var currency = USD_ENABLED && requestedCurrency === 'USD' ? 'USD' : 'INR';
@@ -35,7 +35,6 @@
         btn.disabled = true;
         btn.setAttribute('aria-disabled', 'true');
         btn.classList.add('pay-currency__btn--soon');
-        btn.title = 'International payments are not live yet';
         if (btn.querySelector('.pay-currency__soon') === null) {
           btn.innerHTML =
             'Pay in $ USD <span class="pay-currency__soon">Coming soon</span>';

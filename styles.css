@@ -1178,7 +1178,7 @@ a:hover { text-decoration: underline; }
   min-width: 0;
   padding: 8px 10px;
 }
-/* USD disabled until international payments go live */
+/* Unavailable currency option */
 .pay-currency__btn--soon,
 .pay-currency__btn--soon:hover {
   display: inline-flex;
@@ -1197,13 +1197,6 @@ a:hover { text-decoration: underline; }
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: #8a94a0;
-}
-.pay-currency__note {
-  margin: -6px auto 16px;
-  max-width: 460px;
-  text-align: center;
-  font-size: 0.82rem;
-  color: var(--muted);
 }
 .page-hero--pricing {
   padding-bottom: 16px;

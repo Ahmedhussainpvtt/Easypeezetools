@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pricing — Pdf Buddy ₹299/yr · ₹999 life · Kharch Log ₹149 | Easy Peeze Tools</title>
-  <meta name="description" content="Easy Peeze Tools pricing: Pdf Buddy free 3/day, then ₹299/year or ₹999 lifetime. Kharch Log lifetime ₹149. Payments in INR — USD checkout coming soon." />
+  <meta name="description" content="Easy Peeze Tools pricing: Pdf Buddy free 3/day, then ₹299/year or ₹999 lifetime. Kharch Log lifetime ₹149. One-time unlocks, no subscription trap." />
   <meta name="keywords" content="pdf editor, free pdf editor, best pdf editor, pdf editor free download, best free pdf editor, pdf editor windows, free pdf editor windows, best pdf editor for windows, best pdf editor for windows 10, best pdf editor for windows 11, pdf editor free offline, desktop pdf editor, pdf editor software, edit pdf file, edit pdf text, add text to pdf, type on pdf free, pdf text editor, edit scanned pdf, ocr pdf editor, pdf digital signature, sign pdf digitally, pdf form filler free, fill and sign pdf, convert pdf to editable word, pdf to word editable free, convert scanned pdf to editable pdf, pdf editor free no sign up, online pdf editor free no sign up, pdf filler free online, pdf editor online free without watermark, modify pdf, pdf writer free, pdf reader and editor, free pdf annotator, cheap pdf editor, buy pdf editor, pdf editor without subscription, open source pdf editor, foxit pdf" />
   <meta name="author" content="Easy Peeze Tools" />
   
@@ -24,7 +24,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Easy Peeze Tools" />
   <meta property="og:title" content="Pricing — Pdf Buddy &amp; Kharch Log | Easy Peeze Tools" />
-  <meta property="og:description" content="Pdf Buddy: ₹299/yr or ₹999 lifetime. Kharch Log: ₹149 lifetime. Payments in INR — USD coming soon." />
+  <meta property="og:description" content="Pdf Buddy: ₹299/yr or ₹999 lifetime. Kharch Log: ₹149 lifetime. One-time unlocks, no subscription trap." />
   <meta property="og:url" content="../pricing/" />
   <meta property="og:image" content="../og-image.jpg" />
   <meta property="og:image:width" content="1200" />
@@ -32,7 +32,7 @@
   <meta property="og:locale" content="en_IN" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Pricing — Pdf Buddy &amp; Kharch Log" />
-  <meta name="twitter:description" content="Pdf Buddy ₹299/yr · ₹999 lifetime. Kharch Log ₹149 lifetime. USD coming soon." />
+  <meta name="twitter:description" content="Pdf Buddy ₹299/yr · ₹999 lifetime. Kharch Log ₹149 lifetime." />
   <meta name="twitter:image" content="../og-image.jpg" />
   
   </head>
@@ -82,11 +82,10 @@
       <div class="pay-currency pricing-currency" role="group" aria-label="Currency">
         <button type="button" class="pay-currency__btn is-active" data-currency="INR" id="currencyInr">₹ INR</button>
         <button type="button" class="pay-currency__btn pay-currency__btn--soon" data-currency="USD" id="currencyUsd"
-                disabled aria-disabled="true" title="International payments are not live yet">
+                disabled aria-disabled="true">
           $ USD <span class="pay-currency__soon">Coming soon</span>
         </button>
       </div>
-      <p class="pay-currency__note">International cards aren't enabled yet — USD checkout is coming soon. All payments are processed in INR today.</p>
     </div>
 
     <section class="section section--pricing-plans" id="pdf-buddy" aria-labelledby="pdf-price-title">
@@ -185,7 +184,7 @@
 
     <section class="section seo-block">
       <h2>Why this pricing model</h2>
-      <p>Online PDF sites monetize uploads and caps. We monetize a desktop license after a fair free daily try — and we don’t need your IDs on our servers to edit a PDF. Download free (3 edits/day, no subscription). Unlock yearly or lifetime when you need more. Kharch Log is a one-time unlock with the spreadsheet living in <em>your</em> Google account. Payments are processed in INR today — USD checkout for international buyers is coming soon.</p>
+      <p>Online PDF sites monetize uploads and caps. We monetize a desktop license after a fair free daily try — and we don’t need your IDs on our servers to edit a PDF. Download free (3 edits/day, no subscription). Unlock yearly or lifetime when you need more. Kharch Log is a one-time unlock with the spreadsheet living in <em>your</em> Google account.</p>
       <p style="color:var(--muted);">Questions? <a href="mailto:easypeezetools@gmail.com">easypeezetools@gmail.com</a> · <a href="../refund/">Refunds</a> · <a href="../about/">About</a>
         <a href="../contact/">Contact</a></p>
     </section>
@@ -243,7 +242,7 @@
     }
     document.querySelectorAll('.pay-currency__btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
-        // USD is disabled until international payments go live.
+        // Only enabled currencies are selectable.
         if (btn.disabled || btn.getAttribute('aria-disabled') === 'true') return;
         currency = btn.getAttribute('data-currency') === 'USD' ? 'USD' : 'INR';
         apply();
