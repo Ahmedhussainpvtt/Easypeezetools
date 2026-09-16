@@ -17,6 +17,9 @@
     '.blog-grid'
   ];
 
+  // Grids that read better rising into place than sliding sideways
+  const liftGroups = ['.pricing-grid', '.steps', '.compare-grid', '.faq'];
+
   const revealNodes = [];
   const seen = new Set();
 
@@ -30,6 +33,37 @@
         node.style.setProperty('--reveal-delay', `${Math.min(index, 5) * 70}ms`);
         revealNodes.push(node);
       });
+    });
+  });
+
+  liftGroups.forEach((groupSelector) => {
+    document.querySelectorAll(groupSelector).forEach((group) => {
+      [...group.children].forEach((node, index) => {
+        if (seen.has(node)) return;
+        seen.add(node);
+        node.classList.add('motion-reveal', 'motion-enter-scale');
+        node.style.setProperty('--reveal-delay', `${Math.min(index, 5) * 80}ms`);
+        revealNodes.push(node);
+      });
+    });
+  });
+
+  // Section headings: fade up and draw their accent rule
+  document.querySelectorAll('.section__head, .section > h2, .precision').forEach((node) => {
+    if (seen.has(node)) return;
+    seen.add(node);
+    node.classList.add('motion-reveal', 'motion-enter-up');
+    revealNodes.push(node);
+  });
+
+  // Trust pills / chip rows stagger in one by one
+  document.querySelectorAll('.trust__list, .hero__chips, .chip-row').forEach((list) => {
+    [...list.children].forEach((node, index) => {
+      if (seen.has(node)) return;
+      seen.add(node);
+      node.classList.add('motion-chip');
+      node.style.setProperty('--reveal-delay', `${Math.min(index, 8) * 60}ms`);
+      revealNodes.push(node);
     });
   });
 
@@ -54,6 +88,29 @@
     { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }
   );
   revealNodes.forEach((node) => reveal.observe(node));
+
+  // Scroll progress bar + header depth, both driven by one rAF-throttled read.
+  const progress = document.createElement('div');
+  progress.className = 'scroll-progress';
+  body.appendChild(progress);
+
+  const header = document.querySelector('.site-header');
+  let scrollRaf = 0;
+  const onScroll = () => {
+    scrollRaf = 0;
+    const scrollable = doc.scrollHeight - window.innerHeight;
+    const ratio = scrollable > 0 ? Math.min(1, window.scrollY / scrollable) : 0;
+    progress.style.setProperty('--scroll-progress', String(ratio));
+    if (header) header.classList.toggle('is-stuck', window.scrollY > 8);
+  };
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!scrollRaf) scrollRaf = requestAnimationFrame(onScroll);
+    },
+    { passive: true }
+  );
+  onScroll();
 
   const heroPhoto = document.querySelector('.hero__visual--photo img');
   if (heroPhoto && pointerFine) {

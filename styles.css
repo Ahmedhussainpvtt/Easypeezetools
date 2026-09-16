@@ -264,9 +264,41 @@ a:hover { text-decoration: underline; }
   text-decoration: none !important;
   border: none;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  /* Default .btn is the primary CTA — most markup uses the bare class. */
+  background: linear-gradient(315deg, var(--primary), var(--secondary));
+  background-size: 160% 160%;
+  color: #fff !important;
+  box-shadow: 0 10px 24px rgba(15, 42, 67, 0.22);
+  transition:
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.22s ease,
+    background-position 0.45s ease;
 }
-.btn:hover { transform: translateY(-1px); }
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(15, 42, 67, 0.28);
+  background-position: 100% 0;
+}
+.btn:active { transform: translateY(0); }
+/* Light sweep across the button on hover */
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.42) 48%,
+    transparent 66%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn:hover::after { transform: translateX(120%); }
 
 /* Tertiary yellow orbit while a request is in flight */
 @keyframes btn-busy-orbit { to { transform: rotate(360deg); } }
@@ -611,7 +643,7 @@ a:hover { text-decoration: underline; }
 
 /* —— Sections —— */
 .section {
-  padding: 48px 0;
+  padding: 40px 0;
 }
 .section--tint {
   width: 100%;
@@ -631,7 +663,7 @@ a:hover { text-decoration: underline; }
 
 .section__head {
   max-width: 40rem;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 .section__head h2 {
   margin: 0 0 10px;
@@ -805,7 +837,10 @@ a:hover { text-decoration: underline; }
   color: transparent;
   line-height: 1.15;
 }
-.pricing-tease__price span {
+/* Only the trailing sub-label is small/muted — the price span keeps the
+   big gradient treatment. Two markup shapes exist: "PRICE <span>sub</span>"
+   and "<span>PRICE</span><span>sub</span>". */
+.pricing-tease__price span:last-child {
   display: block;
   margin-top: 4px;
   font-size: 1rem;
@@ -870,11 +905,11 @@ a:hover { text-decoration: underline; }
 .pricing-tease__note a:hover { text-decoration: underline; }
 .pricing-tease--page {
   margin-top: 0;
-  margin-bottom: 56px;
+  margin-bottom: 32px;
 }
 
 .cta-band {
-  margin: 28px auto 56px;
+  margin: 24px auto 48px;
   padding: 36px 28px;
   border-radius: 24px;
   text-align: center;
@@ -1834,7 +1869,7 @@ ol.steps-inline li::before {
 }
 
 .page-hero {
-  padding: 48px 0 28px;
+  padding: 40px 0 20px;
 }
 .page-hero h1 {
   margin: 0 0 12px;
@@ -2132,4 +2167,259 @@ ol.steps-inline li::before {
   .hero { grid-template-columns: 1fr; }
   .trust { grid-template-columns: 1fr 1fr; }
   .blog-grid { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   Layout polish + motion  (shared by kharchlog.com and easypeeze.com)
+   ========================================================================== */
+
+/* Footer sits at the bottom even on short pages (pricing, contact, refund). */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+body > main,
+body > .wrap {
+  flex: 1 0 auto;
+}
+body > .site-footer {
+  flex: none;
+}
+
+/* Trim the double gap when a hero is immediately followed by a section. */
+.page-hero + .section,
+.page-hero + section > .section:first-child {
+  padding-top: 24px;
+}
+.section + .section {
+  padding-top: 24px;
+}
+.section > h2:first-child {
+  margin-top: 0;
+}
+
+/* —— Pricing grids: equal height cards with bottom-aligned CTAs —— */
+.pricing-grid {
+  align-items: stretch;
+}
+.pricing-grid > * {
+  display: flex;
+  flex-direction: column;
+}
+/* Beats the inline margin-top on the action rows inside the cards. */
+.pricing-grid > * > .hero__actions {
+  margin-top: auto !important;
+  margin-bottom: 0;
+}
+/* A single-card row should centre, not hug the left edge. */
+.pricing-grid--narrow {
+  margin-inline: auto;
+}
+
+/* —— Hover lift on card surfaces —— */
+.feature,
+.pricing-tease,
+.product-card,
+.blog-card,
+.feature-links a,
+.feature-related a {
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+.feature:hover,
+.blog-card:hover,
+.feature-links a:hover,
+.feature-related a:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 38px rgba(15, 42, 67, 0.12);
+  border-color: rgba(0, 196, 154, 0.45);
+}
+.pricing-tease:hover,
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 26px 52px rgba(15, 42, 67, 0.14);
+}
+
+/* Numeric price keeps a slow gradient drift so the card feels alive. */
+.pricing-tease__price,
+.pricing-tease h3 {
+  background-size: 220% 220%;
+  animation: price-gradient 9s ease-in-out infinite;
+}
+@keyframes price-gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* —— Sticky header gains depth once you scroll —— */
+.site-header {
+  transition: box-shadow 0.25s ease, background-color 0.25s ease;
+}
+.site-header.is-stuck {
+  box-shadow: 0 10px 30px rgba(15, 42, 67, 0.1);
+  background: rgba(240, 245, 250, 0.94);
+}
+
+/* —— Scroll progress bar —— */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  z-index: 60;
+  transform-origin: 0 50%;
+  transform: scaleX(var(--scroll-progress, 0));
+  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--tertiary));
+  pointer-events: none;
+}
+
+/* —— Extra reveal directions used by site-motion.js —— */
+.motion-reveal.motion-enter-up {
+  transform: translate3d(0, 34px, 0);
+}
+.motion-reveal.motion-enter-scale {
+  transform: translate3d(0, 24px, 0) scale(0.965);
+}
+.motion-reveal.motion-enter-up.is-visible,
+.motion-reveal.motion-enter-scale.is-visible {
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* Section headings draw a short accent rule as they enter. */
+.motion-underline {
+  position: relative;
+}
+.motion-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  height: 3px;
+  width: 54px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+}
+.motion-underline.is-visible::after {
+  transform: scaleX(1);
+}
+
+/* Trust / chip rows stagger in. */
+.motion-chip {
+  opacity: 0;
+  transform: translate3d(0, 12px, 0);
+  transition:
+    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.motion-chip.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pricing-tease__price,
+  .pricing-tease h3 {
+    animation: none !important;
+  }
+  .feature,
+  .pricing-tease,
+  .product-card,
+  .blog-card,
+  .feature-links a,
+  .feature-related a,
+  .btn {
+    transition: none !important;
+  }
+  .feature:hover,
+  .pricing-tease:hover,
+  .product-card:hover,
+  .blog-card:hover,
+  .feature-links a:hover,
+  .feature-related a:hover,
+  .btn:hover {
+    transform: none !important;
+  }
+  .btn::after { display: none !important; }
+  .scroll-progress { display: none !important; }
+  .motion-chip,
+  .motion-underline::after {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* —— Pricing card headline prices (Easy Peeze plan cards) —— */
+.pricing-grid .pricing-tease h3 {
+  margin: 0 0 10px;
+  font-size: clamp(1.9rem, 3.6vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  background: linear-gradient(315deg, var(--primary) 35%, var(--secondary));
+  background-size: 220% 220%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: price-gradient 9s ease-in-out infinite;
+}
+/* Trailing suffix ("/ yr", "one-time", "edits / day") stays muted. */
+.pricing-grid .pricing-tease h3 > span:last-child {
+  display: block;
+  margin-top: 2px;
+  letter-spacing: 0;
+  -webkit-text-fill-color: var(--muted);
+  color: var(--muted);
+  background: none;
+}
+
+/* —— Currency toggle: equal-height segments —— */
+.pay-currency {
+  align-items: stretch;
+}
+.pay-currency__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  line-height: 1.2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pricing-grid .pricing-tease h3 { animation: none !important; }
+}
+
+/* Centred pricing card => centred action row. */
+.pricing-tease .hero__actions {
+  justify-content: center;
+}
+
+/* Product cards: CTA rows line up across the row regardless of copy length. */
+.product-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.product-card__body .hero__actions {
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+/* Two 240px pricing columns get too cramped to read on phones. */
+@media (max-width: 720px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+  .pricing-grid--narrow {
+    max-width: none;
+  }
 }
