@@ -8,6 +8,25 @@
   const $ = (id) => document.getElementById(id);
   let usersCache = [];
 
+  const esc = (v) =>
+    String(v ?? "").replace(/[&<>"']/g, (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])
+    );
+
+  const icon = (id) => `<svg aria-hidden="true"><use href="#${id}" /></svg>`;
+
+  function toast(message, tone = "info") {
+    const stack = $("toast-stack");
+    if (!stack) return;
+    const el = document.createElement("div");
+    el.className = `toast toast--${tone}`;
+    el.innerHTML = `${
+      tone === "error" ? icon("i-alert") : tone === "ok" ? icon("i-check") : ""
+    }<span>${esc(message)}</span>`;
+    stack.appendChild(el);
+    setTimeout(() => el.remove(), tone === "error" ? 6000 : 3500);
+  }
+
   function token() {
     return sessionStorage.getItem(TOKEN_KEY) || "";
   }
@@ -53,8 +72,9 @@
   function showApp() {
     $("login-view").classList.add("hidden");
     $("app-view").classList.remove("hidden");
-    $("admin-email-label").textContent =
-      sessionStorage.getItem(EMAIL_KEY) || "";
+    const email = sessionStorage.getItem(EMAIL_KEY) || "";
+    $("admin-email-label").textContent = email;
+    $("admin-initials").textContent = initials("", email);
   }
 
   function initials(name, email) {
@@ -69,6 +89,26 @@
     if (!slice || slice.plan === "none") return "—";
     const st = slice.status && slice.status !== "none" ? ` · ${slice.status}` : "";
     return `${slice.plan}${st}`;
+  }
+
+  function planCell(slice) {
+    const label = planLabel(slice);
+    const cls = label === "—" ? "plan-pill plan-pill--none" : "plan-pill";
+    return `<span class="${cls}">${esc(label)}</span>`;
+  }
+
+  /** Placeholder rows so the table never flashes an empty/"not found" state. */
+  function showTableLoading() {
+    $("users-empty").hidden = true;
+    const widths = ["70%", "85%", "55%", "60%", "65%", "65%", "40%"];
+    $("users-tbody").innerHTML = Array.from({ length: 5 })
+      .map(
+        () =>
+          `<tr>${widths
+            .map((w) => `<td><span class="skeleton-line" style="width:${w}"></span></td>`)
+            .join("")}</tr>`
+      )
+      .join("");
   }
 
   function renderUsers(list) {
@@ -86,25 +126,30 @@
     tbody.innerHTML = "";
     $("users-empty").hidden = filtered.length > 0;
     for (const u of filtered) {
+      const mail = esc(u.email);
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td>
+        <td data-label="Name">
           <div class="name-cell">
-            <span class="avatar">${initials(u.name, u.email)}</span>
-            <a class="name-link" href="#" data-edit="${u.email}">${u.name || "—"}</a>
+            <span class="avatar">${esc(initials(u.name, u.email))}</span>
+            <a class="name-link" href="#" data-edit="${mail}">${esc(u.name || "—")}</a>
           </div>
         </td>
-        <td>${u.email}</td>
-        <td>${u.phone || "—"}</td>
-        <td><span class="badge ${u.active ? "badge-ok" : "badge-off"}">${
-          u.active ? "● ACTIVE" : "○ INACTIVE"
-        }</span></td>
-        <td><span class="plan-pill">${planLabel(u.kharchlog)}</span></td>
-        <td><span class="plan-pill">${planLabel(u.pdfbuddy)}</span></td>
-        <td>
+        <td data-label="Email" class="cell-mono">${mail}</td>
+        <td data-label="Phone" class="cell-mono">${esc(u.phone || "—")}</td>
+        <td data-label="Status"><span class="badge ${
+          u.active ? "badge-ok" : "badge-off"
+        }">${u.active ? "Active" : "Inactive"}</span></td>
+        <td data-label="Kharch Log">${planCell(u.kharchlog)}</td>
+        <td data-label="Pdf Buddy">${planCell(u.pdfbuddy)}</td>
+        <td data-label="Actions" class="col-actions">
           <div class="row-actions">
-            <button type="button" class="icon-btn" title="Edit" data-edit="${u.email}">✎</button>
-            <button type="button" class="icon-btn" title="Remove" data-del="${u.email}">🗑</button>
+            <button type="button" class="icon-btn" title="Edit ${mail}" aria-label="Edit ${mail}" data-edit="${mail}">${icon(
+        "i-edit"
+      )}</button>
+            <button type="button" class="icon-btn icon-btn--danger" title="Remove ${mail}" aria-label="Remove ${mail}" data-del="${mail}">${icon(
+        "i-trash"
+      )}</button>
           </div>
         </td>`;
       tbody.appendChild(tr);
@@ -120,10 +165,17 @@
   }
 
   async function loadUsers() {
-    const data = await api("/admin/users");
-    usersCache = data.users || [];
-    setKpis(data.stats || {});
-    renderUsers(usersCache);
+    const btn = $("btn-refresh");
+    btn.disabled = true;
+    showTableLoading();
+    try {
+      const data = await api("/admin/users");
+      usersCache = data.users || [];
+      setKpis(data.stats || {});
+      renderUsers(usersCache);
+    } finally {
+      btn.disabled = false;
+    }
   }
 
   function openUserModal(user) {
@@ -200,7 +252,11 @@
     });
   });
 
-  $("btn-refresh").addEventListener("click", () => loadUsers().catch(alert));
+  $("btn-refresh").addEventListener("click", () =>
+    loadUsers()
+      .then(() => toast("Customers refreshed", "ok"))
+      .catch((ex) => toast(ex.message, "error"))
+  );
   $("search-users").addEventListener("input", () => renderUsers(usersCache));
   $("btn-new-user").addEventListener("click", () => openUserModal(null));
 
@@ -222,8 +278,9 @@
           body: JSON.stringify({ email })
         });
         await loadUsers();
+        toast(`Removed ${email}`, "ok");
       } catch (ex) {
-        alert(ex.message);
+        toast(ex.message, "error");
       }
     }
   });
@@ -232,12 +289,15 @@
   $("user-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const err = $("user-modal-error");
+    const save = $("user-form").querySelector('button[type="submit"]');
     err.hidden = true;
+    save.disabled = true;
     try {
+      const email = $("u-email").value.trim();
       await api("/admin/grant-access", {
         method: "POST",
         body: JSON.stringify({
-          email: $("u-email").value.trim(),
+          email,
           name: $("u-name").value.trim(),
           product: $("u-product").value,
           planType: $("u-plan").value,
@@ -246,16 +306,28 @@
       });
       $("user-modal").close();
       await loadUsers();
+      toast(`Access granted to ${email}`, "ok");
     } catch (ex) {
       err.textContent = ex.message;
       err.hidden = false;
+    } finally {
+      save.disabled = false;
     }
   });
+
+  /** Shared inline status line for the blog forms. */
+  function setFormMsg(el, text, tone) {
+    el.textContent = text;
+    el.className = tone === "error" ? "form-error" : "form-msg";
+    el.hidden = false;
+  }
 
   $("blog-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const msg = $("blog-msg");
+    const btn = $("blog-form").querySelector('button[type="submit"]');
     msg.hidden = true;
+    btn.disabled = true;
     try {
       const data = await api("/admin/blog", {
         method: "POST",
@@ -266,13 +338,13 @@
           body: $("blog-body").value
         })
       });
-      msg.textContent = data.url ? `Published: ${data.url}` : "Published";
-      msg.hidden = false;
+      setFormMsg(msg, data.url ? `Published: ${data.url}` : "Published", "ok");
+      toast("Blog post published", "ok");
       $("blog-form").reset();
     } catch (ex) {
-      msg.textContent = ex.message;
-      msg.style.color = "#dc2626";
-      msg.hidden = false;
+      setFormMsg(msg, ex.message, "error");
+    } finally {
+      btn.disabled = false;
     }
   });
 
@@ -281,20 +353,21 @@
     const slug = $("blog-del-slug").value.trim();
     if (!confirm(`Delete blog slug "${slug}"?`)) return;
     const msg = $("blog-del-msg");
+    const btn = $("blog-delete-form").querySelector('button[type="submit"]');
     msg.hidden = true;
+    btn.disabled = true;
     try {
       await api("/admin/blog/delete", {
         method: "POST",
         body: JSON.stringify({ slug })
       });
-      msg.textContent = "Deleted";
-      msg.style.color = "#059669";
-      msg.hidden = false;
+      setFormMsg(msg, "Deleted", "ok");
+      toast(`Deleted "${slug}"`, "ok");
       $("blog-delete-form").reset();
     } catch (ex) {
-      msg.textContent = ex.message;
-      msg.style.color = "#dc2626";
-      msg.hidden = false;
+      setFormMsg(msg, ex.message, "error");
+    } finally {
+      btn.disabled = false;
     }
   });
 
