@@ -6,11 +6,6 @@ Disallow: /pay/
 Disallow: /pay/success.html
 Disallow: /staging/
 
-# Private ops UI — NEVER sitemap / llms / nav / internal links.
-# Path is intentionally obscure. Do not rename into sitemap generators.
-Disallow: /ksadbwefreggh/
-Disallow: /admin/
-
 # AI / LLM discovery (AIO / GEO)
 # https://llmstxt.org
 # llms.txt: https://easypeeze.com/llms.txt
