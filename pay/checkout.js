@@ -279,12 +279,12 @@
     var email = (emailInput.value || '').trim().toLowerCase();
     var phone = normalizePhone((phoneInput && phoneInput.value) || '');
     if (!isRealPersonName(firstName)) {
-      setStatus('Enter a real first name (letters only, not junk like “test” / “asdf”)', true);
+      setStatus('Please enter your first name.', true);
       if (firstNameInput) firstNameInput.focus();
       return null;
     }
     if (lastName && !isRealPersonName(lastName)) {
-      setStatus('Enter a real last name, or leave it blank', true);
+      setStatus('Please enter a valid last name, or leave this field blank.', true);
       if (lastNameInput) lastNameInput.focus();
       return null;
     }
