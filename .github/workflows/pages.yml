@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -22,13 +22,38 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: SEO build (discover pages → meta / schema / sitemap / robots)
+        run: node seo-build.js
+
+      - name: Commit SEO updates if needed
+        run: |
+          git config user.name "seo-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No SEO file changes"
+          else
+            git commit -m "chore(seo): auto-refresh meta, sitemap, robots [skip ci]"
+            git push
+          fi
+
       - uses: actions/configure-pages@v5
+
       - name: Prepare site artifact
         run: |
           mkdir -p _site
-          rsync -a --exclude '.git' --exclude '.github' --exclude '_site' ./ _site/
+          rsync -a --exclude '.git' --exclude '.github' --exclude '_site' --exclude 'seo-build.js' --exclude 'seo.config.js' ./ _site/
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
+
       - id: deployment
         uses: actions/deploy-pages@v4

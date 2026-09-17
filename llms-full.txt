@@ -21,17 +21,29 @@ Easy Peeze Tools makes simple privacy-first apps: Pdf Buddy (100% local Windows 
 URL: https://easypeeze.com/
 Easy Peeze Tools — Pdf Buddy (local Windows PDF editor) and Kharch Log (Android expenses).
 
-### Products
-URL: https://easypeeze.com/products/
-Product hub for Pdf Buddy and Kharch Log.
+### About
+URL: https://easypeeze.com/about/
+About.
+
+### Blog index
+URL: https://easypeeze.com/blog/
+PDF how-tos for Windows India: compress, OCR, e-sign, privacy vs online editors.
+
+### Download Pdf Buddy
+URL: https://easypeeze.com/download/
+Download Pdf Buddy for Windows 10/11.
+
+### FAQ
+URL: https://easypeeze.com/faq/
+FAQ for Pdf Buddy licensing, free tier, and local-first privacy.
 
 ### All features
 URL: https://easypeeze.com/features/
 Pdf Buddy tools: edit, merge, split, compress, sign, OCR, unlock, convert.
 
-### Blog index
-URL: https://easypeeze.com/blog/
-PDF how-tos for Windows India: compress, OCR, e-sign, privacy vs online editors.
+### Glossary index
+URL: https://easypeeze.com/glossary/
+PDF and product glossary (OCR, e-sign, merge, local-first, etc.).
 
 ### Guides index
 URL: https://easypeeze.com/guides/
@@ -45,23 +57,19 @@ Install Pdf Buddy (SmartScreen) and Kharch Log (Play Protect) — official downl
 URL: https://easypeeze.com/pricing/
 Pdf Buddy INR 299/year or INR 999 lifetime; free tier 3 actions/day.
 
-### Download Pdf Buddy
-URL: https://easypeeze.com/download/
-Download Pdf Buddy for Windows 10/11.
-
-### FAQ
-URL: https://easypeeze.com/faq/
-FAQ for Pdf Buddy licensing, free tier, and local-first privacy.
-
-### About
-URL: https://easypeeze.com/about/
-About.
-
-### Glossary index
-URL: https://easypeeze.com/glossary/
-PDF and product glossary (OCR, e-sign, merge, local-first, etc.).
+### Products
+URL: https://easypeeze.com/products/
+Product hub for Pdf Buddy and Kharch Log.
 
 ## Features
+
+### Compress Pdf
+URL: https://easypeeze.com/features/compress-pdf/
+Compress PDFs for WhatsApp / portal size limits.
+
+### Convert Pdf
+URL: https://easypeeze.com/features/convert-pdf/
+Convert images and Office files to PDF.
 
 ### Edit Pdf
 URL: https://easypeeze.com/features/edit-pdf/
@@ -71,51 +79,67 @@ Edit PDF text and pages offline on Windows.
 URL: https://easypeeze.com/features/merge-pdf/
 Merge multiple PDFs into one file locally.
 
-### Split Pdf
-URL: https://easypeeze.com/features/split-pdf/
-Split PDF pages into separate files.
-
-### Compress Pdf
-URL: https://easypeeze.com/features/compress-pdf/
-Compress PDFs for WhatsApp / portal size limits.
+### Ocr Pdf
+URL: https://easypeeze.com/features/ocr-pdf/
+OCR scanned PDFs into searchable text.
 
 ### Sign Pdf
 URL: https://easypeeze.com/features/sign-pdf/
 Draw or place signatures without Adobe.
 
-### Ocr Pdf
-URL: https://easypeeze.com/features/ocr-pdf/
-OCR scanned PDFs into searchable text.
+### Split Pdf
+URL: https://easypeeze.com/features/split-pdf/
+Split PDF pages into separate files.
 
 ### Unlock Pdf
 URL: https://easypeeze.com/features/unlock-pdf/
 Unlock password-protected PDFs you own.
 
-### Convert Pdf
-URL: https://easypeeze.com/features/convert-pdf/
-Convert images and Office files to PDF.
-
 ## Guides
+
+### Adobe Acrobat Alternative India Cheap
+URL: https://easypeeze.com/guides/adobe-acrobat-alternative-india-cheap/
+Guide: Adobe Acrobat Alternative India Cheap.
 
 ### Best Free Pdf Editor Windows
 URL: https://easypeeze.com/guides/best-free-pdf-editor-windows/
 Guide: Best Free Pdf Editor Windows.
 
-### Edit Pdf Online Vs No Signup
-URL: https://easypeeze.com/guides/edit-pdf-online-vs-no-signup/
-Guide: Edit Pdf Online Vs No Signup.
+### Compress Pdf Whatsapp 2Mb
+URL: https://easypeeze.com/guides/compress-pdf-whatsapp-2mb/
+Guide: Compress Pdf Whatsapp 2Mb.
 
 ### Convert Pdf To Editable Word
 URL: https://easypeeze.com/guides/convert-pdf-to-editable-word/
 Guide: Convert Pdf To Editable Word.
 
-### Pdf Signature Form Filler
-URL: https://easypeeze.com/guides/pdf-signature-form-filler/
-Guide: Pdf Signature Form Filler.
+### Edit Pdf Online Vs No Signup
+URL: https://easypeeze.com/guides/edit-pdf-online-vs-no-signup/
+Guide: Edit Pdf Online Vs No Signup.
+
+### Edit Pdf Text Replace Same Font
+URL: https://easypeeze.com/guides/edit-pdf-text-replace-same-font/
+Guide: Edit Pdf Text Replace Same Font.
 
 ### Edit Scanned Pdf Ocr
 URL: https://easypeeze.com/guides/edit-scanned-pdf-ocr/
 Guide: Edit Scanned Pdf Ocr.
+
+### Esign Pdf Vs Dsc India
+URL: https://easypeeze.com/guides/esign-pdf-vs-dsc-india/
+Guide: Esign Pdf Vs Dsc India.
+
+### Form 16 Pdf Split Compress Itr
+URL: https://easypeeze.com/guides/form-16-pdf-split-compress-itr/
+Guide: Form 16 Pdf Split Compress Itr.
+
+### Make Pdf Fillable Windows
+URL: https://easypeeze.com/guides/make-pdf-fillable-windows/
+Guide: Make Pdf Fillable Windows.
+
+### Offline Pdf Editor Windows No Upload
+URL: https://easypeeze.com/guides/offline-pdf-editor-windows-no-upload/
+Guide: Offline Pdf Editor Windows No Upload.
 
 ### Pdf Editor Alternatives Compared
 URL: https://easypeeze.com/guides/pdf-editor-alternatives-compared/
@@ -125,47 +149,23 @@ Guide: Pdf Editor Alternatives Compared.
 URL: https://easypeeze.com/guides/pdf-editor-mac-android-iphone/
 Guide: Pdf Editor Mac Android Iphone.
 
-### Edit Pdf Text Replace Same Font
-URL: https://easypeeze.com/guides/edit-pdf-text-replace-same-font/
-Guide: Edit Pdf Text Replace Same Font.
-
-### Adobe Acrobat Alternative India Cheap
-URL: https://easypeeze.com/guides/adobe-acrobat-alternative-india-cheap/
-Guide: Adobe Acrobat Alternative India Cheap.
-
-### Offline Pdf Editor Windows No Upload
-URL: https://easypeeze.com/guides/offline-pdf-editor-windows-no-upload/
-Guide: Offline Pdf Editor Windows No Upload.
-
-### Compress Pdf Whatsapp 2Mb
-URL: https://easypeeze.com/guides/compress-pdf-whatsapp-2mb/
-Guide: Compress Pdf Whatsapp 2Mb.
-
-### Form 16 Pdf Split Compress Itr
-URL: https://easypeeze.com/guides/form-16-pdf-split-compress-itr/
-Guide: Form 16 Pdf Split Compress Itr.
-
-### Esign Pdf Vs Dsc India
-URL: https://easypeeze.com/guides/esign-pdf-vs-dsc-india/
-Guide: Esign Pdf Vs Dsc India.
-
-### Make Pdf Fillable Windows
-URL: https://easypeeze.com/guides/make-pdf-fillable-windows/
-Guide: Make Pdf Fillable Windows.
+### Pdf Signature Form Filler
+URL: https://easypeeze.com/guides/pdf-signature-form-filler/
+Guide: Pdf Signature Form Filler.
 
 ## Blog
-
-### Cheap Adobe Acrobat Alternative India
-URL: https://easypeeze.com/blog/cheap-adobe-acrobat-alternative-india/
-Blog: Cheap Adobe Acrobat Alternative India.
 
 ### Aadhaar Kyc Pdf Do Not Upload
 URL: https://easypeeze.com/blog/aadhaar-kyc-pdf-do-not-upload/
 Blog: Aadhaar Kyc Pdf Do Not Upload.
 
-### Gst Invoice Pdf Merge India
-URL: https://easypeeze.com/blog/gst-invoice-pdf-merge-india/
-Blog: Gst Invoice Pdf Merge India.
+### Best Pdf Editor Windows India
+URL: https://easypeeze.com/blog/best-pdf-editor-windows-india/
+Blog: Best Pdf Editor Windows India.
+
+### Cheap Adobe Acrobat Alternative India
+URL: https://easypeeze.com/blog/cheap-adobe-acrobat-alternative-india/
+Blog: Cheap Adobe Acrobat Alternative India.
 
 ### College Admission Pdf Checklist India
 URL: https://easypeeze.com/blog/college-admission-pdf-checklist-india/
@@ -175,135 +175,119 @@ Blog: College Admission Pdf Checklist India.
 URL: https://easypeeze.com/blog/easy-peeze-tools-pdf-buddy-kharch-log/
 Blog: Easy Peeze Tools Pdf Buddy Kharch Log.
 
-### Rotate Pdf Pages Windows
-URL: https://easypeeze.com/blog/rotate-pdf-pages-windows/
-Blog: Rotate Pdf Pages Windows.
-
-### Password Protect Pdf Before Email
-URL: https://easypeeze.com/blog/password-protect-pdf-before-email/
-Blog: Password Protect Pdf Before Email.
-
-### Whatsapp Pdf Size Limit India
-URL: https://easypeeze.com/blog/whatsapp-pdf-size-limit-india/
-Blog: Whatsapp Pdf Size Limit India.
-
-### Ocr Scanned Pdf Searchable
-URL: https://easypeeze.com/blog/ocr-scanned-pdf-searchable/
-Blog: Ocr Scanned Pdf Searchable.
-
-### Pdf Seo Metadata Filenames
-URL: https://easypeeze.com/blog/pdf-seo-metadata-filenames/
-Blog: Pdf Seo Metadata Filenames.
-
-### Online Pdf Editor Privacy
-URL: https://easypeeze.com/blog/online-pdf-editor-privacy/
-Blog: Online Pdf Editor Privacy.
-
-### Pdf Buddy Vs Online Editors
-URL: https://easypeeze.com/blog/pdf-buddy-vs-online-editors/
-Blog: Pdf Buddy Vs Online Editors.
-
 ### Fill And Type On Pdf Windows
 URL: https://easypeeze.com/blog/fill-and-type-on-pdf-windows/
 Blog: Fill And Type On Pdf Windows.
 
-### Pdf Pack For Indian Portals
-URL: https://easypeeze.com/blog/pdf-pack-for-indian-portals/
-Blog: Pdf Pack For Indian Portals.
-
-### Merge Split Compress Pdf Guide
-URL: https://easypeeze.com/blog/merge-split-compress-pdf-guide/
-Blog: Merge Split Compress Pdf Guide.
-
-### Sign Pdf Without Adobe
-URL: https://easypeeze.com/blog/sign-pdf-without-adobe/
-Blog: Sign Pdf Without Adobe.
-
-### Best Pdf Editor Windows India
-URL: https://easypeeze.com/blog/best-pdf-editor-windows-india/
-Blog: Best Pdf Editor Windows India.
-
-### Merge Aadhaar Pan Salary Slip Kyc Pdf
-URL: https://easypeeze.com/blog/merge-aadhaar-pan-salary-slip-kyc-pdf/
-Blog: Merge Aadhaar Pan Salary Slip Kyc Pdf.
+### Gst Invoice Pdf Merge India
+URL: https://easypeeze.com/blog/gst-invoice-pdf-merge-india/
+Blog: Gst Invoice Pdf Merge India.
 
 ### Image To Pdf Indian Portal Upload
 URL: https://easypeeze.com/blog/image-to-pdf-indian-portal-upload/
 Blog: Image To Pdf Indian Portal Upload.
 
-### Split Bank Statement Pdf Pages
-URL: https://easypeeze.com/blog/split-bank-statement-pdf-pages/
-Blog: Split Bank Statement Pdf Pages.
+### Merge Aadhaar Pan Salary Slip Kyc Pdf
+URL: https://easypeeze.com/blog/merge-aadhaar-pan-salary-slip-kyc-pdf/
+Blog: Merge Aadhaar Pan Salary Slip Kyc Pdf.
 
-### Redact Sensitive Info Pdf Before Sharing
-URL: https://easypeeze.com/blog/redact-sensitive-info-pdf-before-sharing/
-Blog: Redact Sensitive Info Pdf Before Sharing.
+### Merge Split Compress Pdf Guide
+URL: https://easypeeze.com/blog/merge-split-compress-pdf-guide/
+Blog: Merge Split Compress Pdf Guide.
 
-### Pdf Size Limits Epfo Bank Portals India
-URL: https://easypeeze.com/blog/pdf-size-limits-epfo-bank-portals-india/
-Blog: Pdf Size Limits Epfo Bank Portals India.
+### Ocr Scanned Pdf Searchable
+URL: https://easypeeze.com/blog/ocr-scanned-pdf-searchable/
+Blog: Ocr Scanned Pdf Searchable.
 
 ### Offline Pdf Editor Vs Browser Local Tools
 URL: https://easypeeze.com/blog/offline-pdf-editor-vs-browser-local-tools/
 Blog: Offline Pdf Editor Vs Browser Local Tools.
 
+### Online Pdf Editor Privacy
+URL: https://easypeeze.com/blog/online-pdf-editor-privacy/
+Blog: Online Pdf Editor Privacy.
+
+### Password Protect Pdf Before Email
+URL: https://easypeeze.com/blog/password-protect-pdf-before-email/
+Blog: Password Protect Pdf Before Email.
+
+### Pdf Buddy Vs Online Editors
+URL: https://easypeeze.com/blog/pdf-buddy-vs-online-editors/
+Blog: Pdf Buddy Vs Online Editors.
+
+### Pdf Pack For Indian Portals
+URL: https://easypeeze.com/blog/pdf-pack-for-indian-portals/
+Blog: Pdf Pack For Indian Portals.
+
+### Pdf Seo Metadata Filenames
+URL: https://easypeeze.com/blog/pdf-seo-metadata-filenames/
+Blog: Pdf Seo Metadata Filenames.
+
+### Pdf Size Limits Epfo Bank Portals India
+URL: https://easypeeze.com/blog/pdf-size-limits-epfo-bank-portals-india/
+Blog: Pdf Size Limits Epfo Bank Portals India.
+
+### Redact Sensitive Info Pdf Before Sharing
+URL: https://easypeeze.com/blog/redact-sensitive-info-pdf-before-sharing/
+Blog: Redact Sensitive Info Pdf Before Sharing.
+
+### Rotate Pdf Pages Windows
+URL: https://easypeeze.com/blog/rotate-pdf-pages-windows/
+Blog: Rotate Pdf Pages Windows.
+
+### Sign Pdf Without Adobe
+URL: https://easypeeze.com/blog/sign-pdf-without-adobe/
+Blog: Sign Pdf Without Adobe.
+
+### Split Bank Statement Pdf Pages
+URL: https://easypeeze.com/blog/split-bank-statement-pdf-pages/
+Blog: Split Bank Statement Pdf Pages.
+
+### Whatsapp Pdf Size Limit India
+URL: https://easypeeze.com/blog/whatsapp-pdf-size-limit-india/
+Blog: Whatsapp Pdf Size Limit India.
+
 ## Glossary
 
-### Merge Pdf
-URL: https://easypeeze.com/glossary/merge-pdf/
-Glossary: what “Merge Pdf” means and how it relates to the product.
-
-### Split Pdf
-URL: https://easypeeze.com/glossary/split-pdf/
-Glossary: what “Split Pdf” means and how it relates to the product.
-
-### Compress Pdf
-URL: https://easypeeze.com/glossary/compress-pdf/
-Glossary: what “Compress Pdf” means and how it relates to the product.
-
-### Ocr Pdf
-URL: https://easypeeze.com/glossary/ocr-pdf/
-Glossary: what “Ocr Pdf” means and how it relates to the product.
-
-### Esign Pdf
-URL: https://easypeeze.com/glossary/esign-pdf/
-Glossary: what “Esign Pdf” means and how it relates to the product.
-
-### Pdf Editor
-URL: https://easypeeze.com/glossary/pdf-editor/
-Glossary: what “Pdf Editor” means and how it relates to the product.
-
-### Searchable Pdf
-URL: https://easypeeze.com/glossary/searchable-pdf/
-Glossary: what “Searchable Pdf” means and how it relates to the product.
-
-### Pdf Metadata
-URL: https://easypeeze.com/glossary/pdf-metadata/
-Glossary: what “Pdf Metadata” means and how it relates to the product.
-
-### Unlock Pdf
-URL: https://easypeeze.com/glossary/unlock-pdf/
-Glossary: what “Unlock Pdf” means and how it relates to the product.
-
-### Jpg To Pdf
-URL: https://easypeeze.com/glossary/jpg-to-pdf/
-Glossary: what “Jpg To Pdf” means and how it relates to the product.
+### Aadhaar Pdf Privacy
+URL: https://easypeeze.com/glossary/aadhaar-pdf-privacy/
+Glossary: what “Aadhaar Pdf Privacy” means and how it relates to the product.
 
 ### Adobe Acrobat Alternative
 URL: https://easypeeze.com/glossary/adobe-acrobat-alternative/
 Glossary: what “Adobe Acrobat Alternative” means and how it relates to the product.
 
+### Compress Pdf
+URL: https://easypeeze.com/glossary/compress-pdf/
+Glossary: what “Compress Pdf” means and how it relates to the product.
+
 ### Desktop Pdf Editor
 URL: https://easypeeze.com/glossary/desktop-pdf-editor/
 Glossary: what “Desktop Pdf Editor” means and how it relates to the product.
+
+### Dsc Digital Signature
+URL: https://easypeeze.com/glossary/dsc-digital-signature/
+Glossary: what “Dsc Digital Signature” means and how it relates to the product.
 
 ### Easy Peeze Tools
 URL: https://easypeeze.com/glossary/easy-peeze-tools/
 Glossary: what “Easy Peeze Tools” means and how it relates to the product.
 
-### Pdf Buddy
-URL: https://easypeeze.com/glossary/pdf-buddy/
-Glossary: what “Pdf Buddy” means and how it relates to the product.
+### Esign Pdf
+URL: https://easypeeze.com/glossary/esign-pdf/
+Glossary: what “Esign Pdf” means and how it relates to the product.
+
+### Fillable Pdf
+URL: https://easypeeze.com/glossary/fillable-pdf/
+Glossary: what “Fillable Pdf” means and how it relates to the product.
+
+### Form 16 Pdf
+URL: https://easypeeze.com/glossary/form-16-pdf/
+Glossary: what “Form 16 Pdf” means and how it relates to the product.
+
+### Jpg To Pdf
+URL: https://easypeeze.com/glossary/jpg-to-pdf/
+Glossary: what “Jpg To Pdf” means and how it relates to the product.
 
 ### Kharch Log
 URL: https://easypeeze.com/glossary/kharch-log/
@@ -313,38 +297,54 @@ Glossary: what “Kharch Log” means and how it relates to the product.
 URL: https://easypeeze.com/glossary/kyc-pdf-pack/
 Glossary: what “Kyc Pdf Pack” means and how it relates to the product.
 
-### Upi Expense Tracker
-URL: https://easypeeze.com/glossary/upi-expense-tracker/
-Glossary: what “Upi Expense Tracker” means and how it relates to the product.
-
 ### Local First Pdf
 URL: https://easypeeze.com/glossary/local-first-pdf/
 Glossary: what “Local First Pdf” means and how it relates to the product.
 
-### Pdf Whiteout
-URL: https://easypeeze.com/glossary/pdf-whiteout/
-Glossary: what “Pdf Whiteout” means and how it relates to the product.
+### Merge Pdf
+URL: https://easypeeze.com/glossary/merge-pdf/
+Glossary: what “Merge Pdf” means and how it relates to the product.
 
-### Form 16 Pdf
-URL: https://easypeeze.com/glossary/form-16-pdf/
-Glossary: what “Form 16 Pdf” means and how it relates to the product.
+### Ocr Pdf
+URL: https://easypeeze.com/glossary/ocr-pdf/
+Glossary: what “Ocr Pdf” means and how it relates to the product.
 
 ### Offline Pdf Editor
 URL: https://easypeeze.com/glossary/offline-pdf-editor/
 Glossary: what “Offline Pdf Editor” means and how it relates to the product.
 
+### Pdf Buddy
+URL: https://easypeeze.com/glossary/pdf-buddy/
+Glossary: what “Pdf Buddy” means and how it relates to the product.
+
+### Pdf Editor
+URL: https://easypeeze.com/glossary/pdf-editor/
+Glossary: what “Pdf Editor” means and how it relates to the product.
+
+### Pdf Metadata
+URL: https://easypeeze.com/glossary/pdf-metadata/
+Glossary: what “Pdf Metadata” means and how it relates to the product.
+
+### Pdf Whiteout
+URL: https://easypeeze.com/glossary/pdf-whiteout/
+Glossary: what “Pdf Whiteout” means and how it relates to the product.
+
+### Searchable Pdf
+URL: https://easypeeze.com/glossary/searchable-pdf/
+Glossary: what “Searchable Pdf” means and how it relates to the product.
+
+### Split Pdf
+URL: https://easypeeze.com/glossary/split-pdf/
+Glossary: what “Split Pdf” means and how it relates to the product.
+
+### Unlock Pdf
+URL: https://easypeeze.com/glossary/unlock-pdf/
+Glossary: what “Unlock Pdf” means and how it relates to the product.
+
+### Upi Expense Tracker
+URL: https://easypeeze.com/glossary/upi-expense-tracker/
+Glossary: what “Upi Expense Tracker” means and how it relates to the product.
+
 ### Whatsapp Pdf Limit
 URL: https://easypeeze.com/glossary/whatsapp-pdf-limit/
 Glossary: what “Whatsapp Pdf Limit” means and how it relates to the product.
-
-### Fillable Pdf
-URL: https://easypeeze.com/glossary/fillable-pdf/
-Glossary: what “Fillable Pdf” means and how it relates to the product.
-
-### Dsc Digital Signature
-URL: https://easypeeze.com/glossary/dsc-digital-signature/
-Glossary: what “Dsc Digital Signature” means and how it relates to the product.
-
-### Aadhaar Pdf Privacy
-URL: https://easypeeze.com/glossary/aadhaar-pdf-privacy/
-Glossary: what “Aadhaar Pdf Privacy” means and how it relates to the product.
