@@ -1933,6 +1933,20 @@ ol.steps-inline li::before {
   overflow: hidden;
 }
 .contact-submit { margin-top: 14px; width: 100%; }
+.contact-submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none;
+}
+.contact-captcha {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-start;
+}
+.contact-captcha .g-recaptcha {
+  transform-origin: left center;
+}
 .contact-status {
   margin: 10px 0 0;
   padding: 10px 12px;
