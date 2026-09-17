@@ -209,12 +209,16 @@
     if (paypalSdkReady) return paypalSdkReady;
     var clientId = cfg.paypalClientId;
     if (!clientId) return Promise.reject(new Error('PayPal is not configured'));
+    var sandbox = String(cfg.paypalMode || 'sandbox').toLowerCase() !== 'live';
+    var sdkHost = sandbox ? 'https://www.sandbox.paypal.com/sdk/js' : 'https://www.paypal.com/sdk/js';
+    var qs =
+      'client-id=' +
+      encodeURIComponent(clientId) +
+      '&currency=USD&intent=capture&components=buttons' +
+      (sandbox ? '&buyer-country=US' : '');
     paypalSdkReady = new Promise(function (resolve, reject) {
       var s = document.createElement('script');
-      s.src =
-        'https://www.paypal.com/sdk/js?client-id=' +
-        encodeURIComponent(clientId) +
-        '&currency=USD&intent=capture';
+      s.src = sdkHost + '?' + qs;
       s.onload = function () {
         resolve();
       };
