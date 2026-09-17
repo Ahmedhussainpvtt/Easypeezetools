@@ -22,7 +22,10 @@
   if (productParam === 'kharchlog') planKey = 'lifetime';
   else if (planKey !== 'lifetime') planKey = 'yearly';
   var plan = (cfg.plans && cfg.plans[planKey]) || cfg.plans.yearly || cfg.plans.lifetime;
-  var USD_ENABLED = !!(cfg.paypalClientId || cfg.usdEnabled);
+  // Staging keeps sandbox client id in page config. Production waits for /health (live).
+  var USD_ENABLED = !!(cfg.staging
+    ? cfg.paypalClientId || cfg.usdEnabled
+    : cfg.paypalClientId && cfg.usdEnabled && String(cfg.paypalMode || '').toLowerCase() === 'live');
   var requestedCurrency = (params.get('currency') || 'INR').toUpperCase();
   var currency = USD_ENABLED && requestedCurrency === 'USD' ? 'USD' : 'INR';
   var firstNameInput = document.getElementById('firstName');
@@ -37,6 +40,24 @@
   var fineEl = document.getElementById('pay-fine');
   var paypalSdkReady = null;
   var paypalRendered = false;
+
+  function refreshUsdFromHealth() {
+    if (cfg.staging || !cfg.trackerUrl) return Promise.resolve();
+    return fetch(cfg.trackerUrl.replace(/\/$/, '') + '/health', { credentials: 'omit' })
+      .then(function (r) {
+        return r.json();
+      })
+      .then(function (h) {
+        if (!h || !h.ok) return;
+        if (h.paypalClientId) cfg.paypalClientId = h.paypalClientId;
+        if (h.paypalMode) cfg.paypalMode = h.paypalMode;
+        USD_ENABLED = !!(h.usdEnabled && h.paypalClientId);
+        if (!USD_ENABLED && currency === 'USD') currency = 'INR';
+        else if (USD_ENABLED && requestedCurrency === 'USD') currency = 'USD';
+        syncPrice();
+      })
+      .catch(function () {});
+  }
 
   function priceLabel() {
     if (!plan) return '';
@@ -90,6 +111,7 @@
   }
 
   syncPrice();
+  refreshUsdFromHealth();
   if (titleEl && plan) {
     titleEl.textContent =
       plan.label || (productParam === 'kharchlog' ? 'Unlock Kharch Log' : 'Unlock Pdf Buddy');

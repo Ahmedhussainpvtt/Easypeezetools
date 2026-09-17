@@ -106,7 +106,7 @@
     <div class="page-hero section page-hero--pricing">
       <p class="crumbs"><a href="/">Home</a> / Pricing</p>
       <h1>Pricing of goods &amp; services</h1>
-      <p><strong>Your data stays yours.</strong> Digital software licenses for Pdf Buddy and Kharch Log. Billed in <strong>INR</strong>. Seller: <strong>Easy Peeze Tools</strong> (India).</p>
+      <p><strong>Your data stays yours.</strong> Digital software licenses for Pdf Buddy and Kharch Log. Billed in <strong>INR</strong> or <strong>USD</strong> (PayPal). Seller: <strong>Easy Peeze Tools</strong> (India).</p>
       <div class="pay-currency pricing-currency" role="group" aria-label="Currency">
         <button type="button" class="pay-currency__btn is-active" data-currency="INR" id="currencyInr">₹ INR</button>
         <button type="button" class="pay-currency__btn pay-currency__btn--soon" data-currency="USD" id="currencyUsd"
@@ -252,6 +252,26 @@
   <script>
   (function () {
     var currency = 'INR';
+    var usdReady = false;
+    var trackerUrl = 'https://kharchlog-license-u4rcttr3nq-el.a.run.app';
+    function setUsdEnabled(on) {
+      usdReady = !!on;
+      var btn = document.getElementById('currencyUsd');
+      if (!btn) return;
+      if (usdReady) {
+        btn.disabled = false;
+        btn.removeAttribute('aria-disabled');
+        btn.classList.remove('pay-currency__btn--soon');
+        btn.textContent = '$ USD';
+      } else {
+        btn.disabled = true;
+        btn.setAttribute('aria-disabled', 'true');
+        btn.classList.add('pay-currency__btn--soon');
+        btn.innerHTML = '$ USD <span class="pay-currency__soon">Coming soon</span>';
+        if (currency === 'USD') currency = 'INR';
+      }
+      apply();
+    }
     function apply() {
       document.querySelectorAll('.pay-currency__btn').forEach(function (btn) {
         btn.classList.toggle('is-active', btn.getAttribute('data-currency') === currency);
@@ -275,7 +295,14 @@
         apply();
       });
     });
-    apply();
+    // Gate USD on live PayPal (/health.usdEnabled) so sandbox never shows on production.
+    setUsdEnabled(false);
+    fetch(trackerUrl + '/health', { credentials: 'omit' })
+      .then(function (r) { return r.json(); })
+      .then(function (h) {
+        setUsdEnabled(!!(h && h.usdEnabled && h.paypalClientId));
+      })
+      .catch(function () { setUsdEnabled(false); });
   })();
   </script>
 </body>
