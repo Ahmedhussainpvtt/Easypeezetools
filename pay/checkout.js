@@ -272,13 +272,13 @@
     if (paypalSdkReady) return paypalSdkReady;
     var clientId = cfg.paypalClientId;
     if (!clientId) return Promise.reject(new Error('PayPal is not configured'));
-    var sandbox = String(cfg.paypalMode || 'sandbox').toLowerCase() !== 'live';
-    // Official host for both modes — client-id selects sandbox vs live.
-    // Sandbox guest cards are flaky; disable card funding so buyers log in.
+    // Guest debit/credit on PayPal India often hangs on "Pay Now" for USD.
+    // Force PayPal wallet login (or create account) — much more reliable.
     var qs =
       'client-id=' +
       encodeURIComponent(clientId) +
-      '&currency=USD&intent=capture&components=buttons';
+      '&currency=USD&intent=capture&components=buttons' +
+      '&disable-funding=card,credit,paylater,venmo';
     paypalSdkReady = new Promise(function (resolve, reject) {
       var s = document.createElement('script');
       s.src = 'https://www.paypal.com/sdk/js?' + qs;
@@ -383,7 +383,7 @@
               setStatus(
                 sandbox
                   ? 'PayPal failed — Log In with a Sandbox Personal buyer from developer.paypal.com → Sandbox → Accounts (guest cards often fail).'
-                  : 'PayPal checkout failed — try again',
+                  : 'PayPal failed — use Log In with your PayPal account (guest card checkout often hangs in India).',
                 true
               );
             }
