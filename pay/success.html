@@ -3,19 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Payment success — Pdf Buddy</title>
-  <meta name="description" content="Pdf Buddy payment success." />
-  <meta name="keywords" content="pdf editor, free pdf editor, best pdf editor, pdf editor free download, best free pdf editor, pdf editor windows, free pdf editor windows, best pdf editor for windows, best pdf editor for windows 10, best pdf editor for windows 11, pdf editor free offline, desktop pdf editor, pdf editor software, edit pdf file, edit pdf text, add text to pdf, type on pdf free, pdf text editor, edit scanned pdf, ocr pdf editor, pdf digital signature, sign pdf digitally, pdf form filler free, fill and sign pdf, convert pdf to editable word, pdf to word editable free, convert scanned pdf to editable pdf, pdf editor free no sign up, online pdf editor free no sign up, pdf filler free online, pdf editor online free without watermark, modify pdf, pdf writer free, pdf reader and editor, free pdf annotator, cheap pdf editor, buy pdf editor, pdf editor without subscription, open source pdf editor, foxit pdf" />
+  <title>Payment success — Easy Peeze Tools</title>
+  <meta name="description" content="Payment success — Easy Peeze Tools." />
   <meta name="author" content="Easy Peeze Tools" />
   <meta name="robots" content="noindex" />
   <meta name="googlebot" content="noindex" />
   <meta name="theme-color" content="#0085FF" />
   <meta name="application-name" content="Easy Peeze Tools" />
-  <meta name="geo.region" content="IN" />
-  <meta name="geo.placename" content="India" />
   <link rel="canonical" href="https://easypeeze.com/pay/success.html" />
-  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://easypeeze.com/sitemap.xml" />
-  <link rel="alternate" type="text/plain" title="LLM context" href="https://easypeeze.com/llms.txt" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -24,18 +19,9 @@
   <link rel="apple-touch-icon" href="https://easypeeze.com/apple-touch-icon.png" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Easy Peeze Tools" />
-  <meta property="og:title" content="Payment success — Pdf Buddy" />
-  <meta property="og:description" content="Pdf Buddy payment success." />
+  <meta property="og:title" content="Payment success — Easy Peeze Tools" />
   <meta property="og:url" content="https://easypeeze.com/pay/success.html" />
   <meta property="og:image" content="https://easypeeze.com/og-image.jpg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="1200" />
-  <meta property="og:locale" content="en_IN" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Payment success — Pdf Buddy" />
-  <meta name="twitter:description" content="Pdf Buddy payment success." />
-  <meta name="twitter:image" content="https://easypeeze.com/og-image.jpg" />
-  
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -45,7 +31,7 @@
         <img src="https://easypeeze.com/logo.png" alt="" />
         <span class="brand-lockup__name">Easy Peeze Tools</span>
       </a>
-            <nav class="site-nav" aria-label="Primary">
+      <nav class="site-nav" aria-label="Primary">
         <div class="nav-dropdown">
           <a href="../products/" class="nav-dropdown__trigger" aria-haspopup="true">Products</a>
           <div class="nav-dropdown__menu" role="menu">
@@ -56,20 +42,6 @@
         </div>
         <a href="../pricing/">Pricing</a>
         <a href="../contact/">Contact</a>
-        <div class="nav-dropdown">
-          <a href="../blog/" class="nav-dropdown__trigger" aria-haspopup="true">Resources</a>
-          <div class="nav-dropdown__menu" role="menu">
-            <a href="../features/" role="menuitem">Pdf Buddy features</a>
-            <a href="../blog/" role="menuitem">Blog</a>
-            <a href="../guides/" role="menuitem">Guides</a>
-            <a href="../install/" role="menuitem">Install</a>
-            <a href="../faq/" role="menuitem">FAQ</a>
-            <a href="../about/" role="menuitem">About</a>
-            <a href="../refund/" role="menuitem">Refunds</a>
-            <a href="../privacy/" role="menuitem">Privacy</a>
-            <a href="../terms/" role="menuitem">Terms</a>
-          </div>
-        </div>
         <a class="nav-cta" href="../pricing/">Pricing — from ₹149</a>
       </nav>
     </div>
@@ -78,10 +50,23 @@
 
     <div class="page-hero section">
       <h1 id="pay-success-title">Payment received</h1>
-      <p id="pay-success-msg">We’re unlocking your Pdf Buddy license. Sign in to the Windows app with the same Google email.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download Pdf Buddy</a>
-         <a class="btn btn--ghost" href="../../pricing/">Pricing</a></p>
+      <p id="pay-success-msg">We’re unlocking your license. Sign in with the same Google email.</p>
+      <p class="hero__actions" id="pay-success-actions">
+        <a class="btn" id="pay-success-primary" href="../download/" rel="noopener">Download Pdf Buddy</a>
+        <a class="btn btn--ghost" href="../pricing/">Pricing</a>
+      </p>
     </div>
+
+    <section class="section" id="pay-cross-sell" aria-labelledby="cross-sell-title">
+      <h2 id="cross-sell-title">Explore other Easy Peeze Tools products</h2>
+      <p class="section-lead" id="cross-sell-lead">
+        Same brand, same privacy-first idea — pick what else you need.
+      </p>
+      <div class="pricing-grid" id="cross-sell-grid">
+        <!-- Filled by script from product query -->
+      </div>
+    </section>
+
     <script>
     (function () {
       var q = new URLSearchParams(location.search);
@@ -89,18 +74,116 @@
       var provider = (q.get('provider') || '').toLowerCase();
       var alreadyPaid = q.get('paid') === '1' || q.get('paid') === 'true';
       var staging = q.get('staging') === '1' || q.get('staging') === 'true';
+      var product = (q.get('product') || 'pdfbuddy').toLowerCase();
+      if (product === 'kharch' || product === 'expense') product = 'kharchlog';
+      if (product !== 'kharchlog') product = 'pdfbuddy';
+
       var titleEl = document.getElementById('pay-success-title');
       var msgEl = document.getElementById('pay-success-msg');
-      if (staging) {
-        if (titleEl) titleEl.textContent = 'Payment completed';
-        if (msgEl) {
-          msgEl.textContent =
-            q.get('msg') ||
-            'Staging only — payment verified, license was NOT granted.';
-        }
-        return;
+      var primaryBtn = document.getElementById('pay-success-primary');
+      var grid = document.getElementById('cross-sell-grid');
+      var lead = document.getElementById('cross-sell-lead');
+
+      function card(html) {
+        var d = document.createElement('div');
+        d.className = 'pricing-tease pricing-tease--page';
+        d.style.margin = '0';
+        d.innerHTML = html;
+        return d;
       }
-      // PayPal already captured + granted on the API
+
+      if (product === 'kharchlog') {
+        document.title = 'Payment success — Kharch Log';
+        if (titleEl) titleEl.textContent = staging ? 'Payment completed' : 'You’re in';
+        if (msgEl) {
+          msgEl.textContent = staging
+            ? (q.get('msg') || 'Staging only — payment verified, license was NOT granted.')
+            : 'Kharch Log lifetime is unlocked. Sign in to the Android app with the same Google email, then download the APK if you haven’t yet.';
+        }
+        if (primaryBtn) {
+          primaryBtn.textContent = 'Download Kharch Log APK';
+          primaryBtn.href = 'https://kharchlog.com/KharchLog.apk';
+          primaryBtn.rel = 'noopener';
+        }
+        if (lead) {
+          lead.textContent =
+            'While you’re here — Pdf Buddy is our Windows PDF editor (100% local on your PC). Same Easy Peeze Tools brand.';
+        }
+        if (grid) {
+          grid.appendChild(
+            card(
+              '<p class="pricing-tease__kicker">Windows</p>' +
+                '<h3>Pdf Buddy</h3>' +
+                '<p class="pricing-tease__hook">Edit, merge, split, compress, sign &amp; OCR — files stay on your PC.</p>' +
+                '<ul class="pricing-tease__points">' +
+                '<li>3 free actions / day</li>' +
+                '<li>₹299/year or ₹999 lifetime</li>' +
+                '</ul>' +
+                '<p class="hero__actions" style="justify-content:center;margin-top:18px;">' +
+                '<a class="btn" href="../download/" rel="noopener">Try Pdf Buddy free</a>' +
+                '<a class="btn btn--ghost" href="../pricing/#pdf-buddy">See PDF pricing</a>' +
+                '</p>'
+            )
+          );
+          grid.appendChild(
+            card(
+              '<p class="pricing-tease__kicker">All products</p>' +
+                '<h3>Easy Peeze Tools</h3>' +
+                '<p class="pricing-tease__hook">Simple tools. Zero hassle. Your data stays yours.</p>' +
+                '<p class="hero__actions" style="justify-content:center;margin-top:18px;">' +
+                '<a class="btn btn--ghost" href="../products/">Browse products</a>' +
+                '<a class="btn btn--ghost" href="../">Home</a>' +
+                '</p>'
+            )
+          );
+        }
+      } else {
+        document.title = 'Payment success — Pdf Buddy';
+        if (titleEl) titleEl.textContent = staging ? 'Payment completed' : 'Payment received';
+        if (msgEl) {
+          msgEl.textContent = staging
+            ? (q.get('msg') || 'Staging only — payment verified, license was NOT granted.')
+            : 'We’re unlocking your Pdf Buddy license. Sign in to the Windows app with the same Google email.';
+        }
+        if (primaryBtn) {
+          primaryBtn.textContent = 'Download Pdf Buddy';
+          primaryBtn.href = '../download/';
+        }
+        if (lead) {
+          lead.textContent =
+            'Also from Easy Peeze Tools — Kharch Log tracks UPI & bank SMS into your Google Sheet on Android.';
+        }
+        if (grid) {
+          grid.appendChild(
+            card(
+              '<p class="pricing-tease__kicker">Android</p>' +
+                '<h3>Kharch Log</h3>' +
+                '<p class="pricing-tease__hook">Expense tracker with SMS capture and Sheets sync — your data stays yours.</p>' +
+                '<ul class="pricing-tease__points">' +
+                '<li>₹149 lifetime</li>' +
+                '<li>Ledger in your Google Drive</li>' +
+                '</ul>' +
+                '<p class="hero__actions" style="justify-content:center;margin-top:18px;">' +
+                '<a class="btn" href="../pricing/#kharch-log">Get Kharch Log — ₹149</a>' +
+                '<a class="btn btn--ghost" href="https://kharchlog.com/" rel="noopener">Kharch Log site</a>' +
+                '</p>'
+            )
+          );
+          grid.appendChild(
+            card(
+              '<p class="pricing-tease__kicker">All products</p>' +
+                '<h3>Easy Peeze Tools</h3>' +
+                '<p class="pricing-tease__hook">Simple tools. Zero hassle. Your data stays yours.</p>' +
+                '<p class="hero__actions" style="justify-content:center;margin-top:18px;">' +
+                '<a class="btn btn--ghost" href="../products/">Browse products</a>' +
+                '<a class="btn btn--ghost" href="../">Home</a>' +
+                '</p>'
+            )
+          );
+        }
+      }
+
+      if (staging) return;
       if (provider === 'paypal' && alreadyPaid) return;
       var body = {
         email: q.get('email') || '',
@@ -112,8 +195,8 @@
         orderId: q.get('order_id') || '',
         subscriptionId: q.get('subscription_id') || '',
         signature: q.get('signature') || '',
-        product: q.get('product') || 'pdfbuddy',
-        planType: q.get('plan') || 'yearly'
+        product: product,
+        planType: q.get('plan') || (product === 'kharchlog' ? 'lifetime' : 'yearly')
       };
       if (!body.paymentId) return;
       fetch(api + '/', {
@@ -131,31 +214,16 @@
         <img src="https://easypeeze.com/logo.png" alt="" />
         <span>Easy Peeze Tools</span>
       </div>
-            <nav aria-label="Footer">
+      <nav aria-label="Footer">
         <a href="../">Home</a>
         <a href="../products/">Products</a>
         <a href="../pricing/">Pricing</a>
         <a href="../contact/">Contact</a>
-        <div class="nav-dropdown footer-resources">
-          <a href="../blog/" class="nav-dropdown__trigger" aria-haspopup="true">Resources</a>
-          <div class="nav-dropdown__menu" role="menu">
-            <a href="../features/" role="menuitem">Pdf Buddy features</a>
-            <a href="https://kharchlog.com/" role="menuitem" rel="noopener">Kharch Log</a>
-            <a href="../blog/" role="menuitem">Blog</a>
-            <a href="../guides/" role="menuitem">Guides</a>
-            <a href="../install/" role="menuitem">Install</a>
-            <a href="../glossary/" role="menuitem">Glossary</a>
-            <a href="../about/" role="menuitem">About</a>
-            <a href="../refund/" role="menuitem">Refunds</a>
-            <a href="../privacy/" role="menuitem">Privacy</a>
-            <a href="../terms/" role="menuitem">Terms</a>
-          </div>
-        </div>
         <a href="mailto:easypeezetools@gmail.com">Support</a>
       </nav>
-      <p class="site-footer__copy">© 2026 Easy Peeze Tools. Pdf Buddy (Windows PDF editor) · <a href="https://kharchlog.com/">Kharch Log</a> (Android expense tracker). Simple tools. Zero hassle.</p>
+      <p class="site-footer__copy">© 2026 Easy Peeze Tools. Pdf Buddy · Kharch Log. Simple tools. Zero hassle.</p>
     </div>
   </footer>
 </body>
 </html>
-  <script src="../../site-motion.js" defer></script>
+<script src="../../site-motion.js" defer></script>
