@@ -384,6 +384,33 @@
     return sha256Hex(`easypeeze-admin-v1\n${e}\n${password}`);
   }
 
+  function collectDeviceInfo() {
+    let screenStr = "";
+    try {
+      screenStr = `${window.screen.width}x${window.screen.height}x${window.screen.colorDepth || ""}`;
+    } catch (_e) {}
+    return {
+      deviceName: navigator.platform || "",
+      platform: navigator.platform || "",
+      vendor: navigator.vendor || "",
+      userAgent: navigator.userAgent || "",
+      language: navigator.language || "",
+      languages: navigator.languages ? Array.from(navigator.languages) : [],
+      screen: screenStr,
+      timezone: (() => {
+        try {
+          return Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+        } catch (_e) {
+          return "";
+        }
+      })(),
+      hardwareConcurrency: navigator.hardwareConcurrency || null,
+      maxTouchPoints: navigator.maxTouchPoints || null,
+      cookieEnabled: typeof navigator.cookieEnabled === "boolean" ? navigator.cookieEnabled : null,
+      clientTime: new Date().toISOString()
+    };
+  }
+
   $("login-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const btn = $("login-btn");
@@ -398,7 +425,7 @@
       const data = await fetch(`${API}/admin/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ email, passwordHash })
+        body: JSON.stringify({ email, passwordHash, device: collectDeviceInfo() })
       }).then(async (r) => {
         const j = await r.json().catch(() => ({}));
         if (!r.ok || j.ok === false) throw new Error(j.error || `HTTP ${r.status}`);
