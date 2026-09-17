@@ -132,6 +132,8 @@
     var btn = document.getElementById('contact-submit');
     var statusEl = document.getElementById('contact-status');
     if (!form || !btn) return;
+    // FormSubmit activated for this inbox (easypeezetools@gmail.com still pending activation).
+    var TO = 'mahhussain123@gmail.com';
     var API = 'https://kharchlog-license-u4rcttr3nq-el.a.run.app/contact';
     var SUBJECT = 'Contact — Easy Peeze Tools (easypeeze.com)';
     var SOURCE = 'easypeeze.com/contact';
@@ -160,27 +162,48 @@
       setBusy(true);
       setStatus('Sending…', false);
 
-      fetch(API, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          name: name,
-          email: email,
-          message: message,
-          _subject: SUBJECT,
-          source: SOURCE
-        })
-      })
-        .then(function (r) {
+      var payload = {
+        name: name,
+        email: email,
+        message: message,
+        _subject: SUBJECT,
+        _template: 'table',
+        _captcha: 'false',
+        source: SOURCE
+      };
+
+      // Email via FormSubmit (activated) + copy to Super Admin Messages (Firestore).
+      Promise.all([
+        fetch('https://formsubmit.co/ajax/' + encodeURIComponent(TO), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(function (r) {
           return r.text().then(function (t) {
             var j = null;
             try { j = t ? JSON.parse(t) : null; } catch (_e) { j = null; }
             return { httpOk: r.ok, j: j };
           });
-        })
-        .then(function (res) {
-          if (!res.httpOk || !res.j || res.j.ok !== true) {
-            var msg = (res.j && res.j.error) || 'Could not send. Email easypeezetools@gmail.com instead.';
+        }),
+        fetch(API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(function (r) {
+          return r.text().then(function (t) {
+            var j = null;
+            try { j = t ? JSON.parse(t) : null; } catch (_e) { j = null; }
+            return { httpOk: r.ok, j: j };
+          });
+        }).catch(function () { return { httpOk: false, j: null }; })
+      ])
+        .then(function (results) {
+          var mail = results[0];
+          var api = results[1];
+          var mailOk = mail.httpOk && mail.j && (mail.j.success === true || mail.j.success === 'true');
+          var apiOk = api.httpOk && api.j && api.j.ok === true;
+          if (!mailOk && !apiOk) {
+            var msg = (mail.j && mail.j.message) || (api.j && api.j.error) || 'Could not send. Email easypeezetools@gmail.com instead.';
             throw new Error(msg);
           }
           form.reset();
