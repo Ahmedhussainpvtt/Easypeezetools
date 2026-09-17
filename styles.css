@@ -304,7 +304,9 @@ a:hover { text-decoration: underline; }
 @keyframes btn-busy-orbit { to { transform: rotate(360deg); } }
 .btn.is-busy,
 .btn[aria-busy="true"],
-.pay-btn.is-busy {
+.pay-btn.is-busy,
+.btn-download.is-busy,
+.nav-cta.is-busy {
   position: relative;
   pointer-events: none;
   isolation: isolate;
@@ -312,7 +314,9 @@ a:hover { text-decoration: underline; }
 }
 .btn.is-busy::before,
 .btn[aria-busy="true"]::before,
-.pay-btn.is-busy::before {
+.pay-btn.is-busy::before,
+.btn-download.is-busy::before,
+.nav-cta.is-busy::before {
   content: "";
   position: absolute;
   inset: -3px;

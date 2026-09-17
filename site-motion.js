@@ -344,3 +344,56 @@
     window.addEventListener('blur', clearTrail);
   }
 })();
+
+/* APK-style yellow busy orbit on CTAs so every click shows feedback. */
+(() => {
+  const SELECTOR = '.btn, .pay-btn, .btn-download, .nav-cta, button[type="submit"]';
+
+  const markBusy = (el) => {
+    if (!el || el.disabled || el.classList.contains('nav-toggle')) return;
+    el.classList.add('is-busy');
+    el.setAttribute('aria-busy', 'true');
+  };
+
+  const clearBusy = (el) => {
+    if (!el) return;
+    el.classList.remove('is-busy');
+    el.removeAttribute('aria-busy');
+  };
+
+  document.addEventListener(
+    'click',
+    (event) => {
+      const el = event.target.closest(SELECTOR);
+      if (!el || el.classList.contains('nav-toggle')) return;
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      if (el.tagName === 'A') {
+        const href = el.getAttribute('href') || '';
+        const blank = el.getAttribute('target') === '_blank';
+        markBusy(el);
+        if (blank || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+          window.setTimeout(() => clearBusy(el), 900);
+        }
+        return;
+      }
+      markBusy(el);
+      window.setTimeout(() => {
+        if (!el.disabled) clearBusy(el);
+      }, 12000);
+    },
+    true
+  );
+
+  document.addEventListener(
+    'submit',
+    (event) => {
+      const form = event.target;
+      if (!(form instanceof HTMLFormElement)) return;
+      const btn =
+        form.querySelector('button[type="submit"], .btn[type="submit"], .pay-btn, input[type="submit"]') ||
+        form.querySelector('.btn');
+      if (btn) markBusy(btn);
+    },
+    true
+  );
+})();
