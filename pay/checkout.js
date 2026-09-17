@@ -1,9 +1,27 @@
 (function () {
   var cfg = window.EASYPEEZE_PAY || {};
   var params = new URLSearchParams(location.search);
-  var planKey = (params.get('plan') || 'yearly').toLowerCase();
-  if (planKey !== 'lifetime') planKey = 'yearly';
-  var plan = (cfg.plans && cfg.plans[planKey]) || cfg.plans.yearly;
+  var productParam = (params.get('product') || cfg.product || 'pdfbuddy').toLowerCase();
+  if (productParam === 'kharch' || productParam === 'expense') productParam = 'kharchlog';
+  if (productParam !== 'kharchlog') productParam = 'pdfbuddy';
+  cfg.product = productParam;
+
+  if (productParam === 'kharchlog') {
+    cfg.plans = {
+      lifetime: {
+        planType: 'lifetime',
+        amountInr: 149,
+        amountUsd: 2,
+        label: 'Kharch Log Lifetime',
+        once: 'one-time'
+      }
+    };
+  }
+
+  var planKey = (params.get('plan') || (productParam === 'kharchlog' ? 'lifetime' : 'yearly')).toLowerCase();
+  if (productParam === 'kharchlog') planKey = 'lifetime';
+  else if (planKey !== 'lifetime') planKey = 'yearly';
+  var plan = (cfg.plans && cfg.plans[planKey]) || cfg.plans.yearly || cfg.plans.lifetime;
   var USD_ENABLED = !!(cfg.paypalClientId || cfg.usdEnabled);
   var requestedCurrency = (params.get('currency') || 'INR').toUpperCase();
   var currency = USD_ENABLED && requestedCurrency === 'USD' ? 'USD' : 'INR';
@@ -72,7 +90,25 @@
   }
 
   syncPrice();
-  if (titleEl && plan) titleEl.textContent = plan.label || 'Unlock Pdf Buddy';
+  if (titleEl && plan) {
+    titleEl.textContent =
+      plan.label || (productParam === 'kharchlog' ? 'Unlock Kharch Log' : 'Unlock Pdf Buddy');
+  }
+  var subEl = document.getElementById('pay-sub');
+  if (subEl) {
+    subEl.textContent =
+      productParam === 'kharchlog'
+        ? 'Use the same Google email you sign in with in the Android app.'
+        : 'Use the same Google email you sign in with in the Windows app.';
+  }
+  var tipEl = document.querySelector('.pay-email-check');
+  if (tipEl && productParam === 'kharchlog') {
+    tipEl.textContent = 'Download the APK from kharchlog.com after payment — sign in with this Google email.';
+  }
+  if (fineEl && productParam === 'kharchlog') {
+    fineEl.innerHTML =
+      '<a href="https://kharchlog.com/" rel="noopener">Kharch Log home</a> · <a href="../pricing/#kharch-log">Back to pricing</a>';
+  }
   if (params.get('email') && emailInput) emailInput.value = params.get('email');
 
   document.querySelectorAll('.pay-currency__btn').forEach(function (btn) {
@@ -186,7 +222,12 @@
       return null;
     }
     if (!email || email.indexOf('@') < 1 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setStatus('Enter the Google email you use in Pdf Buddy', true);
+      setStatus(
+        productParam === 'kharchlog'
+          ? 'Enter the Google email you use in Kharch Log'
+          : 'Enter the Google email you use in Pdf Buddy',
+        true
+      );
       if (emailInput) emailInput.focus();
       return null;
     }
@@ -210,15 +251,15 @@
     var clientId = cfg.paypalClientId;
     if (!clientId) return Promise.reject(new Error('PayPal is not configured'));
     var sandbox = String(cfg.paypalMode || 'sandbox').toLowerCase() !== 'live';
-    var sdkHost = sandbox ? 'https://www.sandbox.paypal.com/sdk/js' : 'https://www.paypal.com/sdk/js';
+    // Official host for both modes — client-id selects sandbox vs live.
+    // Sandbox guest cards are flaky; disable card funding so buyers log in.
     var qs =
       'client-id=' +
       encodeURIComponent(clientId) +
-      '&currency=USD&intent=capture&components=buttons' +
-      (sandbox ? '&buyer-country=US' : '');
+      '&currency=USD&intent=capture&components=buttons';
     paypalSdkReady = new Promise(function (resolve, reject) {
       var s = document.createElement('script');
-      s.src = sdkHost + '?' + qs;
+      s.src = 'https://www.paypal.com/sdk/js?' + qs;
       s.onload = function () {
         resolve();
       };
@@ -241,7 +282,7 @@
             style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'paypal' },
             createOrder: function () {
               var buyer = readBuyer();
-              if (!buyer) return Promise.reject(new Error('Fix the form fields first'));
+              if (!buyer) return Promise.reject(new Error('VALIDATION'));
               setStatus('Creating PayPal order…');
               return createOrder({
                 email: buyer.email,
@@ -259,6 +300,10 @@
                 }
                 setStatus('Continue in PayPal…');
                 return orderData.orderId;
+              }).catch(function (e) {
+                var m = (e && e.message) || 'Could not start PayPal checkout';
+                setStatus(m, true);
+                throw new Error('VALIDATION');
               });
             },
             onApprove: function (data) {
@@ -301,8 +346,24 @@
             onCancel: function () {
               setStatus('PayPal checkout cancelled');
             },
-            onError: function () {
-              setStatus('PayPal checkout failed — try again', true);
+            onError: function (err) {
+              console.error('PayPal onError', err);
+              var msg = String((err && err.message) || err || '');
+              if (/VALIDATION|Fix the form/i.test(msg)) return;
+              if (/Failed to fetch|NetworkError|Load failed/i.test(msg)) {
+                setStatus(
+                  'Could not reach payment API (CORS/network). Staging origin may be blocked — tell Alex to redeploy license API.',
+                  true
+                );
+                return;
+              }
+              var sandbox = String(cfg.paypalMode || 'sandbox').toLowerCase() !== 'live';
+              setStatus(
+                sandbox
+                  ? 'PayPal failed — Log In with a Sandbox Personal buyer from developer.paypal.com → Sandbox → Accounts (guest cards often fail).'
+                  : 'PayPal checkout failed — try again',
+                true
+              );
             }
           })
           .render('#paypal-buttons');
@@ -325,7 +386,7 @@
           firstName: buyer.firstName,
           lastName: buyer.lastName,
           name: fullName,
-          product: 'pdfbuddy',
+          product: cfg.product || 'pdfbuddy',
           planType: plan.planType
         },
         theme: { color: '#0085FF' },
@@ -334,7 +395,7 @@
           q.set('email', buyer.email);
           q.set('firstName', buyer.firstName);
           q.set('lastName', buyer.lastName);
-          q.set('product', 'pdfbuddy');
+          q.set('product', cfg.product || 'pdfbuddy');
           q.set('plan', plan.planType);
           q.set('phone', buyer.phone || '');
           if (response.razorpay_payment_id) q.set('payment_id', response.razorpay_payment_id);

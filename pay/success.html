@@ -77,8 +77,8 @@
   <main id="main">
 
     <div class="page-hero section">
-      <h1>Payment received</h1>
-      <p>We’re unlocking your Pdf Buddy license. Sign in to the Windows app with the same Google email.</p>
+      <h1 id="pay-success-title">Payment received</h1>
+      <p id="pay-success-msg">We’re unlocking your Pdf Buddy license. Sign in to the Windows app with the same Google email.</p>
       <p><a class="btn" href="../../download/" rel="noopener">Download Pdf Buddy</a>
          <a class="btn btn--ghost" href="../../pricing/">Pricing</a></p>
     </div>
@@ -88,6 +88,18 @@
       var api = 'https://kharchlog-license-u4rcttr3nq-el.a.run.app';
       var provider = (q.get('provider') || '').toLowerCase();
       var alreadyPaid = q.get('paid') === '1' || q.get('paid') === 'true';
+      var staging = q.get('staging') === '1' || q.get('staging') === 'true';
+      var titleEl = document.getElementById('pay-success-title');
+      var msgEl = document.getElementById('pay-success-msg');
+      if (staging) {
+        if (titleEl) titleEl.textContent = 'Payment completed';
+        if (msgEl) {
+          msgEl.textContent =
+            q.get('msg') ||
+            'Staging only — payment verified, license was NOT granted.';
+        }
+        return;
+      }
       // PayPal already captured + granted on the API
       if (provider === 'paypal' && alreadyPaid) return;
       var body = {
