@@ -223,22 +223,22 @@
       setBusy(true);
       setStatus('Sending…', false);
 
-      var payload = {
+      var mailPayload = {
         name: name,
         email: email,
         message: message,
         _subject: name + ' - New Message on ' + SITE,
         _template: 'table',
         _captcha: 'false',
-        'g-recaptcha-response': token,
         source: SOURCE
       };
+      var apiPayload = Object.assign({}, mailPayload, { 'g-recaptcha-response': token });
 
       Promise.all([
         fetch('https://formsubmit.co/ajax/' + encodeURIComponent(TO), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(mailPayload)
         }).then(function (r) {
           return r.text().then(function (t) {
             var j = null;
@@ -249,7 +249,7 @@
         fetch(API, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(apiPayload)
         }).then(function (r) {
           return r.text().then(function (t) {
             var j = null;
