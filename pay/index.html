@@ -83,6 +83,7 @@
     </div>
     <section class="section" style="max-width:480px;">
       <p class="pay-price" id="pay-price">₹299 <span class="pay-once" id="pay-once">/ year</span></p>
+      <p class="pay-status" id="status" role="status" aria-live="assertive" hidden></p>
       <div class="pay-currency" role="group" aria-label="Currency">
         <button type="button" class="pay-currency__btn is-active" data-currency="INR" id="currencyInr">Pay in ₹ INR</button>
         <button type="button" class="pay-currency__btn pay-currency__btn--soon" data-currency="USD" id="currencyUsd"
@@ -101,7 +102,6 @@
       <p class="pay-email-check">Free tier is still available: download and use 3 actions/day with no subscription.</p>
       <button class="pay-btn btn" type="button" id="payBtn">Continue to pay</button>
       <div id="paypal-buttons" class="paypal-buttons" hidden></div>
-      <p class="pay-status" id="status" aria-live="polite"></p>
       <p class="pay-fine" id="pay-fine"><a href="../download/" rel="noopener">Download free instead</a> · <a href="../pricing/">Back to pricing</a></p>
     </section>
     <script>

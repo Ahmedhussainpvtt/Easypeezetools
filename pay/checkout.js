@@ -143,13 +143,28 @@
 
   function setStatus(msg, isError) {
     if (!statusEl) return;
-    statusEl.textContent = msg || '';
-    statusEl.className = 'pay-status' + (isError ? ' pay-status-error' : '');
+    var text = String(msg || '').trim();
+    if (!text) {
+      statusEl.textContent = '';
+      statusEl.hidden = true;
+      statusEl.className = 'pay-status';
+      return;
+    }
+    statusEl.hidden = false;
+    statusEl.textContent = text;
+    statusEl.className = 'pay-status' + (isError ? ' pay-status-error' : ' pay-status-ok');
+    if (isError) {
+      try {
+        statusEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (_e) {}
+    }
   }
 
   function paymentFailMessage(err, fallback) {
     if (!err) return fallback || 'Payment failed. Please try again.';
-    if (typeof err === 'string' && err.trim()) return err.trim();
+    if (typeof err === 'string' && err.trim()) {
+      err = { message: err.trim() };
+    }
     var msg =
       (err.error && String(err.error)) ||
       (err.message && String(err.message)) ||
@@ -159,17 +174,22 @@
     if (!msg || /VALIDATION|Fix the form/i.test(msg)) {
       return fallback || 'Payment failed. Please try again.';
     }
+    // PayPal fires this when the popup is closed / cancelled.
+    if (
+      /window is closed/i.test(msg) ||
+      /can not determine type|cannot determine type/i.test(msg) ||
+      /Checkout closed|dismiss|cancelled|canceled/i.test(msg)
+    ) {
+      return 'Looks like you closed the payment window. Please try again when you’re ready.';
+    }
     if (/Failed to fetch|NetworkError|Load failed/i.test(msg)) {
       return 'Could not reach the payment server. Check your connection and try again.';
-    }
-    if (/Checkout closed|dismiss/i.test(msg)) {
-      return 'Looks like you cancelled the payment. Please try again when you’re ready.';
     }
     return msg;
   }
 
   if (params.get('cancelled') === '1' || params.get('cancel') === '1') {
-    setStatus('Looks like you cancelled the payment. Please try again when you’re ready.', true);
+    setStatus('Looks like you closed the payment window. Please try again when you’re ready.', true);
   }
 
   var NAME_BLOCKLIST = {
@@ -405,14 +425,17 @@
             },
             onCancel: function () {
               setStatus(
-                'Looks like you cancelled the payment. Please try again when you’re ready.',
+                'Looks like you closed the payment window. Please try again when you’re ready.',
                 true
               );
             },
             onError: function (err) {
               console.error('PayPal onError', err);
               setStatus(
-                paymentFailMessage(err, 'PayPal checkout failed. Please try again.'),
+                paymentFailMessage(
+                  err,
+                  'Looks like you closed the payment window. Please try again when you’re ready.'
+                ),
                 true
               );
             }
@@ -458,7 +481,9 @@
         },
         modal: {
           ondismiss: function () {
-            reject(new Error('Looks like you cancelled the payment. Please try again when you’re ready.'));
+            reject(
+              new Error('Looks like you closed the payment window. Please try again when you’re ready.')
+            );
           }
         }
       };
