@@ -300,7 +300,9 @@ a:hover { text-decoration: underline; }
 }
 .btn:hover::after { transform: translateX(120%); }
 
-/* APK-style: yellow stroke races around the button edge (no filled spinner). */
+/* APK-style: yellow highlight races around the button EDGE only.
+   Do NOT rotate a bordered box (corners swing across the page).
+   Rotate a conic-gradient ring masked to a thin stroke. */
 @keyframes btn-busy-orbit { to { transform: rotate(360deg); } }
 .btn.is-busy,
 .btn[aria-busy="true"],
@@ -329,19 +331,30 @@ a:hover { text-decoration: underline; }
 .nav-cta.is-busy::before {
   content: "";
   position: absolute;
-  inset: -3px;
+  inset: -2px;
   border-radius: inherit;
   box-sizing: border-box;
-  background: transparent !important;
-  /* Faint full track + bright yellow head that rotates around the edge */
-  border: 3px solid rgba(255, 193, 7, 0.22);
-  border-top-color: var(--tertiary);
-  border-right-color: #fff3b0;
-  border-bottom-color: rgba(255, 193, 7, 0.05);
-  border-left-color: rgba(255, 193, 7, 0.05);
-  animation: btn-busy-orbit 0.85s linear infinite;
+  padding: 2.5px; /* stroke thickness */
   pointer-events: none;
-  z-index: 5;
+  z-index: 2;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg 220deg,
+    rgba(255, 193, 7, 0.2) 250deg,
+    var(--tertiary) 300deg,
+    #fff8d0 330deg,
+    var(--tertiary) 350deg,
+    transparent 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+          mask-composite: exclude;
+  animation: btn-busy-orbit 0.85s linear infinite;
 }
 .btn:disabled {
   cursor: wait;
@@ -362,18 +375,30 @@ a:hover { text-decoration: underline; }
 .pay-btn.is-success::before {
   content: "";
   position: absolute;
-  inset: -3px;
+  inset: -2px;
   border-radius: inherit;
   box-sizing: border-box;
-  background: transparent !important;
-  border: 3px solid rgba(0, 196, 154, 0.25);
-  border-top-color: var(--secondary);
-  border-right-color: #b8ffe8;
-  border-bottom-color: rgba(0, 196, 154, 0.05);
-  border-left-color: rgba(0, 196, 154, 0.05);
-  animation: btn-busy-orbit 0.55s linear 1;
+  padding: 2.5px;
   pointer-events: none;
-  z-index: 5;
+  z-index: 2;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg 220deg,
+    rgba(0, 196, 154, 0.2) 250deg,
+    var(--secondary) 300deg,
+    #b8ffe8 330deg,
+    var(--secondary) 350deg,
+    transparent 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+          mask-composite: exclude;
+  animation: btn-busy-orbit 0.55s linear 1;
 }
 
 .btn--primary {

@@ -361,12 +361,18 @@
     el.removeAttribute('aria-busy');
   };
 
+  const isSubmitControl = (el) =>
+    el.matches('button[type="submit"], input[type="submit"], .contact-submit, .pay-btn');
+
   document.addEventListener(
     'click',
     (event) => {
       const el = event.target.closest(SELECTOR);
       if (!el || el.classList.contains('nav-toggle')) return;
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      // Submit controls: page handlers own busy. Click-capture busy blocks
+      // form submit / leaves a stuck ring after validation errors.
+      if (isSubmitControl(el)) return;
       if (el.tagName === 'A') {
         const href = el.getAttribute('href') || '';
         const blank = el.getAttribute('target') === '_blank';
@@ -380,19 +386,6 @@
       window.setTimeout(() => {
         if (!el.disabled) clearBusy(el);
       }, 12000);
-    },
-    true
-  );
-
-  document.addEventListener(
-    'submit',
-    (event) => {
-      const form = event.target;
-      if (!(form instanceof HTMLFormElement)) return;
-      const btn =
-        form.querySelector('button[type="submit"], .btn[type="submit"], .pay-btn, input[type="submit"]') ||
-        form.querySelector('.btn');
-      if (btn) markBusy(btn);
     },
     true
   );
