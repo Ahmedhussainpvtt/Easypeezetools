@@ -132,7 +132,7 @@
     var btn = document.getElementById('contact-submit');
     var statusEl = document.getElementById('contact-status');
     if (!form || !btn) return;
-    var TO = 'easypeezetools@gmail.com';
+    var API = 'https://kharchlog-license-u4rcttr3nq-el.a.run.app/contact';
     var SUBJECT = 'Contact — Easy Peeze Tools (easypeeze.com)';
     var SOURCE = 'easypeeze.com/contact';
 
@@ -148,10 +148,6 @@
       btn.textContent = on ? 'Sending…' : 'Send message';
     }
 
-    if (new URLSearchParams(location.search).get('sent') === '1') {
-      setStatus('Thanks — message sent. If first time, confirm FormSubmit in your inbox (easypeezetools@gmail.com).', false);
-    }
-
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var name = (document.getElementById('contact-name').value || '').trim();
@@ -164,7 +160,7 @@
       setBusy(true);
       setStatus('Sending…', false);
 
-      fetch('https://formsubmit.co/ajax/' + encodeURIComponent(TO), {
+      fetch(API, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
@@ -172,8 +168,6 @@
           email: email,
           message: message,
           _subject: SUBJECT,
-          _template: 'table',
-          _captcha: 'false',
           source: SOURCE
         })
       })
@@ -181,13 +175,12 @@
           return r.text().then(function (t) {
             var j = null;
             try { j = t ? JSON.parse(t) : null; } catch (_e) { j = null; }
-            return { httpOk: r.ok, j: j, raw: t };
+            return { httpOk: r.ok, j: j };
           });
         })
         .then(function (res) {
-          var ok = res.httpOk && res.j && (res.j.success === true || res.j.success === 'true');
-          if (!ok) {
-            var msg = (res.j && res.j.message) || 'Could not send. Email easypeezetools@gmail.com instead.';
+          if (!res.httpOk || !res.j || res.j.ok !== true) {
+            var msg = (res.j && res.j.error) || 'Could not send. Email easypeezetools@gmail.com instead.';
             throw new Error(msg);
           }
           form.reset();

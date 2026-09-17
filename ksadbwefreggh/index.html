@@ -89,6 +89,7 @@
     <main class="app-main">
       <nav class="tabs" role="tablist">
         <button type="button" class="tab is-active" data-tab="customers" role="tab">Customers</button>
+        <button type="button" class="tab" data-tab="messages" role="tab">Messages</button>
         <button type="button" class="tab" data-tab="blog" role="tab">Blog</button>
       </nav>
 
@@ -160,6 +161,41 @@
             <svg><use href="#i-users" /></svg>
             <strong>No customers found</strong>
             <span>Try a different search, or add a customer to grant access.</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-messages" class="tab-panel hidden">
+        <div class="table-card">
+          <div class="table-card__head">
+            <div class="table-card__title">
+              <h2>Contact messages</h2>
+              <span class="count-pill" id="messages-count">0</span>
+            </div>
+            <div class="table-card__tools">
+              <button type="button" class="btn btn-outline" id="btn-refresh-messages">
+                <svg><use href="#i-refresh" /></svg>Refresh
+              </button>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>When</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Source</th>
+                  <th>Message</th>
+                </tr>
+              </thead>
+              <tbody id="messages-tbody"></tbody>
+            </table>
+          </div>
+          <div id="messages-empty" class="empty" hidden>
+            <svg><use href="#i-users" /></svg>
+            <strong>No messages yet</strong>
+            <span>Contact form submissions from the websites appear here.</span>
           </div>
         </div>
       </section>

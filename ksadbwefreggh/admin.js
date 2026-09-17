@@ -235,6 +235,30 @@
     }
   }
 
+  async function loadMessages() {
+    try {
+      const data = await api("/admin/contact-messages?limit=80");
+      const rows = Array.isArray(data.messages) ? data.messages : [];
+      $("messages-count").textContent = String(rows.length);
+      const tbody = $("messages-tbody");
+      tbody.innerHTML = "";
+      $("messages-empty").hidden = rows.length > 0;
+      for (const m of rows) {
+        const tr = document.createElement("tr");
+        const when = esc(String(m.recordedAt || "").replace("T", " ").slice(0, 19));
+        tr.innerHTML = `
+          <td data-label="When" class="cell-mono">${when || "—"}</td>
+          <td data-label="Name">${esc(m.name || "—")}</td>
+          <td data-label="Email" class="cell-mono"><a href="mailto:${esc(m.email)}">${esc(m.email || "—")}</a></td>
+          <td data-label="Source">${esc(m.source || "—")}</td>
+          <td data-label="Message">${esc(m.message || "")}</td>`;
+        tbody.appendChild(tr);
+      }
+    } catch (ex) {
+      toast(ex.message || "Could not load messages", "error");
+    }
+  }
+
   function setKpis(stats) {
     $("kpi-total").textContent = stats?.total ?? "—";
     $("kpi-active").textContent = stats?.active ?? "—";
@@ -457,13 +481,20 @@
       btn.classList.add("is-active");
       const tab = btn.dataset.tab;
       $("tab-customers").classList.toggle("hidden", tab !== "customers");
+      $("tab-messages").classList.toggle("hidden", tab !== "messages");
       $("tab-blog").classList.toggle("hidden", tab !== "blog");
+      if (tab === "messages") loadMessages();
     });
   });
 
   $("btn-refresh").addEventListener("click", () =>
     loadUsers()
       .then(() => toast("Customers refreshed", "ok"))
+      .catch((ex) => toast(ex.message, "error"))
+  );
+  $("btn-refresh-messages").addEventListener("click", () =>
+    loadMessages()
+      .then(() => toast("Messages refreshed", "ok"))
       .catch((ex) => toast(ex.message, "error"))
   );
   $("search-users").addEventListener("input", () => renderUsers(usersCache));
