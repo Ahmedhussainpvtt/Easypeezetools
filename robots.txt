@@ -4,7 +4,6 @@ Allow: /
 # Thin / utility pages — keep crawl budget on product + content
 Disallow: /pay/
 Disallow: /pay/success.html
-Disallow: /staging/
 
 # AI / LLM discovery (AIO / GEO)
 # https://llmstxt.org
