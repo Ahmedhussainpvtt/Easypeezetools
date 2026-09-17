@@ -4,8 +4,7 @@
   var planKey = (params.get('plan') || 'yearly').toLowerCase();
   if (planKey !== 'lifetime') planKey = 'yearly';
   var plan = (cfg.plans && cfg.plans[planKey]) || cfg.plans.yearly;
-  // Currency: INR only for now.
-  var USD_ENABLED = false;
+  var USD_ENABLED = !!(cfg.paypalClientId || cfg.usdEnabled);
   var requestedCurrency = (params.get('currency') || 'INR').toUpperCase();
   var currency = USD_ENABLED && requestedCurrency === 'USD' ? 'USD' : 'INR';
   var firstNameInput = document.getElementById('firstName');
@@ -13,9 +12,13 @@
   var emailInput = document.getElementById('email');
   var phoneInput = document.getElementById('phone');
   var payBtn = document.getElementById('payBtn');
+  var paypalWrap = document.getElementById('paypal-buttons');
   var statusEl = document.getElementById('status');
   var priceEl = document.getElementById('pay-price');
   var titleEl = document.getElementById('pay-title');
+  var fineEl = document.getElementById('pay-fine');
+  var paypalSdkReady = null;
+  var paypalRendered = false;
 
   function priceLabel() {
     if (!plan) return '';
@@ -28,9 +31,23 @@
       priceEl.innerHTML =
         priceLabel() + ' <span class="pay-once" id="pay-once">' + (plan.once || '') + '</span>';
     }
+    if (payBtn) {
+      payBtn.hidden = currency === 'USD';
+      payBtn.textContent =
+        currency === 'USD' ? 'Pay with PayPal' : 'Continue to pay';
+    }
+    if (paypalWrap) {
+      paypalWrap.hidden = currency !== 'USD';
+    }
+    if (fineEl) {
+      fineEl.innerHTML =
+        currency === 'USD'
+          ? 'Secure checkout via PayPal (USD). <a href="../download/" rel="noopener">Download free instead</a> · <a href="../pricing/">Back to pricing</a>'
+          : '<a href="../download/" rel="noopener">Download free instead</a> · <a href="../pricing/">Back to pricing</a>';
+    }
     document.querySelectorAll('.pay-currency__btn').forEach(function (btn) {
       var isUsd = btn.getAttribute('data-currency') === 'USD';
-      btn.classList.toggle('is-active', !isUsd && currency === 'INR');
+      btn.classList.toggle('is-active', (isUsd && currency === 'USD') || (!isUsd && currency === 'INR'));
       if (isUsd && !USD_ENABLED) {
         btn.disabled = true;
         btn.setAttribute('aria-disabled', 'true');
@@ -39,8 +56,16 @@
           btn.innerHTML =
             'Pay in $ USD <span class="pay-currency__soon">Coming soon</span>';
         }
+      } else if (isUsd && USD_ENABLED) {
+        btn.disabled = false;
+        btn.removeAttribute('aria-disabled');
+        btn.classList.remove('pay-currency__btn--soon');
+        btn.textContent = 'Pay in $ USD';
       }
     });
+    if (currency === 'USD' && USD_ENABLED) {
+      ensurePaypalButtons();
+    }
   }
 
   syncPrice();
@@ -127,7 +152,157 @@
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
-    }).then(function (r) { return r.json(); });
+    }).then(function (r) {
+      return r.json();
+    });
+  }
+
+  function capturePaypal(payload) {
+    return fetch(apiBase() + '/paypal/capture', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function (r) {
+      return r.json();
+    });
+  }
+
+  function readBuyer() {
+    var firstName = normalizeName((firstNameInput && firstNameInput.value) || '');
+    var lastName = normalizeName((lastNameInput && lastNameInput.value) || '');
+    var email = (emailInput.value || '').trim().toLowerCase();
+    var phone = normalizePhone((phoneInput && phoneInput.value) || '');
+    if (!isRealPersonName(firstName)) {
+      setStatus('Enter a real first name (letters only, not junk like “test” / “asdf”)', true);
+      if (firstNameInput) firstNameInput.focus();
+      return null;
+    }
+    if (lastName && !isRealPersonName(lastName)) {
+      setStatus('Enter a real last name, or leave it blank', true);
+      if (lastNameInput) lastNameInput.focus();
+      return null;
+    }
+    if (!email || email.indexOf('@') < 1 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setStatus('Enter the Google email you use in Pdf Buddy', true);
+      if (emailInput) emailInput.focus();
+      return null;
+    }
+    if (!phone) {
+      setStatus('Enter a valid phone with country code (e.g. +91 98765 43210)', true);
+      if (phoneInput) phoneInput.focus();
+      return null;
+    }
+    return {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phone: phone,
+      displayName: [firstName, lastName].filter(Boolean).join(' ')
+    };
+  }
+
+  function loadPaypalSdk() {
+    if (window.paypal) return Promise.resolve();
+    if (paypalSdkReady) return paypalSdkReady;
+    var clientId = cfg.paypalClientId;
+    if (!clientId) return Promise.reject(new Error('PayPal is not configured'));
+    paypalSdkReady = new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src =
+        'https://www.paypal.com/sdk/js?client-id=' +
+        encodeURIComponent(clientId) +
+        '&currency=USD&intent=capture';
+      s.onload = function () {
+        resolve();
+      };
+      s.onerror = function () {
+        reject(new Error('PayPal SDK failed to load'));
+      };
+      document.head.appendChild(s);
+    });
+    return paypalSdkReady;
+  }
+
+  function ensurePaypalButtons() {
+    if (!paypalWrap || paypalRendered || !USD_ENABLED) return;
+    loadPaypalSdk()
+      .then(function () {
+        if (paypalRendered || !window.paypal) return;
+        paypalRendered = true;
+        window.paypal
+          .Buttons({
+            style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'paypal' },
+            createOrder: function () {
+              var buyer = readBuyer();
+              if (!buyer) return Promise.reject(new Error('Fix the form fields first'));
+              setStatus('Creating PayPal order…');
+              return createOrder({
+                email: buyer.email,
+                phone: buyer.phone,
+                firstName: buyer.firstName,
+                lastName: buyer.lastName,
+                name: buyer.displayName,
+                product: cfg.product || 'pdfbuddy',
+                planType: plan.planType,
+                currency: 'USD',
+                staging: !!cfg.staging
+              }).then(function (orderData) {
+                if (!orderData || !orderData.ok || orderData.provider !== 'paypal' || !orderData.orderId) {
+                  throw new Error((orderData && orderData.error) || 'Could not start PayPal checkout');
+                }
+                setStatus('Continue in PayPal…');
+                return orderData.orderId;
+              });
+            },
+            onApprove: function (data) {
+              var buyer = readBuyer() || {
+                email: (emailInput.value || '').trim().toLowerCase(),
+                firstName: normalizeName((firstNameInput && firstNameInput.value) || ''),
+                lastName: normalizeName((lastNameInput && lastNameInput.value) || ''),
+                phone: normalizePhone((phoneInput && phoneInput.value) || '') || ''
+              };
+              setStatus('Confirming PayPal payment…');
+              return capturePaypal({
+                orderId: data.orderID,
+                email: buyer.email,
+                phone: buyer.phone,
+                firstName: buyer.firstName,
+                lastName: buyer.lastName,
+                product: cfg.product || 'pdfbuddy',
+                planType: plan.planType,
+                staging: !!cfg.staging
+              }).then(function (result) {
+                if (!result || !result.ok) {
+                  throw new Error((result && result.error) || 'PayPal capture failed');
+                }
+                var q = new URLSearchParams();
+                q.set('email', result.email || buyer.email);
+                q.set('firstName', buyer.firstName || '');
+                q.set('lastName', buyer.lastName || '');
+                q.set('product', cfg.product || 'pdfbuddy');
+                q.set('plan', plan.planType);
+                q.set('phone', buyer.phone || '');
+                q.set('provider', 'paypal');
+                if (result.paymentId) q.set('payment_id', result.paymentId);
+                if (result.orderId) q.set('order_id', result.orderId);
+                q.set('paid', result.paid ? '1' : '0');
+                if (result.staging) q.set('staging', '1');
+                if (result.message) q.set('msg', result.message);
+                window.location.href = 'success.html?' + q.toString();
+              });
+            },
+            onCancel: function () {
+              setStatus('PayPal checkout cancelled');
+            },
+            onError: function () {
+              setStatus('PayPal checkout failed — try again', true);
+            }
+          })
+          .render('#paypal-buttons');
+      })
+      .catch(function (e) {
+        setStatus((e && e.message) || 'PayPal failed to load', true);
+      });
   }
 
   function openRazorpay(buyer, orderData) {
@@ -162,7 +337,11 @@
           window.location.href = 'success.html?' + q.toString();
           resolve({ ok: true });
         },
-        modal: { ondismiss: function () { reject(new Error('Checkout closed')); } }
+        modal: {
+          ondismiss: function () {
+            reject(new Error('Checkout closed'));
+          }
+        }
       };
       if (orderData.mode === 'subscription' && orderData.subscriptionId) {
         options.subscription_id = orderData.subscriptionId;
@@ -181,32 +360,8 @@
 
   if (payBtn) {
     payBtn.addEventListener('click', function () {
-      var firstName = normalizeName((firstNameInput && firstNameInput.value) || '');
-      var lastName = normalizeName((lastNameInput && lastNameInput.value) || '');
-      var email = (emailInput.value || '').trim().toLowerCase();
-      var phone = normalizePhone((phoneInput && phoneInput.value) || '');
-      if (!isRealPersonName(firstName)) {
-        setStatus('Enter a real first name (letters only, not junk like “test” / “asdf”)', true);
-        if (firstNameInput) firstNameInput.focus();
-        return;
-      }
-      if (lastName && !isRealPersonName(lastName)) {
-        setStatus('Enter a real last name, or leave it blank', true);
-        if (lastNameInput) lastNameInput.focus();
-        return;
-      }
-      if (!email || email.indexOf('@') < 1 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        setStatus('Enter the Google email you use in Pdf Buddy', true);
-        if (emailInput) emailInput.focus();
-        return;
-      }
-      if (!phone) {
-        setStatus('Enter a valid phone with country code (e.g. +91 98765 43210)', true);
-        if (phoneInput) phoneInput.focus();
-        return;
-      }
-      var buyer = { firstName: firstName, lastName: lastName, email: email, phone: phone };
-      var displayName = [firstName, lastName].filter(Boolean).join(' ');
+      var buyer = readBuyer();
+      if (!buyer) return;
       if (
         !window.confirm(
           'Pay ' +
@@ -214,11 +369,11 @@
             ' for ' +
             (plan.label || 'Pdf Buddy') +
             ' with:\n\n' +
-            displayName +
+            buyer.displayName +
             '\n' +
-            email +
+            buyer.email +
             '\n' +
-            phone +
+            buyer.phone +
             '\n\nContinue?'
         )
       )
@@ -226,15 +381,15 @@
       setStatus('Creating checkout…');
       payBtn.disabled = true;
       createOrder({
-        email: email,
-        phone: phone,
-        firstName: firstName,
-        lastName: lastName,
-        name: displayName,
+        email: buyer.email,
+        phone: buyer.phone,
+        firstName: buyer.firstName,
+        lastName: buyer.lastName,
+        name: buyer.displayName,
         product: cfg.product || 'pdfbuddy',
         planType: plan.planType,
         currency: currency,
-        staging: !!(cfg.staging)
+        staging: !!cfg.staging
       })
         .then(function (data) {
           if (!data || !data.ok) throw new Error((data && data.error) || 'Could not start checkout');

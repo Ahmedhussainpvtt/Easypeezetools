@@ -76,15 +76,18 @@
   <main id="main">
 
     <div class="page-hero section">
-      <h1>Payment received</h1>
-      <p>We’re unlocking your Pdf Buddy license. Sign in to the Windows app with the same Google email.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download Pdf Buddy</a>
-         <a class="btn btn--ghost" href="../../pricing/">Pricing</a></p>
+      <h1>Payment completed</h1>
+      <p>Staging only — this payment did <strong>not</strong> unlock Pdf Buddy. No license was granted.</p>
+      <p><a class="btn" href="../pay/">Back to staging pay</a>
+         <a class="btn btn--ghost" href="../pricing/">Pricing</a></p>
     </div>
     <script>
     (function () {
       var q = new URLSearchParams(location.search);
       var api = 'https://kharchlog-license-u4rcttr3nq-el.a.run.app';
+      var provider = (q.get('provider') || '').toLowerCase();
+      // PayPal already handled with staging:true (no grant)
+      if (provider === 'paypal') return;
       var body = {
         email: q.get('email') || '',
         phone: q.get('phone') || '',
@@ -96,7 +99,8 @@
         subscriptionId: q.get('subscription_id') || '',
         signature: q.get('signature') || '',
         product: q.get('product') || 'pdfbuddy',
-        planType: q.get('plan') || 'yearly'
+        planType: q.get('plan') || 'yearly',
+        staging: true
       };
       if (!body.paymentId) return;
       fetch(api + '/', {

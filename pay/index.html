@@ -85,8 +85,9 @@
       <p class="pay-price" id="pay-price">₹299 <span class="pay-once" id="pay-once">/ year</span></p>
       <div class="pay-currency" role="group" aria-label="Currency">
         <button type="button" class="pay-currency__btn is-active" data-currency="INR" id="currencyInr">Pay in ₹ INR</button>
-        <button type="button" class="pay-currency__btn" data-currency="USD" id="currencyUsd">
-          Pay in $ USD
+        <button type="button" class="pay-currency__btn pay-currency__btn--soon" data-currency="USD" id="currencyUsd"
+                disabled aria-disabled="true">
+          Pay in $ USD <span class="pay-currency__soon">Coming soon</span>
         </button>
       </div>
       <label class="pay-label" for="firstName">First name <span class="req" aria-hidden="true">*</span></label>
@@ -107,10 +108,7 @@
       window.EASYPEEZE_PAY = {
         trackerUrl: 'https://kharchlog-license-u4rcttr3nq-el.a.run.app',
         razorpayKeyId: 'rzp_live_TVqX95CxZTFsuk',
-        paypalClientId:
-          'BAArjySr8FEOyBr__W27sM7Hg_yxQXVdvmArD4Ccuhj7ZkhnsQ2xWVhZDVV05eD1cz5wrStuAmeu4N-qOU',
-        paypalMode: 'sandbox',
-        usdEnabled: true,
+        usdEnabled: false,
         product: 'pdfbuddy',
         plans: {
           yearly: {

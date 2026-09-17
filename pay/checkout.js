@@ -285,7 +285,9 @@
                 q.set('provider', 'paypal');
                 if (result.paymentId) q.set('payment_id', result.paymentId);
                 if (result.orderId) q.set('order_id', result.orderId);
-                q.set('paid', '1');
+                q.set('paid', result.paid ? '1' : '0');
+                if (result.staging) q.set('staging', '1');
+                if (result.message) q.set('msg', result.message);
                 window.location.href = 'success.html?' + q.toString();
               });
             },
