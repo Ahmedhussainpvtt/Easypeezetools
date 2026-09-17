@@ -300,20 +300,27 @@ a:hover { text-decoration: underline; }
 }
 .btn:hover::after { transform: translateX(120%); }
 
-/* APK-style yellow edge loop — clipped to the button so it cannot fly outside.
-   Rotating a bordered box with overflow:visible made corners sweep the page. */
-@keyframes btn-busy-orbit { to { transform: rotate(360deg); } }
+/* Yellow highlight travels around the button outline.
+   Animate the gradient ANGLE only — never rotate the box (that flies off the button). */
+@property --busy-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes btn-busy-orbit { to { --busy-angle: 360deg; } }
 .btn.is-busy,
 .btn[aria-busy="true"],
 .pay-btn.is-busy,
 .btn-download.is-busy,
 .nav-cta.is-busy {
   position: relative;
-  overflow: hidden !important; /* hard clip to button + border-radius */
+  overflow: hidden !important;
+  clip-path: inset(0 round 14px);
   pointer-events: none;
   isolation: isolate;
   opacity: 0.96;
   outline: none;
+  transform: none !important;
 }
 .btn.is-busy::after,
 .btn[aria-busy="true"]::after,
@@ -329,20 +336,30 @@ a:hover { text-decoration: underline; }
 .nav-cta.is-busy::before {
   content: "";
   position: absolute;
-  /* Same size as button — overflow:hidden clips rotated corners to the edge */
   inset: 0;
   border-radius: inherit;
   box-sizing: border-box;
-  background: transparent !important;
-  border: 3px solid rgba(255, 193, 7, 0.15);
-  border-top-color: var(--tertiary);
-  border-right-color: #fff8d0;
-  border-bottom-color: transparent;
-  border-left-color: transparent;
-  animation: btn-busy-orbit 0.85s linear infinite;
-  transform-origin: center center;
+  padding: 3px;
   pointer-events: none;
   z-index: 2;
+  transform: none !important;
+  background: conic-gradient(
+    from var(--busy-angle, 0deg),
+    transparent 0deg 250deg,
+    var(--tertiary) 300deg,
+    #fff8d0 328deg,
+    var(--tertiary) 348deg,
+    transparent 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+          mask-composite: exclude;
+  animation: btn-busy-orbit 0.9s linear infinite;
 }
 .btn:disabled {
   cursor: wait;
@@ -357,6 +374,8 @@ a:hover { text-decoration: underline; }
 .pay-btn.is-success {
   position: relative;
   overflow: hidden !important;
+  clip-path: inset(0 round 14px);
+  transform: none !important;
   animation: btn-success-flash 0.65s ease-out;
 }
 .btn.is-success::before,
@@ -366,16 +385,27 @@ a:hover { text-decoration: underline; }
   inset: 0;
   border-radius: inherit;
   box-sizing: border-box;
-  background: transparent !important;
-  border: 3px solid rgba(0, 196, 154, 0.2);
-  border-top-color: var(--secondary);
-  border-right-color: #b8ffe8;
-  border-bottom-color: transparent;
-  border-left-color: transparent;
-  animation: btn-busy-orbit 0.55s linear 1;
-  transform-origin: center center;
+  padding: 3px;
   pointer-events: none;
   z-index: 2;
+  transform: none !important;
+  background: conic-gradient(
+    from var(--busy-angle, 0deg),
+    transparent 0deg 250deg,
+    var(--secondary) 300deg,
+    #b8ffe8 328deg,
+    var(--secondary) 348deg,
+    transparent 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+          mask-composite: exclude;
+  animation: btn-busy-orbit 0.55s linear 1;
 }
 
 .btn--primary {
