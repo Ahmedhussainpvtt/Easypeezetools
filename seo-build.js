@@ -134,6 +134,42 @@ function upsertPropMeta(html, property, content) {
   return html.replace(/<\/head>/i, `  ${tag}\n</head>`);
 }
 
+function gtagSnippet(id) {
+  return `<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=${id}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '${id}');
+</script>
+`;
+}
+
+function ensureGtag(html, id) {
+  if (!id || !/<head[\s>]/i.test(html)) return html;
+  if (html.includes(`gtag/js?id=${id}`)) return html;
+  html = html.replace(
+    /\s*<!-- Google tag \(gtag\.js\) -->[\s\S]*?gtag\('config',\s*'G-[A-Z0-9]+'\);\s*<\/script>\s*/i,
+    '\n'
+  );
+  return html.replace(/<head[^>]*>/i, (open) => `${open}\n${gtagSnippet(id)}`);
+}
+
+function applyGtagToTree(siteDir, gtagId, dryRun) {
+  if (!gtagId) return 0;
+  let n = 0;
+  for (const file of walkHtmlFiles(siteDir, [])) {
+    const html = fs.readFileSync(file, 'utf8');
+    const next = ensureGtag(html, gtagId);
+    if (next === html) continue;
+    if (!dryRun) fs.writeFileSync(file, next, 'utf8');
+    n += 1;
+  }
+  return n;
+}
+
 function upsertLink(html, rel, href, extra = '') {
   const tag = `<link rel="${rel}" href="${escapeAttr(href)}"${extra} />`;
   const re = new RegExp(`<link\\s+[^>]*rel=["']${rel}["'][^>]*>`, 'i');
@@ -214,6 +250,7 @@ function applyPageSeo(html, cfg, pagePath, page) {
     ? 'noindex'
     : page.robots || cfg.defaults.robots;
 
+  html = ensureGtag(html, cfg.site && cfg.site.gtagId);
   html = upsertTitle(html, title);
   html = upsertNamedMeta(html, 'description', description);
   html = upsertNamedMeta(html, 'robots', robots);
@@ -337,7 +374,9 @@ function buildSite(key, opts) {
 
   writeSitemap(cfg, sitemapEntries, path.join(meta.dir, 'sitemap.xml'), opts.dryRun);
   writeRobots(cfg, path.join(meta.dir, 'robots.txt'), opts.dryRun);
+  const gtagPages = applyGtagToTree(meta.dir, cfg.site && cfg.site.gtagId, opts.dryRun);
   console.log(`  pages touched: ${updated}/${files.length}${opts.dryRun ? ' (dry-run)' : ''}`);
+  console.log(`  gtag: ${gtagPages} html file(s)`);
 }
 
 function buildLocal(siteDir, opts) {
@@ -388,8 +427,10 @@ function buildLocal(siteDir, opts) {
 
   writeSitemap(cfg, sitemapEntries, path.join(siteDir, 'sitemap.xml'), opts.dryRun);
   writeRobots(cfg, path.join(siteDir, 'robots.txt'), opts.dryRun);
+  const gtagPages = applyGtagToTree(siteDir, cfg.site && cfg.site.gtagId, opts.dryRun);
   console.log(`  pages touched: ${updated}/${files.length}${opts.dryRun ? ' (dry-run)' : ''}`);
   console.log(`  discovered HTML: ${files.length} | sitemap urls: ${sitemapEntries.length}`);
+  console.log(`  gtag: ${gtagPages} html file(s)`);
 }
 
 function main() {

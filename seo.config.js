@@ -18,6 +18,7 @@ module.exports = {
     favicon: 'https://easypeeze.com/favicon.png',
     twitterCard: 'summary_large_image',
     author: 'Easy Peeze Tools',
+    gtagId: 'G-VNHDP7MYHF',
   },
 
   organization: {
