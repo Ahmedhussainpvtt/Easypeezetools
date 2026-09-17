@@ -1866,6 +1866,57 @@ ol.steps-inline li::before {
   font-size: 0.92rem;
   color: var(--hint);
 }
+.contact-form {
+  display: grid;
+  gap: 4px;
+  margin: 18px 0 8px;
+}
+.contact-label {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink, #102a43);
+}
+.contact-label .req { color: var(--expense, #c62828); }
+.contact-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font: inherit;
+  background: #fff;
+  color: var(--ink, #102a43);
+}
+.contact-input:focus {
+  outline: 2px solid color-mix(in srgb, var(--primary) 35%, transparent);
+  border-color: var(--primary);
+}
+.contact-textarea { resize: vertical; min-height: 120px; }
+.contact-honey {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  overflow: hidden;
+}
+.contact-submit { margin-top: 14px; width: 100%; }
+.contact-status {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+.contact-status--ok {
+  color: #0b5a2a;
+  background: #e8f8ee;
+}
+.contact-status--error {
+  color: #7a1020;
+  background: #ffe8ec;
+}
 
 @media (max-width: 720px) {
   .feature-detail__grid { grid-template-columns: 1fr; }
