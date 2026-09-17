@@ -1,13 +1,6 @@
 User-agent: *
 Allow: /
-
-# Thin / utility pages — keep crawl budget on product + content
 Disallow: /pay/
-Disallow: /pay/success.html
-
-# AI / LLM discovery (AIO / GEO)
-# https://llmstxt.org
-# llms.txt: https://easypeeze.com/llms.txt
-# llms-full.txt: https://easypeeze.com/llms-full.txt
+Disallow: /ksadbwefreggh/
 
 Sitemap: https://easypeeze.com/sitemap.xml
