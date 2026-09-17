@@ -33,11 +33,14 @@
     }
     if (payBtn) {
       payBtn.hidden = currency === 'USD';
+      payBtn.classList.toggle('is-hidden', currency === 'USD');
+      payBtn.setAttribute('aria-hidden', currency === 'USD' ? 'true' : 'false');
       payBtn.textContent =
         currency === 'USD' ? 'Pay with PayPal' : 'Continue to pay';
     }
     if (paypalWrap) {
       paypalWrap.hidden = currency !== 'USD';
+      paypalWrap.classList.toggle('is-hidden', currency !== 'USD');
     }
     if (fineEl) {
       fineEl.innerHTML =
@@ -360,6 +363,11 @@
 
   if (payBtn) {
     payBtn.addEventListener('click', function () {
+      if (currency === 'USD') {
+        setStatus('Use the PayPal buttons below to pay in USD');
+        ensurePaypalButtons();
+        return;
+      }
       var buyer = readBuyer();
       if (!buyer) return;
       if (
@@ -393,6 +401,12 @@
       })
         .then(function (data) {
           if (!data || !data.ok) throw new Error((data && data.error) || 'Could not start checkout');
+          if (data.provider === 'paypal') {
+            throw new Error('Use the PayPal buttons for USD checkout');
+          }
+          if (data.provider !== 'razorpay') {
+            throw new Error('Unexpected payment provider');
+          }
           return openRazorpay(buyer, data);
         })
         .catch(function (e) {
