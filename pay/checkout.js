@@ -147,6 +147,31 @@
     statusEl.className = 'pay-status' + (isError ? ' pay-status-error' : '');
   }
 
+  function paymentFailMessage(err, fallback) {
+    if (!err) return fallback || 'Payment failed. Please try again.';
+    if (typeof err === 'string' && err.trim()) return err.trim();
+    var msg =
+      (err.error && String(err.error)) ||
+      (err.message && String(err.message)) ||
+      (err.details && err.details[0] && (err.details[0].description || err.details[0].issue)) ||
+      '';
+    msg = String(msg || '').trim();
+    if (!msg || /VALIDATION|Fix the form/i.test(msg)) {
+      return fallback || 'Payment failed. Please try again.';
+    }
+    if (/Failed to fetch|NetworkError|Load failed/i.test(msg)) {
+      return 'Could not reach the payment server. Check your connection and try again.';
+    }
+    if (/Checkout closed|dismiss/i.test(msg)) {
+      return 'Looks like you cancelled the payment. Please try again when you’re ready.';
+    }
+    return msg;
+  }
+
+  if (params.get('cancelled') === '1' || params.get('cancel') === '1') {
+    setStatus('Looks like you cancelled the payment. Please try again when you’re ready.', true);
+  }
+
   var NAME_BLOCKLIST = {
     test: 1, asdf: 1, asdfgh: 1, qwerty: 1, qwertyuiop: 1, abc: 1, abcd: 1, abcde: 1,
     xyz: 1, xxx: 1, aaa: 1, bbb: 1, ccc: 1, name: 1, fname: 1, lname: 1, firstname: 1,
@@ -323,8 +348,11 @@
                 setStatus('Continue in PayPal…');
                 return orderData.orderId;
               }).catch(function (e) {
-                var m = (e && e.message) || 'Could not start PayPal checkout';
-                setStatus(m, true);
+                var m = paymentFailMessage(e, 'Could not start PayPal checkout. Please try again.');
+                if (!/VALIDATION/i.test(String((e && e.message) || ''))) setStatus(m, true);
+                else if (statusEl && statusEl.textContent) {
+                  /* validation already set status */
+                } else setStatus(m, true);
                 throw new Error('VALIDATION');
               });
             },
@@ -345,45 +373,46 @@
                 product: cfg.product || 'pdfbuddy',
                 planType: plan.planType,
                 staging: !!cfg.staging
-              }).then(function (result) {
-                if (!result || !result.ok) {
-                  throw new Error((result && result.error) || 'PayPal capture failed');
-                }
-                var q = new URLSearchParams();
-                q.set('email', result.email || buyer.email);
-                q.set('firstName', buyer.firstName || '');
-                q.set('lastName', buyer.lastName || '');
-                q.set('product', cfg.product || 'pdfbuddy');
-                q.set('plan', plan.planType);
-                q.set('phone', buyer.phone || '');
-                q.set('provider', 'paypal');
-                if (result.paymentId) q.set('payment_id', result.paymentId);
-                if (result.orderId) q.set('order_id', result.orderId);
-                q.set('paid', result.paid ? '1' : '0');
-                if (result.staging) q.set('staging', '1');
-                if (result.message) q.set('msg', result.message);
-                window.location.href = 'success.html?' + q.toString();
-              });
+              })
+                .then(function (result) {
+                  if (!result || !result.ok) {
+                    throw new Error(
+                      paymentFailMessage(result, 'PayPal could not complete this payment. Please try again.')
+                    );
+                  }
+                  var q = new URLSearchParams();
+                  q.set('email', result.email || buyer.email);
+                  q.set('firstName', buyer.firstName || '');
+                  q.set('lastName', buyer.lastName || '');
+                  q.set('product', cfg.product || 'pdfbuddy');
+                  q.set('plan', plan.planType);
+                  q.set('phone', buyer.phone || '');
+                  q.set('provider', 'paypal');
+                  if (result.paymentId) q.set('payment_id', result.paymentId);
+                  if (result.orderId) q.set('order_id', result.orderId);
+                  q.set('paid', result.paid ? '1' : '0');
+                  if (result.staging) q.set('staging', '1');
+                  if (result.message) q.set('msg', result.message);
+                  window.location.href = 'success.html?' + q.toString();
+                })
+                .catch(function (e) {
+                  setStatus(
+                    paymentFailMessage(e, 'PayPal payment failed. Please try again.'),
+                    true
+                  );
+                  throw e;
+                });
             },
             onCancel: function () {
-              setStatus('PayPal checkout cancelled');
+              setStatus(
+                'Looks like you cancelled the payment. Please try again when you’re ready.',
+                true
+              );
             },
             onError: function (err) {
               console.error('PayPal onError', err);
-              var msg = String((err && err.message) || err || '');
-              if (/VALIDATION|Fix the form/i.test(msg)) return;
-              if (/Failed to fetch|NetworkError|Load failed/i.test(msg)) {
-                setStatus(
-                  'Could not reach payment API (CORS/network). Staging origin may be blocked — tell Alex to redeploy license API.',
-                  true
-                );
-                return;
-              }
-              var sandbox = String(cfg.paypalMode || 'sandbox').toLowerCase() !== 'live';
               setStatus(
-                sandbox
-                  ? 'PayPal failed — Log In with a Sandbox Personal buyer from developer.paypal.com → Sandbox → Accounts (guest cards often fail).'
-                  : 'PayPal failed — use Log In with your PayPal account (guest card checkout often hangs in India).',
+                paymentFailMessage(err, 'PayPal checkout failed. Please try again.'),
                 true
               );
             }
@@ -429,7 +458,7 @@
         },
         modal: {
           ondismiss: function () {
-            reject(new Error('Checkout closed'));
+            reject(new Error('Looks like you cancelled the payment. Please try again when you’re ready.'));
           }
         }
       };
@@ -442,7 +471,10 @@
       }
       var rzp = new Razorpay(options);
       rzp.on('payment.failed', function (resp) {
-        reject(new Error((resp.error && resp.error.description) || 'Payment failed'));
+        var detail =
+          (resp && resp.error && (resp.error.description || resp.error.reason || resp.error.code)) ||
+          'Payment failed';
+        reject(new Error('Payment failed: ' + detail + '. Please try again.'));
       });
       rzp.open();
     });
@@ -497,7 +529,7 @@
           return openRazorpay(buyer, data);
         })
         .catch(function (e) {
-          setStatus((e && e.message) || 'Checkout failed', true);
+          setStatus(paymentFailMessage(e, 'Checkout failed. Please try again.'), true);
           payBtn.disabled = false;
         });
     });
