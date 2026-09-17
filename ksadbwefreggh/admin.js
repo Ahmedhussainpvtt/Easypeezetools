@@ -5,11 +5,15 @@
   const TOKEN_KEY = "easypeeze_admin_token";
   const EMAIL_KEY = "easypeeze_admin_email";
   const EXPIRES_KEY = "easypeeze_admin_expires";
-  const SESSION_MS = 30 * 60 * 1000;
+  const IDLE_MS = 10 * 60 * 1000;
 
   const $ = (id) => document.getElementById(id);
   let usersCache = [];
   let sessionTimer = null;
+  let memoryToken = "";
+  let memoryEmail = "";
+  let lastActivity = 0;
+  let lastHeartbeat = 0;
 
   const esc = (v) =>
     String(v ?? "").replace(/[&<>"']/g, (c) =>
@@ -31,21 +35,13 @@
   }
 
   function token() {
-    return sessionStorage.getItem(TOKEN_KEY) || "";
-  }
-
-  function sessionExpiresAt() {
-    const raw = Number(sessionStorage.getItem(EXPIRES_KEY) || 0);
-    return Number.isFinite(raw) ? raw : 0;
+    return memoryToken || "";
   }
 
   function isSessionAlive() {
-    const tok = token();
-    if (!tok) return false;
-    const exp = sessionExpiresAt();
-    // Older sessions without expiry metadata are treated as expired.
-    if (!exp) return false;
-    return Date.now() < exp;
+    if (!token()) return false;
+    if (!lastActivity) return false;
+    return Date.now() - lastActivity < IDLE_MS;
   }
 
   function clearSessionTimer() {
@@ -57,12 +53,47 @@
 
   function armSessionTimer() {
     clearSessionTimer();
-    const exp = sessionExpiresAt();
-    if (!exp) return;
-    const wait = Math.max(0, exp - Date.now());
+    if (!token()) return;
+    const wait = Math.max(0, IDLE_MS - (Date.now() - lastActivity));
     sessionTimer = setTimeout(() => {
-      expireSession("Session expired — sign in again");
+      expireSession("Signed out after 10 minutes of inactivity");
     }, wait);
+  }
+
+  function markActivity() {
+    if (!token()) return;
+    lastActivity = Date.now();
+    armSessionTimer();
+    if (Date.now() - lastHeartbeat < 60_000) return;
+    lastHeartbeat = Date.now();
+    const tok = token();
+    fetch(`${API}/admin/me`, {
+      headers: { Accept: "application/json", Authorization: `Bearer ${tok}` }
+    })
+      .then((r) => {
+        if (r.status === 401 && token()) {
+          expireSession("Session expired — sign in again");
+        }
+      })
+      .catch(() => {});
+  }
+
+  function revokeOnServer(tok) {
+    if (!tok) return;
+    try {
+      fetch(`${API}/admin/logout`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${tok}`
+        },
+        body: JSON.stringify({ token: tok }),
+        keepalive: true
+      }).catch(() => {});
+    } catch (_e) {
+      /* ignore */
+    }
   }
 
   function expireSession(message) {
@@ -78,19 +109,29 @@
     }
   }
 
-  function setSession(tok, email, expiresAtMs) {
-    const exp = Number(expiresAtMs) || Date.now() + SESSION_MS;
-    sessionStorage.setItem(TOKEN_KEY, tok);
-    sessionStorage.setItem(EMAIL_KEY, email || "");
-    sessionStorage.setItem(EXPIRES_KEY, String(exp));
+  function setSession(tok, email) {
+    memoryToken = tok || "";
+    memoryEmail = email || "";
+    lastActivity = Date.now();
+    lastHeartbeat = 0;
     armSessionTimer();
   }
 
   function clearSession() {
     clearSessionTimer();
-    sessionStorage.removeItem(TOKEN_KEY);
-    sessionStorage.removeItem(EMAIL_KEY);
-    sessionStorage.removeItem(EXPIRES_KEY);
+    const tok = memoryToken;
+    memoryToken = "";
+    memoryEmail = "";
+    lastActivity = 0;
+    lastHeartbeat = 0;
+    try {
+      sessionStorage.removeItem(TOKEN_KEY);
+      sessionStorage.removeItem(EMAIL_KEY);
+      sessionStorage.removeItem(EXPIRES_KEY);
+    } catch (_e) {
+      /* ignore */
+    }
+    revokeOnServer(tok);
   }
 
   async function api(path, opts = {}) {
@@ -105,6 +146,7 @@
     const tok = token();
     if (tok) headers.Authorization = `Bearer ${tok}`;
     const res = await fetch(`${API}${path}`, { ...opts, headers });
+    markActivity();
     const text = await res.text();
     let data = null;
     try {
@@ -129,9 +171,8 @@
   function showApp() {
     $("login-view").classList.add("hidden");
     $("app-view").classList.remove("hidden");
-    const email = sessionStorage.getItem(EMAIL_KEY) || "";
-    $("admin-email-label").textContent = email;
-    $("admin-initials").textContent = initials("", email);
+    $("admin-email-label").textContent = memoryEmail || "";
+    $("admin-initials").textContent = initials("", memoryEmail);
   }
 
   function initials(name, email) {
@@ -455,11 +496,7 @@
         if (!r.ok || j.ok === false) throw new Error(j.error || `HTTP ${r.status}`);
         return j;
       });
-      setSession(
-        data.token,
-        data.email,
-        data.expiresAt || Date.now() + SESSION_MS
-      );
+      setSession(data.token, data.email);
       showApp();
       await loadUsers();
     } catch (ex) {
@@ -471,8 +508,12 @@
   });
 
   $("logout-btn").addEventListener("click", () => {
-    clearSession();
-    showLogin();
+    expireSession("");
+    const err = $("login-error");
+    if (err) {
+      err.textContent = "";
+      err.hidden = true;
+    }
   });
 
   document.querySelectorAll(".tab").forEach((btn) => {
@@ -616,20 +657,29 @@
   });
 
   async function boot() {
-    if (!isSessionAlive()) {
-      clearSession();
-      showLogin();
-      return;
-    }
-    armSessionTimer();
-    showApp();
     try {
-      await api("/admin/me");
-      await loadUsers();
-    } catch {
-      expireSession("Session expired — sign in again");
+      sessionStorage.removeItem(TOKEN_KEY);
+      sessionStorage.removeItem(EMAIL_KEY);
+      sessionStorage.removeItem(EXPIRES_KEY);
+    } catch (_e) {
+      /* ignore */
     }
+    showLogin();
   }
+
+  ["pointerdown", "keydown", "click", "scroll", "touchstart"].forEach((ev) => {
+    document.addEventListener(ev, () => markActivity(), { passive: true });
+  });
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState !== "visible") return;
+    if (!token()) return;
+    if (Date.now() - lastActivity > IDLE_MS) {
+      expireSession("Signed out after 10 minutes of inactivity");
+    }
+  });
+  window.addEventListener("pagehide", () => {
+    if (memoryToken) revokeOnServer(memoryToken);
+  });
 
   boot();
 })();
