@@ -85,9 +85,8 @@
       <p class="pay-price" id="pay-price">₹299 <span class="pay-once" id="pay-once">/ year</span></p>
       <div class="pay-currency" role="group" aria-label="Currency">
         <button type="button" class="pay-currency__btn is-active" data-currency="INR" id="currencyInr">Pay in ₹ INR</button>
-        <button type="button" class="pay-currency__btn pay-currency__btn--soon" data-currency="USD" id="currencyUsd"
-                disabled aria-disabled="true">
-          Pay in $ USD <span class="pay-currency__soon">Coming soon</span>
+        <button type="button" class="pay-currency__btn" data-currency="USD" id="currencyUsd">
+          Pay in $ USD
         </button>
       </div>
       <label class="pay-label" for="firstName">First name <span class="req" aria-hidden="true">*</span></label>
@@ -100,13 +99,18 @@
       <input class="pay-input" id="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="+91 98765 43210" required />
       <p class="pay-email-check">Free tier is still available: download and use 3 actions/day with no subscription.</p>
       <button class="pay-btn btn" type="button" id="payBtn">Continue to pay</button>
+      <div id="paypal-buttons" class="paypal-buttons" hidden></div>
       <p class="pay-status" id="status" aria-live="polite"></p>
-      <p class="pay-fine"><a href="../download/" rel="noopener">Download free instead</a> · <a href="../pricing/">Back to pricing</a></p>
+      <p class="pay-fine" id="pay-fine"><a href="../download/" rel="noopener">Download free instead</a> · <a href="../pricing/">Back to pricing</a></p>
     </section>
     <script>
       window.EASYPEEZE_PAY = {
         trackerUrl: 'https://kharchlog-license-u4rcttr3nq-el.a.run.app',
         razorpayKeyId: 'rzp_live_TVqX95CxZTFsuk',
+        paypalClientId:
+          'BAArjySr8FEOyBr__W27sM7Hg_yxQXVdvmArD4Ccuhj7ZkhnsQ2xWVhZDVV05eD1cz5wrStuAmeu4N-qOU',
+        paypalMode: 'sandbox',
+        usdEnabled: true,
         product: 'pdfbuddy',
         plans: {
           yearly: {

@@ -86,6 +86,10 @@
     (function () {
       var q = new URLSearchParams(location.search);
       var api = 'https://kharchlog-license-u4rcttr3nq-el.a.run.app';
+      var provider = (q.get('provider') || '').toLowerCase();
+      var alreadyPaid = q.get('paid') === '1' || q.get('paid') === 'true';
+      // PayPal already captured + granted on the API
+      if (provider === 'paypal' && alreadyPaid) return;
       var body = {
         email: q.get('email') || '',
         phone: q.get('phone') || '',

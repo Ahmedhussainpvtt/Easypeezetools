@@ -2,7 +2,7 @@
 
 > Easy Peeze Tools makes simple privacy-first apps: Pdf Buddy (100% local Windows PDF editor, 3 free actions/day, then INR 299/year or INR 999 lifetime) and Kharch Log (Android expense tracker on Google Sheets, INR 149 lifetime). Site: easypeeze.com - expenses product also at kharchlog.com.
 
-Last updated: 2026-09-16
+Last updated: 2026-09-17
 Canonical site: https://easypeeze.com/
 Sitemap: https://easypeeze.com/sitemap.xml
 Full corpus: https://easypeeze.com/llms-full.txt
