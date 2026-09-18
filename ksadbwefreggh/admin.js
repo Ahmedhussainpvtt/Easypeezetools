@@ -524,6 +524,7 @@
       $("tab-customers").classList.toggle("hidden", tab !== "customers");
       $("tab-messages").classList.toggle("hidden", tab !== "messages");
       $("tab-blog").classList.toggle("hidden", tab !== "blog");
+      $("tab-notice").classList.toggle("hidden", tab !== "notice");
       if (tab === "messages") loadMessages();
     });
   });
@@ -606,6 +607,38 @@
     el.className = tone === "error" ? "form-error" : "form-msg";
     el.hidden = false;
   }
+
+  function syncNoticePreview() {
+    const h1 = ($("notice-h1").value || "").trim() || "We Are Live on playstore";
+    const h2 = ($("notice-h2").value || "").trim() || "Download it from playstore now";
+    $("notice-preview-h1").textContent = h1;
+    $("notice-preview-h2").textContent = h2;
+  }
+  $("notice-h1").addEventListener("input", syncNoticePreview);
+  $("notice-h2").addEventListener("input", syncNoticePreview);
+
+  $("notice-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const h1 = $("notice-h1").value.trim();
+    const h2 = $("notice-h2").value.trim();
+    if (!confirm("Send this notice to all installs?")) return;
+    const msg = $("notice-msg");
+    const btn = $("notice-form").querySelector('button[type="submit"]');
+    msg.hidden = true;
+    btn.disabled = true;
+    try {
+      await api("/admin/fanout", {
+        method: "POST",
+        body: JSON.stringify({ h1, h2 })
+      });
+      setFormMsg(msg, "Sent", "ok");
+      toast("Sent", "ok");
+    } catch (ex) {
+      setFormMsg(msg, ex.message, "error");
+    } finally {
+      btn.disabled = false;
+    }
+  });
 
   $("blog-form").addEventListener("submit", async (e) => {
     e.preventDefault();

@@ -101,6 +101,7 @@
         <button type="button" class="tab is-active" data-tab="customers" role="tab">Customers</button>
         <button type="button" class="tab" data-tab="messages" role="tab">Messages</button>
         <button type="button" class="tab" data-tab="blog" role="tab">Blog</button>
+        <button type="button" class="tab" data-tab="notice" role="tab">Notice</button>
       </nav>
 
       <section id="tab-customers" class="tab-panel">
@@ -252,6 +253,42 @@
               <svg><use href="#i-trash" /></svg>Delete post
             </button>
           </form>
+        </div>
+      </section>
+
+      <section id="tab-notice" class="tab-panel hidden">
+        <div class="split">
+          <form class="form-card" id="notice-form">
+            <div class="card-head">
+              <h2>Notice</h2>
+              <p class="muted">H1 is the title. H2 is the second line. Send only after you are signed in.</p>
+            </div>
+            <label>
+              <span>H1</span>
+              <input id="notice-h1" required maxlength="80" placeholder="We Are Live on playstore" />
+            </label>
+            <label>
+              <span>H2</span>
+              <input id="notice-h2" required maxlength="220" placeholder="Download it from playstore now" />
+            </label>
+            <p id="notice-msg" class="form-msg" hidden></p>
+            <button type="submit" class="btn btn-primary">Send</button>
+          </form>
+          <div class="form-card">
+            <div class="card-head">
+              <h2>Preview</h2>
+            </div>
+            <div class="notice-shade" aria-hidden="true">
+              <div class="notice-chip">
+                <span class="notice-chip__mark">K</span>
+                <div class="notice-chip__copy">
+                  <p class="notice-chip__h1" id="notice-preview-h1">We Are Live on playstore</p>
+                  <p class="notice-chip__h2" id="notice-preview-h2">Download it from playstore now</p>
+                </div>
+                <span class="notice-chip__time">now</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </main>
