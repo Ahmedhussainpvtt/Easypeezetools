@@ -23,6 +23,38 @@
 
   const icon = (id) => `<svg aria-hidden="true"><use href="#${id}" /></svg>`;
 
+  function safePhotoUrl(raw) {
+    const s = String(raw || "").trim();
+    if (!s.startsWith("https://")) return "";
+    try {
+      const host = new URL(s).hostname.toLowerCase();
+      if (!host.endsWith("googleusercontent.com")) return "";
+      return s;
+    } catch (_e) {
+      return "";
+    }
+  }
+
+  function setAvatar(el, url, initialsText) {
+    if (!el) return;
+    const photo = safePhotoUrl(url);
+    const ini = initialsText || " - ";
+    if (!photo) {
+      el.classList.remove("avatar--photo");
+      el.textContent = ini;
+      return;
+    }
+    el.classList.add("avatar--photo");
+    el.innerHTML = `<img src="${esc(photo)}" alt="" referrerpolicy="no-referrer" />`;
+  }
+
+  function avatarHtml(u) {
+    const ini = esc(initials(u.name, u.email));
+    const photo = safePhotoUrl(u.photoUrl);
+    if (!photo) return `<span class="avatar">${ini}</span>`;
+    return `<span class="avatar avatar--photo"><img src="${esc(photo)}" alt="" referrerpolicy="no-referrer" /></span>`;
+  }
+
   function toast(message, tone = "info") {
     const stack = $("toast-stack");
     if (!stack) return;
@@ -261,7 +293,7 @@
       tr.innerHTML = `
         <td data-label="Name">
           <div class="name-cell">
-            <span class="avatar">${esc(initials(u.name, u.email))}</span>
+            ${avatarHtml(u)}
             <a class="name-link" href="#" data-open="${mail}">${esc(u.name || " - ")}</a>
           </div>
         </td>
@@ -402,7 +434,7 @@
   function fillCustomerView(user) {
     const name = user.name || user.email || "Customer";
     $("customer-view-title").textContent = name;
-    $("cv-avatar").textContent = initials(user.name, user.email);
+    setAvatar($("cv-avatar"), user.photoUrl, initials(user.name, user.email));
     $("cv-name").textContent = name;
     const key = user.state || "none";
     const badge = STATE_BADGE[key] || STATE_BADGE.none;

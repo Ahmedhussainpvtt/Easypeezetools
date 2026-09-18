@@ -555,6 +555,18 @@ label.search-field > input[type="search"]::-webkit-search-cancel-button {
   font-size: 0.74rem;
   flex: none;
 }
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+.avatar--photo {
+  padding: 0;
+  overflow: hidden;
+  background: var(--line);
+}
 .name-link {
   color: var(--text);
   font-weight: 650;
