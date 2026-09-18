@@ -124,9 +124,7 @@
           <span class="customer-view__sep" aria-hidden="true">/</span>
           <strong id="customer-view-title">Customer</strong>
         </div>
-        <button type="button" class="btn btn-primary" id="cv-edit">
-          <svg><use href="#i-edit" /></svg>Grant / update access
-        </button>
+        <button type="button" class="btn btn-primary" id="cv-update">Update</button>
       </div>
       <div class="customer-view__grid">
         <aside class="customer-side">
@@ -138,15 +136,15 @@
           <div class="customer-side__block">
             <p class="customer-side__h">Basic info</p>
             <dl class="customer-dl">
-              <div><dt>First name</dt><dd id="cv-first"> - </dd></div>
-              <div><dt>Last name</dt><dd id="cv-last"> - </dd></div>
-              <div><dt>Email</dt><dd id="cv-email" class="cell-mono"> - </dd></div>
-              <div><dt>Phone</dt><dd id="cv-phone" class="cell-mono"> - </dd></div>
+              <div><dt>First name</dt><dd><input id="cv-first" type="text" maxlength="80" autocomplete="off" /></dd></div>
+              <div><dt>Last name</dt><dd><input id="cv-last" type="text" maxlength="80" autocomplete="off" /></dd></div>
+              <div><dt>Email</dt><dd><input id="cv-email" class="cell-mono" type="email" maxlength="120" autocomplete="off" /></dd></div>
+              <div><dt>Phone</dt><dd><input id="cv-phone" class="cell-mono" type="tel" maxlength="20" autocomplete="off" /></dd></div>
               <div><dt>Platform</dt><dd id="cv-platform"> - </dd></div>
               <div><dt>App version</dt><dd id="cv-version"> - </dd></div>
               <div><dt>First seen</dt><dd id="cv-first-seen"> - </dd></div>
               <div><dt>Last seen</dt><dd id="cv-last-seen"> - </dd></div>
-              <div><dt>Notes</dt><dd id="cv-notes"> - </dd></div>
+              <div><dt>Notes</dt><dd><textarea id="cv-notes" rows="3" maxlength="400"></textarea></dd></div>
             </dl>
           </div>
         </aside>
@@ -184,7 +182,36 @@
             </div>
           </div>
           <div id="cv-panel-sub" class="customer-panel hidden">
-            <div class="sub-grid" id="cv-sub-grid"></div>
+            <div class="sub-grid">
+              <article class="sub-card" data-product="kharchlog">
+                <h3>Kharch Log</h3>
+                <label>
+                  <span>Plan</span>
+                  <select id="cv-kh-plan">
+                    <option value="none">None / free</option>
+                    <option value="lifetime">Lifetime</option>
+                    <option value="yearly">Yearly</option>
+                  </select>
+                </label>
+                <p>Status: <span id="cv-kh-status"> - </span></p>
+                <p>Started: <span id="cv-kh-start"> - </span></p>
+                <p>Expires: <span id="cv-kh-exp"> - </span></p>
+              </article>
+              <article class="sub-card" data-product="pdfbuddy">
+                <h3>Pdf Buddy</h3>
+                <label>
+                  <span>Plan</span>
+                  <select id="cv-pdf-plan">
+                    <option value="none">None / free</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="lifetime">Lifetime</option>
+                  </select>
+                </label>
+                <p>Status: <span id="cv-pdf-status"> - </span></p>
+                <p>Started: <span id="cv-pdf-start"> - </span></p>
+                <p>Expires: <span id="cv-pdf-exp"> - </span></p>
+              </article>
+            </div>
           </div>
         </section>
       </div>

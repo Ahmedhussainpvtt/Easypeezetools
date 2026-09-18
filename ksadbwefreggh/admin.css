@@ -1057,6 +1057,22 @@ label.search-field > input[type="search"]::-webkit-search-cancel-button {
   font-weight: 650;
   word-break: break-word;
 }
+.customer-dl input,
+.customer-dl textarea {
+  width: 100%;
+  font-weight: 600;
+  padding: 8px 10px;
+}
+.sub-card label {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0 12px;
+}
+.sub-card label span {
+  font-size: 0.72rem;
+  font-weight: 650;
+  color: var(--muted);
+}
 .customer-main {
   padding: 0;
   display: flex;

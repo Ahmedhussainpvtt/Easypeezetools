@@ -295,7 +295,10 @@
       return String(iso).replace("T", " ").slice(0, 19);
     }
     const pad = (n) => String(n).padStart(2, "0");
-    return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}, ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+    let h = d.getHours();
+    const ampm = h >= 12 ? "PM" : "AM";
+    h = h % 12 || 12;
+    return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}, ${h}:${pad(d.getMinutes())}:${pad(d.getSeconds())} ${ampm}`;
   }
 
   function setCustomerMode(on) {
@@ -327,19 +330,14 @@
     });
   }
 
-  function subCard(title, slice) {
-    const plan = slice && slice.plan && slice.plan !== "none" ? slice.plan : "None";
-    const status = slice && slice.status && slice.status !== "none" ? slice.status : "free";
-    const amount = slice && slice.amountInr ? `INR ${slice.amountInr}` : " - ";
-    return `<article class="sub-card">
-      <h3>${esc(title)}</h3>
-      <p class="sub-plan">${esc(plan)} · ${esc(status)}</p>
-      <p>Amount: ${esc(amount)}</p>
-      <p>Started: ${esc(formatWhen(slice && slice.startsAt))}</p>
-      <p>Expires: ${esc(slice && slice.expiresAt ? formatWhen(slice.expiresAt) : "Never")}</p>
-      <p>Payment: ${esc(dash(slice && (slice.paymentId || slice.paymentProvider)))}</p>
-      <p>Granted by: ${esc(dash(slice && slice.grantedBy))}</p>
-    </article>`;
+  function fillSubFields(prefix, slice) {
+    const plan = slice && slice.plan && slice.plan !== "none" ? slice.plan : "none";
+    const sel = $(`${prefix}-plan`);
+    if (sel.querySelector(`option[value="${plan}"]`)) sel.value = plan;
+    else sel.value = "none";
+    $(`${prefix}-status`).textContent = dash(slice && slice.status && slice.status !== "none" ? slice.status : "free");
+    $(`${prefix}-start`).textContent = formatWhen(slice && slice.startsAt);
+    $(`${prefix}-exp`).textContent = slice && slice.expiresAt ? formatWhen(slice.expiresAt) : "Never";
   }
 
   function fillCustomerView(user) {
@@ -351,22 +349,18 @@
     const badge = STATE_BADGE[key] || STATE_BADGE.none;
     $("cv-state").className = `badge ${badge.cls}`;
     $("cv-state").textContent = badge.text;
-    $("cv-first").textContent = dash(user.firstName);
-    $("cv-last").textContent = dash(user.lastName);
-    $("cv-email").textContent = dash(user.email);
-    $("cv-phone").textContent = dash(user.phone);
+    $("cv-first").value = user.firstName || "";
+    $("cv-last").value = user.lastName || "";
+    $("cv-email").value = user.email || "";
+    $("cv-phone").value = user.phone || "";
     $("cv-platform").textContent = dash(user.platform);
     $("cv-version").textContent = dash(user.appVersion);
     $("cv-first-seen").textContent = formatWhen(user.firstSeen);
     $("cv-last-seen").textContent = formatWhen(user.lastSeen);
-    $("cv-notes").textContent = dash(user.notes);
+    $("cv-notes").value = user.notes || "";
     renderLoginHistory(user.loginHistory);
-    $("cv-sub-grid").innerHTML =
-      subCard("Kharch Log", user.kharchlog) + subCard("Pdf Buddy", user.pdfbuddy);
-    $("cv-edit").onclick = () => {
-      const cached = usersCache.find((u) => u.email === user.email) || user;
-      openUserModal(cached);
-    };
+    fillSubFields("cv-kh", user.kharchlog);
+    fillSubFields("cv-pdf", user.pdfbuddy);
   }
 
   async function openCustomer(email) {
@@ -615,6 +609,44 @@
   });
 
   $("customer-back").addEventListener("click", () => closeCustomer());
+  $("cv-update").addEventListener("click", async () => {
+    if (!currentCustomerEmail) return;
+    const btn = $("cv-update");
+    if (btn.classList.contains("is-busy")) return;
+    const nextEmail = ($("cv-email").value || "").trim();
+    if (!nextEmail || nextEmail.indexOf("@") < 1) {
+      toast("Enter a valid email", "error");
+      return;
+    }
+    btn.disabled = true;
+    btn.classList.add("is-busy");
+    btn.setAttribute("aria-busy", "true");
+    try {
+      const data = await api("/admin/update-user", {
+        method: "POST",
+        body: JSON.stringify({
+          email: currentCustomerEmail,
+          nextEmail,
+          firstName: $("cv-first").value.trim(),
+          lastName: $("cv-last").value.trim(),
+          phone: $("cv-phone").value.trim(),
+          notes: $("cv-notes").value.trim(),
+          kharchlog: { plan: $("cv-kh-plan").value },
+          pdfbuddy: { plan: $("cv-pdf-plan").value }
+        })
+      });
+      const email = data.email || nextEmail;
+      await loadUsers();
+      await openCustomer(email);
+      toast("Updated", "ok");
+    } catch (ex) {
+      toast(ex.message || "Update failed", "error");
+    } finally {
+      btn.disabled = false;
+      btn.classList.remove("is-busy");
+      btn.removeAttribute("aria-busy");
+    }
+  });
   document.querySelectorAll(".customer-subtab").forEach((btn) => {
     btn.addEventListener("click", () => {
       document.querySelectorAll(".customer-subtab").forEach((b) => b.classList.remove("is-active"));
@@ -665,8 +697,7 @@
     }
     if (edit) {
       e.preventDefault();
-      const email = edit.getAttribute("data-edit");
-      openUserModal(usersCache.find((u) => u.email === email) || { email });
+      openCustomer(edit.getAttribute("data-edit"));
       return;
     }
     if (open) {
