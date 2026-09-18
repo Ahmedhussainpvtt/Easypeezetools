@@ -34,7 +34,8 @@ html, body {
   margin: 0;
   min-height: 100%;
 }
-body:has(.app-shell.is-customer) { overflow: hidden; }
+body:has(.app-shell.is-customer),
+body:has(.app-shell.is-list) { overflow: hidden; }
 
 body {
   background: var(--bg);
@@ -377,6 +378,16 @@ label.search-field > input[type="search"]::-webkit-search-cancel-button {
   margin: 0 auto;
   padding-top: 22px;
 }
+
+.list-chrome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.list-chrome .tabs { margin-bottom: 0; }
 
 /* ---------- Tabs ---------- */
 
@@ -949,13 +960,75 @@ label.search-field > input[type="search"]::-webkit-search-cancel-button {
 
 /* ---------- Customer detail ---------- */
 
+.app-shell.is-list,
 .app-shell.is-customer {
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   padding-bottom: 0;
   display: flex;
   flex-direction: column;
 }
+.app-shell.is-list .app-top,
+.app-shell.is-customer .app-top { flex: none; }
+.app-shell.is-list .app-top__inner { padding: 8px 0; }
+.app-shell.is-list .app-main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-top: 8px;
+  width: min(1280px, calc(100% - 24px));
+}
+.app-shell.is-list .list-chrome {
+  flex: none;
+  margin-bottom: 8px;
+  gap: 8px;
+}
+.app-shell.is-list .tabs { padding: 3px; }
+.app-shell.is-list .tab { padding: 6px 14px; font-size: 0.82rem; }
+.app-shell.is-list .table-card__tools .btn {
+  height: 32px;
+  font-size: 0.8rem;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.app-shell.is-list .table-card__tools .search-field { width: 220px; }
+.app-shell.is-list #tab-customers {
+  flex: 1;
+  min-height: 0;
+  gap: 8px;
+  grid-template-rows: auto 1fr;
+}
+.app-shell.is-list .kpi-row { gap: 6px; }
+.app-shell.is-list .kpi {
+  padding: 6px 8px;
+  border-radius: 10px;
+}
+.app-shell.is-list .kpi__label { font-size: 0.62rem; letter-spacing: 0.04em; }
+.app-shell.is-list .kpi__value { margin-top: 0; font-size: 1.05rem; }
+.app-shell.is-list .table-card {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.app-shell.is-list .table-card__head {
+  padding: 6px 12px;
+  flex: none;
+}
+.app-shell.is-list .table-card__head h2 { font-size: 0.9rem; }
+.app-shell.is-list .table-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+.app-shell.is-list .data-table th,
+.app-shell.is-list .data-table td {
+  padding: 8px 12px;
+}
+.app-shell.is-list .empty { flex: none; }
 .app-shell.is-customer .app-top { flex: none; }
 .customer-view {
   padding: 8px 22px 16px;
@@ -1142,6 +1215,16 @@ label.search-field > input[type="search"]::-webkit-search-cancel-button {
 }
 .sub-card h3 { font-size: 0.95rem; margin-bottom: 8px; }
 .sub-card p { margin: 4px 0; font-size: 0.86rem; color: var(--text-soft); }
+.sub-card .sub-meta { font-size: 0.78rem; }
+.sub-card input,
+.sub-card select {
+  width: 100%;
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+.sub-card label { margin: 6px 0; }
 .sub-card .sub-plan {
   font-size: 1.15rem;
   font-weight: 800;
@@ -1150,6 +1233,10 @@ label.search-field > input[type="search"]::-webkit-search-cancel-button {
 @media (max-width: 900px) {
   .customer-view__grid { grid-template-columns: 1fr; }
   .sub-grid { grid-template-columns: 1fr; }
-  .app-shell.is-customer { height: auto; overflow: auto; }
+  .app-shell.is-customer,
+  .app-shell.is-list { height: auto; overflow: auto; }
   .app-shell.is-customer .customer-view { overflow: visible; }
+  .app-shell.is-list .app-main,
+  .app-shell.is-list #tab-customers,
+  .app-shell.is-list .table-card { overflow: visible; height: auto; }
 }

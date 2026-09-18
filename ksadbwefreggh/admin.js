@@ -179,6 +179,7 @@
     $("app-view").classList.remove("hidden");
     $("admin-email-label").textContent = memoryEmail || "";
     $("admin-initials").textContent = initials("", memoryEmail);
+    syncShellLayout();
   }
 
   function initials(name, email) {
@@ -301,10 +302,19 @@
     return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}, ${h}:${pad(d.getMinutes())}:${pad(d.getSeconds())} ${ampm}`;
   }
 
+  function syncShellLayout() {
+    const customer = !$("customer-view").classList.contains("hidden");
+    const customersTab = !$("tab-customers").classList.contains("hidden");
+    $("app-view").classList.toggle("is-customer", customer);
+    $("app-view").classList.toggle("is-list", !customer && customersTab);
+    const tools = $("customers-tools");
+    if (tools) tools.classList.toggle("hidden", customer || !customersTab);
+  }
+
   function setCustomerMode(on) {
     $("customer-view").classList.toggle("hidden", !on);
     $("app-main").classList.toggle("hidden", on);
-    $("app-view").classList.toggle("is-customer", on);
+    syncShellLayout();
   }
 
   function closeCustomer() {
@@ -330,14 +340,65 @@
     });
   }
 
+  function isoDate(v) {
+    if (!v) return "";
+    const d = new Date(v);
+    if (Number.isNaN(d.getTime())) return "";
+    const p = (n) => String(n).padStart(2, "0");
+    return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+  }
+
+  function syncSubExpiry(prefix) {
+    const plan = $(`${prefix}-plan`).value;
+    const none = plan === "none";
+    const life = plan === "lifetime";
+    const exp = $(`${prefix}-exp`);
+    exp.disabled = none || life;
+    if (life || none) exp.value = "";
+    ["start", "amount", "payid", "order", "provider"].forEach((k) => {
+      const el = $(`${prefix}-${k}`);
+      if (el) el.disabled = none;
+    });
+  }
+
   function fillSubFields(prefix, slice) {
     const plan = slice && slice.plan && slice.plan !== "none" ? slice.plan : "none";
     const sel = $(`${prefix}-plan`);
+    if (plan === "yearly" && !sel.querySelector('option[value="yearly"]')) {
+      const o = document.createElement("option");
+      o.value = "yearly";
+      o.textContent = "Yearly (legacy)";
+      sel.appendChild(o);
+    }
     if (sel.querySelector(`option[value="${plan}"]`)) sel.value = plan;
     else sel.value = "none";
     $(`${prefix}-status`).textContent = dash(slice && slice.status && slice.status !== "none" ? slice.status : "free");
-    $(`${prefix}-start`).textContent = formatWhen(slice && slice.startsAt);
-    $(`${prefix}-exp`).textContent = slice && slice.expiresAt ? formatWhen(slice.expiresAt) : "Never";
+    $(`${prefix}-granted`).textContent = dash(slice && slice.grantedBy);
+    $(`${prefix}-start`).value = isoDate(slice && slice.startsAt);
+    $(`${prefix}-exp`).value = isoDate(slice && slice.expiresAt);
+    $(`${prefix}-amount`).value = slice && slice.amountInr ? String(slice.amountInr) : "";
+    $(`${prefix}-payid`).value = (slice && slice.paymentId) || "";
+    $(`${prefix}-order`).value = (slice && slice.orderId) || "";
+    const provider = (slice && slice.paymentProvider) || "manual";
+    const prov = $(`${prefix}-provider`);
+    if (prov.querySelector(`option[value="${provider}"]`)) prov.value = provider;
+    else prov.value = "manual";
+    syncSubExpiry(prefix);
+  }
+
+  function productPayload(prefix) {
+    const plan = $(`${prefix}-plan`).value;
+    if (plan === "none") return { plan: "none" };
+    const amountRaw = $(`${prefix}-amount`).value.trim();
+    return {
+      plan,
+      startsAt: $(`${prefix}-start`).value || undefined,
+      expiresAt: plan === "yearly" ? $(`${prefix}-exp`).value || undefined : undefined,
+      amountInr: amountRaw ? Number(amountRaw) : undefined,
+      paymentId: $(`${prefix}-payid`).value.trim(),
+      orderId: $(`${prefix}-order`).value.trim(),
+      paymentProvider: $(`${prefix}-provider`).value
+    };
   }
 
   function fillCustomerView(user) {
@@ -629,8 +690,8 @@
           lastName: $("cv-last").value.trim(),
           phone: $("cv-phone").value.trim(),
           notes: $("cv-notes").value.trim(),
-          kharchlog: { plan: $("cv-kh-plan").value },
-          pdfbuddy: { plan: $("cv-pdf-plan").value }
+          kharchlog: productPayload("cv-kh"),
+          pdfbuddy: productPayload("cv-pdf")
         })
       });
       const email = data.email || nextEmail;
@@ -663,8 +724,11 @@
       $("tab-customers").classList.toggle("hidden", tab !== "customers");
       $("tab-blog").classList.toggle("hidden", tab !== "blog");
       $("tab-notice").classList.toggle("hidden", tab !== "notice");
+      syncShellLayout();
     });
   });
+  $("cv-kh-plan").addEventListener("change", () => syncSubExpiry("cv-kh"));
+  $("cv-pdf-plan").addEventListener("change", () => syncSubExpiry("cv-pdf"));
 
   $("btn-refresh").addEventListener("click", () =>
     loadUsers()

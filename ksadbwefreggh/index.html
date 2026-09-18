@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="admin.css" />
+  <link rel="stylesheet" href="admin.css?v=20260918b" />
   <link rel="icon" href="/favicon.png" type="image/png" />
 </head>
 <body>
@@ -188,12 +188,39 @@
                   <select id="cv-kh-plan">
                     <option value="none">None / free</option>
                     <option value="lifetime">Lifetime</option>
-                    <option value="yearly">Yearly</option>
                   </select>
                 </label>
                 <p>Status: <span id="cv-kh-status"> - </span></p>
-                <p>Started: <span id="cv-kh-start"> - </span></p>
-                <p>Expires: <span id="cv-kh-exp"> - </span></p>
+                <p class="sub-meta">Granted by: <span id="cv-kh-granted"> - </span></p>
+                <label>
+                  <span>Started</span>
+                  <input type="date" id="cv-kh-start" />
+                </label>
+                <label>
+                  <span>Expires</span>
+                  <input type="date" id="cv-kh-exp" disabled />
+                </label>
+                <label>
+                  <span>Amount (INR)</span>
+                  <input type="number" id="cv-kh-amount" min="0" step="1" />
+                </label>
+                <label>
+                  <span>Payment id</span>
+                  <input type="text" id="cv-kh-payid" autocomplete="off" />
+                </label>
+                <label>
+                  <span>Order id</span>
+                  <input type="text" id="cv-kh-order" autocomplete="off" />
+                </label>
+                <label>
+                  <span>Payment provider</span>
+                  <select id="cv-kh-provider">
+                    <option value="manual">manual</option>
+                    <option value="cashfree">cashfree</option>
+                    <option value="razorpay">razorpay</option>
+                    <option value="paypal">paypal</option>
+                  </select>
+                </label>
               </article>
               <article class="sub-card" data-product="pdfbuddy">
                 <h3>Pdf Buddy</h3>
@@ -206,8 +233,36 @@
                   </select>
                 </label>
                 <p>Status: <span id="cv-pdf-status"> - </span></p>
-                <p>Started: <span id="cv-pdf-start"> - </span></p>
-                <p>Expires: <span id="cv-pdf-exp"> - </span></p>
+                <p class="sub-meta">Granted by: <span id="cv-pdf-granted"> - </span></p>
+                <label>
+                  <span>Started</span>
+                  <input type="date" id="cv-pdf-start" />
+                </label>
+                <label>
+                  <span>Expires (set a new date to extend yearly)</span>
+                  <input type="date" id="cv-pdf-exp" />
+                </label>
+                <label>
+                  <span>Amount (INR)</span>
+                  <input type="number" id="cv-pdf-amount" min="0" step="1" />
+                </label>
+                <label>
+                  <span>Payment id</span>
+                  <input type="text" id="cv-pdf-payid" autocomplete="off" />
+                </label>
+                <label>
+                  <span>Order id</span>
+                  <input type="text" id="cv-pdf-order" autocomplete="off" />
+                </label>
+                <label>
+                  <span>Payment provider</span>
+                  <select id="cv-pdf-provider">
+                    <option value="manual">manual</option>
+                    <option value="cashfree">cashfree</option>
+                    <option value="razorpay">razorpay</option>
+                    <option value="paypal">paypal</option>
+                  </select>
+                </label>
               </article>
             </div>
           </div>
@@ -216,11 +271,26 @@
     </div>
 
     <main class="app-main" id="app-main">
-      <nav class="tabs" role="tablist">
-        <button type="button" class="tab is-active" data-tab="customers" role="tab">Customers</button>
-        <button type="button" class="tab" data-tab="blog" role="tab">Blog</button>
-        <button type="button" class="tab" data-tab="notice" role="tab">Notice</button>
-      </nav>
+      <div class="list-chrome">
+        <nav class="tabs" role="tablist">
+          <button type="button" class="tab is-active" data-tab="customers" role="tab">Customers</button>
+          <button type="button" class="tab" data-tab="blog" role="tab">Blog</button>
+          <button type="button" class="tab" data-tab="notice" role="tab">Notice</button>
+        </nav>
+        <div class="table-card__tools" id="customers-tools">
+          <label class="search-field">
+            <svg aria-hidden="true"><use href="#i-search" /></svg>
+            <span class="sr-only">Search customers</span>
+            <input type="search" id="search-users" placeholder="Search name, email, plan..." autocomplete="off" />
+          </label>
+          <button type="button" class="btn btn-outline" id="btn-refresh">
+            <svg><use href="#i-refresh" /></svg>Refresh
+          </button>
+          <button type="button" class="btn btn-primary" id="btn-new-user">
+            <svg><use href="#i-plus" /></svg>New customer
+          </button>
+        </div>
+      </div>
 
       <section id="tab-customers" class="tab-panel">
         <div class="kpi-row" id="kpi-row">
@@ -255,19 +325,6 @@
             <div class="table-card__title">
               <h2>Customers</h2>
               <span class="count-pill" id="table-count">0</span>
-            </div>
-            <div class="table-card__tools">
-              <label class="search-field">
-                <svg aria-hidden="true"><use href="#i-search" /></svg>
-                <span class="sr-only">Search customers</span>
-                <input type="search" id="search-users" placeholder="Search name, email, plan..." autocomplete="off" />
-              </label>
-              <button type="button" class="btn btn-outline" id="btn-refresh">
-                <svg><use href="#i-refresh" /></svg>Refresh
-              </button>
-              <button type="button" class="btn btn-primary" id="btn-new-user">
-                <svg><use href="#i-plus" /></svg>New customer
-              </button>
             </div>
           </div>
           <div class="table-scroll">
@@ -463,6 +520,6 @@
 
   <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
 
-  <script src="admin.js"></script>
+  <script src="admin.js?v=20260918b"></script>
 </body>
 </html>
