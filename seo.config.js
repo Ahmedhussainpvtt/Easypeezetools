@@ -19,6 +19,7 @@ module.exports = {
     twitterCard: 'summary_large_image',
     author: 'Easy Peeze Tools',
     gtagId: 'G-VNHDP7MYHF',
+    amplitudeApiKey: '67d580c08d457990405291aae28f5a41',
   },
 
   organization: {

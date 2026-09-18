@@ -170,6 +170,39 @@ function applyGtagToTree(siteDir, gtagId, dryRun) {
   return n;
 }
 
+function amplitudeSnippet(apiKey) {
+  return `<!-- Amplitude -->
+<script src="https://cdn.amplitude.com/script/${apiKey}.js"></script><script>window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));window.amplitude.init('${apiKey}', {"fetchRemoteConfig":true,"autocapture":true});</script>
+`;
+}
+
+function ensureAmplitude(html, apiKey) {
+  if (!apiKey || !/<head[\s>]/i.test(html)) return html;
+  if (html.includes(`cdn.amplitude.com/script/${apiKey}.js`)) return html;
+  html = html.replace(
+    /\s*<!-- Amplitude -->\s*<script src="https:\/\/cdn\.amplitude\.com\/script\/[^"]+\.js"><\/script><script>window\.amplitude[\s\S]*?<\/script>\s*/i,
+    '\n'
+  );
+  html = html.replace(
+    /\s*<script src="https:\/\/cdn\.amplitude\.com\/script\/[^"]+\.js"><\/script>\s*<script>window\.amplitude[\s\S]*?<\/script>\s*/i,
+    '\n'
+  );
+  return html.replace(/<head[^>]*>/i, (open) => `${open}\n${amplitudeSnippet(apiKey)}`);
+}
+
+function applyAmplitudeToTree(siteDir, apiKey, dryRun, skipPrefixes = []) {
+  if (!apiKey) return 0;
+  let n = 0;
+  for (const file of walkHtmlFiles(siteDir, skipPrefixes)) {
+    const html = fs.readFileSync(file, 'utf8');
+    const next = ensureAmplitude(html, apiKey);
+    if (next === html) continue;
+    if (!dryRun) fs.writeFileSync(file, next, 'utf8');
+    n += 1;
+  }
+  return n;
+}
+
 function upsertLink(html, rel, href, extra = '') {
   const tag = `<link rel="${rel}" href="${escapeAttr(href)}"${extra} />`;
   const re = new RegExp(`<link\\s+[^>]*rel=["']${rel}["'][^>]*>`, 'i');
@@ -251,6 +284,9 @@ function applyPageSeo(html, cfg, pagePath, page) {
     : page.robots || cfg.defaults.robots;
 
   html = ensureGtag(html, cfg.site && cfg.site.gtagId);
+  if (!String(pagePath || '').startsWith('/ksadbwefreggh')) {
+    html = ensureAmplitude(html, cfg.site && cfg.site.amplitudeApiKey);
+  }
   html = upsertTitle(html, title);
   html = upsertNamedMeta(html, 'description', description);
   html = upsertNamedMeta(html, 'robots', robots);
@@ -375,8 +411,15 @@ function buildSite(key, opts) {
   writeSitemap(cfg, sitemapEntries, path.join(meta.dir, 'sitemap.xml'), opts.dryRun);
   writeRobots(cfg, path.join(meta.dir, 'robots.txt'), opts.dryRun);
   const gtagPages = applyGtagToTree(meta.dir, cfg.site && cfg.site.gtagId, opts.dryRun);
+  const ampPages = applyAmplitudeToTree(
+    meta.dir,
+    cfg.site && cfg.site.amplitudeApiKey,
+    opts.dryRun,
+    ['/ksadbwefreggh/']
+  );
   console.log(`  pages touched: ${updated}/${files.length}${opts.dryRun ? ' (dry-run)' : ''}`);
   console.log(`  gtag: ${gtagPages} html file(s)`);
+  console.log(`  amplitude: ${ampPages} html file(s)`);
 }
 
 function buildLocal(siteDir, opts) {
@@ -428,9 +471,16 @@ function buildLocal(siteDir, opts) {
   writeSitemap(cfg, sitemapEntries, path.join(siteDir, 'sitemap.xml'), opts.dryRun);
   writeRobots(cfg, path.join(siteDir, 'robots.txt'), opts.dryRun);
   const gtagPages = applyGtagToTree(siteDir, cfg.site && cfg.site.gtagId, opts.dryRun);
+  const ampPages = applyAmplitudeToTree(
+    siteDir,
+    cfg.site && cfg.site.amplitudeApiKey,
+    opts.dryRun,
+    ['/ksadbwefreggh/']
+  );
   console.log(`  pages touched: ${updated}/${files.length}${opts.dryRun ? ' (dry-run)' : ''}`);
   console.log(`  discovered HTML: ${files.length} | sitemap urls: ${sitemapEntries.length}`);
   console.log(`  gtag: ${gtagPages} html file(s)`);
+  console.log(`  amplitude: ${ampPages} html file(s)`);
 }
 
 function main() {
