@@ -54,6 +54,16 @@
     <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
       <path d="M6 6l12 12M18 6 6 18" />
     </symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" />
+      <circle cx="12" cy="12" r="3" />
+    </symbol>
+    <symbol id="i-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 3l18 18" />
+      <path d="M10.6 10.6A3 3 0 0 0 12 15a3 3 0 0 0 2.4-4.4" />
+      <path d="M9.9 5.1A10.6 10.6 0 0 1 12 5c6.5 0 10 7 10 7a16.7 16.7 0 0 1-3.9 4.6" />
+      <path d="M6.1 6.1C3.7 7.8 2 12 2 12s3.5 7 10 7c1.3 0 2.5-.2 3.6-.6" />
+    </symbol>
   </svg>
 
   <div id="login-view" class="login-shell hidden">
@@ -67,7 +77,13 @@
       </label>
       <label>
         <span>Password</span>
-        <input id="login-password" type="password" name="password" required autocomplete="current-password" />
+        <div class="password-wrap">
+          <input id="login-password" type="password" name="password" required autocomplete="current-password" />
+          <button type="button" class="password-toggle" id="login-password-toggle" aria-label="Show password" aria-pressed="false">
+            <svg class="eye-show"><use href="#i-eye" /></svg>
+            <svg class="eye-hide hidden"><use href="#i-eye-off" /></svg>
+          </button>
+        </div>
       </label>
       <p id="login-error" class="form-error" hidden></p>
       <button type="submit" class="btn btn-primary btn-block" id="login-btn">Sign in</button>
@@ -99,7 +115,6 @@
     <main class="app-main">
       <nav class="tabs" role="tablist">
         <button type="button" class="tab is-active" data-tab="customers" role="tab">Customers</button>
-        <button type="button" class="tab" data-tab="messages" role="tab">Messages</button>
         <button type="button" class="tab" data-tab="blog" role="tab">Blog</button>
         <button type="button" class="tab" data-tab="notice" role="tab">Notice</button>
       </nav>
@@ -172,41 +187,6 @@
             <svg><use href="#i-users" /></svg>
             <strong>No customers found</strong>
             <span>Try a different search, or add a customer to grant access.</span>
-          </div>
-        </div>
-      </section>
-
-      <section id="tab-messages" class="tab-panel hidden">
-        <div class="table-card">
-          <div class="table-card__head">
-            <div class="table-card__title">
-              <h2>Contact messages</h2>
-              <span class="count-pill" id="messages-count">0</span>
-            </div>
-            <div class="table-card__tools">
-              <button type="button" class="btn btn-outline" id="btn-refresh-messages">
-                <svg><use href="#i-refresh" /></svg>Refresh
-              </button>
-            </div>
-          </div>
-          <div class="table-scroll">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>When</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Source</th>
-                  <th>Message</th>
-                </tr>
-              </thead>
-              <tbody id="messages-tbody"></tbody>
-            </table>
-          </div>
-          <div id="messages-empty" class="empty" hidden>
-            <svg><use href="#i-users" /></svg>
-            <strong>No messages yet</strong>
-            <span>Contact form submissions from the websites appear here.</span>
           </div>
         </div>
       </section>

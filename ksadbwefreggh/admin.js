@@ -56,7 +56,7 @@
     if (!token()) return;
     const wait = Math.max(0, IDLE_MS - (Date.now() - lastActivity));
     sessionTimer = setTimeout(() => {
-      expireSession("Signed out after 10 minutes of inactivity");
+      expireSession("Session expired - please log in again");
     }, wait);
   }
 
@@ -72,7 +72,7 @@
     })
       .then((r) => {
         if (r.status === 401 && token()) {
-          expireSession("Session expired - sign in again");
+          expireSession("Session expired - please log in again");
         }
       })
       .catch(() => {});
@@ -136,7 +136,7 @@
 
   async function api(path, opts = {}) {
     if (!isSessionAlive()) {
-      expireSession("Session expired - sign in again");
+      expireSession("Session expired - please log in again");
       throw new Error("session expired");
     }
     const headers = Object.assign(
@@ -152,10 +152,15 @@
     try {
       data = text ? JSON.parse(text) : null;
     } catch {
-      data = { ok: false, error: text || "bad response" };
+      const plain = String(text || "")
+        .replace(/<[^>]+>/g, " ")
+        .replace(/\s+/g, " ")
+        .trim()
+        .slice(0, 180);
+      data = { ok: false, error: plain || "bad response" };
     }
     if (res.status === 401) {
-      expireSession("Session expired - sign in again");
+      expireSession("Session expired - please log in again");
       throw new Error(data?.error || "unauthorized");
     }
     if (!res.ok || data?.ok === false) {
@@ -273,30 +278,6 @@
           </div>
         </td>`;
       tbody.appendChild(tr);
-    }
-  }
-
-  async function loadMessages() {
-    try {
-      const data = await api("/admin/contact-messages?limit=80");
-      const rows = Array.isArray(data.messages) ? data.messages : [];
-      $("messages-count").textContent = String(rows.length);
-      const tbody = $("messages-tbody");
-      tbody.innerHTML = "";
-      $("messages-empty").hidden = rows.length > 0;
-      for (const m of rows) {
-        const tr = document.createElement("tr");
-        const when = esc(String(m.recordedAt || "").replace("T", " ").slice(0, 19));
-        tr.innerHTML = `
-          <td data-label="When" class="cell-mono">${when || " - "}</td>
-          <td data-label="Name">${esc(m.name || " - ")}</td>
-          <td data-label="Email" class="cell-mono"><a href="mailto:${esc(m.email)}">${esc(m.email || " - ")}</a></td>
-          <td data-label="Source">${esc(m.source || " - ")}</td>
-          <td data-label="Message">${esc(m.message || "")}</td>`;
-        tbody.appendChild(tr);
-      }
-    } catch (ex) {
-      toast(ex.message || "Could not load messages", "error");
     }
   }
 
@@ -476,12 +457,26 @@
     };
   }
 
+  $("login-password-toggle").addEventListener("click", () => {
+    const input = $("login-password");
+    const btn = $("login-password-toggle");
+    const show = input.type === "password";
+    input.type = show ? "text" : "password";
+    btn.setAttribute("aria-pressed", show ? "true" : "false");
+    btn.setAttribute("aria-label", show ? "Hide password" : "Show password");
+    btn.querySelector(".eye-show").classList.toggle("hidden", show);
+    btn.querySelector(".eye-hide").classList.toggle("hidden", !show);
+    input.focus();
+  });
+
   $("login-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const btn = $("login-btn");
     const err = $("login-error");
     err.hidden = true;
     btn.disabled = true;
+    btn.classList.add("is-busy");
+    btn.setAttribute("aria-busy", "true");
     try {
       const email = $("login-email").value.trim();
       const password = $("login-password").value;
@@ -504,6 +499,8 @@
       err.hidden = false;
     } finally {
       btn.disabled = false;
+      btn.classList.remove("is-busy");
+      btn.removeAttribute("aria-busy");
     }
   });
 
@@ -522,21 +519,14 @@
       btn.classList.add("is-active");
       const tab = btn.dataset.tab;
       $("tab-customers").classList.toggle("hidden", tab !== "customers");
-      $("tab-messages").classList.toggle("hidden", tab !== "messages");
       $("tab-blog").classList.toggle("hidden", tab !== "blog");
       $("tab-notice").classList.toggle("hidden", tab !== "notice");
-      if (tab === "messages") loadMessages();
     });
   });
 
   $("btn-refresh").addEventListener("click", () =>
     loadUsers()
       .then(() => toast("Customers refreshed", "ok"))
-      .catch((ex) => toast(ex.message, "error"))
-  );
-  $("btn-refresh-messages").addEventListener("click", () =>
-    loadMessages()
-      .then(() => toast("Messages refreshed", "ok"))
       .catch((ex) => toast(ex.message, "error"))
   );
   $("search-users").addEventListener("input", () => renderUsers(usersCache));
@@ -707,7 +697,7 @@
     if (document.visibilityState !== "visible") return;
     if (!token()) return;
     if (Date.now() - lastActivity > IDLE_MS) {
-      expireSession("Signed out after 10 minutes of inactivity");
+      expireSession("Session expired - please log in again");
     }
   });
   window.addEventListener("pagehide", () => {
