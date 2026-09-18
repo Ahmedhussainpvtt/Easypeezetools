@@ -1460,8 +1460,29 @@ footer:not(.site-footer) {
   .foundation__grid,
   .why-list,
   .trust__list { grid-template-columns: 1fr; }
-  .hero__actions { flex-direction: column; align-items: stretch; }
-  .btn { width: 100%; }
+  .hero__actions,
+  .showcase__actions,
+  .pricing-tease__actions,
+  p:has(> .btn + .btn) {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .hero__actions > .btn,
+  .showcase__actions > .btn,
+  .pricing-tease__actions > .btn,
+  .product-card .btn,
+  .cta-band > .btn,
+  p:has(> .btn + .btn) > .btn {
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 auto;
+  }
+  .showcase + .showcase {
+    margin-top: 40px;
+  }
 }
 
 /* - - Feature showcase (Kredmint-style) - - */
@@ -1518,6 +1539,13 @@ footer:not(.site-footer) {
   margin: 0 0 18px;
   color: var(--muted);
   font-size: 1.05rem;
+}
+.showcase__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: stretch;
+  margin: 0;
 }
 .checklist {
   list-style: none;
