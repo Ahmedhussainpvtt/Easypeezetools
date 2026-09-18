@@ -9,6 +9,7 @@
 
   const $ = (id) => document.getElementById(id);
   let usersCache = [];
+  let currentCustomerEmail = "";
   let sessionTimer = null;
   let memoryToken = "";
   let memoryEmail = "";
@@ -255,11 +256,12 @@
     for (const u of filtered) {
       const mail = esc(u.email);
       const tr = document.createElement("tr");
+      tr.setAttribute("data-open", u.email);
       tr.innerHTML = `
         <td data-label="Name">
           <div class="name-cell">
             <span class="avatar">${esc(initials(u.name, u.email))}</span>
-            <a class="name-link" href="#" data-edit="${mail}">${esc(u.name || " - ")}</a>
+            <a class="name-link" href="#" data-open="${mail}">${esc(u.name || " - ")}</a>
           </div>
         </td>
         <td data-label="Email" class="cell-mono">${mail}</td>
@@ -278,6 +280,104 @@
           </div>
         </td>`;
       tbody.appendChild(tr);
+    }
+  }
+
+  function dash(v) {
+    const s = String(v || "").trim();
+    return s || " - ";
+  }
+
+  function formatWhen(iso) {
+    if (!iso) return " - ";
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) {
+      return String(iso).replace("T", " ").slice(0, 19);
+    }
+    const pad = (n) => String(n).padStart(2, "0");
+    return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}, ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+  }
+
+  function setCustomerMode(on) {
+    $("customer-view").classList.toggle("hidden", !on);
+    $("app-main").classList.toggle("hidden", on);
+  }
+
+  function closeCustomer() {
+    currentCustomerEmail = "";
+    setCustomerMode(false);
+  }
+
+  function renderLoginHistory(rows) {
+    const list = Array.isArray(rows) ? rows : [];
+    $("cv-login-count").textContent = String(list.length);
+    $("cv-login-empty").hidden = list.length > 0;
+    const tbody = $("cv-login-tbody");
+    tbody.innerHTML = "";
+    list.forEach((row, i) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td data-label="S.No">${i + 1}</td>
+        <td data-label="Login time">${esc(formatWhen(row.at))}</td>
+        <td data-label="IP address" class="cell-mono">${esc(dash(row.ip))}</td>
+        <td data-label="Platform">${esc(dash(row.platform || row.appVersion))}</td>
+        <td data-label="Logout time"> - </td>`;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function subCard(title, slice) {
+    const plan = slice && slice.plan && slice.plan !== "none" ? slice.plan : "None";
+    const status = slice && slice.status && slice.status !== "none" ? slice.status : "free";
+    const amount = slice && slice.amountInr ? `INR ${slice.amountInr}` : " - ";
+    return `<article class="sub-card">
+      <h3>${esc(title)}</h3>
+      <p class="sub-plan">${esc(plan)} · ${esc(status)}</p>
+      <p>Amount: ${esc(amount)}</p>
+      <p>Started: ${esc(formatWhen(slice && slice.startsAt))}</p>
+      <p>Expires: ${esc(slice && slice.expiresAt ? formatWhen(slice.expiresAt) : "Never")}</p>
+      <p>Payment: ${esc(dash(slice && (slice.paymentId || slice.paymentProvider)))}</p>
+      <p>Granted by: ${esc(dash(slice && slice.grantedBy))}</p>
+    </article>`;
+  }
+
+  function fillCustomerView(user) {
+    const name = user.name || user.email || "Customer";
+    $("customer-view-title").textContent = name;
+    $("cv-avatar").textContent = initials(user.name, user.email);
+    $("cv-name").textContent = name;
+    const key = user.state || "none";
+    const badge = STATE_BADGE[key] || STATE_BADGE.none;
+    $("cv-state").className = `badge ${badge.cls}`;
+    $("cv-state").textContent = badge.text;
+    $("cv-first").textContent = dash(user.firstName);
+    $("cv-last").textContent = dash(user.lastName);
+    $("cv-email").textContent = dash(user.email);
+    $("cv-phone").textContent = dash(user.phone);
+    $("cv-platform").textContent = dash(user.platform);
+    $("cv-version").textContent = dash(user.appVersion);
+    $("cv-first-seen").textContent = formatWhen(user.firstSeen);
+    $("cv-last-seen").textContent = formatWhen(user.lastSeen);
+    $("cv-notes").textContent = dash(user.notes);
+    renderLoginHistory(user.loginHistory);
+    $("cv-sub-grid").innerHTML =
+      subCard("Kharch Log", user.kharchlog) + subCard("Pdf Buddy", user.pdfbuddy);
+    $("cv-edit").onclick = () => {
+      const cached = usersCache.find((u) => u.email === user.email) || user;
+      openUserModal(cached);
+    };
+  }
+
+  async function openCustomer(email) {
+    currentCustomerEmail = email;
+    setCustomerMode(true);
+    $("customer-view-title").textContent = email;
+    try {
+      const data = await api(`/admin/user?email=${encodeURIComponent(email)}`);
+      fillCustomerView(data.user || { email });
+    } catch (ex) {
+      toast(ex.message || "Could not load customer", "error");
+      closeCustomer();
     }
   }
 
@@ -513,6 +613,17 @@
     }
   });
 
+  $("customer-back").addEventListener("click", () => closeCustomer());
+  document.querySelectorAll(".customer-subtab").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".customer-subtab").forEach((b) => b.classList.remove("is-active"));
+      btn.classList.add("is-active");
+      const panel = btn.dataset.cpanel;
+      $("cv-panel-login").classList.toggle("hidden", panel !== "login");
+      $("cv-panel-sub").classList.toggle("hidden", panel !== "sub");
+    });
+  });
+
   document.querySelectorAll(".tab").forEach((btn) => {
     btn.addEventListener("click", () => {
       document.querySelectorAll(".tab").forEach((b) => b.classList.remove("is-active"));
@@ -533,14 +644,9 @@
   $("btn-new-user").addEventListener("click", () => openUserModal(null));
 
   $("users-tbody").addEventListener("click", async (e) => {
-    const edit = e.target.closest("[data-edit]");
     const del = e.target.closest("[data-del]");
-    if (edit) {
-      e.preventDefault();
-      const email = edit.getAttribute("data-edit");
-      openUserModal(usersCache.find((u) => u.email === email) || { email });
-      return;
-    }
+    const edit = e.target.closest("[data-edit]");
+    const open = e.target.closest("[data-open]");
     if (del) {
       const email = del.getAttribute("data-del");
       if (!confirm(`Remove ${email}? This deletes their license records.`)) return;
@@ -554,6 +660,17 @@
       } catch (ex) {
         toast(ex.message, "error");
       }
+      return;
+    }
+    if (edit) {
+      e.preventDefault();
+      const email = edit.getAttribute("data-edit");
+      openUserModal(usersCache.find((u) => u.email === email) || { email });
+      return;
+    }
+    if (open) {
+      e.preventDefault();
+      openCustomer(open.getAttribute("data-open"));
     }
   });
 
@@ -582,6 +699,9 @@
       });
       $("user-modal").close();
       await loadUsers();
+      if (currentCustomerEmail && currentCustomerEmail === email) {
+        await openCustomer(email);
+      }
       toast(`Granted ${planType} on ${product} to ${email}`, "ok");
     } catch (ex) {
       err.textContent = ex.message;

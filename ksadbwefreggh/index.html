@@ -54,6 +54,9 @@
     <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
       <path d="M6 6l12 12M18 6 6 18" />
     </symbol>
+    <symbol id="i-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M15 6l-6 6 6 6" />
+    </symbol>
     <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" />
       <circle cx="12" cy="12" r="3" />
@@ -112,7 +115,80 @@
       </div>
     </header>
 
-    <main class="app-main">
+    <div id="customer-view" class="customer-view hidden">
+      <div class="customer-view__bar">
+        <button type="button" class="btn btn-ghost customer-back" id="customer-back">
+          <svg><use href="#i-back" /></svg>Customers
+        </button>
+        <span class="customer-view__sep" aria-hidden="true">/</span>
+        <strong id="customer-view-title">Customer</strong>
+      </div>
+      <div class="customer-view__grid">
+        <aside class="customer-side">
+          <div class="customer-side__hero">
+            <span class="avatar avatar--lg" id="cv-avatar"> - </span>
+            <h2 id="cv-name"> - </h2>
+            <span id="cv-state" class="badge badge-off">Free</span>
+          </div>
+          <div class="customer-side__block">
+            <p class="customer-side__h">Basic info</p>
+            <dl class="customer-dl">
+              <div><dt>First name</dt><dd id="cv-first"> - </dd></div>
+              <div><dt>Last name</dt><dd id="cv-last"> - </dd></div>
+              <div><dt>Email</dt><dd id="cv-email" class="cell-mono"> - </dd></div>
+              <div><dt>Phone</dt><dd id="cv-phone" class="cell-mono"> - </dd></div>
+              <div><dt>Platform</dt><dd id="cv-platform"> - </dd></div>
+              <div><dt>App version</dt><dd id="cv-version"> - </dd></div>
+              <div><dt>First seen</dt><dd id="cv-first-seen"> - </dd></div>
+              <div><dt>Last seen</dt><dd id="cv-last-seen"> - </dd></div>
+              <div><dt>Notes</dt><dd id="cv-notes"> - </dd></div>
+            </dl>
+          </div>
+          <button type="button" class="btn btn-outline btn-block" id="cv-edit">
+            <svg><use href="#i-edit" /></svg>Grant / update access
+          </button>
+        </aside>
+        <section class="customer-main">
+          <div class="customer-subtabs" role="tablist">
+            <button type="button" class="customer-subtab is-active" data-cpanel="login" role="tab">Login history</button>
+            <button type="button" class="customer-subtab" data-cpanel="sub" role="tab">Subscription</button>
+          </div>
+          <div id="cv-panel-login" class="customer-panel">
+            <div class="table-card">
+              <div class="table-card__head">
+                <div class="table-card__title">
+                  <h2>Login history</h2>
+                  <span class="count-pill" id="cv-login-count">0</span>
+                </div>
+              </div>
+              <div class="table-scroll">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>S.No</th>
+                      <th>Login time</th>
+                      <th>IP address</th>
+                      <th>Platform</th>
+                      <th>Logout time</th>
+                    </tr>
+                  </thead>
+                  <tbody id="cv-login-tbody"></tbody>
+                </table>
+              </div>
+              <div id="cv-login-empty" class="empty" hidden>
+                <strong>No login history yet</strong>
+                <span>App opens after this update will show here.</span>
+              </div>
+            </div>
+          </div>
+          <div id="cv-panel-sub" class="customer-panel hidden">
+            <div class="sub-grid" id="cv-sub-grid"></div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <main class="app-main" id="app-main">
       <nav class="tabs" role="tablist">
         <button type="button" class="tab is-active" data-tab="customers" role="tab">Customers</button>
         <button type="button" class="tab" data-tab="blog" role="tab">Blog</button>
