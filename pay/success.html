@@ -159,7 +159,8 @@
             play.className = 'btn btn--play';
             play.href = 'https://kharchlog.com/play/';
             play.rel = 'noopener';
-            play.textContent = 'Play Store';
+            play.setAttribute('aria-label', 'Get it on Google Play');
+            play.innerHTML = '<span class="btn--play__text"><span class="btn--play__kicker">GET IT ON</span><span class="btn--play__brand">Google Play</span></span>';
             primaryBtn.insertAdjacentElement('afterend', play);
           }
         }
