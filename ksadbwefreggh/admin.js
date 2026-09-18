@@ -324,8 +324,8 @@
         <td data-label="S.No">${i + 1}</td>
         <td data-label="Login time">${esc(formatWhen(row.at))}</td>
         <td data-label="IP address" class="cell-mono">${esc(dash(row.ip))}</td>
-        <td data-label="Platform">${esc(dash(row.platform || row.appVersion))}</td>
-        <td data-label="Logout time"> - </td>`;
+        <td data-label="Platform">${esc(dash(row.platform))}</td>
+        <td data-label="App version">${esc(dash(row.appVersion))}</td>`;
       tbody.appendChild(tr);
     });
   }
@@ -353,8 +353,6 @@
     $("cv-last").value = user.lastName || "";
     $("cv-email").value = user.email || "";
     $("cv-phone").value = user.phone || "";
-    $("cv-platform").textContent = dash(user.platform);
-    $("cv-version").textContent = dash(user.appVersion);
     $("cv-first-seen").textContent = formatWhen(user.firstSeen);
     $("cv-last-seen").textContent = formatWhen(user.lastSeen);
     $("cv-notes").value = user.notes || "";
