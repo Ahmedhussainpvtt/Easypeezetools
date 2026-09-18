@@ -39,7 +39,7 @@
   <meta name="twitter:title" content="Payment success — Easy Peeze Tools" />
   <meta name="twitter:description" content="Payment success — Easy Peeze Tools." />
   <meta name="twitter:image" content="https://easypeeze.com/og-image.jpg" />
-                                            <script type="application/ld+json" id="seo-jsonld">
+                                          <script type="application/ld+json" id="seo-jsonld">
 {
     "@context": "https://schema.org",
     "@graph": [
@@ -153,6 +153,15 @@
           primaryBtn.textContent = 'Download Kharch Log APK';
           primaryBtn.href = 'https://kharchlog.com/KharchLog.apk';
           primaryBtn.rel = 'noopener';
+          if (!document.getElementById('pay-success-play')) {
+            var play = document.createElement('a');
+            play.id = 'pay-success-play';
+            play.className = 'btn btn--play';
+            play.href = 'https://kharchlog.com/play/';
+            play.rel = 'noopener';
+            play.textContent = 'Get on Play Store';
+            primaryBtn.insertAdjacentElement('afterend', play);
+          }
         }
         if (lead) {
           lead.textContent =

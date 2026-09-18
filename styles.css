@@ -418,6 +418,12 @@ a:hover { text-decoration: underline; }
   color: var(--primary) !important;
   border: 2px solid rgba(20, 184, 166, 0.55);
 }
+.btn--play {
+  background: #fff;
+  color: var(--primary) !important;
+  border: 2px solid var(--primary);
+  box-shadow: none;
+}
 
 /* —— Hero —— */
 .hero {
