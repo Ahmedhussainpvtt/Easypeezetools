@@ -19,7 +19,7 @@ Contact: easypeezetools@gmail.com
 
 ## Product
 
-- [Home](https://easypeeze.com/): Easy Peeze Tools — Pdf Buddy (local Windows PDF editor) and Kharch Log (Android expenses).
+- [Home](https://easypeeze.com/): Easy Peeze Tools - Pdf Buddy (local Windows PDF editor) and Kharch Log (Android expenses).
 - [About](https://easypeeze.com/about/): About.
 - [Blog index](https://easypeeze.com/blog/): PDF how-tos for Windows India: compress, OCR, e-sign, privacy vs online editors.
 - [Download Pdf Buddy](https://easypeeze.com/download/): Download Pdf Buddy for Windows 10/11.
@@ -27,7 +27,7 @@ Contact: easypeezetools@gmail.com
 - [All features](https://easypeeze.com/features/): Pdf Buddy tools: edit, merge, split, compress, sign, OCR, unlock, convert.
 - [Glossary index](https://easypeeze.com/glossary/): PDF and product glossary (OCR, e-sign, merge, local-first, etc.).
 - [Guides index](https://easypeeze.com/guides/): Long-form guides: free PDF editors, OCR scans, form fill & sign, alternatives.
-- [Install guides](https://easypeeze.com/install/): Install Pdf Buddy (SmartScreen) and Kharch Log (Play Protect) — official downloads only.
+- [Install guides](https://easypeeze.com/install/): Install Pdf Buddy (SmartScreen) and Kharch Log (Play Protect) - official downloads only.
 - [Pricing](https://easypeeze.com/pricing/): Pdf Buddy INR 299/year or INR 999 lifetime; free tier 3 actions/day.
 - [Products](https://easypeeze.com/products/): Product hub for Pdf Buddy and Kharch Log.
 
@@ -116,7 +116,7 @@ Contact: easypeezetools@gmail.com
 ## Optional
 
 - [Contact](https://easypeeze.com/contact/): Support: easypeezetools@gmail.com.
-- [Privacy](https://easypeeze.com/privacy/): Privacy policy — Pdf Buddy runs locally; Kharch Log uses your Google Sheet.
+- [Privacy](https://easypeeze.com/privacy/): Privacy policy - Pdf Buddy runs locally; Kharch Log uses your Google Sheet.
 - [Refund](https://easypeeze.com/refund/): Refund.
 - [Terms](https://easypeeze.com/terms/): Terms of use for Easy Peeze Tools products.
 - [robots.txt](https://easypeeze.com/robots.txt): Crawl rules and sitemap pointer.

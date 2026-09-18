@@ -125,7 +125,7 @@
   }
   var tipEl = document.querySelector('.pay-email-check');
   if (tipEl && productParam === 'kharchlog') {
-    tipEl.textContent = 'Download the APK from kharchlog.com after payment — sign in with this Google email.';
+    tipEl.textContent = 'Download the APK from kharchlog.com after payment - sign in with this Google email.';
   }
   if (fineEl && productParam === 'kharchlog') {
     fineEl.innerHTML =
@@ -318,7 +318,7 @@
     var clientId = cfg.paypalClientId;
     if (!clientId) return Promise.reject(new Error('PayPal is not configured'));
     // Guest debit/credit on PayPal India often hangs on "Pay Now" for USD.
-    // Force PayPal wallet login (or create account) — much more reliable.
+    // Force PayPal wallet login (or create account) - much more reliable.
     var qs =
       'client-id=' +
       encodeURIComponent(clientId) +

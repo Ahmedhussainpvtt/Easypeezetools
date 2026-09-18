@@ -72,7 +72,7 @@
     })
       .then((r) => {
         if (r.status === 401 && token()) {
-          expireSession("Session expired — sign in again");
+          expireSession("Session expired - sign in again");
         }
       })
       .catch(() => {});
@@ -136,7 +136,7 @@
 
   async function api(path, opts = {}) {
     if (!isSessionAlive()) {
-      expireSession("Session expired — sign in again");
+      expireSession("Session expired - sign in again");
       throw new Error("session expired");
     }
     const headers = Object.assign(
@@ -155,7 +155,7 @@
       data = { ok: false, error: text || "bad response" };
     }
     if (res.status === 401) {
-      expireSession("Session expired — sign in again");
+      expireSession("Session expired - sign in again");
       throw new Error(data?.error || "unauthorized");
     }
     if (!res.ok || data?.ok === false) {
@@ -184,7 +184,7 @@
   }
 
   function planLabel(slice) {
-    if (!slice || slice.plan === "none") return "—";
+    if (!slice || slice.plan === "none") return " - ";
     const st = slice.status && slice.status !== "none" ? ` · ${slice.status}` : "";
     return `${slice.plan}${st}`;
   }
@@ -192,7 +192,7 @@
   function planCell(slice) {
     const label = planLabel(slice);
     let cls = "plan-pill";
-    if (label === "—") cls += " plan-pill--none";
+    if (label === " - ") cls += " plan-pill--none";
     else if (slice.status === "expired") cls += " plan-pill--expired";
     return `<span class="${cls}">${esc(label)}</span>`;
   }
@@ -254,11 +254,11 @@
         <td data-label="Name">
           <div class="name-cell">
             <span class="avatar">${esc(initials(u.name, u.email))}</span>
-            <a class="name-link" href="#" data-edit="${mail}">${esc(u.name || "—")}</a>
+            <a class="name-link" href="#" data-edit="${mail}">${esc(u.name || " - ")}</a>
           </div>
         </td>
         <td data-label="Email" class="cell-mono">${mail}</td>
-        <td data-label="Phone" class="cell-mono">${esc(u.phone || "—")}</td>
+        <td data-label="Phone" class="cell-mono">${esc(u.phone || " - ")}</td>
         <td data-label="Status">${stateCell(u)}</td>
         <td data-label="Kharch Log">${planCell(u.kharchlog)}</td>
         <td data-label="Pdf Buddy">${planCell(u.pdfbuddy)}</td>
@@ -288,10 +288,10 @@
         const tr = document.createElement("tr");
         const when = esc(String(m.recordedAt || "").replace("T", " ").slice(0, 19));
         tr.innerHTML = `
-          <td data-label="When" class="cell-mono">${when || "—"}</td>
-          <td data-label="Name">${esc(m.name || "—")}</td>
-          <td data-label="Email" class="cell-mono"><a href="mailto:${esc(m.email)}">${esc(m.email || "—")}</a></td>
-          <td data-label="Source">${esc(m.source || "—")}</td>
+          <td data-label="When" class="cell-mono">${when || " - "}</td>
+          <td data-label="Name">${esc(m.name || " - ")}</td>
+          <td data-label="Email" class="cell-mono"><a href="mailto:${esc(m.email)}">${esc(m.email || " - ")}</a></td>
+          <td data-label="Source">${esc(m.source || " - ")}</td>
           <td data-label="Message">${esc(m.message || "")}</td>`;
         tbody.appendChild(tr);
       }
@@ -301,12 +301,12 @@
   }
 
   function setKpis(stats) {
-    $("kpi-total").textContent = stats?.total ?? "—";
-    $("kpi-active").textContent = stats?.active ?? "—";
-    $("kpi-expired").textContent = stats?.expired ?? "—";
-    $("kpi-inactive").textContent = stats?.inactive ?? "—";
-    $("kpi-kharch").textContent = stats?.kharchlogActive ?? "—";
-    $("kpi-pdf").textContent = stats?.pdfbuddyActive ?? "—";
+    $("kpi-total").textContent = stats?.total ?? " - ";
+    $("kpi-active").textContent = stats?.active ?? " - ";
+    $("kpi-expired").textContent = stats?.expired ?? " - ";
+    $("kpi-inactive").textContent = stats?.inactive ?? " - ";
+    $("kpi-kharch").textContent = stats?.kharchlogActive ?? " - ";
+    $("kpi-pdf").textContent = stats?.pdfbuddyActive ?? " - ";
   }
 
   async function loadUsers() {
@@ -392,7 +392,7 @@
 
     emailInput.value = user?.email || "";
     emailInput.readOnly = editing;
-    // required only when creating — otherwise a hidden field can block submit
+    // required only when creating - otherwise a hidden field can block submit
     emailInput.required = !editing;
     emailWrap.hidden = editing;
     emailWrap.classList.toggle("is-hidden", editing);
@@ -404,7 +404,7 @@
     if (editing) {
       summary.hidden = false;
       $("u-avatar").textContent = initials(user.name, user.email);
-      $("u-display-name").textContent = user.name || "—";
+      $("u-display-name").textContent = user.name || " - ";
       $("u-display-email").textContent = user.email;
       const key = user.state || (user.active ? "active" : "none");
       const badge = STATE_BADGE[key] || STATE_BADGE.none;
@@ -443,7 +443,7 @@
       .join("");
   }
 
-  /** Never send plaintext password — hash matches Cloud Run adminPasswordHash(). */
+  /** Never send plaintext password - hash matches Cloud Run adminPasswordHash(). */
   async function passwordHashForLogin(email, password) {
     const e = String(email || "").trim().toLowerCase();
     return sha256Hex(`easypeeze-admin-v1\n${e}\n${password}`);

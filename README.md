@@ -1,4 +1,4 @@
-# Easy Peeze Tools — website
+# Easy Peeze Tools - website
 
 Static site for **[https://easypeeze.com](https://easypeeze.com)** (GitHub Pages).
 
@@ -6,7 +6,7 @@ Static site for **[https://easypeeze.com](https://easypeeze.com)** (GitHub Pages
 1. Repo Settings → Pages → Source: **GitHub Actions**
 2. Push to `main` (workflow `.github/workflows/pages.yml`)
 3. Temporary URL: `https://ahmedhussainpvtt.github.io/Easypeezetools/`
-4. Custom domain **easypeeze.com** — add DNS (registrar), then set Pages custom domain:
+4. Custom domain **easypeeze.com** - add DNS (registrar), then set Pages custom domain:
 
 ### DNS (at your domain registrar)
 | Type | Host | Value | TTL |

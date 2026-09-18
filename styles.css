@@ -64,7 +64,7 @@ a:hover { text-decoration: underline; }
 }
 .skip-link:focus { left: 12px; top: 12px; }
 
-/* —— Header —— */
+/* - - Header - - */
 .site-header {
   position: sticky;
   top: 0;
@@ -113,7 +113,7 @@ a:hover { text-decoration: underline; }
   background: transparent;
   padding: 0;
 }
-/* White plate ONLY on dark chrome — ~5px around the mark */
+/* White plate ONLY on dark chrome - ~5px around the mark */
 .logo-on-dark,
 .brand-lockup--on-dark img {
   background: #fff !important;
@@ -250,7 +250,7 @@ a:hover { text-decoration: underline; }
   box-shadow: 0 12px 28px rgba(15, 42, 67, 0.28);
 }
 
-/* —— Buttons —— */
+/* - - Buttons - - */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -267,7 +267,7 @@ a:hover { text-decoration: underline; }
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  /* Default .btn is the primary CTA — most markup uses the bare class. */
+  /* Default .btn is the primary CTA - most markup uses the bare class. */
   background: linear-gradient(315deg, var(--primary), var(--secondary));
   background-size: 160% 160%;
   color: #fff !important;
@@ -301,7 +301,7 @@ a:hover { text-decoration: underline; }
 .btn:hover::after { transform: translateX(120%); }
 
 /* Yellow highlight travels around the button outline.
-   Animate the gradient ANGLE only — never rotate the box (that flies off the button). */
+   Animate the gradient ANGLE only - never rotate the box (that flies off the button). */
 @property --busy-angle {
   syntax: "<angle>";
   inherits: false;
@@ -442,7 +442,7 @@ a:hover { text-decoration: underline; }
   background: rgba(15, 42, 67, 0.04);
 }
 
-/* —— Hero —— */
+/* - - Hero - - */
 .hero {
   position: relative;
   display: grid;
@@ -602,7 +602,7 @@ a:hover { text-decoration: underline; }
   }
 }
 
-/* —— Trust strip —— */
+/* - - Trust strip - - */
 .trust {
   padding: 8px 0 28px;
 }
@@ -626,7 +626,7 @@ a:hover { text-decoration: underline; }
   padding: 6px 8px;
 }
 
-/* —— Foundation (Built Around What Matters) —— */
+/* - - Foundation (Built Around What Matters) - - */
 .foundation {
   padding-top: 28px;
   padding-bottom: 56px;
@@ -702,7 +702,7 @@ a:hover { text-decoration: underline; }
   line-height: 1.5;
 }
 
-/* —— Sections —— */
+/* - - Sections - - */
 .section {
   padding: 40px 0;
 }
@@ -792,7 +792,7 @@ a:hover { text-decoration: underline; }
 .steps h3 { margin: 0 0 4px; font-size: 1.05rem; }
 .steps p { margin: 0; color: var(--muted); }
 
-/* Plain <ol class="steps"> (no .steps__num cards) — numbered list, not broken 2-col grid */
+/* Plain <ol class="steps"> (no .steps__num cards) - numbered list, not broken 2-col grid */
 .steps:not(:has(.steps__num)) {
   list-style: decimal;
   margin: 0;
@@ -830,7 +830,7 @@ a:hover { text-decoration: underline; }
 .why-list strong { font-size: 1.02rem; }
 .why-list span { color: var(--muted); font-size: 0.95rem; }
 
-/* —— FAQ —— */
+/* - - FAQ - - */
 .faq {
   display: grid;
   gap: 10px;
@@ -854,7 +854,7 @@ a:hover { text-decoration: underline; }
   color: var(--secondary-dark);
   font-weight: 700;
 }
-.faq details[open] summary::after { content: "–"; }
+.faq details[open] summary::after { content: "-"; }
 .faq details p {
   margin: 0 0 14px;
   color: var(--muted);
@@ -862,7 +862,7 @@ a:hover { text-decoration: underline; }
 .faq details p + p { margin-top: -6px; }
 .seo-block .faq { margin-top: 8px; }
 
-/* —— CTA band —— */
+/* - - CTA band - - */
 .pricing-tease {
   width: min(var(--max), calc(100% - 40px));
   margin: 8px auto 40px;
@@ -898,7 +898,7 @@ a:hover { text-decoration: underline; }
   color: transparent;
   line-height: 1.15;
 }
-/* Only the trailing sub-label is small/muted — the price span keeps the
+/* Only the trailing sub-label is small/muted - the price span keeps the
    big gradient treatment. Two markup shapes exist: "PRICE <span>sub</span>"
    and "<span>PRICE</span><span>sub</span>". */
 .pricing-tease__price span:last-child {
@@ -995,7 +995,7 @@ a:hover { text-decoration: underline; }
 }
 .cta-band__support a { color: #fff; text-decoration: underline; }
 
-/* —— Footer —— */
+/* - - Footer - - */
 .site-footer {
   border-top: 1px solid var(--line);
   padding: 28px 0 40px;
@@ -1036,7 +1036,7 @@ a:hover { text-decoration: underline; }
   font-weight: 600;
 }
 
-/* Footer Resources dropdown — open upward so it stays on-screen */
+/* Footer Resources dropdown - open upward so it stays on-screen */
 .site-footer .footer-resources {
   display: inline-flex;
   align-items: center;
@@ -1060,7 +1060,7 @@ a:hover { text-decoration: underline; }
   font-size: 0.88rem;
 }
 
-/* —— Legacy wrap (privacy / terms / pay) —— */
+/* - - Legacy wrap (privacy / terms / pay) - - */
 .wrap {
   max-width: 720px;
   margin: 0 auto;
@@ -1307,7 +1307,7 @@ a:hover { text-decoration: underline; }
   cursor: pointer;
 }
 .pay-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-/* .btn { display: inline-flex } beats native [hidden] — force hide */
+/* .btn { display: inline-flex } beats native [hidden] - force hide */
 .pay-btn[hidden],
 #payBtn[hidden],
 .paypal-buttons[hidden],
@@ -1433,7 +1433,7 @@ footer:not(.site-footer) {
   .btn { width: 100%; }
 }
 
-/* —— Feature showcase (Kredmint-style) —— */
+/* - - Feature showcase (Kredmint-style) - - */
 .precision {
   padding: 40px 0 4px;
   text-align: center;
@@ -2356,7 +2356,7 @@ body > .site-footer {
   margin-top: 0;
 }
 
-/* —— Pricing grids: equal height cards with bottom-aligned CTAs —— */
+/* - - Pricing grids: equal height cards with bottom-aligned CTAs - - */
 .pricing-grid {
   align-items: stretch;
 }
@@ -2374,7 +2374,7 @@ body > .site-footer {
   margin-inline: auto;
 }
 
-/* —— Hover lift on card surfaces —— */
+/* - - Hover lift on card surfaces - - */
 .feature,
 .pricing-tease,
 .product-card,
@@ -2411,7 +2411,7 @@ body > .site-footer {
   50% { background-position: 100% 50%; }
 }
 
-/* —— Sticky header gains depth once you scroll —— */
+/* - - Sticky header gains depth once you scroll - - */
 .site-header {
   transition: box-shadow 0.25s ease, background-color 0.25s ease;
 }
@@ -2420,7 +2420,7 @@ body > .site-footer {
   background: rgba(240, 245, 250, 0.94);
 }
 
-/* —— Scroll progress bar —— */
+/* - - Scroll progress bar - - */
 .scroll-progress {
   position: fixed;
   top: 0;
@@ -2434,7 +2434,7 @@ body > .site-footer {
   pointer-events: none;
 }
 
-/* —— Extra reveal directions used by site-motion.js —— */
+/* - - Extra reveal directions used by site-motion.js - - */
 .motion-reveal.motion-enter-up {
   transform: translate3d(0, 34px, 0);
 }
@@ -2514,7 +2514,7 @@ body > .site-footer {
   }
 }
 
-/* —— Pricing card headline prices (Easy Peeze plan cards) —— */
+/* - - Pricing card headline prices (Easy Peeze plan cards) - - */
 .pricing-grid .pricing-tease h3 {
   margin: 0 0 10px;
   font-size: clamp(1.9rem, 3.6vw, 2.5rem);
@@ -2539,7 +2539,7 @@ body > .site-footer {
   background: none;
 }
 
-/* —— Currency toggle: equal-height segments —— */
+/* - - Currency toggle: equal-height segments - - */
 .pay-currency {
   align-items: stretch;
 }
@@ -2706,7 +2706,7 @@ body > .site-footer {
     text-decoration: none;
   }
 
-  /* Dropdowns flatten into labelled groups — hover menus are useless on touch. */
+  /* Dropdowns flatten into labelled groups - hover menus are useless on touch. */
   .site-header.nav-ready .site-nav .nav-dropdown {
     display: block;
     border-top: 1px solid var(--line);

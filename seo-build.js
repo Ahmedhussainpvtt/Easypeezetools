@@ -228,7 +228,7 @@ function upsertJsonLd(html, json) {
       block
     );
   }
-  // Insert before </head> — keep any existing hand-written ld+json; managed block is additive.
+  // Insert before </head> - keep any existing hand-written ld+json; managed block is additive.
   return html.replace(/<\/head>/i, `${block}</head>`);
 }
 
@@ -340,7 +340,7 @@ function buildSite(key, opts) {
 
   for (const file of files) {
     const pagePath = fileToUrlPath(meta.dir, file);
-    // Skip non-page assets mistakenly named .html in odd places — keep all
+    // Skip non-page assets mistakenly named .html in odd places - keep all
     const page = Object.assign({}, cfg.defaults || {}, cfg.pages && cfg.pages[pagePath] ? cfg.pages[pagePath] : {});
     let html = fs.readFileSync(file, 'utf8');
     if (!/<html[\s>]/i.test(html)) continue;

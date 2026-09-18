@@ -1,4 +1,4 @@
-# Easy Peeze Tools — llms-full.txt
+# Easy Peeze Tools - llms-full.txt
 
 Generated: 2026-09-18
 Source: https://easypeeze.com/
@@ -19,7 +19,7 @@ Easy Peeze Tools makes simple privacy-first apps: Pdf Buddy (100% local Windows 
 
 ### Home
 URL: https://easypeeze.com/
-Easy Peeze Tools — Pdf Buddy (local Windows PDF editor) and Kharch Log (Android expenses).
+Easy Peeze Tools - Pdf Buddy (local Windows PDF editor) and Kharch Log (Android expenses).
 
 ### About
 URL: https://easypeeze.com/about/
@@ -51,7 +51,7 @@ Long-form guides: free PDF editors, OCR scans, form fill & sign, alternatives.
 
 ### Install guides
 URL: https://easypeeze.com/install/
-Install Pdf Buddy (SmartScreen) and Kharch Log (Play Protect) — official downloads only.
+Install Pdf Buddy (SmartScreen) and Kharch Log (Play Protect) - official downloads only.
 
 ### Pricing
 URL: https://easypeeze.com/pricing/

@@ -1,4 +1,4 @@
-/* Mobile nav — a kebab button that collapses the header links into a panel.
+/* Mobile nav - a kebab button that collapses the header links into a panel.
    Runs before any motion code because navigation must work even when the
    visitor asks for reduced motion. */
 (() => {
