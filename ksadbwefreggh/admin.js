@@ -301,6 +301,7 @@
   function setCustomerMode(on) {
     $("customer-view").classList.toggle("hidden", !on);
     $("app-main").classList.toggle("hidden", on);
+    $("app-view").classList.toggle("is-customer", on);
   }
 
   function closeCustomer() {

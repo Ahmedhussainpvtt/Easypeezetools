@@ -117,11 +117,16 @@
 
     <div id="customer-view" class="customer-view hidden">
       <div class="customer-view__bar">
-        <button type="button" class="btn btn-ghost customer-back" id="customer-back">
-          <svg><use href="#i-back" /></svg>Customers
+        <div class="customer-view__bar-left">
+          <button type="button" class="btn btn-ghost customer-back" id="customer-back">
+            <svg><use href="#i-back" /></svg>Customers
+          </button>
+          <span class="customer-view__sep" aria-hidden="true">/</span>
+          <strong id="customer-view-title">Customer</strong>
+        </div>
+        <button type="button" class="btn btn-primary" id="cv-edit">
+          <svg><use href="#i-edit" /></svg>Grant / update access
         </button>
-        <span class="customer-view__sep" aria-hidden="true">/</span>
-        <strong id="customer-view-title">Customer</strong>
       </div>
       <div class="customer-view__grid">
         <aside class="customer-side">
@@ -144,9 +149,6 @@
               <div><dt>Notes</dt><dd id="cv-notes"> - </dd></div>
             </dl>
           </div>
-          <button type="button" class="btn btn-outline btn-block" id="cv-edit">
-            <svg><use href="#i-edit" /></svg>Grant / update access
-          </button>
         </aside>
         <section class="customer-main">
           <div class="customer-subtabs" role="tablist">
