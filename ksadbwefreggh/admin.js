@@ -307,8 +307,6 @@
     const customersTab = !$("tab-customers").classList.contains("hidden");
     $("app-view").classList.toggle("is-customer", customer);
     $("app-view").classList.toggle("is-list", !customer && customersTab);
-    const tools = $("customers-tools");
-    if (tools) tools.classList.toggle("hidden", customer || !customersTab);
   }
 
   function setCustomerMode(on) {

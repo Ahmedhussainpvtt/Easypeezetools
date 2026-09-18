@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="admin.css?v=20260918b" />
+  <link rel="stylesheet" href="admin.css?v=20260918c" />
   <link rel="icon" href="/favicon.png" type="image/png" />
 </head>
 <body>
@@ -277,19 +277,6 @@
           <button type="button" class="tab" data-tab="blog" role="tab">Blog</button>
           <button type="button" class="tab" data-tab="notice" role="tab">Notice</button>
         </nav>
-        <div class="table-card__tools" id="customers-tools">
-          <label class="search-field">
-            <svg aria-hidden="true"><use href="#i-search" /></svg>
-            <span class="sr-only">Search customers</span>
-            <input type="search" id="search-users" placeholder="Search name, email, plan..." autocomplete="off" />
-          </label>
-          <button type="button" class="btn btn-outline" id="btn-refresh">
-            <svg><use href="#i-refresh" /></svg>Refresh
-          </button>
-          <button type="button" class="btn btn-primary" id="btn-new-user">
-            <svg><use href="#i-plus" /></svg>New customer
-          </button>
-        </div>
       </div>
 
       <section id="tab-customers" class="tab-panel">
@@ -325,6 +312,19 @@
             <div class="table-card__title">
               <h2>Customers</h2>
               <span class="count-pill" id="table-count">0</span>
+            </div>
+            <div class="table-card__tools">
+              <label class="search-field">
+                <svg aria-hidden="true"><use href="#i-search" /></svg>
+                <span class="sr-only">Search customers</span>
+                <input type="search" id="search-users" placeholder="Search name, email, plan..." autocomplete="off" />
+              </label>
+              <button type="button" class="btn btn-outline" id="btn-refresh">
+                <svg><use href="#i-refresh" /></svg>Refresh
+              </button>
+              <button type="button" class="btn btn-primary" id="btn-new-user">
+                <svg><use href="#i-plus" /></svg>New customer
+              </button>
             </div>
           </div>
           <div class="table-scroll">
@@ -520,6 +520,6 @@
 
   <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
 
-  <script src="admin.js?v=20260918b"></script>
+  <script src="admin.js?v=20260918c"></script>
 </body>
 </html>
