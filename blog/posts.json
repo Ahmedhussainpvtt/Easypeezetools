@@ -1,5 +1,51 @@
 [
   {
+    "slug": "page-numbers-bookmarks-pdf-editor-india-packs",
+    "title": "Page numbers and order: finish a portal pack in a Pdf Editor",
+    "description": "Indian portals reject jumbled packs. Use a Pdf Editor to order pages, drop blanks, and keep a readable filename before you hit upload.",
+    "date": "2026-09-18",
+    "url": "/blog/page-numbers-bookmarks-pdf-editor-india-packs/",
+    "image": "/images/hero-tools.jpg",
+    "tags": [
+      "Pdf Editor",
+      "merge PDF",
+      "split PDF",
+      "KYC PDF pack",
+      "India portals"
+    ]
+  },
+  {
+    "slug": "print-to-pdf-vs-real-pdf-editor-forms",
+    "title": "Print to PDF is not a Pdf Editor: filling Indian forms on Windows",
+    "description": "Chrome print-to-PDF flattens a page. A real Pdf Editor lets you type on the form, keep a copy, and avoid re-printing when one field was wrong.",
+    "date": "2026-09-17",
+    "url": "/blog/print-to-pdf-vs-real-pdf-editor-forms/",
+    "image": "/images/blog-forms.jpg",
+    "tags": [
+      "Pdf Editor",
+      "fill PDF form",
+      "type on PDF",
+      "Windows PDF editor",
+      "India"
+    ]
+  },
+  {
+    "slug": "ca-month-end-batch-pdf-editor-windows",
+    "title": "CA month-end packs: batch work in a Windows Pdf Editor",
+    "description": "Month-end GST and client folders mean dozens of invoices. How a desktop Pdf Editor on Windows beats tab-by-tab online tools for merge, compress, and naming.",
+    "date": "2026-09-16",
+    "url": "/blog/ca-month-end-batch-pdf-editor-windows/",
+    "image": "/images/merge-files.jpg",
+    "tags": [
+      "Pdf Editor",
+      "PDF editor Windows",
+      "merge PDF",
+      "compress PDF",
+      "GST",
+      "India"
+    ]
+  },
+  {
     "slug": "offline-pdf-editor-vs-browser-local-tools",
     "title": "Offline Windows PDF editor vs in-browser “no upload” tools",
     "description": "Browser WebAssembly tools can stay on-device - but a desktop app still wins for daily KYC packs, batch compress, and working without the tab dying.",
