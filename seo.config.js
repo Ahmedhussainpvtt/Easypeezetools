@@ -68,7 +68,7 @@ module.exports = {
     '/': {
       title: 'Easy Peeze Tools - Pdf Buddy & Kharch Log | Simple tools. Zero hassle.',
       description:
-        'Easy Peeze Tools: your data stays yours. Pdf Buddy - 100% local Windows PDF editor (3 free edits/day, then ₹299/year or ₹999 lifetime). Kharch Log - expenses in your Google Sheet (₹149 lifetime).',
+        'Easy Peeze Tools: your data stays yours. Pdf Buddy - 100% local Windows PDF editor (2 free edits/day after Google sign-in, then ₹299/year or ₹999 lifetime). Kharch Log - expenses in your Google Sheet (₹149 lifetime).',
       changefreq: 'weekly',
       priority: 1.0,
       schemaType: 'WebSite',
@@ -93,7 +93,7 @@ module.exports = {
     },
     '/download/': {
       title: 'Download Pdf Buddy for Windows',
-      description: 'Download Pdf Buddy - free PDF editor for Windows with 3 edits/day. No upload, files stay local.',
+      description: 'Download Pdf Buddy - free PDF editor for Windows with 2 edits/day after Google sign-in. No upload, files stay local.',
       priority: 0.8,
     },
     '/blog/': {
@@ -145,7 +145,7 @@ module.exports = {
     },
     '/pay/': {
       title: 'Pay - Pdf Buddy | Easy Peeze Tools',
-      description: 'Unlock Pdf Buddy yearly or lifetime. Free tier: 3 edits/day with no subscription.',
+      description: 'Unlock Pdf Buddy yearly or lifetime. Free tier: 2 edits/day after Google sign-in.',
       noindex: true,
       sitemap: false,
     },
