@@ -157,12 +157,43 @@ function ensureGtag(html, id) {
   return html.replace(/<head[^>]*>/i, (open) => `${open}\n${gtagSnippet(id)}`);
 }
 
-function applyGtagToTree(siteDir, gtagId, dryRun) {
-  if (!gtagId) return 0;
+function stripGtag(html) {
+  return html.replace(
+    /\s*<!-- Google tag \(gtag\.js\) -->[\s\S]*?gtag\('config',\s*'G-[A-Z0-9]+'\);\s*<\/script>\s*/i,
+    '\n'
+  );
+}
+
+function stripAmplitude(html) {
+  html = html.replace(
+    /\s*<!-- Amplitude -->\s*<script src="https:\/\/cdn\.amplitude\.com\/script\/[^"]+\.js"><\/script><script>window\.amplitude[\s\S]*?<\/script>\s*/i,
+    '\n'
+  );
+  return html.replace(
+    /\s*<script src="https:\/\/cdn\.amplitude\.com\/script\/[^"]+\.js"><\/script>\s*<script>window\.amplitude[\s\S]*?<\/script>\s*/i,
+    '\n'
+  );
+}
+
+const INTERNAL_SKIP_PATHS = ['/ksadbwefreggh/'];
+
+function applyGtagToTree(siteDir, gtagId, dryRun, skipPrefixes = INTERNAL_SKIP_PATHS) {
   let n = 0;
+  if (gtagId) {
+    for (const file of walkHtmlFiles(siteDir, skipPrefixes)) {
+      const html = fs.readFileSync(file, 'utf8');
+      const next = ensureGtag(html, gtagId);
+      if (next === html) continue;
+      if (!dryRun) fs.writeFileSync(file, next, 'utf8');
+      n += 1;
+    }
+  }
   for (const file of walkHtmlFiles(siteDir, [])) {
+    const pagePath = fileToUrlPath(siteDir, file);
+    const skipped = skipPrefixes.some((p) => pagePath === p || pagePath.startsWith(p));
+    if (!skipped) continue;
     const html = fs.readFileSync(file, 'utf8');
-    const next = ensureGtag(html, gtagId);
+    const next = stripAmplitude(stripGtag(html));
     if (next === html) continue;
     if (!dryRun) fs.writeFileSync(file, next, 'utf8');
     n += 1;
@@ -283,8 +314,11 @@ function applyPageSeo(html, cfg, pagePath, page) {
     ? 'noindex'
     : page.robots || cfg.defaults.robots;
 
-  html = ensureGtag(html, cfg.site && cfg.site.gtagId);
-  if (!String(pagePath || '').startsWith('/ksadbwefreggh')) {
+  const isInternal = String(pagePath || '').startsWith('/ksadbwefreggh');
+  if (isInternal) {
+    html = stripAmplitude(stripGtag(html));
+  } else {
+    html = ensureGtag(html, cfg.site && cfg.site.gtagId);
     html = ensureAmplitude(html, cfg.site && cfg.site.amplitudeApiKey);
   }
   html = upsertTitle(html, title);
