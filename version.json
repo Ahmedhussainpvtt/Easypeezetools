@@ -1,8 +1,8 @@
 {
-  "versionCode": 91,
-  "versionName": "1.0.93",
+  "versionCode": 96,
+  "versionName": "1.0.96",
   "installerUrl": "https://github.com/Ahmedhussainpvtt/Easypeezetools/releases/latest",
   "installerExeHint": "Pdf-Buddy-by-Easy-Peeze-Tools-Setup",
   "apkUrl": "",
-  "notes": "Pdf Buddy by Easy Peeze Tools \u2014 auto-update via GitHub Releases"
+  "notes": "Pdf Buddy by Easy Peeze Tools - auto-update via GitHub Releases"
 }
