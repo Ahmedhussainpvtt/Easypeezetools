@@ -22,10 +22,7 @@
   if (productParam === 'kharchlog') planKey = 'lifetime';
   else if (planKey !== 'lifetime') planKey = 'yearly';
   var plan = (cfg.plans && cfg.plans[planKey]) || cfg.plans.yearly || cfg.plans.lifetime;
-  // Staging keeps sandbox client id in page config. Production waits for /health (live).
-  var USD_ENABLED = !!(cfg.staging
-    ? cfg.paypalClientId || cfg.usdEnabled
-    : cfg.paypalClientId && cfg.usdEnabled && String(cfg.paypalMode || '').toLowerCase() === 'live');
+  var USD_ENABLED = cfg.usdEnabled !== false;
   var requestedCurrency = (params.get('currency') || 'INR').toUpperCase();
   var currency = USD_ENABLED && requestedCurrency === 'USD' ? 'USD' : 'INR';
   var firstNameInput = document.getElementById('firstName');
@@ -38,20 +35,16 @@
   var priceEl = document.getElementById('pay-price');
   var titleEl = document.getElementById('pay-title');
   var fineEl = document.getElementById('pay-fine');
-  var paypalSdkReady = null;
-  var paypalRendered = false;
 
   function refreshUsdFromHealth() {
-    if (cfg.staging || !cfg.trackerUrl) return Promise.resolve();
+    if (!cfg.trackerUrl) return Promise.resolve();
     return fetch(cfg.trackerUrl.replace(/\/$/, '') + '/health', { credentials: 'omit' })
       .then(function (r) {
         return r.json();
       })
       .then(function (h) {
         if (!h || !h.ok) return;
-        if (h.paypalClientId) cfg.paypalClientId = h.paypalClientId;
-        if (h.paypalMode) cfg.paypalMode = h.paypalMode;
-        USD_ENABLED = !!(h.usdEnabled && h.paypalClientId);
+        USD_ENABLED = !!(h.usdEnabled && h.razorpay);
         if (!USD_ENABLED && currency === 'USD') currency = 'INR';
         else if (USD_ENABLED && requestedCurrency === 'USD') currency = 'USD';
         syncPrice();
@@ -71,20 +64,19 @@
         priceLabel() + ' <span class="pay-once" id="pay-once">' + (plan.once || '') + '</span>';
     }
     if (payBtn) {
-      payBtn.hidden = currency === 'USD';
-      payBtn.classList.toggle('is-hidden', currency === 'USD');
-      payBtn.setAttribute('aria-hidden', currency === 'USD' ? 'true' : 'false');
-      payBtn.textContent =
-        currency === 'USD' ? 'Pay with PayPal' : 'Continue to pay';
+      payBtn.hidden = false;
+      payBtn.classList.remove('is-hidden');
+      payBtn.setAttribute('aria-hidden', 'false');
+      payBtn.textContent = 'Continue to pay';
     }
     if (paypalWrap) {
-      paypalWrap.hidden = currency !== 'USD';
-      paypalWrap.classList.toggle('is-hidden', currency !== 'USD');
+      paypalWrap.hidden = true;
+      paypalWrap.classList.add('is-hidden');
     }
-    if (fineEl) {
+    if (fineEl && productParam !== 'kharchlog') {
       fineEl.innerHTML =
         currency === 'USD'
-          ? 'Secure checkout via PayPal (USD). <a href="../download/" rel="noopener">Download free instead</a> · <a href="../pricing/">Back to pricing</a>'
+          ? 'Secure checkout via Razorpay (USD, PayPal available in the payment window). <a href="../download/" rel="noopener">Download free instead</a> · <a href="../pricing/">Back to pricing</a>'
           : '<a href="../download/" rel="noopener">Download free instead</a> · <a href="../pricing/">Back to pricing</a>';
     }
     document.querySelectorAll('.pay-currency__btn').forEach(function (btn) {
@@ -105,9 +97,6 @@
         btn.textContent = 'Pay in $ USD';
       }
     });
-    if (currency === 'USD' && USD_ENABLED) {
-      ensurePaypalButtons();
-    }
   }
 
   syncPrice();
@@ -263,16 +252,6 @@
     });
   }
 
-  function capturePaypal(payload) {
-    return fetch(apiBase() + '/paypal/capture', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    }).then(function (r) {
-      return r.json();
-    });
-  }
-
   function readBuyer() {
     var firstName = normalizeName((firstNameInput && firstNameInput.value) || '');
     var lastName = normalizeName((lastNameInput && lastNameInput.value) || '');
@@ -312,141 +291,6 @@
     };
   }
 
-  function loadPaypalSdk() {
-    if (window.paypal) return Promise.resolve();
-    if (paypalSdkReady) return paypalSdkReady;
-    var clientId = cfg.paypalClientId;
-    if (!clientId) return Promise.reject(new Error('PayPal is not configured'));
-    // Guest debit/credit on PayPal India often hangs on "Pay Now" for USD.
-    // Force PayPal wallet login (or create account) - much more reliable.
-    var qs =
-      'client-id=' +
-      encodeURIComponent(clientId) +
-      '&currency=USD&intent=capture&components=buttons' +
-      '&disable-funding=card,credit,paylater,venmo';
-    paypalSdkReady = new Promise(function (resolve, reject) {
-      var s = document.createElement('script');
-      s.src = 'https://www.paypal.com/sdk/js?' + qs;
-      s.onload = function () {
-        resolve();
-      };
-      s.onerror = function () {
-        reject(new Error('PayPal SDK failed to load'));
-      };
-      document.head.appendChild(s);
-    });
-    return paypalSdkReady;
-  }
-
-  function ensurePaypalButtons() {
-    if (!paypalWrap || paypalRendered || !USD_ENABLED) return;
-    loadPaypalSdk()
-      .then(function () {
-        if (paypalRendered || !window.paypal) return;
-        paypalRendered = true;
-        window.paypal
-          .Buttons({
-            style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'paypal' },
-            createOrder: function () {
-              var buyer = readBuyer();
-              if (!buyer) return Promise.reject(new Error('VALIDATION'));
-              setStatus('Creating PayPal order…');
-              return createOrder({
-                email: buyer.email,
-                phone: buyer.phone,
-                firstName: buyer.firstName,
-                lastName: buyer.lastName,
-                name: buyer.displayName,
-                product: cfg.product || 'pdfbuddy',
-                planType: plan.planType,
-                currency: 'USD',
-                staging: !!cfg.staging
-              }).then(function (orderData) {
-                if (!orderData || !orderData.ok || orderData.provider !== 'paypal' || !orderData.orderId) {
-                  throw new Error((orderData && orderData.error) || 'Could not start PayPal checkout');
-                }
-                setStatus('Continue in PayPal…');
-                return orderData.orderId;
-              }).catch(function (e) {
-                var m = paymentFailMessage(e, 'Could not start PayPal checkout. Please try again.');
-                if (!/VALIDATION/i.test(String((e && e.message) || ''))) setStatus(m, true);
-                else if (statusEl && statusEl.textContent) {
-                  /* validation already set status */
-                } else setStatus(m, true);
-                throw new Error('VALIDATION');
-              });
-            },
-            onApprove: function (data) {
-              var buyer = readBuyer() || {
-                email: (emailInput.value || '').trim().toLowerCase(),
-                firstName: normalizeName((firstNameInput && firstNameInput.value) || ''),
-                lastName: normalizeName((lastNameInput && lastNameInput.value) || ''),
-                phone: normalizePhone((phoneInput && phoneInput.value) || '') || ''
-              };
-              setStatus('Confirming PayPal payment…');
-              return capturePaypal({
-                orderId: data.orderID,
-                email: buyer.email,
-                phone: buyer.phone,
-                firstName: buyer.firstName,
-                lastName: buyer.lastName,
-                product: cfg.product || 'pdfbuddy',
-                planType: plan.planType,
-                staging: !!cfg.staging
-              })
-                .then(function (result) {
-                  if (!result || !result.ok) {
-                    throw new Error(
-                      paymentFailMessage(result, 'PayPal could not complete this payment. Please try again.')
-                    );
-                  }
-                  var q = new URLSearchParams();
-                  q.set('email', result.email || buyer.email);
-                  q.set('firstName', buyer.firstName || '');
-                  q.set('lastName', buyer.lastName || '');
-                  q.set('product', cfg.product || 'pdfbuddy');
-                  q.set('plan', plan.planType);
-                  q.set('phone', buyer.phone || '');
-                  q.set('provider', 'paypal');
-                  if (result.paymentId) q.set('payment_id', result.paymentId);
-                  if (result.orderId) q.set('order_id', result.orderId);
-                  q.set('paid', result.paid ? '1' : '0');
-                  if (result.staging) q.set('staging', '1');
-                  if (result.message) q.set('msg', result.message);
-                  window.location.href = 'success.html?' + q.toString();
-                })
-                .catch(function (e) {
-                  setStatus(
-                    paymentFailMessage(e, 'PayPal payment failed. Please try again.'),
-                    true
-                  );
-                  throw e;
-                });
-            },
-            onCancel: function () {
-              setStatus(
-                'Looks like you closed the payment window. Please try again when you’re ready.',
-                true
-              );
-            },
-            onError: function (err) {
-              console.error('PayPal onError', err);
-              setStatus(
-                paymentFailMessage(
-                  err,
-                  'Looks like you closed the payment window. Please try again when you’re ready.'
-                ),
-                true
-              );
-            }
-          })
-          .render('#paypal-buttons');
-      })
-      .catch(function (e) {
-        setStatus((e && e.message) || 'PayPal failed to load', true);
-      });
-  }
-
   function openRazorpay(buyer, orderData) {
     return new Promise(function (resolve, reject) {
       var fullName = [buyer.firstName, buyer.lastName].filter(Boolean).join(' ');
@@ -461,7 +305,8 @@
           lastName: buyer.lastName,
           name: fullName,
           product: cfg.product || 'pdfbuddy',
-          planType: plan.planType
+          planType: plan.planType,
+          currency: orderData.currency || currency
         },
         theme: { color: '#0085FF' },
         handler: function (response) {
@@ -507,11 +352,6 @@
 
   if (payBtn) {
     payBtn.addEventListener('click', function () {
-      if (currency === 'USD') {
-        setStatus('Use the PayPal buttons below to pay in USD');
-        ensurePaypalButtons();
-        return;
-      }
       var buyer = readBuyer();
       if (!buyer) return;
       if (
@@ -545,9 +385,6 @@
       })
         .then(function (data) {
           if (!data || !data.ok) throw new Error((data && data.error) || 'Could not start checkout');
-          if (data.provider === 'paypal') {
-            throw new Error('Use the PayPal buttons for USD checkout');
-          }
           if (data.provider !== 'razorpay') {
             throw new Error('Unexpected payment provider');
           }

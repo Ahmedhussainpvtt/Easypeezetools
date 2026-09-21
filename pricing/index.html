@@ -17,7 +17,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pricing - Pdf Buddy & Kharch Log</title>
-  <meta name="description" content="Pdf Buddy from ₹299/year. Kharch Log lifetime ₹149. Pay in INR (Razorpay) or USD (PayPal)." />
+  <meta name="description" content="Pdf Buddy from ₹299/year. Kharch Log lifetime ₹149. Pay in INR or USD via Razorpay." />
   <meta name="keywords" content="pdf editor, free pdf editor, best pdf editor, pdf editor free download, best free pdf editor, pdf editor windows, free pdf editor windows, best pdf editor for windows, best pdf editor for windows 10, best pdf editor for windows 11, pdf editor free offline, desktop pdf editor, pdf editor software, edit pdf file, edit pdf text, add text to pdf, type on pdf free, pdf text editor, edit scanned pdf, ocr pdf editor, pdf digital signature, sign pdf digitally, pdf form filler free, fill and sign pdf, convert pdf to editable word, pdf to word editable free, convert scanned pdf to editable pdf, pdf editor free no sign up, online pdf editor free no sign up, pdf filler free online, pdf editor online free without watermark, modify pdf, pdf writer free, pdf reader and editor, free pdf annotator, cheap pdf editor, buy pdf editor, pdf editor without subscription, open source pdf editor, foxit pdf" />
   <meta name="author" content="Easy Peeze Tools" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -38,7 +38,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Easy Peeze Tools" />
   <meta property="og:title" content="Pricing - Pdf Buddy &amp; Kharch Log" />
-  <meta property="og:description" content="Pdf Buddy from ₹299/year. Kharch Log lifetime ₹149. Pay in INR (Razorpay) or USD (PayPal)." />
+  <meta property="og:description" content="Pdf Buddy from ₹299/year. Kharch Log lifetime ₹149. Pay in INR or USD via Razorpay." />
   <meta property="og:url" content="https://easypeeze.com/pricing/" />
   <meta property="og:image" content="https://easypeeze.com/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
@@ -46,7 +46,7 @@
   <meta property="og:locale" content="en_IN" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Pricing - Pdf Buddy &amp; Kharch Log" />
-  <meta name="twitter:description" content="Pdf Buddy from ₹299/year. Kharch Log lifetime ₹149. Pay in INR (Razorpay) or USD (PayPal)." />
+  <meta name="twitter:description" content="Pdf Buddy from ₹299/year. Kharch Log lifetime ₹149. Pay in INR or USD via Razorpay." />
   <meta name="twitter:image" content="https://easypeeze.com/og-image.jpg" />
   
   <script type="application/ld+json">
@@ -96,7 +96,7 @@
         "@id": "https://easypeeze.com/pricing/#webpage",
         "url": "https://easypeeze.com/pricing/",
         "name": "Pricing - Pdf Buddy & Kharch Log",
-        "description": "Pdf Buddy from ₹299/year. Kharch Log lifetime ₹149. Pay in INR (Razorpay) or USD (PayPal).",
+        "description": "Pdf Buddy from ₹299/year. Kharch Log lifetime ₹149. Pay in INR or USD via Razorpay.",
         "isPartOf": {
           "@id": "https://easypeeze.com/#website"
         },
@@ -151,7 +151,7 @@
     <div class="page-hero section page-hero--pricing">
       <p class="crumbs"><a href="/">Home</a> / Pricing</p>
       <h1>Pricing of goods &amp; services</h1>
-      <p><strong>Your data stays yours.</strong> Digital software licenses for Pdf Buddy and Kharch Log. Billed in <strong>INR</strong> or <strong>USD</strong> (PayPal). Seller: <strong>Easy Peeze Tools</strong> (India).</p>
+      <p><strong>Your data stays yours.</strong> Digital software licenses for Pdf Buddy and Kharch Log. Billed in <strong>INR</strong> or <strong>USD</strong> via Razorpay (PayPal is offered for USD). Seller: <strong>Easy Peeze Tools</strong> (India).</p>
       <div class="pay-currency pricing-currency" role="group" aria-label="Currency">
         <button type="button" class="pay-currency__btn is-active" data-currency="INR" id="currencyInr">₹ INR</button>
         <button type="button" class="pay-currency__btn pay-currency__btn--soon" data-currency="USD" id="currencyUsd"
@@ -340,12 +340,12 @@
         apply();
       });
     });
-    // Gate USD on live PayPal (/health.usdEnabled) so sandbox never shows on production.
+    // Gate USD on Razorpay (/health.usdEnabled).
     setUsdEnabled(false);
     fetch(trackerUrl + '/health', { credentials: 'omit' })
       .then(function (r) { return r.json(); })
       .then(function (h) {
-        setUsdEnabled(!!(h && h.usdEnabled && h.paypalClientId));
+        setUsdEnabled(!!(h && h.usdEnabled && h.razorpay));
       })
       .catch(function () { setUsdEnabled(false); });
   })();
