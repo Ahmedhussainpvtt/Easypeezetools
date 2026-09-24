@@ -1,7 +1,7 @@
 (() => {
   const API =
     window.EASYPEEZE_ADMIN_API ||
-    "https://kharchlog-license-u4rcttr3nq-el.a.run.app";
+    "https://easypeeze-tools-u4rcttr3nq-el.a.run.app";
   const TOKEN_KEY = "easypeeze_admin_token";
   const EMAIL_KEY = "easypeeze_admin_email";
   const EXPIRES_KEY = "easypeeze_admin_expires";
@@ -15,6 +15,8 @@
   let memoryEmail = "";
   let lastActivity = 0;
   let lastHeartbeat = 0;
+  let pendingChallengeId = "";
+  let pendingEmail = "";
 
   const esc = (v) =>
     String(v ?? "").replace(/[&<>"']/g, (c) =>
@@ -203,6 +205,7 @@
   }
 
   function showLogin() {
+    resetLoginSteps();
     $("login-view").classList.remove("hidden");
     $("app-view").classList.add("hidden");
   }
@@ -665,6 +668,19 @@
     input.focus();
   });
 
+  function resetLoginSteps() {
+    pendingChallengeId = "";
+    pendingEmail = "";
+    const otpBox = $("login-step-otp");
+    const passBox = $("login-step-password");
+    const otpInput = $("login-otp");
+    if (otpBox) otpBox.classList.add("hidden");
+    if (passBox) passBox.classList.remove("hidden");
+    if (otpInput) otpInput.value = "";
+    const emailInput = $("login-email");
+    if (emailInput) emailInput.readOnly = false;
+  }
+
   $("login-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const btn = $("login-btn");
@@ -674,6 +690,30 @@
     btn.classList.add("is-busy");
     btn.setAttribute("aria-busy", "true");
     try {
+      if (pendingChallengeId) {
+        const otp = String($("login-otp").value || "").replace(/\D/g, "");
+        $("login-otp").value = "";
+        if (!/^\d{8}$/.test(otp)) throw new Error("Enter the 8-digit code from email");
+        const otpProof = await sha256Hex(`easypeeze-admin-otp-v1\n${pendingChallengeId}\n${otp}`);
+        const data = await fetch(`${API}/admin/login-otp`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            challengeId: pendingChallengeId,
+            otpProof,
+            device: collectDeviceInfo()
+          })
+        }).then(async (r) => {
+          const j = await r.json().catch(() => ({}));
+          if (!r.ok || j.ok === false) throw new Error(j.error || `HTTP ${r.status}`);
+          return j;
+        });
+        resetLoginSteps();
+        setSession(data.token, data.email);
+        showApp();
+        await loadUsers();
+        return;
+      }
       const email = $("login-email").value.trim();
       const password = $("login-password").value;
       const passwordHash = await passwordHashForLogin(email, password);
@@ -687,9 +727,15 @@
         if (!r.ok || j.ok === false) throw new Error(j.error || `HTTP ${r.status}`);
         return j;
       });
-      setSession(data.token, data.email);
-      showApp();
-      await loadUsers();
+      if (!data.otpRequired || !data.challengeId) {
+        throw new Error("Sign-in code required");
+      }
+      pendingChallengeId = String(data.challengeId);
+      pendingEmail = email;
+      $("login-email").readOnly = true;
+      $("login-step-password").classList.add("hidden");
+      $("login-step-otp").classList.remove("hidden");
+      $("login-otp").focus();
     } catch (ex) {
       err.textContent = ex.message || "Login failed";
       err.hidden = false;

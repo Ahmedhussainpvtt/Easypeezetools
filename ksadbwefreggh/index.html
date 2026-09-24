@@ -60,7 +60,7 @@
   </svg>
 
   <div id="login-view" class="login-shell hidden">
-    <form class="login-card" id="login-form" autocomplete="on">
+    <form class="login-card" id="login-form" autocomplete="on" novalidate>
       <img class="login-logo" src="/logo.png" alt="" width="48" height="48" />
       <h1>Super Admin</h1>
       <p class="login-sub">Easy Peeze Tools · customers &amp; blog control</p>
@@ -68,16 +68,25 @@
         <span>Email</span>
         <input id="login-email" type="email" name="email" required value="easypeezetools@gmail.com" autocomplete="username" />
       </label>
-      <label>
-        <span>Password</span>
-        <div class="password-wrap">
-          <input id="login-password" type="password" name="password" required autocomplete="current-password" />
-          <button type="button" class="password-toggle" id="login-password-toggle" aria-label="Show password" aria-pressed="false">
-            <svg class="eye-show"><use href="#i-eye" /></svg>
-            <svg class="eye-hide hidden"><use href="#i-eye-off" /></svg>
-          </button>
-        </div>
-      </label>
+      <div id="login-step-password">
+        <label>
+          <span>Password</span>
+          <div class="password-wrap">
+            <input id="login-password" type="password" name="password" required autocomplete="current-password" />
+            <button type="button" class="password-toggle" id="login-password-toggle" aria-label="Show password" aria-pressed="false">
+              <svg class="eye-show"><use href="#i-eye" /></svg>
+              <svg class="eye-hide hidden"><use href="#i-eye-off" /></svg>
+            </button>
+          </div>
+        </label>
+      </div>
+      <div id="login-step-otp" class="hidden">
+        <p class="login-sub" id="login-otp-hint">We emailed an 8-digit code to easypeezetools@gmail.com. It is not shown in this page or in the API response.</p>
+        <label>
+          <span>Sign-in code</span>
+          <input id="login-otp" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="12" />
+        </label>
+      </div>
       <p id="login-error" class="form-error" hidden></p>
       <button type="submit" class="btn btn-primary btn-block" id="login-btn">Sign in</button>
     </form>
@@ -523,6 +532,6 @@
 
   <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
 
-  <script src="admin.js?v=20260918d"></script>
+  <script src="admin.js?v=20260924otp"></script>
 </body>
 </html>
