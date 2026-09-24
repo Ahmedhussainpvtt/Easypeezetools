@@ -186,6 +186,7 @@
       return "blog-delete";
     }
     if (p === "/admin/fanout") return "fanout";
+    if (p === "/admin/release-device") return "release-device";
     return "";
   }
 
@@ -905,6 +906,41 @@
       btn.removeAttribute("aria-busy");
     }
   });
+
+  $("cv-release-device").addEventListener("click", async () => {
+    if (!currentCustomerEmail) return;
+    const btn = $("cv-release-device");
+    if (btn.classList.contains("is-busy")) return;
+    if (
+      !confirm(
+        `Release the device lock for ${currentCustomerEmail}? Their current phone will be signed out. They can sign in on a new phone after this.`
+      )
+    ) {
+      return;
+    }
+    btn.disabled = true;
+    btn.classList.add("is-busy");
+    btn.setAttribute("aria-busy", "true");
+    try {
+      const data = await api("/admin/release-device", {
+        method: "POST",
+        body: JSON.stringify({ email: currentCustomerEmail })
+      });
+      toast(
+        data.hadLock
+          ? "Device lock released. They can sign in on a new phone."
+          : "No active device lock. They can sign in on a new phone.",
+        "ok"
+      );
+    } catch (ex) {
+      toast(ex.message || "Release failed", "error");
+    } finally {
+      btn.disabled = false;
+      btn.classList.remove("is-busy");
+      btn.removeAttribute("aria-busy");
+    }
+  });
+
   document.querySelectorAll(".customer-subtab").forEach((btn) => {
     btn.addEventListener("click", () => {
       document.querySelectorAll(".customer-subtab").forEach((b) => b.classList.remove("is-active"));
