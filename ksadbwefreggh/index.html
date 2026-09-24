@@ -132,6 +132,7 @@
               <div><dt>Phone</dt><dd><input id="cv-phone" class="cell-mono" type="tel" maxlength="20" autocomplete="off" /></dd></div>
               <div><dt>First seen</dt><dd id="cv-first-seen"> - </dd></div>
               <div><dt>Last seen</dt><dd id="cv-last-seen"> - </dd></div>
+              <div><dt>Country</dt><dd id="cv-country"> - </dd></div>
               <div><dt>Notes</dt><dd><textarea id="cv-notes" rows="3" maxlength="400"></textarea></dd></div>
             </dl>
           </div>
@@ -401,6 +402,18 @@
               <span>H2</span>
               <input id="notice-h2" required maxlength="220" placeholder="Download it from playstore now" />
             </label>
+            <div class="country-picker">
+              <div class="country-picker__head">
+                <span>Countries</span>
+                <div class="country-picker__actions">
+                  <button type="button" class="linkish" id="notice-countries-all">Select all</button>
+                  <button type="button" class="linkish" id="notice-countries-none">Deselect all</button>
+                </div>
+              </div>
+              <p class="muted country-picker__hint" id="notice-countries-summary">All countries selected</p>
+              <input id="notice-country-search" type="search" placeholder="Search countries…" autocomplete="off" />
+              <div id="notice-country-list" class="country-picker__list" role="group" aria-label="Target countries"></div>
+            </div>
             <p id="notice-msg" class="form-msg" hidden></p>
             <button type="submit" class="btn btn-primary">Send</button>
           </form>

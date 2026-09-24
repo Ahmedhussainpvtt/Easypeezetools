@@ -446,10 +446,22 @@
     $("cv-phone").value = user.phone || "";
     $("cv-first-seen").textContent = formatWhen(user.firstSeen);
     $("cv-last-seen").textContent = formatWhen(user.lastSeen);
+    $("cv-country").textContent = countryLabel(user.countryIso);
     $("cv-notes").value = user.notes || "";
     renderLoginHistory(user.loginHistory);
     fillSubFields("cv-kh", user.kharchlog);
     fillSubFields("cv-pdf", user.pdfbuddy);
+  }
+
+  function countryLabel(iso) {
+    const code = String(iso || "").trim().toUpperCase();
+    if (!code) return " - ";
+    try {
+      const name = new Intl.DisplayNames(["en"], { type: "region" }).of(code);
+      return name ? `${name} (${code})` : code;
+    } catch {
+      return code;
+    }
   }
 
   async function openCustomer(email) {
@@ -851,11 +863,109 @@
   $("notice-h1").addEventListener("input", syncNoticePreview);
   $("notice-h2").addEventListener("input", syncNoticePreview);
 
+  const NOTICE_COUNTRIES = (() => {
+    const codes = [
+      "AF","AL","DZ","AS","AD","AO","AI","AQ","AG","AR","AM","AW","AU","AT","AZ","BS","BH","BD","BB","BY",
+      "BE","BZ","BJ","BM","BT","BO","BA","BW","BR","BN","BG","BF","BI","KH","CM","CA","CV","KY","CF","TD",
+      "CL","CN","CO","KM","CG","CD","CR","CI","HR","CU","CY","CZ","DK","DJ","DM","DO","EC","EG","SV","GQ",
+      "ER","EE","SZ","ET","FJ","FI","FR","GA","GM","GE","DE","GH","GI","GR","GL","GD","GU","GT","GN","GW",
+      "GY","HT","HN","HK","HU","IS","IN","ID","IR","IQ","IE","IL","IT","JM","JP","JO","KZ","KE","KI","KP",
+      "KR","KW","KG","LA","LV","LB","LS","LR","LY","LI","LT","LU","MO","MG","MW","MY","MV","ML","MT","MH",
+      "MR","MU","MX","FM","MD","MC","MN","ME","MA","MZ","MM","NA","NR","NP","NL","NZ","NI","NE","NG","MK",
+      "NO","OM","PK","PW","PS","PA","PG","PY","PE","PH","PL","PT","PR","QA","RO","RU","RW","KN","LC","VC",
+      "WS","SM","ST","SA","SN","RS","SC","SL","SG","SK","SI","SB","SO","ZA","SS","ES","LK","SD","SR","SE",
+      "CH","SY","TW","TJ","TZ","TH","TL","TG","TO","TT","TN","TR","TM","UG","UA","AE","GB","US","UY","UZ",
+      "VU","VE","VN","YE","ZM","ZW"
+    ];
+    let names;
+    try {
+      names = new Intl.DisplayNames(["en"], { type: "region" });
+    } catch {
+      names = null;
+    }
+    return codes
+      .map((iso) => ({
+        iso,
+        name: (names && names.of(iso)) || iso,
+        search: `${iso} ${(names && names.of(iso)) || ""}`.toLowerCase()
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+  })();
+
+  const noticeCountrySelected = new Set(NOTICE_COUNTRIES.map((c) => c.iso));
+
+  function noticeCountrySelection() {
+    const selected = NOTICE_COUNTRIES.map((c) => c.iso).filter((iso) => noticeCountrySelected.has(iso));
+    const all = selected.length === NOTICE_COUNTRIES.length;
+    return { all, countries: selected };
+  }
+
+  function syncNoticeCountrySummary() {
+    const { all, countries } = noticeCountrySelection();
+    const el = $("notice-countries-summary");
+    if (!el) return;
+    if (all) el.textContent = "All countries selected";
+    else if (!countries.length) el.textContent = "No countries selected";
+    else if (countries.length <= 4) el.textContent = `${countries.length} selected: ${countries.join(", ")}`;
+    else el.textContent = `${countries.length} countries selected`;
+  }
+
+  function renderNoticeCountries(filter = "") {
+    const list = $("notice-country-list");
+    if (!list) return;
+    const needle = String(filter || "").trim().toLowerCase();
+    list.innerHTML = NOTICE_COUNTRIES.map((c) => {
+      const hidden = needle && !c.search.includes(needle);
+      const checked = noticeCountrySelected.has(c.iso) ? "checked" : "";
+      return `<label class="country-picker__item${hidden ? " hidden" : ""}">
+        <input type="checkbox" data-country="${c.iso}" ${checked} />
+        <span>${esc(c.name)} <span class="muted">(${esc(c.iso)})</span></span>
+      </label>`;
+    }).join("");
+  }
+
+  renderNoticeCountries();
+  syncNoticeCountrySummary();
+
+  $("notice-country-list")?.addEventListener("change", (e) => {
+    const input = e.target.closest("input[data-country]");
+    if (!input) return;
+    if (input.checked) noticeCountrySelected.add(input.dataset.country);
+    else noticeCountrySelected.delete(input.dataset.country);
+    syncNoticeCountrySummary();
+  });
+
+  $("notice-country-search")?.addEventListener("input", (e) => {
+    renderNoticeCountries(e.target.value);
+  });
+
+  $("notice-countries-all")?.addEventListener("click", () => {
+    NOTICE_COUNTRIES.forEach((c) => noticeCountrySelected.add(c.iso));
+    renderNoticeCountries($("notice-country-search")?.value || "");
+    syncNoticeCountrySummary();
+  });
+
+  $("notice-countries-none")?.addEventListener("click", () => {
+    noticeCountrySelected.clear();
+    renderNoticeCountries($("notice-country-search")?.value || "");
+    syncNoticeCountrySummary();
+  });
+
   $("notice-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const h1 = $("notice-h1").value.trim();
     const h2 = $("notice-h2").value.trim();
-    if (!confirm("Send this notice to all installs?")) return;
+    const { all, countries } = noticeCountrySelection();
+    if (!all && !countries.length) {
+      toast("Select at least one country", "error");
+      return;
+    }
+    const scope = all
+      ? "all installs"
+      : countries.length === 1
+        ? `users in ${countries[0]}`
+        : `users in ${countries.length} countries`;
+    if (!confirm(`Send this notice to ${scope}?`)) return;
     const msg = $("notice-msg");
     const btn = $("notice-form").querySelector('button[type="submit"]');
     msg.hidden = true;
@@ -863,9 +973,14 @@
     try {
       await api("/admin/fanout", {
         method: "POST",
-        body: JSON.stringify({ h1, h2 })
+        body: JSON.stringify({
+          h1,
+          h2,
+          allCountries: all,
+          countries: all ? [] : countries
+        })
       });
-      setFormMsg(msg, "Sent", "ok");
+      setFormMsg(msg, all ? "Sent to all" : `Sent to ${countries.join(", ")}`, "ok");
       toast("Sent", "ok");
     } catch (ex) {
       setFormMsg(msg, ex.message, "error");
