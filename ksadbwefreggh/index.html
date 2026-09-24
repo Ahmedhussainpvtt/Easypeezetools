@@ -81,10 +81,10 @@
         </label>
       </div>
       <div id="login-step-otp" class="hidden">
-        <p class="login-sub" id="login-otp-hint">We emailed an 8-digit code to support@easypeeze.com. It is not shown in this page or in the API response.</p>
+        <p class="login-sub" id="login-otp-hint">We emailed an 8-character code (letters and numbers) to support@easypeeze.com. It is not shown in this page or in the API response.</p>
         <label>
           <span>Sign-in code</span>
-          <input id="login-otp" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="12" />
+          <input id="login-otp" type="text" inputmode="text" autocomplete="one-time-code" maxlength="12" spellcheck="false" autocapitalize="characters" />
         </label>
       </div>
       <p id="login-error" class="form-error" hidden></p>
@@ -530,8 +530,24 @@
     </form>
   </dialog>
 
+  <dialog class="modal" id="otp-action-dialog">
+    <form id="otp-action-form">
+      <h2>Confirm with email code</h2>
+      <p class="login-sub" id="otp-action-hint">We emailed an 8-character code to support@easypeeze.com. This action cannot continue without it.</p>
+      <label>
+        <span>Code</span>
+        <input id="otp-action-input" type="text" inputmode="text" autocomplete="one-time-code" maxlength="12" spellcheck="false" autocapitalize="characters" />
+      </label>
+      <p id="otp-action-error" class="form-error" hidden></p>
+      <div class="modal__actions">
+        <button type="button" class="btn btn-ghost" id="otp-action-cancel">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="otp-action-submit">Continue</button>
+      </div>
+    </form>
+  </dialog>
+
   <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
 
-  <script src="admin.js?v=20260924otp"></script>
+  <script src="admin.js?v=20260924step"></script>
 </body>
 </html>

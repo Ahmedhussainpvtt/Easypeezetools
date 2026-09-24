@@ -169,17 +169,113 @@
     revokeOnServer(tok);
   }
 
+  function actionIntent(path, method) {
+    const p = String(path || "").split("?")[0].replace(/\/+$/, "");
+    const m = String(method || "GET").toUpperCase();
+    if (p === "/admin/paid-users.csv") return "export-users";
+    if (p === "/admin/grant-access") return "grant-access";
+    if (p === "/admin/update-user") return "update-user";
+    if (p === "/admin/revoke-access" || p === "/admin/revokeaccess" || p === "/admin/revoke") {
+      return "revoke-access";
+    }
+    if (p === "/admin/user-plans" && m === "POST") return "user-plans";
+    if (p === "/admin/migrate-plans") return "migrate-plans";
+    if (p === "/admin/blog" && m === "DELETE") return "blog-delete";
+    if (p === "/admin/blog") return "blog";
+    if (p === "/admin/blog/delete" || p === "/admin/delete-blog" || p === "/admin/deleteblog") {
+      return "blog-delete";
+    }
+    if (p === "/admin/fanout") return "fanout";
+    return "";
+  }
+
+  function normalizeActionOtp(raw) {
+    return String(raw || "")
+      .toUpperCase()
+      .replace(/[^A-Z0-9]/g, "");
+  }
+
+  function promptActionOtp() {
+    return new Promise((resolve, reject) => {
+      const dlg = $("otp-action-dialog");
+      const form = $("otp-action-form");
+      const input = $("otp-action-input");
+      const err = $("otp-action-error");
+      const cancel = $("otp-action-cancel");
+      if (!dlg || !form || !input) {
+        reject(new Error("Code required"));
+        return;
+      }
+      input.value = "";
+      if (err) err.hidden = true;
+      const finish = (fn) => {
+        form.removeEventListener("submit", onSubmit);
+        cancel.removeEventListener("click", onCancel);
+        dlg.close();
+        fn();
+      };
+      const onCancel = () => finish(() => reject(new Error("Code required")));
+      const onSubmit = (e) => {
+        e.preventDefault();
+        const otp = normalizeActionOtp(input.value);
+        input.value = "";
+        if (!/^[A-HJ-NP-Z2-9]{8}$/.test(otp)) {
+          if (err) {
+            err.textContent = "Enter the 8-character code from email";
+            err.hidden = false;
+          }
+          return;
+        }
+        finish(() => resolve(otp));
+      };
+      cancel.addEventListener("click", onCancel);
+      form.addEventListener("submit", onSubmit);
+      dlg.showModal();
+      input.focus();
+    });
+  }
+
+  async function sendStepUp(intent) {
+    const tok = token();
+    const res = await fetch(`${API}/admin/step-up`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${tok}`
+      },
+      body: JSON.stringify({ intent })
+    });
+    const j = await res.json().catch(() => ({}));
+    if (res.status === 401 && /unauthorized/i.test(String(j.error || ""))) {
+      expireSession("Session expired - please log in again");
+      throw new Error("session expired");
+    }
+    if (!res.ok || j.ok === false) throw new Error(j.error || `HTTP ${res.status}`);
+    if (!j.challengeId) throw new Error("sign-in code required");
+    return j;
+  }
+
   async function api(path, opts = {}) {
     if (!isSessionAlive()) {
       expireSession("Session expired - please log in again");
       throw new Error("session expired");
     }
+    const method = String(opts.method || "GET").toUpperCase();
     const headers = Object.assign(
       { Accept: "application/json", "Content-Type": "application/json" },
       opts.headers || {}
     );
     const tok = token();
     if (tok) headers.Authorization = `Bearer ${tok}`;
+    const intent = actionIntent(path, method);
+    if (path !== "/admin/step-up" && intent) {
+      const step = await sendStepUp(intent);
+      const otp = await promptActionOtp();
+      const otpProof = await sha256Hex(`easypeeze-admin-otp-v1\n${step.challengeId}\n${otp}`);
+      headers["X-KL-Challenge-Id"] = step.challengeId;
+      headers["X-KL-Otp-Proof"] = otpProof;
+    }
     const res = await fetch(`${API}${path}`, { ...opts, headers });
     markActivity();
     const text = await res.text();
@@ -195,8 +291,12 @@
       data = { ok: false, error: plain || "bad response" };
     }
     if (res.status === 401) {
+      const msg = String(data?.error || "");
+      if (/code required|expired code|invalid or expired/i.test(msg)) {
+        throw new Error(msg);
+      }
       expireSession("Session expired - please log in again");
-      throw new Error(data?.error || "unauthorized");
+      throw new Error(msg || "unauthorized");
     }
     if (!res.ok || data?.ok === false) {
       throw new Error(data?.error || `HTTP ${res.status}`);
@@ -691,9 +791,9 @@
     btn.setAttribute("aria-busy", "true");
     try {
       if (pendingChallengeId) {
-        const otp = String($("login-otp").value || "").replace(/\D/g, "");
+        const otp = normalizeActionOtp($("login-otp").value);
         $("login-otp").value = "";
-        if (!/^\d{8}$/.test(otp)) throw new Error("Enter the 8-digit code from email");
+        if (!/^[A-HJ-NP-Z2-9]{8}$/.test(otp)) throw new Error("Enter the 8-character code from email");
         const otpProof = await sha256Hex(`easypeeze-admin-otp-v1\n${pendingChallengeId}\n${otp}`);
         const data = await fetch(`${API}/admin/login-otp`, {
           method: "POST",
