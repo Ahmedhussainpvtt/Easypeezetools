@@ -219,9 +219,9 @@
         e.preventDefault();
         const otp = normalizeActionOtp(input.value);
         input.value = "";
-        if (!/^[A-HJ-NP-Z2-9]{8}$/.test(otp)) {
+        if (!otp) {
           if (err) {
-            err.textContent = "Enter the 8-character code from email";
+            err.textContent = "Enter the code from email";
             err.hidden = false;
           }
           return;
@@ -272,9 +272,21 @@
     if (path !== "/admin/step-up" && intent) {
       const step = await sendStepUp(intent);
       const otp = await promptActionOtp();
-      const otpProof = await sha256Hex(`easypeeze-admin-otp-v1\n${step.challengeId}\n${otp}`);
       headers["X-KL-Challenge-Id"] = step.challengeId;
-      headers["X-KL-Otp-Proof"] = otpProof;
+      let bodyObj = {};
+      if (opts.body) {
+        try {
+          bodyObj = JSON.parse(opts.body);
+        } catch (_e) {
+          bodyObj = {};
+        }
+      }
+      bodyObj.challengeId = step.challengeId;
+      bodyObj.otp = otp;
+      opts = Object.assign({}, opts, {
+        method: method === "GET" ? "POST" : method,
+        body: JSON.stringify(bodyObj)
+      });
     }
     const res = await fetch(`${API}${path}`, { ...opts, headers });
     markActivity();
@@ -793,14 +805,13 @@
       if (pendingChallengeId) {
         const otp = normalizeActionOtp($("login-otp").value);
         $("login-otp").value = "";
-        if (!/^[A-HJ-NP-Z2-9]{8}$/.test(otp)) throw new Error("Enter the 8-character code from email");
-        const otpProof = await sha256Hex(`easypeeze-admin-otp-v1\n${pendingChallengeId}\n${otp}`);
+        if (!otp) throw new Error("Enter the code from email");
         const data = await fetch(`${API}/admin/login-otp`, {
           method: "POST",
           headers: { "Content-Type": "application/json", Accept: "application/json" },
           body: JSON.stringify({
             challengeId: pendingChallengeId,
-            otpProof,
+            otp,
             device: collectDeviceInfo()
           })
         }).then(async (r) => {
