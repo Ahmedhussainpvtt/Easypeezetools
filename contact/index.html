@@ -17,7 +17,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contact Easy Peeze Tools</title>
-  <meta name="description" content="Email easypeezetools@gmail.com for Pdf Buddy and Kharch Log support." />
+  <meta name="description" content="Email support@easypeeze.com for Pdf Buddy and Kharch Log support." />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <link rel="canonical" href="https://easypeeze.com/contact/" />
   <link rel="stylesheet" href="../styles.css" />
@@ -30,13 +30,13 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Easy Peeze Tools" />
   <meta property="og:title" content="Contact Easy Peeze Tools" />
-  <meta property="og:description" content="Email easypeezetools@gmail.com for Pdf Buddy and Kharch Log support." />
+  <meta property="og:description" content="Email support@easypeeze.com for Pdf Buddy and Kharch Log support." />
   <meta property="og:url" content="https://easypeeze.com/contact/" />
   <meta property="og:image" content="https://easypeeze.com/og-image.jpg" />
   <meta property="og:locale" content="en_IN" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Contact Easy Peeze Tools" />
-  <meta name="twitter:description" content="Email easypeezetools@gmail.com for Pdf Buddy and Kharch Log support." />
+  <meta name="twitter:description" content="Email support@easypeeze.com for Pdf Buddy and Kharch Log support." />
   <meta name="twitter:image" content="https://easypeeze.com/og-image.jpg" />
                                                                                     <script type="application/ld+json" id="seo-jsonld">
 {
@@ -48,7 +48,7 @@
         "name": "Easy Peeze Tools",
         "url": "https://easypeeze.com/",
         "logo": "https://easypeeze.com/logo.png",
-        "email": "easypeezetools@gmail.com",
+        "email": "support@easypeeze.com",
         "sameAs": [
           "https://kharchlog.com/"
         ]
@@ -58,7 +58,7 @@
         "@id": "https://easypeeze.com/contact/#webpage",
         "url": "https://easypeeze.com/contact/",
         "name": "Contact Easy Peeze Tools",
-        "description": "Email easypeezetools@gmail.com for Pdf Buddy and Kharch Log support.",
+        "description": "Email support@easypeeze.com for Pdf Buddy and Kharch Log support.",
         "isPartOf": {
           "@id": "https://easypeeze.com/#website"
         },
@@ -125,7 +125,7 @@
 
         <p class="contact-note">
           Or email directly:
-          <a href="mailto:easypeezetools@gmail.com?subject=Easy%20Peeze%20Tools%20support">easypeezetools@gmail.com</a>.
+          <a href="mailto:support@easypeeze.com?subject=Easy%20Peeze%20Tools%20support">support@easypeeze.com</a>.
           Typical reply: 1-2 business days.
           <a href="../refund/">Refund policy</a> ·
           <a href="../privacy/">Privacy</a> ·
@@ -145,7 +145,7 @@
         <a href="../">Home</a>
         <a href="../pricing/">Pricing</a>
         <a href="../contact/">Contact</a>
-        <a href="mailto:easypeezetools@gmail.com">Support</a>
+        <a href="mailto:support@easypeeze.com">Support</a>
       </nav>
       <p class="site-footer__copy">© 2026 Easy Peeze Tools</p>
     </div>
@@ -176,7 +176,7 @@
     var statusEl = document.getElementById('contact-status');
     if (!form || !btn) return;
     window.__contactCaptchaOk = false;
-    var TO = 'easypeezetools@gmail.com';
+    var TO = 'support@easypeeze.com';
     var API = 'https://kharchlog-license-u4rcttr3nq-el.a.run.app/contact';
     var SITE = 'Easy Peeze Tools';
     var SOURCE = 'easypeeze.com/contact';
@@ -278,7 +278,7 @@
           var mailOk = mail.httpOk && mail.j && (mail.j.success === true || mail.j.success === 'true');
           var apiOk = api.httpOk && api.j && api.j.ok === true;
           if (!mailOk && !apiOk) {
-            var msg = (mail.j && mail.j.message) || (api.j && api.j.error) || 'Could not send. Email easypeezetools@gmail.com instead.';
+            var msg = (mail.j && mail.j.message) || (api.j && api.j.error) || 'Could not send. Email support@easypeeze.com instead.';
             throw new Error(msg);
           }
           form.reset();
@@ -288,7 +288,7 @@
           setTimeout(function () { btn.classList.remove('is-success'); }, 800);
         })
         .catch(function (err) {
-          setStatus((err && err.message) || 'Could not send. Email easypeezetools@gmail.com instead.', true);
+          setStatus((err && err.message) || 'Could not send. Email support@easypeeze.com instead.', true);
           resetCaptcha();
         })
         .finally(function () { setBusy(false); });

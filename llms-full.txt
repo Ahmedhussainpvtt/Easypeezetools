@@ -1,6 +1,6 @@
 # Easy Peeze Tools - llms-full.txt
 
-Generated: 2026-09-21
+Generated: 2026-09-24
 Source: https://easypeeze.com/
 Index: https://easypeeze.com/llms.txt
 
@@ -10,9 +10,9 @@ Easy Peeze Tools makes simple privacy-first apps: Pdf Buddy (100% local Windows 
 
 - Brand: Easy Peeze Tools
 - Pdf Buddy: Windows 10/11 desktop PDF editor, local-first (no upload required for edits)
-- Pdf Buddy free: 2 actions/day; paid: INR 299/year or INR 999 lifetime
+- Pdf Buddy free: 2 actions/day after Google sign-in; paid: INR 299/year or INR 999 lifetime
 - Kharch Log: Android UPI/SMS expense tracker -> your Google Sheet; INR 149 lifetime
-- Support: easypeezetools@gmail.com
+- Support: support@easypeeze.com
 - Kharch site: https://kharchlog.com/
 
 ## Product
@@ -55,7 +55,7 @@ Install Pdf Buddy (SmartScreen) and Kharch Log (Play Protect) - official downloa
 
 ### Pricing
 URL: https://easypeeze.com/pricing/
-Pdf Buddy INR 299/year or INR 999 lifetime; free tier 2 actions/day.
+Pdf Buddy INR 299/year or INR 999 lifetime; free tier 2 actions/day after Google sign-in.
 
 ### Products
 URL: https://easypeeze.com/products/

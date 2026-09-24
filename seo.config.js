@@ -28,7 +28,7 @@ module.exports = {
     name: 'Easy Peeze Tools',
     url: 'https://easypeeze.com/',
     logo: 'https://easypeeze.com/logo.png',
-    email: 'easypeezetools@gmail.com',
+    email: 'support@easypeeze.com',
     sameAs: ['https://kharchlog.com/'],
   },
 
@@ -121,7 +121,7 @@ module.exports = {
     },
     '/contact/': {
       title: 'Contact Easy Peeze Tools',
-      description: 'Email easypeezetools@gmail.com for Pdf Buddy and Kharch Log support.',
+      description: 'Email support@easypeeze.com for Pdf Buddy and Kharch Log support.',
       priority: 0.5,
       changefreq: 'yearly',
     },

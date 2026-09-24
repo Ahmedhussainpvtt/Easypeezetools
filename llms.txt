@@ -2,19 +2,19 @@
 
 > Easy Peeze Tools makes simple privacy-first apps: Pdf Buddy (100% local Windows PDF editor, 2 free actions/day, then INR 299/year or INR 999 lifetime) and Kharch Log (Android expense tracker on Google Sheets, INR 149 lifetime). Site: easypeeze.com - expenses product also at kharchlog.com.
 
-Last updated: 2026-09-21
+Last updated: 2026-09-24
 Canonical site: https://easypeeze.com/
 Sitemap: https://easypeeze.com/sitemap.xml
 Full corpus: https://easypeeze.com/llms-full.txt
-Contact: easypeezetools@gmail.com
+Contact: support@easypeeze.com
 
 ## Key facts
 
 - Brand: Easy Peeze Tools
 - Pdf Buddy: Windows 10/11 desktop PDF editor, local-first (no upload required for edits)
-- Pdf Buddy free: 2 actions/day; paid: INR 299/year or INR 999 lifetime
+- Pdf Buddy free: 2 actions/day after Google sign-in; paid: INR 299/year or INR 999 lifetime
 - Kharch Log: Android UPI/SMS expense tracker -> your Google Sheet; INR 149 lifetime
-- Support: easypeezetools@gmail.com
+- Support: support@easypeeze.com
 - Kharch site: https://kharchlog.com/
 
 ## Product
@@ -28,7 +28,7 @@ Contact: easypeezetools@gmail.com
 - [Glossary index](https://easypeeze.com/glossary/): PDF and product glossary (OCR, e-sign, merge, local-first, etc.).
 - [Guides index](https://easypeeze.com/guides/): Long-form guides: free PDF editors, OCR scans, form fill & sign, alternatives.
 - [Install guides](https://easypeeze.com/install/): Install Pdf Buddy (SmartScreen) and Kharch Log (Play Protect) - official downloads only.
-- [Pricing](https://easypeeze.com/pricing/): Pdf Buddy INR 299/year or INR 999 lifetime; free tier 2 actions/day.
+- [Pricing](https://easypeeze.com/pricing/): Pdf Buddy INR 299/year or INR 999 lifetime; free tier 2 actions/day after Google sign-in.
 - [Products](https://easypeeze.com/products/): Product hub for Pdf Buddy and Kharch Log.
 
 ## Features
@@ -118,7 +118,7 @@ Contact: easypeezetools@gmail.com
 
 ## Optional
 
-- [Contact](https://easypeeze.com/contact/): Support: easypeezetools@gmail.com.
+- [Contact](https://easypeeze.com/contact/): Support: support@easypeeze.com.
 - [Privacy](https://easypeeze.com/privacy/): Privacy policy - Pdf Buddy runs locally; Kharch Log uses your Google Sheet.
 - [Refund](https://easypeeze.com/refund/): Refund.
 - [Terms](https://easypeeze.com/terms/): Terms of use for Easy Peeze Tools products.
