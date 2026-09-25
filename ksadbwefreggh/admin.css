@@ -267,20 +267,203 @@ label.search-field > input[type="search"]::-webkit-search-cancel-button {
   display: grid;
   place-items: center;
   padding: 24px;
+  overflow: hidden;
   background:
     radial-gradient(880px 420px at 12% -12%, rgba(0, 133, 255, 0.16), transparent 62%),
     radial-gradient(720px 380px at 100% 0%, rgba(11, 75, 212, 0.13), transparent 58%),
-    var(--bg);
+    linear-gradient(180deg, #f7f9fd 0%, #e7eef8 100%);
 }
+.login-stage {
+  width: min(920px, 100%);
+  min-height: min(640px, calc(100vh - 48px));
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 18px;
+  position: relative;
+}
+.login-skip {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 3;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+  padding: 8px 10px;
+}
+.login-skip:hover { color: var(--text); }
+.login-stage.is-ready .login-skip { visibility: hidden; }
+.login-buddy {
+  position: relative;
+  width: 210px;
+  flex: 0 0 210px;
+  margin-bottom: 8px;
+  z-index: 2;
+}
+.buddy-svg { width: 100%; height: auto; display: block; overflow: visible; }
+.buddy-ground { fill: rgba(15, 27, 45, 0.12); }
+.buddy-leg > rect:first-child { fill: #2c3544; }
+.buddy-leg > .buddy-boot { fill: #7a4a2a; }
+.buddy-leg > .buddy-boot-sole { fill: #3e2616; }
+.buddy-shirt { fill: #ffffff; }
+.buddy-jacket { fill: #8b939e; }
+.buddy-jacket-shade { fill: #6e7682; opacity: 0.55; }
+.buddy-zip { fill: none; stroke: #d7dde6; stroke-width: 2.4; stroke-linecap: round; }
+.buddy-cuff { fill: #5f6772; }
+.buddy-arm path, .buddy-arm circle { fill: #f3c7a5; }
+.buddy-arm path { fill: #7d868f; }
+.buddy-arm circle { fill: #f3c7a5; }
+.buddy-face { fill: #f6d0ae; }
+.buddy-hair { fill: #3a2a22; }
+.buddy-cap, .buddy-cap-brim { fill: #e23b3b; }
+.buddy-cap-brim { fill: #c42d2d; }
+.buddy-eye { fill: #1c2430; }
+.buddy-brow, .buddy-smile, .buddy-lid {
+  fill: none;
+  stroke: #1c2430;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+.buddy-lid { stroke-width: 3.2; opacity: 0; }
+.buddy-leg, .buddy-arm, .buddy-head, .buddy-torso {
+  transform-box: fill-box;
+  transform-origin: center top;
+}
+.buddy-arm { transform-origin: 50% 12%; }
+.buddy-leg { transform-origin: 50% 6%; }
+.buddy-head { transform-origin: 50% 80%; }
+.login-bubble {
+  position: absolute;
+  left: 40px;
+  top: -72px;
+  z-index: 5;
+  width: max-content;
+  max-width: 250px;
+  margin: 0;
+  padding: 11px 13px;
+  border-radius: 16px 16px 16px 5px;
+  background: #10233f;
+  color: #fff;
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1.35;
+  box-shadow: 0 14px 32px rgba(15, 27, 45, 0.22);
+  opacity: 0;
+  pointer-events: none;
+}
+.login-bubble.is-on { opacity: 1; transform: none; }
 .login-card {
   width: min(410px, 100%);
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   padding: 34px 30px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-lg);
   display: grid;
   gap: 14px;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 36px;
+}
+.login-stage.is-intro .login-buddy {
+  animation: buddy-in 1.15s cubic-bezier(0.2, 0.75, 0.2, 1) both;
+}
+.login-stage.is-intro .buddy-leg-l {
+  animation: leg-step 0.2s ease-in-out 5 alternate;
+}
+.login-stage.is-intro .buddy-leg-r {
+  animation: leg-step 0.2s ease-in-out 5 alternate reverse;
+  animation-delay: 0.1s;
+}
+.login-stage.is-intro .buddy-arm-l {
+  animation: arm-swing 0.2s ease-in-out 5 alternate;
+}
+.login-stage.is-intro .buddy-arm-r {
+  animation: arm-reach 4.6s ease both;
+}
+.login-stage.is-intro .buddy-head {
+  animation: head-bob 0.22s ease-in-out 5;
+}
+.login-stage.is-intro .buddy-lid {
+  animation: blink 3.2s ease 1.4s 2;
+}
+.login-stage.is-intro .login-card {
+  animation: card-pull 0.95s cubic-bezier(0.18, 0.86, 0.22, 1) 2.45s both;
+}
+.login-stage.is-ready .buddy-torso {
+  animation: buddy-breathe 3.4s ease-in-out infinite;
+}
+.login-stage.is-ready .login-bubble { display: none; }
+@keyframes buddy-in {
+  from { transform: translateX(-130%); }
+  to { transform: none; }
+}
+@keyframes leg-step {
+  from { transform: rotate(16deg); }
+  to { transform: rotate(-14deg); }
+}
+@keyframes arm-swing {
+  from { transform: rotate(18deg); }
+  to { transform: rotate(-16deg); }
+}
+@keyframes arm-reach {
+  0%, 22% { transform: rotate(14deg); }
+  30% { transform: rotate(0deg); }
+  48%, 68% { transform: rotate(-58deg); }
+  82%, 100% { transform: rotate(-6deg); }
+}
+@keyframes head-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+@keyframes blink {
+  0%, 42%, 54%, 100% { opacity: 0; }
+  46%, 50% { opacity: 1; }
+}
+@keyframes bubble-say {
+  0% { opacity: 0; transform: translateY(8px) scale(0.96); }
+  12%, 78% { opacity: 1; transform: none; }
+  100% { opacity: 0; transform: translateY(-6px); }
+}
+@keyframes card-pull {
+  0% { transform: translateX(78vw); }
+  72% { transform: translateX(-10px); }
+  100% { transform: none; }
+}
+@keyframes buddy-breathe {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(2px); }
+}
+@media (max-width: 760px) {
+  .login-stage {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 100vh;
+    gap: 0;
+  }
+  .login-buddy { width: 150px; flex-basis: 150px; margin-bottom: -8px; }
+  .login-bubble { left: 86px; top: -6px; max-width: 190px; font-size: 0.78rem; }
+  .login-card { margin-bottom: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .login-stage.is-intro .login-buddy,
+  .login-stage.is-intro .login-card,
+  .login-stage.is-intro .buddy-leg-l,
+  .login-stage.is-intro .buddy-leg-r,
+  .login-stage.is-intro .buddy-arm-l,
+  .login-stage.is-intro .buddy-arm-r,
+  .login-stage.is-intro .buddy-head,
+  .login-stage.is-intro .login-bubble,
+  .login-stage.is-ready .buddy-torso {
+    animation: none;
+  }
+  .login-bubble { display: none; }
 }
 .login-logo { border-radius: 12px; }
 .login-card h1 { font-size: 1.5rem; letter-spacing: -0.03em; }

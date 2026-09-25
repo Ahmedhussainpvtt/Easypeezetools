@@ -396,10 +396,34 @@
     return data;
   }
 
+  function startLoginIntro() {
+    const stage = $("login-stage");
+    if (!stage) return;
+    stage.classList.remove("is-intro", "is-ready");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      stage.classList.add("is-ready");
+      return;
+    }
+    void stage.offsetWidth;
+    stage.classList.add("is-intro");
+    const wait = stage.querySelector(".login-bubble--wait");
+    const here = stage.querySelector(".login-bubble--here");
+    const say = (el, on) => { if (el) el.classList.toggle("is-on", on); };
+    window.setTimeout(() => say(wait, true), 1050);
+    window.setTimeout(() => say(wait, false), 2450);
+    window.setTimeout(() => say(here, true), 3500);
+    window.setTimeout(() => {
+      say(here, false);
+      if (stage.classList.contains("is-intro")) stage.classList.add("is-ready");
+    }, 6200);
+  }
+
   function showLogin() {
     resetLoginSteps();
     $("login-view").classList.remove("hidden");
     $("app-view").classList.add("hidden");
+    startLoginIntro();
   }
   function showApp() {
     $("login-view").classList.add("hidden");
@@ -909,6 +933,14 @@
       clientTime: new Date().toISOString()
     };
   }
+
+  $("login-skip")?.addEventListener("click", () => {
+    const stage = $("login-stage");
+    if (!stage) return;
+    stage.classList.remove("is-intro");
+    stage.classList.add("is-ready");
+    stage.querySelectorAll(".login-bubble").forEach((el) => el.classList.remove("is-on"));
+  });
 
   $("login-password-toggle").addEventListener("click", () => {
     const input = $("login-password");
