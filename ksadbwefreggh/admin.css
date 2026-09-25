@@ -268,7 +268,10 @@ label.search-field > input[type="search"]::-webkit-search-cancel-button {
   position: relative;
   padding: 0;
   overflow: hidden;
-  background: #000;
+  background:
+    radial-gradient(880px 460px at 8% -10%, rgba(0, 133, 255, 0.22), transparent 62%),
+    radial-gradient(720px 420px at 100% 110%, rgba(0, 196, 154, 0.2), transparent 58%),
+    linear-gradient(165deg, #f8fafc 0%, #e7f3ff 46%, #e8f7f3 100%);
 }
 #login-scene {
   position: absolute;
@@ -286,14 +289,14 @@ label.search-field > input[type="search"]::-webkit-search-cancel-button {
   z-index: 5;
   border: 0;
   background: transparent;
-  color: #cbd5e1;
+  color: #0066cc;
   font: inherit;
   font-weight: 700;
   font-size: 0.82rem;
   cursor: pointer;
   padding: 8px 10px;
 }
-.login-skip:hover { color: #fff; }
+.login-skip:hover { color: #0b4bd4; }
 .login-stage {
   width: min(920px, 100%);
   min-height: min(640px, calc(100vh - 48px));
