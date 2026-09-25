@@ -9,7 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="admin.css?v=20260924intro" />
+  <link rel="stylesheet" href="admin.css?v=20260924scene" />
+  <link rel="stylesheet" href="scene/login-scene.css?v=20260924scene" />
   <link rel="icon" href="/favicon.png" type="image/png" />
 </head>
 <body>
@@ -60,81 +61,8 @@
   </svg>
 
   <div id="login-view" class="login-shell hidden">
-    <div class="login-stage" id="login-stage">
-      <button type="button" class="login-skip" id="login-skip">Skip</button>
-      <div class="login-buddy" aria-hidden="true">
-        <p class="login-bubble login-bubble--wait">Wait, let me pull the login page for you.</p>
-        <p class="login-bubble login-bubble--here">Here's the login page.</p>
-        <svg class="buddy-svg" viewBox="0 0 240 340" focusable="false">
-          <ellipse class="buddy-ground" cx="120" cy="326" rx="58" ry="8" />
-          <g class="buddy-leg buddy-leg-l">
-            <rect x="90" y="200" width="22" height="72" rx="11" />
-            <rect class="buddy-boot" x="82" y="262" width="38" height="18" rx="8" />
-            <rect class="buddy-boot-sole" x="80" y="276" width="42" height="8" rx="4" />
-          </g>
-          <g class="buddy-leg buddy-leg-r">
-            <rect x="128" y="200" width="22" height="72" rx="11" />
-            <rect class="buddy-boot" x="120" y="262" width="38" height="18" rx="8" />
-            <rect class="buddy-boot-sole" x="118" y="276" width="42" height="8" rx="4" />
-          </g>
-          <g class="buddy-torso">
-            <path class="buddy-jacket" d="M78 132c6-18 22-28 42-28s36 10 42 28c4 16 6 36 4 54-2 14-10 24-22 28H96c-12-4-20-14-22-28-2-18 0-38 4-54z" />
-            <path class="buddy-jacket-shade" d="M120 108c14 2 26 12 32 26 4 16 4 32 2 46-10 2-18 2-26 0 2-22 0-48-8-72z" />
-            <path class="buddy-shirt" d="M108 118h24c1 22 1 40 0 58h-24c-1-18-1-36 0-58z" />
-            <path class="buddy-zip" d="M120 122v52" />
-          </g>
-          <g class="buddy-arm buddy-arm-l">
-            <path d="M84 142c-18 6-30 24-30 44 0 10 8 16 16 14 10-2 16-12 16-24 0-14 2-24-2-34z" />
-            <circle cx="66" cy="198" r="10" />
-          </g>
-          <g class="buddy-arm buddy-arm-r">
-            <path d="M156 142c18 6 30 24 30 44 0 10-8 16-16 14-10-2-16-12-16-24 0-14-2-24 2-34z" />
-            <circle cx="174" cy="198" r="10" />
-          </g>
-          <g class="buddy-head">
-            <circle class="buddy-face" cx="120" cy="116" r="36" />
-            <path class="buddy-hair" d="M96 112c2-14 10-22 20-22 2 8 0 14-8 16-6 0-12 2-12 6z" />
-            <ellipse class="buddy-cap" cx="120" cy="86" rx="40" ry="20" />
-            <rect class="buddy-cap" x="82" y="82" width="76" height="16" rx="4" />
-            <ellipse class="buddy-cap-brim" cx="132" cy="98" rx="36" ry="6" />
-            <circle class="buddy-eye" cx="106" cy="122" r="4.2" />
-            <circle class="buddy-eye" cx="136" cy="122" r="4.2" />
-            <path class="buddy-lid buddy-lid-l" d="M98 122h16" />
-            <path class="buddy-lid buddy-lid-r" d="M128 122h16" />
-            <path class="buddy-brow" d="M98 112c5-3 12-3 16 0M128 112c5-3 12-3 16 0" />
-            <path class="buddy-smile" d="M108 136c5 6 16 6 22 0" />
-          </g>
-        </svg>
-      </div>
-    <form class="login-card" id="login-form" autocomplete="on" novalidate>
-      <img class="login-logo" src="/logo.png" alt="" width="48" height="48" />
-      <label>
-        <span>Email</span>
-        <input id="login-email" type="email" name="email" required value="easypeezetools@gmail.com" autocomplete="username" />
-      </label>
-      <div id="login-step-password">
-        <label>
-          <span>Password</span>
-          <div class="password-wrap">
-            <input id="login-password" type="password" name="password" required autocomplete="current-password" />
-            <button type="button" class="password-toggle" id="login-password-toggle" aria-label="Show password" aria-pressed="false">
-              <svg class="eye-show"><use href="#i-eye" /></svg>
-              <svg class="eye-hide hidden"><use href="#i-eye-off" /></svg>
-            </button>
-          </div>
-        </label>
-      </div>
-      <div id="login-step-otp" class="hidden">
-        <p class="login-sub" id="login-otp-hint">We sent you an OTP. Please enter it below.</p>
-        <label>
-          <span>Sign-in code</span>
-          <input id="login-otp" type="text" inputmode="text" autocomplete="one-time-code" maxlength="12" spellcheck="false" autocapitalize="characters" />
-        </label>
-      </div>
-      <p id="login-error" class="form-error" hidden></p>
-      <button type="submit" class="btn btn-primary btn-block" id="login-btn">Sign in</button>
-    </form>
-    </div>
+    <div id="login-scene"></div>
+    <button type="button" class="login-skip" id="login-skip">Skip</button>
   </div>
 
   <div id="app-view" class="app-shell hidden">
@@ -622,6 +550,7 @@
 
   <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
 
-  <script src="admin.js?v=20260924intro"></script>
+  <script src="admin.js?v=20260924scene"></script>
+  <script type="module" src="scene/login-scene.js?v=20260924scene"></script>
 </body>
 </html>

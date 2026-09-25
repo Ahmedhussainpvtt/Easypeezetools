@@ -397,26 +397,7 @@
   }
 
   function startLoginIntro() {
-    const stage = $("login-stage");
-    if (!stage) return;
-    stage.classList.remove("is-intro", "is-ready");
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      stage.classList.add("is-ready");
-      return;
-    }
-    void stage.offsetWidth;
-    stage.classList.add("is-intro");
-    const wait = stage.querySelector(".login-bubble--wait");
-    const here = stage.querySelector(".login-bubble--here");
-    const say = (el, on) => { if (el) el.classList.toggle("is-on", on); };
-    window.setTimeout(() => say(wait, true), 1050);
-    window.setTimeout(() => say(wait, false), 2450);
-    window.setTimeout(() => say(here, true), 3500);
-    window.setTimeout(() => {
-      say(here, false);
-      if (stage.classList.contains("is-intro")) stage.classList.add("is-ready");
-    }, 6200);
+    window.dispatchEvent(new CustomEvent("admin-login-replay"));
   }
 
   function showLogin() {
@@ -934,26 +915,6 @@
     };
   }
 
-  $("login-skip")?.addEventListener("click", () => {
-    const stage = $("login-stage");
-    if (!stage) return;
-    stage.classList.remove("is-intro");
-    stage.classList.add("is-ready");
-    stage.querySelectorAll(".login-bubble").forEach((el) => el.classList.remove("is-on"));
-  });
-
-  $("login-password-toggle").addEventListener("click", () => {
-    const input = $("login-password");
-    const btn = $("login-password-toggle");
-    const show = input.type === "password";
-    input.type = show ? "text" : "password";
-    btn.setAttribute("aria-pressed", show ? "true" : "false");
-    btn.setAttribute("aria-label", show ? "Hide password" : "Show password");
-    btn.querySelector(".eye-show").classList.toggle("hidden", show);
-    btn.querySelector(".eye-hide").classList.toggle("hidden", !show);
-    input.focus();
-  });
-
   function resetLoginSteps() {
     pendingChallengeId = "";
     pendingEmail = "";
@@ -967,8 +928,36 @@
     if (emailInput) emailInput.readOnly = false;
   }
 
-  $("login-form").addEventListener("submit", async (e) => {
-    e.preventDefault();
+  let loginWired = false;
+  function wireLoginControls() {
+    if (loginWired) return;
+    loginWired = true;
+
+    document.addEventListener("click", (e) => {
+      const target = e.target;
+      if (!target || !target.closest) return;
+      if (target.closest("#login-skip")) {
+        window.dispatchEvent(new CustomEvent("admin-login-skip"));
+        return;
+      }
+      const toggle = target.closest("#login-password-toggle");
+      if (!toggle) return;
+      const input = $("login-password");
+      if (!input) return;
+      const show = input.type === "password";
+      input.type = show ? "text" : "password";
+      toggle.setAttribute("aria-pressed", show ? "true" : "false");
+      toggle.setAttribute("aria-label", show ? "Hide password" : "Show password");
+      const eyeShow = toggle.querySelector(".eye-show");
+      const eyeHide = toggle.querySelector(".eye-hide");
+      if (eyeShow) eyeShow.classList.toggle("hidden", show);
+      if (eyeHide) eyeHide.classList.toggle("hidden", !show);
+      input.focus();
+    });
+
+    document.addEventListener("submit", async (e) => {
+      if (!e.target || e.target.id !== "login-form") return;
+      e.preventDefault();
     const btn = $("login-btn");
     const err = $("login-error");
     err.hidden = true;
@@ -1030,6 +1019,10 @@
       btn.removeAttribute("aria-busy");
     }
   });
+  }
+
+  document.addEventListener("admin-login-ready", wireLoginControls);
+  wireLoginControls();
 
   $("logout-btn").addEventListener("click", () => {
     expireSession("", "manual");
