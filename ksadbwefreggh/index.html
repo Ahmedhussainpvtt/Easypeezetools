@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="admin.css?v=20260924otpfix" />
+  <link rel="stylesheet" href="admin.css?v=20260924sortver" />
   <link rel="icon" href="/favicon.png" type="image/png" />
 </head>
 <body>
@@ -331,12 +331,13 @@
             <table class="data-table">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>Status</th>
-                  <th>Kharch Log</th>
-                  <th>Pdf Buddy</th>
+                  <th data-sort="name" aria-sort="none"><button type="button" class="th-sort">Name</button></th>
+                  <th data-sort="email" aria-sort="ascending"><button type="button" class="th-sort">Email</button></th>
+                  <th data-sort="phone" aria-sort="none"><button type="button" class="th-sort">Phone</button></th>
+                  <th data-sort="status" aria-sort="none"><button type="button" class="th-sort">Status</button></th>
+                  <th data-sort="kharchlog" aria-sort="none"><button type="button" class="th-sort">Kharch Log</button></th>
+                  <th data-sort="pdfbuddy" aria-sort="none"><button type="button" class="th-sort">Pdf Buddy</button></th>
+                  <th data-sort="version" aria-sort="none"><button type="button" class="th-sort">Version</button></th>
                   <th class="col-actions">Actions</th>
                 </tr>
               </thead>
@@ -552,6 +553,6 @@
 
   <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
 
-  <script src="admin.js?v=20260924otpui"></script>
+  <script src="admin.js?v=20260924sortver"></script>
 </body>
 </html>

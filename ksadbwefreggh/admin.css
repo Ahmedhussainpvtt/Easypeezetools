@@ -532,6 +532,42 @@ label.search-field > input[type="search"]::-webkit-search-cancel-button {
   border-bottom: 1px solid var(--line);
   white-space: nowrap;
 }
+.th-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+}
+.th-sort:hover { color: var(--ink); }
+.th-sort::after {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 4px;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  opacity: 0.28;
+  border-bottom: 5px solid currentColor;
+}
+th[aria-sort="ascending"] .th-sort::after {
+  opacity: 1;
+  border-bottom: 5px solid currentColor;
+  border-top: 0;
+}
+th[aria-sort="descending"] .th-sort::after {
+  opacity: 1;
+  border-top: 5px solid currentColor;
+  border-bottom: 0;
+}
 .data-table td {
   padding: 13px 16px;
   border-bottom: 1px solid var(--line);

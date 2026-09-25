@@ -9,6 +9,8 @@
 
   const $ = (id) => document.getElementById(id);
   let usersCache = [];
+  let sortKey = "email";
+  let sortDir = "asc";
   let currentCustomerEmail = "";
   let sessionTimer = null;
   let memoryToken = "";
@@ -369,10 +371,68 @@
     return `<span class="badge ${badge.cls}">${badge.text}</span>`;
   }
 
+  const STATE_RANK = { none: 0, expired: 1, active: 2 };
+
+  function cmpText(a, b) {
+    return String(a || "").toLowerCase().localeCompare(String(b || "").toLowerCase(), undefined, {
+      numeric: true,
+      sensitivity: "base"
+    });
+  }
+
+  function verParts(s) {
+    const nums = String(s || "").match(/\d+/g);
+    if (!nums) return [0, 0, 0];
+    return [Number(nums[0] || 0), Number(nums[1] || 0), Number(nums[2] || 0)];
+  }
+
+  function cmpVersion(a, b) {
+    const pa = verParts(a);
+    const pb = verParts(b);
+    for (let i = 0; i < 3; i++) {
+      if (pa[i] !== pb[i]) return pa[i] - pb[i];
+    }
+    return cmpText(a, b);
+  }
+
+  function sortValue(u, key) {
+    if (key === "name") return u.name || "";
+    if (key === "email") return u.email || "";
+    if (key === "phone") return u.phone || "";
+    if (key === "status") return STATE_RANK[u.state] || 0;
+    if (key === "kharchlog") return `${u.kharchlog?.plan || ""} ${u.kharchlog?.status || ""}`;
+    if (key === "pdfbuddy") return `${u.pdfbuddy?.plan || ""} ${u.pdfbuddy?.status || ""}`;
+    if (key === "version") return u.appVersion || "";
+    return "";
+  }
+
+  function sortedUsers(list) {
+    const copy = list.slice();
+    const dir = sortDir === "desc" ? -1 : 1;
+    copy.sort((a, b) => {
+      const ka = sortValue(a, sortKey);
+      const kb = sortValue(b, sortKey);
+      let r = 0;
+      if (sortKey === "status") r = Number(ka) - Number(kb);
+      else if (sortKey === "version") r = cmpVersion(ka, kb);
+      else r = cmpText(ka, kb);
+      if (r === 0) r = cmpText(a.email, b.email);
+      return r * dir;
+    });
+    return copy;
+  }
+
+  function syncSortHeaders() {
+    document.querySelectorAll("#tab-customers th[data-sort]").forEach((th) => {
+      const key = th.getAttribute("data-sort");
+      th.setAttribute("aria-sort", key === sortKey ? (sortDir === "asc" ? "ascending" : "descending") : "none");
+    });
+  }
+
   /** Placeholder rows so the table never flashes an empty/"not found" state. */
   function showTableLoading() {
     $("users-empty").hidden = true;
-    const widths = ["70%", "85%", "55%", "60%", "65%", "65%", "40%"];
+    const widths = ["70%", "85%", "55%", "60%", "65%", "65%", "40%", "40%"];
     $("users-tbody").innerHTML = Array.from({ length: 5 })
       .map(
         () =>
@@ -393,6 +453,7 @@
             u.name,
             u.phone,
             u.state,
+            u.appVersion,
             u.kharchlog?.plan,
             u.kharchlog?.status,
             u.pdfbuddy?.plan,
@@ -402,11 +463,13 @@
             .toLowerCase()
             .includes(q)
         );
-    $("table-count").textContent = String(filtered.length);
+    const rows = sortedUsers(filtered);
+    syncSortHeaders();
+    $("table-count").textContent = String(rows.length);
     const tbody = $("users-tbody");
     tbody.innerHTML = "";
-    $("users-empty").hidden = filtered.length > 0;
-    for (const u of filtered) {
+    $("users-empty").hidden = rows.length > 0;
+    for (const u of rows) {
       const mail = esc(u.email);
       const tr = document.createElement("tr");
       tr.setAttribute("data-open", u.email);
@@ -422,6 +485,7 @@
         <td data-label="Status">${stateCell(u)}</td>
         <td data-label="Kharch Log">${planCell(u.kharchlog)}</td>
         <td data-label="Pdf Buddy">${planCell(u.pdfbuddy)}</td>
+        <td data-label="Version" class="cell-mono">${esc(u.appVersion || " - ")}</td>
         <td data-label="Actions" class="col-actions">
           <div class="row-actions">
             <button type="button" class="icon-btn" title="Edit ${mail}" aria-label="Edit ${mail}" data-edit="${mail}">${icon(
@@ -975,6 +1039,21 @@
       .catch((ex) => toast(ex.message, "error"))
   );
   $("search-users").addEventListener("input", () => renderUsers(usersCache));
+  const customersHead = document.querySelector("#tab-customers thead");
+  if (customersHead) {
+    customersHead.addEventListener("click", (e) => {
+      const th = e.target.closest("th[data-sort]");
+      if (!th) return;
+      const key = th.getAttribute("data-sort");
+      if (!key) return;
+      if (sortKey === key) sortDir = sortDir === "asc" ? "desc" : "asc";
+      else {
+        sortKey = key;
+        sortDir = "asc";
+      }
+      renderUsers(usersCache);
+    });
+  }
   $("btn-new-user").addEventListener("click", () => openUserModal(null));
 
   $("users-tbody").addEventListener("click", async (e) => {
