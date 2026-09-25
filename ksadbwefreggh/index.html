@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="admin.css?v=20260924sortver" />
+  <link rel="stylesheet" href="admin.css?v=20260924confirm" />
   <link rel="icon" href="/favicon.png" type="image/png" />
 </head>
 <body>
@@ -531,28 +531,50 @@
     </form>
   </dialog>
 
-  <dialog class="modal modal--otp" id="otp-action-dialog">
-    <form id="otp-action-form" class="modal__card">
+  <dialog class="modal modal--otp" id="confirm-dialog">
+    <form method="dialog" class="modal__card" id="confirm-form">
       <div class="modal__head">
-        <h2>Enter OTP</h2>
+        <h2 id="confirm-title">Please confirm</h2>
       </div>
       <div class="modal__body">
-        <p class="login-sub" id="otp-action-hint">We sent you an OTP. Please enter it below.</p>
-        <label>
-          <span>Code</span>
-          <input id="otp-action-input" type="text" inputmode="text" autocomplete="one-time-code" maxlength="12" spellcheck="false" autocapitalize="characters" />
-        </label>
-        <p id="otp-action-error" class="form-error" hidden></p>
+        <p class="login-sub" id="confirm-message"></p>
       </div>
       <div class="modal__actions">
-        <button type="button" class="btn btn-ghost" id="otp-action-cancel">Cancel</button>
-        <button type="submit" class="btn btn-primary" id="otp-action-submit">Continue</button>
+        <button type="button" class="btn btn-ghost" id="confirm-cancel">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="confirm-ok">Continue</button>
       </div>
     </form>
   </dialog>
 
+  <dialog class="modal modal--otp" id="otp-action-dialog">
+    <div class="modal__card">
+      <div id="otp-busy" class="otp-busy" hidden>
+        <div class="ball-loader" aria-hidden="true"><span></span><span></span><span></span></div>
+        <p>Sending OTP</p>
+        <span class="muted">This can take a few seconds</span>
+      </div>
+      <form id="otp-action-form" class="otp-form-panel" hidden>
+        <div class="modal__head">
+          <h2>Enter OTP</h2>
+        </div>
+        <div class="modal__body">
+          <p class="login-sub" id="otp-action-hint">We sent you an OTP. Please enter it below.</p>
+          <label>
+            <span>Code</span>
+            <input id="otp-action-input" type="text" inputmode="text" autocomplete="one-time-code" maxlength="12" spellcheck="false" autocapitalize="characters" />
+          </label>
+          <p id="otp-action-error" class="form-error" hidden></p>
+        </div>
+        <div class="modal__actions">
+          <button type="button" class="btn btn-ghost" id="otp-action-cancel">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="otp-action-submit">Continue</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
   <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
 
-  <script src="admin.js?v=20260924otptab"></script>
+  <script src="admin.js?v=20260924confirm"></script>
 </body>
 </html>

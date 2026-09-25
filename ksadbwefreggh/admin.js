@@ -200,28 +200,87 @@
       .replace(/[^A-Z0-9]/g, "");
   }
 
+  function confirmUi({ title, message, okLabel, danger }) {
+    return new Promise((resolve) => {
+      const dlg = $("confirm-dialog");
+      const form = $("confirm-form");
+      const cancel = $("confirm-cancel");
+      const ok = $("confirm-ok");
+      if (!dlg || !form || !cancel || !ok) {
+        resolve(false);
+        return;
+      }
+      $("confirm-title").textContent = title || "Please confirm";
+      $("confirm-message").textContent = message || "";
+      ok.textContent = okLabel || "Continue";
+      ok.classList.toggle("btn-danger", !!danger);
+      ok.classList.toggle("btn-primary", !danger);
+      const finish = (yes) => {
+        form.removeEventListener("submit", onOk);
+        cancel.removeEventListener("click", onNo);
+        dlg.close();
+        resolve(yes);
+      };
+      const onNo = () => finish(false);
+      const onOk = (e) => {
+        e.preventDefault();
+        finish(true);
+      };
+      cancel.addEventListener("click", onNo);
+      form.addEventListener("submit", onOk);
+      dlg.showModal();
+      ok.focus();
+    });
+  }
+
+  function otpDialogEls() {
+    return {
+      dlg: $("otp-action-dialog"),
+      busy: $("otp-busy"),
+      form: $("otp-action-form"),
+      input: $("otp-action-input"),
+      err: $("otp-action-error"),
+      cancel: $("otp-action-cancel")
+    };
+  }
+
+  function closeOtpDialog() {
+    const { dlg, busy, form } = otpDialogEls();
+    otpHoldIdle = false;
+    lastActivity = Date.now();
+    armSessionTimer();
+    if (busy) busy.hidden = true;
+    if (form) form.hidden = true;
+    if (dlg && dlg.open) dlg.close();
+  }
+
+  function showOtpSending() {
+    const { dlg, busy, form } = otpDialogEls();
+    if (!dlg || !busy) return;
+    otpHoldIdle = true;
+    clearSessionTimer();
+    if (form) form.hidden = true;
+    busy.hidden = false;
+    if (!dlg.open) dlg.showModal();
+  }
+
   function promptActionOtp() {
     return new Promise((resolve, reject) => {
-      const dlg = $("otp-action-dialog");
-      const form = $("otp-action-form");
-      const input = $("otp-action-input");
-      const err = $("otp-action-error");
-      const cancel = $("otp-action-cancel");
+      const { dlg, busy, form, input, err, cancel } = otpDialogEls();
       if (!dlg || !form || !input) {
         reject(new Error("Code required"));
         return;
       }
       otpHoldIdle = true;
       clearSessionTimer();
+      if (busy) busy.hidden = true;
+      form.hidden = false;
       input.value = "";
       if (err) err.hidden = true;
       const finish = (fn) => {
-        otpHoldIdle = false;
-        lastActivity = Date.now();
-        armSessionTimer();
         form.removeEventListener("submit", onSubmit);
         cancel.removeEventListener("click", onCancel);
-        dlg.close();
+        closeOtpDialog();
         fn();
       };
       const onCancel = () => finish(() => reject(new Error("Code required")));
@@ -240,7 +299,7 @@
       };
       cancel.addEventListener("click", onCancel);
       form.addEventListener("submit", onSubmit);
-      dlg.showModal();
+      if (!dlg.open) dlg.showModal();
       input.focus();
     });
   }
@@ -280,7 +339,14 @@
     if (tok) headers.Authorization = `Bearer ${tok}`;
     const intent = actionIntent(path, method);
     if (path !== "/admin/step-up" && intent) {
-      const step = await sendStepUp(intent);
+      showOtpSending();
+      let step;
+      try {
+        step = await sendStepUp(intent);
+      } catch (ex) {
+        closeOtpDialog();
+        throw ex;
+      }
       const otp = await promptActionOtp();
       let bodyObj = {};
       if (opts.body) {
@@ -986,13 +1052,13 @@
     if (!currentCustomerEmail) return;
     const btn = $("cv-release-device");
     if (btn.classList.contains("is-busy")) return;
-    if (
-      !confirm(
-        `Release the device lock for ${currentCustomerEmail}? Their current phone will be signed out. They can sign in on a new phone after this.`
-      )
-    ) {
-      return;
-    }
+    const ok = await confirmUi({
+      title: "Release device",
+      message: `Release the device lock for ${currentCustomerEmail}? Their current phone will be signed out. They can sign in on a new phone after this.`,
+      okLabel: "Release",
+      danger: true
+    });
+    if (!ok) return;
     btn.disabled = true;
     btn.classList.add("is-busy");
     btn.setAttribute("aria-busy", "true");
@@ -1069,7 +1135,13 @@
     const open = e.target.closest("[data-open]");
     if (del) {
       const email = del.getAttribute("data-del");
-      if (!confirm(`Remove ${email}? This deletes their license records.`)) return;
+      const ok = await confirmUi({
+        title: "Remove customer",
+        message: `Remove ${email}? This deletes their license records.`,
+        okLabel: "Delete",
+        danger: true
+      });
+      if (!ok) return;
       try {
         await api("/admin/revoke-access", {
           method: "POST",
@@ -1248,7 +1320,12 @@
       : countries.length === 1
         ? `users in ${countries[0]}`
         : `users in ${countries.length} countries`;
-    if (!confirm(`Send this notice to ${scope}?`)) return;
+    const ok = await confirmUi({
+      title: "Send notice",
+      message: `Send this notice to ${scope}?`,
+      okLabel: "Send"
+    });
+    if (!ok) return;
     const msg = $("notice-msg");
     const btn = $("notice-form").querySelector('button[type="submit"]');
     msg.hidden = true;
@@ -1301,7 +1378,13 @@
   $("blog-delete-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const slug = $("blog-del-slug").value.trim();
-    if (!confirm(`Delete blog slug "${slug}"?`)) return;
+    const ok = await confirmUi({
+      title: "Delete blog post",
+      message: `Delete blog slug "${slug}"?`,
+      okLabel: "Delete",
+      danger: true
+    });
+    if (!ok) return;
     const msg = $("blog-del-msg");
     const btn = $("blog-delete-form").querySelector('button[type="submit"]');
     msg.hidden = true;
