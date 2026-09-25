@@ -19,6 +19,7 @@
   let lastHeartbeat = 0;
   let pendingChallengeId = "";
   let pendingEmail = "";
+  let otpHoldIdle = false;
 
   const esc = (v) =>
     String(v ?? "").replace(/[&<>"']/g, (c) =>
@@ -91,6 +92,7 @@
   function armSessionTimer() {
     clearSessionTimer();
     if (!token()) return;
+    if (otpHoldIdle) return;
     const wait = Math.max(0, IDLE_MS - (Date.now() - lastActivity));
     sessionTimer = setTimeout(() => {
       expireSession("Session expired - please log in again", "idle");
@@ -209,9 +211,14 @@
         reject(new Error("Code required"));
         return;
       }
+      otpHoldIdle = true;
+      clearSessionTimer();
       input.value = "";
       if (err) err.hidden = true;
       const finish = (fn) => {
+        otpHoldIdle = false;
+        lastActivity = Date.now();
+        armSessionTimer();
         form.removeEventListener("submit", onSubmit);
         cancel.removeEventListener("click", onCancel);
         dlg.close();
@@ -1331,12 +1338,10 @@
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState !== "visible") return;
     if (!token()) return;
+    if (otpHoldIdle) return;
     if (Date.now() - lastActivity > IDLE_MS) {
       expireSession("Session expired - please log in again", "idle");
     }
-  });
-  window.addEventListener("pagehide", () => {
-    if (memoryToken) revokeOnServer(memoryToken, "leave");
   });
 
   boot();
