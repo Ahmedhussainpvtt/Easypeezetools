@@ -91,7 +91,7 @@
     if (!token()) return;
     const wait = Math.max(0, IDLE_MS - (Date.now() - lastActivity));
     sessionTimer = setTimeout(() => {
-      expireSession("Session expired - please log in again");
+      expireSession("Session expired - please log in again", "idle");
     }, wait);
   }
 
@@ -107,13 +107,13 @@
     })
       .then((r) => {
         if (r.status === 401 && token()) {
-          expireSession("Session expired - please log in again");
+          expireSession("Session expired - please log in again", "session");
         }
       })
       .catch(() => {});
   }
 
-  function revokeOnServer(tok) {
+  function revokeOnServer(tok, reason) {
     if (!tok) return;
     try {
       fetch(`${API}/admin/logout`, {
@@ -123,7 +123,7 @@
           Accept: "application/json",
           Authorization: `Bearer ${tok}`
         },
-        body: JSON.stringify({ token: tok }),
+        body: JSON.stringify({ token: tok, reason: reason || "leave" }),
         keepalive: true
       }).catch(() => {});
     } catch (_e) {
@@ -131,8 +131,8 @@
     }
   }
 
-  function expireSession(message) {
-    clearSession();
+  function expireSession(message, reason) {
+    clearSession(reason || "session");
     showLogin();
     if (message) {
       const err = $("login-error");
@@ -152,7 +152,7 @@
     armSessionTimer();
   }
 
-  function clearSession() {
+  function clearSession(reason) {
     clearSessionTimer();
     const tok = memoryToken;
     memoryToken = "";
@@ -166,7 +166,7 @@
     } catch (_e) {
       /* ignore */
     }
-    revokeOnServer(tok);
+    revokeOnServer(tok, reason);
   }
 
   function actionIntent(path, method) {
@@ -249,7 +249,7 @@
     });
     const j = await res.json().catch(() => ({}));
     if (res.status === 401 && /unauthorized/i.test(String(j.error || ""))) {
-      expireSession("Session expired - please log in again");
+      expireSession("Session expired - please log in again", "session");
       throw new Error("session expired");
     }
     if (!res.ok || j.ok === false) throw new Error(j.error || `HTTP ${res.status}`);
@@ -259,7 +259,7 @@
 
   async function api(path, opts = {}) {
     if (!isSessionAlive()) {
-      expireSession("Session expired - please log in again");
+      expireSession("Session expired - please log in again", "idle");
       throw new Error("session expired");
     }
     const method = String(opts.method || "GET").toUpperCase();
@@ -312,7 +312,7 @@
       if (/code required|expired code|invalid or expired/i.test(msg)) {
         throw new Error(msg);
       }
-      expireSession("Session expired - please log in again");
+      expireSession("Session expired - please log in again", "session");
       throw new Error(msg || "unauthorized");
     }
     if (!res.ok || data?.ok === false) {
@@ -863,7 +863,7 @@
   });
 
   $("logout-btn").addEventListener("click", () => {
-    expireSession("");
+    expireSession("", "manual");
     const err = $("login-error");
     if (err) {
       err.textContent = "";
@@ -1253,11 +1253,11 @@
     if (document.visibilityState !== "visible") return;
     if (!token()) return;
     if (Date.now() - lastActivity > IDLE_MS) {
-      expireSession("Session expired - please log in again");
+      expireSession("Session expired - please log in again", "idle");
     }
   });
   window.addEventListener("pagehide", () => {
-    if (memoryToken) revokeOnServer(memoryToken);
+    if (memoryToken) revokeOnServer(memoryToken, "leave");
   });
 
   boot();

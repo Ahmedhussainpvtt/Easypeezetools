@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex, nofollow" />
   <meta name="theme-color" content="#0b4bd4" />
-  <title>Super Admin - Easy Peeze Tools</title>
+  <title>Easy Peeze Tools</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -62,8 +62,6 @@
   <div id="login-view" class="login-shell hidden">
     <form class="login-card" id="login-form" autocomplete="on" novalidate>
       <img class="login-logo" src="/logo.png" alt="" width="48" height="48" />
-      <h1>Super Admin</h1>
-      <p class="login-sub">Easy Peeze Tools · customers &amp; blog control</p>
       <label>
         <span>Email</span>
         <input id="login-email" type="email" name="email" required value="easypeezetools@gmail.com" autocomplete="username" />
@@ -81,7 +79,7 @@
         </label>
       </div>
       <div id="login-step-otp" class="hidden">
-        <p class="login-sub" id="login-otp-hint">We emailed an 8-character code (letters and numbers) to support@easypeeze.com. It is not shown in this page or in the API response.</p>
+        <p class="login-sub" id="login-otp-hint">We sent you an OTP. Please enter it below.</p>
         <label>
           <span>Sign-in code</span>
           <input id="login-otp" type="text" inputmode="text" autocomplete="one-time-code" maxlength="12" spellcheck="false" autocapitalize="characters" />
@@ -98,8 +96,7 @@
         <div class="brand">
           <img src="/logo.png" alt="" width="34" height="34" />
           <div>
-            <p class="eyebrow">Easy Peeze Tools</p>
-            <h1>Super Admin</h1>
+            <h1>Easy Peeze Tools</h1>
           </div>
         </div>
         <div class="app-top__right">
@@ -536,10 +533,10 @@
   <dialog class="modal modal--otp" id="otp-action-dialog">
     <form id="otp-action-form" class="modal__card">
       <div class="modal__head">
-        <h2>Confirm with email code</h2>
+        <h2>Enter OTP</h2>
       </div>
       <div class="modal__body">
-        <p class="login-sub" id="otp-action-hint">We emailed an 8-character code to support@easypeeze.com. This action cannot continue without it.</p>
+        <p class="login-sub" id="otp-action-hint">We sent you an OTP. Please enter it below.</p>
         <label>
           <span>Code</span>
           <input id="otp-action-input" type="text" inputmode="text" autocomplete="one-time-code" maxlength="12" spellcheck="false" autocapitalize="characters" />
@@ -555,6 +552,6 @@
 
   <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
 
-  <script src="admin.js?v=20260924otpfix"></script>
+  <script src="admin.js?v=20260924otpui"></script>
 </body>
 </html>
