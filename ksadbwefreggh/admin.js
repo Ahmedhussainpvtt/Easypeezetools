@@ -273,7 +273,6 @@
     if (path !== "/admin/step-up" && intent) {
       const step = await sendStepUp(intent);
       const otp = await promptActionOtp();
-      headers["X-KL-Challenge-Id"] = step.challengeId;
       let bodyObj = {};
       if (opts.body) {
         try {
@@ -289,7 +288,12 @@
         body: JSON.stringify(bodyObj)
       });
     }
-    const res = await fetch(`${API}${path}`, { ...opts, headers });
+    let res;
+    try {
+      res = await fetch(`${API}${path}`, { ...opts, headers });
+    } catch (_e) {
+      throw new Error("Could not reach the server. Try again.");
+    }
     markActivity();
     const text = await res.text();
     let data = null;

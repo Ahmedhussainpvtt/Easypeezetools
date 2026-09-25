@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="admin.css?v=20260918d" />
+  <link rel="stylesheet" href="admin.css?v=20260924otpfix" />
   <link rel="icon" href="/favicon.png" type="image/png" />
 </head>
 <body>
@@ -123,8 +123,10 @@
           <span class="customer-view__sep" aria-hidden="true">/</span>
           <strong id="customer-view-title">Customer</strong>
         </div>
-        <button type="button" class="btn btn-primary" id="cv-update">Update</button>
-        <button type="button" class="btn btn-ghost" id="cv-release-device">Release device</button>
+        <div class="customer-view__bar-actions">
+          <button type="button" class="btn btn-ghost" id="cv-release-device">Release device</button>
+          <button type="button" class="btn btn-primary" id="cv-update">Update</button>
+        </div>
       </div>
       <div class="customer-view__grid">
         <aside class="customer-side">
@@ -531,15 +533,19 @@
     </form>
   </dialog>
 
-  <dialog class="modal" id="otp-action-dialog">
-    <form id="otp-action-form">
-      <h2>Confirm with email code</h2>
-      <p class="login-sub" id="otp-action-hint">We emailed an 8-character code to support@easypeeze.com. This action cannot continue without it.</p>
-      <label>
-        <span>Code</span>
-        <input id="otp-action-input" type="text" inputmode="text" autocomplete="one-time-code" maxlength="12" spellcheck="false" autocapitalize="characters" />
-      </label>
-      <p id="otp-action-error" class="form-error" hidden></p>
+  <dialog class="modal modal--otp" id="otp-action-dialog">
+    <form id="otp-action-form" class="modal__card">
+      <div class="modal__head">
+        <h2>Confirm with email code</h2>
+      </div>
+      <div class="modal__body">
+        <p class="login-sub" id="otp-action-hint">We emailed an 8-character code to support@easypeeze.com. This action cannot continue without it.</p>
+        <label>
+          <span>Code</span>
+          <input id="otp-action-input" type="text" inputmode="text" autocomplete="one-time-code" maxlength="12" spellcheck="false" autocapitalize="characters" />
+        </label>
+        <p id="otp-action-error" class="form-error" hidden></p>
+      </div>
       <div class="modal__actions">
         <button type="button" class="btn btn-ghost" id="otp-action-cancel">Cancel</button>
         <button type="submit" class="btn btn-primary" id="otp-action-submit">Continue</button>
@@ -549,6 +555,6 @@
 
   <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
 
-  <script src="admin.js?v=20260924reldev"></script>
+  <script src="admin.js?v=20260924otpfix"></script>
 </body>
 </html>

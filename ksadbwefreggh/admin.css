@@ -723,6 +723,33 @@ label.search-field > input[type="search"]::-webkit-search-cancel-button {
   width: min(720px, calc(100% - 24px));
   max-height: min(92vh, 820px);
 }
+.modal--otp {
+  width: min(420px, calc(100% - 32px));
+  max-height: none;
+}
+.modal--otp .modal__card {
+  max-height: none;
+}
+.modal--otp .modal__head {
+  padding: 18px 20px 0;
+}
+.modal--otp .modal__head h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+.modal--otp .modal__body {
+  padding: 12px 20px 8px;
+  display: grid;
+  gap: 12px;
+}
+.modal--otp .modal__body label {
+  display: grid;
+  gap: 6px;
+}
+.modal--otp .modal__body input {
+  width: 100%;
+  box-sizing: border-box;
+}
 .modal::backdrop {
   background: rgba(15, 27, 45, 0.5);
   backdrop-filter: blur(3px);
@@ -1124,6 +1151,18 @@ label.search-field > input[type="search"]::-webkit-search-cancel-button {
   align-items: center;
   gap: 8px;
   min-width: 0;
+  flex: 1;
+}
+.customer-view__bar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-left: auto;
+  flex: none;
+}
+.customer-view__bar-actions #cv-update {
+  flex: none;
 }
 .customer-back { padding-left: 6px; color: var(--primary); font-weight: 700; }
 .customer-back svg { width: 18px; height: 18px; }
