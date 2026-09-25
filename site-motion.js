@@ -390,3 +390,222 @@
     true
   );
 })();
+
+/* Stretchy pull for pricing CTAs: follows the cursor and elongates toward it,
+   then snaps home once pulled past BREAK. Copied from the portfolio sticky buttons. */
+(() => {
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!finePointer || reducedMotion) return;
+
+  const CATCH = 90;
+  const BREAK = 130;
+  const PULL_RATIO = 0.45;
+
+  const isPricingBtn = (el) => {
+    if (el.classList.contains("nav-cta")) return true;
+    if (el.hasAttribute("data-pay")) return true;
+    const href = (el.getAttribute("href") || "").toLowerCase();
+    return href.includes("pricing") || /(?:^|\/)pay\/|\bpay\/\?/.test(href);
+  };
+
+  const buttons = [...document.querySelectorAll("a.btn, a.nav-cta, a.pay-btn")].filter(isPricingBtn);
+  buttons.forEach((el) => el.classList.add("btn-magnet"));
+  if (!buttons.length) return;
+
+  const active = new Map();
+  let pointerX = 0;
+  let pointerY = 0;
+  let frame = 0;
+
+  const rest = () => ({ x: 0, y: 0, sx: 1, sy: 1, angle: 0 });
+
+  const apply = (el, state) => {
+    el.style.setProperty("--tx", `${state.x.toFixed(2)}px`);
+    el.style.setProperty("--ty", `${state.y.toFixed(2)}px`);
+    el.style.setProperty("--stretch-x", state.sx.toFixed(3));
+    el.style.setProperty("--stretch-y", state.sy.toFixed(3));
+    el.style.setProperty("--pull-angle", `${state.angle.toFixed(2)}deg`);
+  };
+
+  const release = (el, entry) => {
+    if (!entry.pulling) return;
+    entry.pulling = false;
+    entry.target = rest();
+    el.classList.remove("is-pulling");
+    el.classList.add("is-snapping");
+    entry.state = rest();
+    apply(el, entry.state);
+    clearTimeout(entry.snapTimer);
+    entry.snapTimer = setTimeout(() => {
+      el.classList.remove("is-snapping");
+      entry.state = rest();
+      apply(el, entry.state);
+      active.delete(el);
+    }, 560);
+  };
+
+  const tick = () => {
+    let busy = false;
+    active.forEach((entry, el) => {
+      const ease = entry.pulling ? 0.28 : 0.22;
+      entry.state.x += (entry.target.x - entry.state.x) * ease;
+      entry.state.y += (entry.target.y - entry.state.y) * ease;
+      entry.state.sx += (entry.target.sx - entry.state.sx) * ease;
+      entry.state.sy += (entry.target.sy - entry.state.sy) * ease;
+      entry.state.angle = entry.target.angle;
+      apply(el, entry.state);
+      const settled =
+        !entry.pulling &&
+        Math.abs(entry.state.x) < 0.2 &&
+        Math.abs(entry.state.y) < 0.2 &&
+        Math.abs(entry.state.sx - 1) < 0.01;
+      if (!settled) busy = true;
+    });
+    frame = busy ? requestAnimationFrame(tick) : 0;
+  };
+
+  const startLoop = () => {
+    if (!frame) frame = requestAnimationFrame(tick);
+  };
+
+  const BLOCKER =
+    "a, button, input, textarea, select, label, iframe, [role='checkbox'], [role='button'], p, h1, h2, h3, h4, h5, h6, li";
+
+  const centerOf = (el, entry) => {
+    if (entry?.pulling) return { x: entry.originX, y: entry.originY };
+    const rect = el.getBoundingClientRect();
+    return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+  };
+
+  const findNearest = () => {
+    let nearest = null;
+    let nearestDist = Infinity;
+    buttons.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.width < 2 || rect.height < 2) return;
+      const { x, y } = centerOf(el, active.get(el));
+      const dist = Math.hypot(pointerX - x, pointerY - y);
+      if (dist < nearestDist) {
+        nearestDist = dist;
+        nearest = el;
+      }
+    });
+    return { nearest, nearestDist };
+  };
+
+  const peekUnder = (ignoreEl) => {
+    const prev = ignoreEl.style.pointerEvents;
+    ignoreEl.style.pointerEvents = "none";
+    const hit = document.elementFromPoint(pointerX, pointerY);
+    ignoreEl.style.pointerEvents = prev;
+    return hit;
+  };
+
+  const updateFromPointer = () => {
+    let pullingEl = null;
+    active.forEach((entry, el) => {
+      if (entry.pulling) pullingEl = el;
+    });
+
+    const { nearest, nearestDist } = findNearest();
+
+    if (pullingEl && nearest && nearest !== pullingEl && nearestDist <= CATCH) {
+      release(pullingEl, active.get(pullingEl));
+      pullingEl = null;
+    }
+
+    if (!pullingEl) {
+      if (!nearest || nearestDist > CATCH) {
+        active.forEach((entry, el) => {
+          if (!entry.pulling) active.delete(el);
+        });
+        return;
+      }
+      pullingEl = nearest;
+    }
+
+    const el = pullingEl;
+    const rect = el.getBoundingClientRect();
+    if (rect.width < 2 || rect.height < 2) return;
+
+    let entry = active.get(el);
+    const liveCx = rect.left + rect.width / 2;
+    const liveCy = rect.top + rect.height / 2;
+    const cx = entry?.pulling ? entry.originX : liveCx;
+    const cy = entry?.pulling ? entry.originY : liveCy;
+    const dx = pointerX - cx;
+    const dy = pointerY - cy;
+    const dist = Math.hypot(dx, dy) || 0.0001;
+    const baseSize = entry?.pulling ? entry.baseSize : Math.max(rect.width, rect.height);
+    const reachLimit = baseSize * 0.5 + BREAK;
+
+    if (!entry) {
+      entry = {
+        pulling: false,
+        state: rest(),
+        target: rest(),
+        snapTimer: 0,
+        originX: liveCx,
+        originY: liveCy,
+        baseSize: Math.max(rect.width, rect.height),
+      };
+      active.set(el, entry);
+    }
+
+    if (entry.pulling) {
+      const hit = peekUnder(el);
+      if (hit && !el.contains(hit)) {
+        const otherBtn = hit.closest(".btn, .nav-cta, .pay-btn");
+        if (otherBtn && otherBtn !== el) {
+          release(el, entry);
+          return;
+        }
+        if (hit.closest(BLOCKER)) {
+          release(el, entry);
+          return;
+        }
+      }
+    }
+
+    if (dist > reachLimit) {
+      release(el, entry);
+      return;
+    }
+
+    if (!entry.pulling) {
+      entry.pulling = true;
+      entry.originX = liveCx;
+      entry.originY = liveCy;
+      entry.baseSize = Math.max(rect.width, rect.height);
+      el.classList.add("is-pulling");
+      el.classList.remove("is-snapping");
+      clearTimeout(entry.snapTimer);
+    }
+
+    const t = Math.min(dist / reachLimit, 1);
+    const reach = dist * PULL_RATIO;
+    entry.target.angle = (Math.atan2(dy, dx) * 180) / Math.PI;
+    entry.target.x = (dx / dist) * reach;
+    entry.target.y = (dy / dist) * reach;
+    entry.target.sx = 1 + t * 0.22;
+    entry.target.sy = 1 - t * 0.1;
+    startLoop();
+  };
+
+  window.addEventListener(
+    "pointermove",
+    (event) => {
+      pointerX = event.clientX;
+      pointerY = event.clientY;
+      updateFromPointer();
+    },
+    { passive: true }
+  );
+  window.addEventListener("blur", () => {
+    active.forEach((entry, el) => release(el, entry));
+  });
+  document.addEventListener("pointerleave", () => {
+    active.forEach((entry, el) => release(el, entry));
+  });
+})();

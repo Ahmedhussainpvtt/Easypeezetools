@@ -28,6 +28,29 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../../styles.css" />
+  <style>
+    .pay-hero {
+      display: grid;
+      grid-template-columns: minmax(260px, 380px) minmax(0, 1fr);
+      align-items: center;
+      gap: clamp(24px, 5vw, 64px);
+    }
+    .pay-hero:has(.pay-party[hidden]) { grid-template-columns: minmax(0, 1fr); }
+    .pay-hero__copy { min-width: 0; }
+    .pay-hero__copy > :first-child { margin-top: 0; }
+    @media (max-width: 760px) {
+      .pay-hero { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+    }
+    .pay-party { display: grid; justify-items: center; gap: 6px; margin: 0; }
+    .page-hero .pay-party__line {
+      margin: 0;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #0085ff;
+    }
+    .pay-party-scene { width: min(340px, 80vw); height: 360px; }
+  </style>
   <link rel="icon" href="https://easypeeze.com/favicon.png" type="image/png" />
   <link rel="apple-touch-icon" href="https://easypeeze.com/apple-touch-icon.png" />
   <meta property="og:type" content="website" />
@@ -100,13 +123,19 @@
   </header>
   <main id="main">
 
-    <div class="page-hero section">
-      <h1 id="pay-success-title">Payment received</h1>
-      <p id="pay-success-msg">We’re unlocking your license. Sign in with the same Google email.</p>
-      <p class="hero__actions" id="pay-success-actions">
-        <a class="btn" id="pay-success-primary" href="../download/" rel="noopener">Download Pdf Buddy</a>
-        <a class="btn btn--ghost" href="../pricing/">Pricing</a>
-      </p>
+    <div class="page-hero section pay-hero">
+      <div class="pay-party" id="pay-party">
+        <p class="pay-party__line" id="pay-party-line">Yaaa, you're in!</p>
+        <div class="pay-party-scene" id="pay-party-scene" aria-hidden="true"></div>
+      </div>
+      <div class="pay-hero__copy">
+        <h1 id="pay-success-title">Payment received</h1>
+        <p id="pay-success-msg">We’re unlocking your license. Sign in with the same Google email.</p>
+        <p class="hero__actions" id="pay-success-actions">
+          <a class="btn" id="pay-success-primary" href="../download/" rel="noopener">Download Pdf Buddy</a>
+          <a class="btn btn--ghost" href="../pricing/">Pricing</a>
+        </p>
+      </div>
     </div>
 
     <section class="section" id="pay-cross-sell" aria-labelledby="cross-sell-title">
@@ -146,7 +175,7 @@
 
       if (product === 'kharchlog') {
         document.title = 'Payment success - Kharch Log';
-        if (titleEl) titleEl.textContent = staging ? 'Payment completed' : 'You’re in';
+        if (titleEl) titleEl.textContent = staging ? 'Payment completed' : 'License unlocked';
         if (msgEl) {
           msgEl.textContent = staging
             ? (q.get('msg') || 'Staging only - payment verified, license was NOT granted.')
@@ -201,7 +230,7 @@
         }
       } else {
         document.title = 'Payment success - Pdf Buddy';
-        if (titleEl) titleEl.textContent = staging ? 'Payment completed' : 'Payment received';
+        if (titleEl) titleEl.textContent = staging ? 'Payment completed' : 'License unlocked';
         if (msgEl) {
           msgEl.textContent = staging
             ? (q.get('msg') || 'Staging only - payment verified, license was NOT granted.')
@@ -245,6 +274,14 @@
         }
       }
 
+      var party = document.getElementById('pay-party');
+      if (staging && party) party.hidden = true;
+      if (!staging) {
+        var partyJs = document.createElement('script');
+        partyJs.type = 'module';
+        partyJs.src = 'party/party.js?v=20260925hiphop';
+        document.body.appendChild(partyJs);
+      }
       if (staging) return;
       if (provider === 'paypal' && alreadyPaid) return;
       var body = {

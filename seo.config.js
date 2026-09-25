@@ -49,10 +49,11 @@ module.exports = {
     '/pay/',
     '/pay/success.html',
     '/ksadbwefreggh/',
+    '/404.html',
   ],
 
   /** Glob-ish path prefixes skipped entirely by the injector. */
-  skipPaths: ['/ksadbwefreggh/'],
+  skipPaths: ['/ksadbwefreggh/', '/lost/'],
 
   defaults: {
     changefreq: 'monthly',
