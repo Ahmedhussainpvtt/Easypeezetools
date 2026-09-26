@@ -36,6 +36,8 @@ html, body {
   margin: 0;
   padding: 0;
   min-height: 100%;
+  /* clip, not hidden: no scroll container, so position:sticky keeps working. */
+  overflow-x: clip;
   color: var(--text);
   font-family: var(--font);
   line-height: 1.65;
@@ -1505,6 +1507,17 @@ footer:not(.site-footer) {
     left: 0;
     min-width: min(280px, calc(100vw - 48px));
   }
+  /* Footer menu opens upward from a right-hand column, so anchor it to the right. */
+  .site-footer .nav-dropdown__menu {
+    left: auto;
+    right: 0;
+    min-width: min(240px, calc(100vw - 48px));
+  }
+  /* Raw URLs, APK paths and support emails have no break points. */
+  main a,
+  main code,
+  .wrap a,
+  .wrap code { overflow-wrap: anywhere; }
   .feature-grid,
   .foundation__grid,
   .why-list,
@@ -2549,6 +2562,13 @@ body > .site-footer {
 }
 
 /* - - Extra reveal directions used by site-motion.js - - */
+/* A 64px sideways start hangs off a phone screen, so narrow viewports enter upward. */
+@media (max-width: 860px) {
+  .motion-reveal.motion-enter-left,
+  .motion-reveal.motion-enter-right {
+    transform: translate3d(0, 28px, 0);
+  }
+}
 .motion-reveal.motion-enter-up {
   transform: translate3d(0, 34px, 0);
 }
