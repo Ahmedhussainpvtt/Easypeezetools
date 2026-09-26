@@ -2,9 +2,9 @@
   const API =
     window.EASYPEEZE_ADMIN_API ||
     "https://easypeeze-tools-u4rcttr3nq-el.a.run.app";
-  const TOKEN_KEY = "easypeeze_admin_token";
-  const EMAIL_KEY = "easypeeze_admin_email";
-  const EXPIRES_KEY = "easypeeze_admin_expires";
+  const TOKEN_KEY = "easypeeze_admin_token_v3";
+  const EMAIL_KEY = "easypeeze_admin_email_v3";
+  const EXPIRES_KEY = "easypeeze_admin_expires_v3";
   const IDLE_MS = 10 * 60 * 1000;
 
   const $ = (id) => document.getElementById(id);
@@ -1431,9 +1431,12 @@
 
   async function boot() {
     try {
-      sessionStorage.removeItem(TOKEN_KEY);
-      sessionStorage.removeItem(EMAIL_KEY);
-      sessionStorage.removeItem(EXPIRES_KEY);
+      ["easypeeze_admin_token", "easypeeze_admin_email", "easypeeze_admin_expires", TOKEN_KEY, EMAIL_KEY, EXPIRES_KEY].forEach(
+        (k) => {
+          sessionStorage.removeItem(k);
+          localStorage.removeItem(k);
+        }
+      );
     } catch (_e) {
       /* ignore */
     }
