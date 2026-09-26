@@ -1500,6 +1500,12 @@ footer:not(.site-footer) {
 }
 
 @media (max-width: 640px) {
+  .home-peezy-scene {
+    width: min(340px, 92vw);
+    height: 300px;
+    margin-left: 0;
+    margin-right: auto;
+  }
   .site-nav > a:not(.nav-cta) { display: none; }
   .nav-dropdown__trigger { display: inline-flex !important; }
   .nav-dropdown__menu {
