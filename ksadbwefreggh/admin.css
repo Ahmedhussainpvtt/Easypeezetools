@@ -282,6 +282,9 @@ label.search-field > input[type="search"]::-webkit-search-cancel-button {
   width: 100%;
   height: 100%;
 }
+#login-scene.login-scene--hold canvas {
+  opacity: 0;
+}
 .login-skip {
   position: absolute;
   top: 16px;

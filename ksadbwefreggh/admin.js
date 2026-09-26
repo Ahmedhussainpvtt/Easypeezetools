@@ -402,9 +402,9 @@
 
   function showLogin() {
     resetLoginSteps();
+    startLoginIntro();
     $("login-view").classList.remove("hidden");
     $("app-view").classList.add("hidden");
-    startLoginIntro();
   }
   function showApp() {
     $("login-view").classList.add("hidden");
