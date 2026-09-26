@@ -134,6 +134,13 @@ function upsertPropMeta(html, property, content) {
   return html.replace(/<\/head>/i, `  ${tag}\n</head>`);
 }
 
+function ensureCharsetFirst(html) {
+  if (!/<head[\s>]/i.test(html)) return html;
+  const charsetTag = '  <meta charset="utf-8" />\n';
+  const without = html.replace(/\s*<meta\b[^>]*charset\b[^>]*>\s*/gi, '\n');
+  return without.replace(/<head[^>]*>/i, (open) => `${open}\n${charsetTag}`);
+}
+
 function gtagSnippet(id) {
   return `<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=${id}"></script>
@@ -182,7 +189,7 @@ function applyGtagToTree(siteDir, gtagId, dryRun, skipPrefixes = INTERNAL_SKIP_P
   if (gtagId) {
     for (const file of walkHtmlFiles(siteDir, skipPrefixes)) {
       const html = fs.readFileSync(file, 'utf8');
-      const next = ensureGtag(html, gtagId);
+      const next = ensureCharsetFirst(ensureGtag(html, gtagId));
       if (next === html) continue;
       if (!dryRun) fs.writeFileSync(file, next, 'utf8');
       n += 1;
@@ -226,7 +233,7 @@ function applyAmplitudeToTree(siteDir, apiKey, dryRun, skipPrefixes = []) {
   let n = 0;
   for (const file of walkHtmlFiles(siteDir, skipPrefixes)) {
     const html = fs.readFileSync(file, 'utf8');
-    const next = ensureAmplitude(html, apiKey);
+    const next = ensureCharsetFirst(ensureAmplitude(html, apiKey));
     if (next === html) continue;
     if (!dryRun) fs.writeFileSync(file, next, 'utf8');
     n += 1;
@@ -351,6 +358,7 @@ function applyPageSeo(html, cfg, pagePath, page) {
 
   const jsonLd = buildJsonLd(cfg, pagePath, page, title, description);
   html = upsertJsonLd(html, jsonLd);
+  html = ensureCharsetFirst(html);
 
   return { html, title, description, noindex, canonical };
 }
