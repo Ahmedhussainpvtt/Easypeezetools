@@ -517,6 +517,18 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://easypeeze.com/products/book-karo/</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://easypeeze.com/products/kidly/</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://easypeeze.com/refund/</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>yearly</changefreq>

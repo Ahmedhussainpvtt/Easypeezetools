@@ -36,6 +36,7 @@
   const isOpen = () => header.classList.contains('nav-open');
   const setOpen = (open) => {
     header.classList.toggle('nav-open', open);
+    document.documentElement.classList.toggle('nav-scroll-lock', open && window.innerWidth <= 820);
     toggle.setAttribute('aria-expanded', String(open));
     toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   };
@@ -61,6 +62,38 @@
   });
   window.addEventListener('resize', () => {
     if (isOpen() && window.innerWidth > 820) setOpen(false);
+  });
+})();
+
+/* Desktop menus stay open while the pointer crosses into the list,
+   and the list scrolls on its own instead of the page. */
+(() => {
+  const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (!fine) return;
+  document.querySelectorAll('.nav-dropdown').forEach((drop) => {
+    const menu = drop.querySelector('.nav-dropdown__menu');
+    if (!menu) return;
+    let timer = 0;
+    const arm = () => {
+      window.clearTimeout(timer);
+      drop.classList.add('is-open');
+    };
+    const disarm = () => {
+      timer = window.setTimeout(() => drop.classList.remove('is-open'), 450);
+    };
+    drop.addEventListener('pointerenter', arm);
+    drop.addEventListener('pointerleave', disarm);
+    drop.addEventListener('focusin', arm);
+    drop.addEventListener('focusout', (event) => {
+      if (!drop.contains(event.relatedTarget)) disarm();
+    });
+    menu.addEventListener('wheel', (event) => {
+      if (window.innerWidth <= 820) return;
+      const room = menu.scrollHeight - menu.clientHeight;
+      if (room <= 1) return;
+      event.preventDefault();
+      menu.scrollTop = Math.max(0, Math.min(room, menu.scrollTop + event.deltaY));
+    }, { passive: false });
   });
 })();
 
