@@ -18,8 +18,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="admin.css?v=20260926mob2" />
-  <link rel="stylesheet" href="scene/login-scene.css?v=20260926mob2" />
+  <link rel="stylesheet" href="admin.css?v=20261001otp" />
+  <link rel="stylesheet" href="scene/login-scene.css?v=20261001otp" />
   <link rel="icon" href="/favicon.png" type="image/png" />
 </head>
 <body>
@@ -543,10 +543,24 @@
         </div>
         <div class="modal__body">
           <p class="login-sub" id="otp-action-hint">We sent you an OTP. Please enter it below.</p>
-          <label>
-            <span>Code</span>
-            <input id="otp-action-input" type="text" inputmode="text" autocomplete="one-time-code" maxlength="12" spellcheck="false" autocapitalize="characters" />
-          </label>
+          <div class="otp-stage" id="otp-action-stage" data-otp-input="otp-action-input">
+            <div class="otp-track">
+              <span class="otp-line" aria-hidden="true"></span>
+              <input class="otp-cell" style="--i:0" maxlength="1" inputmode="text" autocomplete="one-time-code" aria-label="OTP digit 1" />
+              <input class="otp-cell" style="--i:1" maxlength="1" inputmode="text" aria-label="OTP digit 2" />
+              <input class="otp-cell" style="--i:2" maxlength="1" inputmode="text" aria-label="OTP digit 3" />
+              <input class="otp-cell" style="--i:3" maxlength="1" inputmode="text" aria-label="OTP digit 4" />
+              <input class="otp-cell" style="--i:4" maxlength="1" inputmode="text" aria-label="OTP digit 5" />
+              <input class="otp-cell" style="--i:5" maxlength="1" inputmode="text" aria-label="OTP digit 6" />
+              <input class="otp-cell" style="--i:6" maxlength="1" inputmode="text" aria-label="OTP digit 7" />
+              <input class="otp-cell" style="--i:7" maxlength="1" inputmode="text" aria-label="OTP digit 8" />
+            </div>
+            <div class="otp-verified" aria-live="polite">
+              <span class="otp-tick" aria-hidden="true"><svg><use href="#i-check" /></svg></span>
+              <p>OTP verified</p>
+            </div>
+            <input id="otp-action-input" class="otp-source" type="text" tabindex="-1" autocomplete="one-time-code" />
+          </div>
           <p id="otp-action-error" class="form-error" hidden></p>
         </div>
         <div class="modal__actions">
@@ -559,7 +573,7 @@
 
   <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
 
-  <script src="admin.js?v=20260926mob2"></script>
-  <script type="module" src="scene/login-scene.js?v=20260926mob2"></script>
+  <script src="admin.js?v=20261001otp"></script>
+  <script type="module" src="scene/login-scene.js?v=20261001otp"></script>
 </body>
 </html>

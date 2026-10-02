@@ -200,6 +200,122 @@
       .replace(/[^A-Z0-9]/g, "");
   }
 
+  function otpStageFor(input) {
+    if (!input) return null;
+    return input.closest(".otp-stage") || document.querySelector(`[data-otp-input="${input.id}"]`);
+  }
+
+  function otpCells(stage) {
+    return stage ? Array.from(stage.querySelectorAll(".otp-cell")) : [];
+  }
+
+  function syncOtpSource(stage) {
+    if (!stage) return "";
+    const code = otpCells(stage).map((cell) => cell.value).join("");
+    const input = document.getElementById(stage.dataset.otpInput || "");
+    if (input) input.value = code;
+    otpCells(stage).forEach((cell) => cell.classList.toggle("is-filled", cell.value !== ""));
+    return code;
+  }
+
+  function clearOtpStage(stage) {
+    if (!stage) return;
+    stage.classList.remove("is-squared", "is-linked", "is-merged", "is-done");
+    otpCells(stage).forEach((cell) => {
+      cell.value = "";
+      cell.disabled = false;
+      cell.classList.remove("is-filled");
+    });
+    syncOtpSource(stage);
+  }
+
+  function focusOtpStage(stage) {
+    const cells = otpCells(stage);
+    const next = cells.find((cell) => !cell.value) || cells[0];
+    if (next) next.focus();
+  }
+
+  function playOtpVerified(stage) {
+    return new Promise((resolve) => {
+      if (!stage) {
+        resolve();
+        return;
+      }
+      otpCells(stage).forEach((cell) => {
+        cell.disabled = true;
+      });
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce) {
+        stage.classList.add("is-done");
+        setTimeout(resolve, 500);
+        return;
+      }
+      stage.classList.add("is-squared");
+      setTimeout(() => stage.classList.add("is-linked"), 220);
+      setTimeout(() => stage.classList.add("is-merged"), 700);
+      setTimeout(() => stage.classList.add("is-done"), 1280);
+      setTimeout(resolve, 1900);
+    });
+  }
+
+  function fillOtpCells(stage, raw, fromIndex) {
+    const chars = normalizeActionOtp(raw).slice(0, 8).split("");
+    const cells = otpCells(stage);
+    chars.forEach((ch, offset) => {
+      const cell = cells[fromIndex + offset];
+      if (cell) cell.value = ch;
+    });
+    syncOtpSource(stage);
+    const next = cells[Math.min(fromIndex + chars.length, cells.length - 1)];
+    if (chars.length && fromIndex + chars.length < cells.length) {
+      cells[fromIndex + chars.length].focus();
+    } else if (next) {
+      next.focus();
+    }
+  }
+
+  document.addEventListener("keydown", (e) => {
+    const cell = e.target && e.target.closest ? e.target.closest(".otp-cell") : null;
+    if (!cell || e.key !== "Backspace") return;
+    if (cell.value) return;
+    const cells = otpCells(cell.closest(".otp-stage"));
+    const index = cells.indexOf(cell);
+    if (index > 0) {
+      cells[index - 1].value = "";
+      cells[index - 1].focus();
+      syncOtpSource(cell.closest(".otp-stage"));
+      e.preventDefault();
+    }
+  });
+
+  document.addEventListener("input", (e) => {
+    const cell = e.target && e.target.closest ? e.target.closest(".otp-cell") : null;
+    if (!cell) return;
+    const stage = cell.closest(".otp-stage");
+    const cells = otpCells(stage);
+    const index = cells.indexOf(cell);
+    const chars = normalizeActionOtp(cell.value);
+    if (chars.length > 1) {
+      cell.value = "";
+      fillOtpCells(stage, chars, index);
+      return;
+    }
+    cell.value = chars;
+    syncOtpSource(stage);
+    if (chars && index < cells.length - 1) cells[index + 1].focus();
+  });
+
+  document.addEventListener("paste", (e) => {
+    const cell = e.target && e.target.closest ? e.target.closest(".otp-cell") : null;
+    if (!cell) return;
+    const text = (e.clipboardData || window.clipboardData).getData("text");
+    if (!text) return;
+    e.preventDefault();
+    const stage = cell.closest(".otp-stage");
+    const index = otpCells(stage).indexOf(cell);
+    fillOtpCells(stage, text, index);
+  });
+
   function confirmUi({ title, message, okLabel, danger }) {
     return new Promise((resolve) => {
       const dlg = $("confirm-dialog");
@@ -277,6 +393,7 @@
       form.hidden = false;
       input.value = "";
       if (err) err.hidden = true;
+      clearOtpStage(otpStageFor(input));
       const finish = (fn) => {
         form.removeEventListener("submit", onSubmit);
         cancel.removeEventListener("click", onCancel);
@@ -287,20 +404,21 @@
       const onSubmit = (e) => {
         e.preventDefault();
         const otp = normalizeActionOtp(input.value);
-        input.value = "";
-        if (!otp) {
+        if (otp.length < 8) {
           if (err) {
             err.textContent = "Enter the code from email";
             err.hidden = false;
           }
           return;
         }
-        finish(() => resolve(otp));
+        form.removeEventListener("submit", onSubmit);
+        cancel.removeEventListener("click", onCancel);
+        resolve(otp);
       };
       cancel.addEventListener("click", onCancel);
       form.addEventListener("submit", onSubmit);
       if (!dlg.open) dlg.showModal();
-      input.focus();
+      focusOtpStage(otpStageFor(input));
     });
   }
 
@@ -367,6 +485,7 @@
     try {
       res = await fetch(`${API}${path}`, { ...opts, headers });
     } catch (_e) {
+      if (intent && path !== "/admin/step-up") closeOtpDialog();
       throw new Error("Could not reach the server. Try again.");
     }
     markActivity();
@@ -384,6 +503,7 @@
     }
     if (res.status === 401) {
       const msg = String(data?.error || "");
+      if (intent && path !== "/admin/step-up") closeOtpDialog();
       if (/code required|expired code|invalid or expired/i.test(msg)) {
         throw new Error(msg);
       }
@@ -391,7 +511,12 @@
       throw new Error(msg || "unauthorized");
     }
     if (!res.ok || data?.ok === false) {
+      if (intent && path !== "/admin/step-up") closeOtpDialog();
       throw new Error(data?.error || `HTTP ${res.status}`);
+    }
+    if (intent && path !== "/admin/step-up") {
+      await playOtpVerified($("otp-action-stage"));
+      closeOtpDialog();
     }
     return data;
   }
@@ -924,6 +1049,7 @@
     if (otpBox) otpBox.classList.add("hidden");
     if (passBox) passBox.classList.remove("hidden");
     if (otpInput) otpInput.value = "";
+    clearOtpStage($("login-otp-stage"));
     const emailInput = $("login-email");
     if (emailInput) emailInput.readOnly = false;
   }
@@ -968,7 +1094,7 @@
       if (pendingChallengeId) {
         const otp = normalizeActionOtp($("login-otp").value);
         $("login-otp").value = "";
-        if (!otp) throw new Error("Enter the code from email");
+        if (!otp || otp.length < 8) throw new Error("Enter the code from email");
         const data = await fetch(`${API}/admin/login-otp`, {
           method: "POST",
           headers: { "Content-Type": "application/json", Accept: "application/json" },
@@ -982,6 +1108,7 @@
           if (!r.ok || j.ok === false) throw new Error(j.error || `HTTP ${r.status}`);
           return j;
         });
+        await playOtpVerified($("login-otp-stage"));
         resetLoginSteps();
         setSession(data.token, data.email);
         showApp();
@@ -1009,7 +1136,8 @@
       $("login-email").readOnly = true;
       $("login-step-password").classList.add("hidden");
       $("login-step-otp").classList.remove("hidden");
-      $("login-otp").focus();
+      clearOtpStage($("login-otp-stage"));
+      focusOtpStage($("login-otp-stage"));
     } catch (ex) {
       err.textContent = ex.message || "Login failed";
       err.hidden = false;
