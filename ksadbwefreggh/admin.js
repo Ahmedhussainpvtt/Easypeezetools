@@ -1,7 +1,7 @@
 (() => {
   const API =
     window.EASYPEEZE_ADMIN_API ||
-    "https://easypeeze-tools-u4rcttr3nq-el.a.run.app";
+    "https://easypeeze-tools-j6dbitzprq-el.a.run.app";
   const TOKEN_KEY = "easypeeze_admin_token_v3";
   const EMAIL_KEY = "easypeeze_admin_email_v3";
   const EXPIRES_KEY = "easypeeze_admin_expires_v3";
@@ -250,11 +250,11 @@
         setTimeout(resolve, 500);
         return;
       }
-      stage.classList.add("is-squared");
-      setTimeout(() => stage.classList.add("is-linked"), 220);
-      setTimeout(() => stage.classList.add("is-merged"), 700);
-      setTimeout(() => stage.classList.add("is-done"), 1280);
-      setTimeout(resolve, 1900);
+      stage.classList.add("is-linked");
+      setTimeout(() => stage.classList.add("is-squared"), 520);
+      setTimeout(() => stage.classList.add("is-merged"), 1100);
+      setTimeout(() => stage.classList.add("is-done"), 1680);
+      setTimeout(resolve, 2300);
     });
   }
 

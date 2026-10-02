@@ -1144,7 +1144,7 @@ th[aria-sort="descending"] .th-sort::after {
   transition: border-radius 0.22s ease, border-color 0.15s ease, transform 0.55s cubic-bezier(.4,0,.2,1), opacity 0.35s ease;
 }
 .otp-cell.is-filled { border-color: #0085FF; background: #f3f8ff; }
-.otp-stage.is-squared .otp-cell { border-radius: 4px; }
+.otp-stage.is-squared .otp-cell { border-radius: 2px; }
 .otp-stage.is-merged .otp-cell {
   transform: translate(calc((1.5 - var(--col)) * 62px), calc((0.5 - var(--row)) * 68px)) scale(0.15);
   opacity: 0;
