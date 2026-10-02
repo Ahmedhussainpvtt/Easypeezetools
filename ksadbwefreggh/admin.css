@@ -1031,6 +1031,10 @@ th[aria-sort="descending"] .th-sort::after {
   width: 100%;
   box-sizing: border-box;
 }
+.modal--otp .otp-cell {
+  width: 44px;
+  flex: 0 0 44px;
+}
 .otp-busy {
   display: grid;
   justify-items: center;
@@ -1070,18 +1074,26 @@ th[aria-sort="descending"] .th-sort::after {
   .ball-loader span { animation: none; opacity: 1; }
 }
 
-.otp-stage { position: relative; min-height: 72px; overflow: hidden; }
-.otp-track {
+.otp-stage { position: relative; min-height: 156px; overflow: hidden; }
+.otp-grid {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  padding: 6px 4px 8px;
+  z-index: 1;
+}
+.otp-row {
+  position: relative;
   display: flex;
   justify-content: center;
-  gap: 6px;
-  position: relative;
-  z-index: 1;
+  gap: 18px;
 }
 .otp-line {
   position: absolute;
-  left: 16px;
-  right: 16px;
+  left: 22px;
+  right: 22px;
   top: 50%;
   height: 2px;
   margin-top: -1px;
@@ -1089,18 +1101,37 @@ th[aria-sort="descending"] .th-sort::after {
   border-radius: 2px;
   transform: scaleX(0);
   transform-origin: center;
-  transition: transform 0.42s ease;
+  transition: transform 0.42s ease, opacity 0.3s ease;
   z-index: 0;
   pointer-events: none;
 }
+.otp-rail {
+  position: absolute;
+  top: 24px;
+  bottom: 24px;
+  width: 2px;
+  background: #0085FF;
+  border-radius: 2px;
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform 0.42s ease 0.12s, opacity 0.3s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+.otp-rail--left { left: calc(50% - 93px); }
+.otp-rail--right { left: calc(50% + 91px); }
 .otp-stage.is-linked .otp-line { transform: scaleX(1); }
+.otp-stage.is-linked .otp-rail { transform: scaleY(1); }
+.otp-stage.is-merged .otp-line,
+.otp-stage.is-merged .otp-rail { opacity: 0; }
 .otp-cell {
-  --i: 0;
-  width: 34px;
-  height: 42px;
-  flex: 0 0 34px;
+  --col: 0;
+  --row: 0;
+  width: 44px;
+  height: 46px;
+  flex: 0 0 44px;
   padding: 0;
-  border-radius: 10px;
+  border-radius: 12px;
   border: 1.5px solid var(--line-strong);
   background: #fff;
   color: var(--text);
@@ -1110,12 +1141,12 @@ th[aria-sort="descending"] .th-sort::after {
   position: relative;
   z-index: 1;
   caret-color: #0085FF;
-  transition: border-radius 0.22s ease, border-color 0.15s ease, transform 0.5s cubic-bezier(.4,0,.2,1), opacity 0.4s ease;
+  transition: border-radius 0.22s ease, border-color 0.15s ease, transform 0.55s cubic-bezier(.4,0,.2,1), opacity 0.35s ease;
 }
 .otp-cell.is-filled { border-color: #0085FF; background: #f3f8ff; }
 .otp-stage.is-squared .otp-cell { border-radius: 4px; }
 .otp-stage.is-merged .otp-cell {
-  transform: translateX(calc((3.5 - var(--i)) * -40px)) scale(0.2);
+  transform: translate(calc((1.5 - var(--col)) * 62px), calc((0.5 - var(--row)) * 68px)) scale(0.15);
   opacity: 0;
 }
 .otp-source {
@@ -1150,7 +1181,7 @@ th[aria-sort="descending"] .th-sort::after {
   transform: scale(0);
 }
 .otp-tick svg { width: 26px; height: 26px; }
-.otp-stage.is-done .otp-track { visibility: hidden; position: absolute; inset: 0; height: 0; overflow: hidden; }
+.otp-stage.is-done .otp-grid { visibility: hidden; position: absolute; inset: 0; height: 0; overflow: hidden; }
 .otp-stage.is-done .otp-verified { display: flex; }
 .otp-stage.is-done .otp-tick { animation: otp-pop 0.45s cubic-bezier(.2, 1.35, .4, 1) forwards; }
 @keyframes otp-pop {
@@ -1159,7 +1190,10 @@ th[aria-sort="descending"] .th-sort::after {
   100% { transform: scale(1); }
 }
 @media (max-width: 420px) {
-  .otp-cell { width: 30px; flex-basis: 30px; height: 38px; font-size: 14px; }
+  .otp-cell { width: 40px; flex-basis: 40px; height: 44px; font-size: 15px; }
+  .otp-row { gap: 14px; }
+  .otp-rail--left { left: calc(50% - 80px); }
+  .otp-rail--right { left: calc(50% + 78px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .otp-cell, .otp-line, .otp-tick { transition: none; animation: none; }
