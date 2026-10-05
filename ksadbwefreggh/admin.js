@@ -9,6 +9,7 @@
 
   const $ = (id) => document.getElementById(id);
   let usersCache = [];
+  const selectedEmails = new Set();
   let sortKey = "email";
   let sortDir = "asc";
   let currentCustomerEmail = "";
@@ -635,7 +636,7 @@
   /** Placeholder rows so the table never flashes an empty/"not found" state. */
   function showTableLoading() {
     $("users-empty").hidden = true;
-    const widths = ["70%", "85%", "55%", "60%", "65%", "65%", "40%", "40%"];
+    const widths = ["16px", "70%", "85%", "55%", "60%", "65%", "65%", "40%", "40%"];
     $("users-tbody").innerHTML = Array.from({ length: 5 })
       .map(
         () =>
@@ -654,6 +655,7 @@
           [
             u.email,
             u.name,
+            u.accountId,
             u.phone,
             u.state,
             u.appVersion,
@@ -666,6 +668,10 @@
             .toLowerCase()
             .includes(q)
         );
+    const live = new Set(list.map((u) => u.email));
+    for (const email of [...selectedEmails]) {
+      if (!live.has(email)) selectedEmails.delete(email);
+    }
     const rows = sortedUsers(filtered);
     syncSortHeaders();
     $("table-count").textContent = String(rows.length);
@@ -676,7 +682,11 @@
       const mail = esc(u.email);
       const tr = document.createElement("tr");
       tr.setAttribute("data-open", u.email);
+      const picked = selectedEmails.has(u.email) ? " checked" : "";
       tr.innerHTML = `
+        <td class="col-check" data-label="Select">
+          <input type="checkbox" class="row-check" data-check="${mail}" aria-label="Select ${mail}"${picked} />
+        </td>
         <td data-label="Name">
           <div class="name-cell">
             ${avatarHtml(u)}
@@ -700,6 +710,34 @@
           </div>
         </td>`;
       tbody.appendChild(tr);
+    }
+    syncChromeActions();
+  }
+
+  function syncChromeActions() {
+    const tab = document.querySelector(".tab.is-active")?.dataset.tab || "customers";
+    const onCustomers = tab === "customers";
+    const n = selectedEmails.size;
+    document.querySelectorAll(".chrome-for-customers").forEach((el) => {
+      el.hidden = !onCustomers;
+    });
+    document.querySelectorAll(".chrome-for-blog").forEach((el) => {
+      el.hidden = tab !== "blog";
+    });
+    document.querySelectorAll(".chrome-for-notice").forEach((el) => {
+      el.hidden = tab !== "notice";
+    });
+    $("sel-count").hidden = !onCustomers || n === 0;
+    $("sel-count").textContent = n === 1 ? "1 selected" : `${n} selected`;
+    $("btn-bulk-sub").hidden = !onCustomers || n === 0;
+    $("btn-bulk-edit").hidden = !onCustomers || n !== 1;
+    $("btn-bulk-del").hidden = !onCustomers || n === 0;
+    const all = $("check-all");
+    if (all) {
+      const boxes = [...document.querySelectorAll("#users-tbody .row-check")];
+      const picked = boxes.filter((box) => box.checked).length;
+      all.checked = boxes.length > 0 && picked === boxes.length;
+      all.indeterminate = picked > 0 && picked < boxes.length;
     }
   }
 
@@ -830,6 +868,7 @@
     $("cv-first").value = user.firstName || "";
     $("cv-last").value = user.lastName || "";
     $("cv-email").value = user.email || "";
+    $("cv-account-id").textContent = dash(user.accountId);
     $("cv-phone").value = user.phone || "";
     $("cv-first-seen").textContent = formatWhen(user.firstSeen);
     $("cv-last-seen").textContent = formatWhen(user.lastSeen);
@@ -1254,6 +1293,7 @@
       $("tab-blog").classList.toggle("hidden", tab !== "blog");
       $("tab-notice").classList.toggle("hidden", tab !== "notice");
       syncShellLayout();
+      syncChromeActions();
     });
   });
   $("cv-kh-plan").addEventListener("change", () => syncSubExpiry("cv-kh"));
@@ -1282,7 +1322,120 @@
   }
   $("btn-new-user").addEventListener("click", () => openUserModal(null));
 
+  $("users-tbody").addEventListener("change", (e) => {
+    const box = e.target.closest(".row-check");
+    if (!box) return;
+    const email = box.getAttribute("data-check");
+    if (!email) return;
+    if (box.checked) selectedEmails.add(email);
+    else selectedEmails.delete(email);
+    syncChromeActions();
+  });
+
+  $("check-all").addEventListener("change", () => {
+    const on = $("check-all").checked;
+    document.querySelectorAll("#users-tbody .row-check").forEach((box) => {
+      box.checked = on;
+      const email = box.getAttribute("data-check");
+      if (!email) return;
+      if (on) selectedEmails.add(email);
+      else selectedEmails.delete(email);
+    });
+    syncChromeActions();
+  });
+
+  $("btn-bulk-edit").addEventListener("click", () => {
+    const [email] = selectedEmails;
+    if (email) openCustomer(email);
+  });
+
+  $("btn-bulk-del").addEventListener("click", async () => {
+    const emails = [...selectedEmails];
+    if (!emails.length) return;
+    const ok = await confirmUi({
+      title: "Remove customers",
+      message: `Remove ${emails.length} customer${emails.length === 1 ? "" : "s"}? This deletes their license records.`,
+      okLabel: "Delete",
+      danger: true
+    });
+    if (!ok) return;
+    try {
+      const data = await api("/admin/revoke-access", {
+        method: "POST",
+        body: JSON.stringify({ emails })
+      });
+      selectedEmails.clear();
+      await loadUsers();
+      toast(`Removed ${data.count || emails.length}`, "ok");
+    } catch (ex) {
+      toast(ex.message, "error");
+    }
+  });
+
+  $("btn-bulk-sub").addEventListener("click", () => {
+    $("bulk-sub-count").textContent = `${selectedEmails.size} selected`;
+    $("bulk-sub-error").hidden = true;
+    $("bulk-sub-dialog").showModal();
+  });
+  $("bulk-sub-cancel").addEventListener("click", () => $("bulk-sub-dialog").close());
+  $("bulk-sub-cancel-btn").addEventListener("click", () => $("bulk-sub-dialog").close());
+  $("bulk-sub-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const emails = [...selectedEmails];
+    if (!emails.length) return;
+    $("bulk-sub-error").hidden = true;
+    try {
+      const data = await api("/admin/grant-access", {
+        method: "POST",
+        body: JSON.stringify({
+          emails,
+          product: $("bulk-product").value,
+          planType: $("bulk-plan").value
+        })
+      });
+      $("bulk-sub-dialog").close();
+      selectedEmails.clear();
+      await loadUsers();
+      toast(`Subscription added for ${data.count || emails.length}`, "ok");
+    } catch (ex) {
+      $("bulk-sub-error").hidden = false;
+      $("bulk-sub-error").textContent = ex.message || "Could not add subscription";
+    }
+  });
+
+  $("btn-deleted").addEventListener("click", async () => {
+    const body = $("deleted-tbody");
+    body.innerHTML = "";
+    $("deleted-empty").hidden = true;
+    $("deleted-dialog").showModal();
+    try {
+      const data = await api("/admin/deleted");
+      const rows = data.deleted || [];
+      $("deleted-empty").hidden = rows.length > 0;
+      body.innerHTML = rows
+        .map(
+          (row) => `<tr>
+            <td class="cell-mono">${esc(row.accountId || " - ")}</td>
+            <td>${esc(formatWhen(row.deletedAt))}</td>
+            <td>${esc(row.method || " - ")}</td>
+            <td>${esc(row.reason || " - ")}</td>
+            <td>${esc(row.note || " - ")}</td>
+            <td>${esc(formatWhen(row.retentionUntil))}</td>
+          </tr>`
+        )
+        .join("");
+    } catch (ex) {
+      toast(ex.message || "Could not load deleted accounts", "error");
+    }
+  });
+  $("deleted-close").addEventListener("click", () => $("deleted-dialog").close());
+
+  $("btn-blog-publish").addEventListener("click", () => $("blog-form").requestSubmit());
+  $("btn-blog-delete").addEventListener("click", () => $("blog-delete-form").requestSubmit());
+  $("btn-notice-send").addEventListener("click", () => $("notice-form").requestSubmit());
+
   $("users-tbody").addEventListener("click", async (e) => {
+    if (e.target.closest(".row-check")) return;
     const del = e.target.closest("[data-del]");
     const edit = e.target.closest("[data-edit]");
     const open = e.target.closest("[data-open]");

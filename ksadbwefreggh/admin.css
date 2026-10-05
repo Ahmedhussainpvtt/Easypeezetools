@@ -632,6 +632,27 @@ html.admin-mobile-login .login-skip { display: none; }
   margin-bottom: 22px;
 }
 .list-chrome .tabs { margin-bottom: 0; }
+.chrome-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.col-check { width: 36px; }
+.row-check { width: 16px; height: 16px; accent-color: var(--accent, #2563eb); }
+.submit-moved {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+#deleted-dialog .table-scroll { max-height: 60vh; }
 
 /* ---------- Tabs ---------- */
 

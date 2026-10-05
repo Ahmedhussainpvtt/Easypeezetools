@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="admin.css?v=20261002otp3" />
+  <link rel="stylesheet" href="admin.css?v=20261005admin2" />
   <link rel="stylesheet" href="scene/login-scene.css?v=20261002s" />
   <link rel="icon" href="/favicon.png" type="image/png" />
 </head>
@@ -122,6 +122,7 @@
               <div><dt>First name</dt><dd><input id="cv-first" type="text" maxlength="80" autocomplete="off" /></dd></div>
               <div><dt>Last name</dt><dd><input id="cv-last" type="text" maxlength="80" autocomplete="off" /></dd></div>
               <div><dt>Email</dt><dd><input id="cv-email" class="cell-mono" type="email" maxlength="120" autocomplete="off" /></dd></div>
+              <div><dt>Account ID</dt><dd id="cv-account-id" class="cell-mono"> - </dd></div>
               <div><dt>Phone</dt><dd><input id="cv-phone" class="cell-mono" type="tel" maxlength="20" autocomplete="off" /></dd></div>
               <div><dt>First seen</dt><dd id="cv-first-seen"> - </dd></div>
               <div><dt>Last seen</dt><dd id="cv-last-seen"> - </dd></div>
@@ -261,6 +262,22 @@
           <button type="button" class="tab" data-tab="blog" role="tab">Blog</button>
           <button type="button" class="tab" data-tab="notice" role="tab">Notice</button>
         </nav>
+        <div class="chrome-actions" id="chrome-actions">
+          <span class="count-pill" id="sel-count" hidden>0 selected</span>
+          <button type="button" class="btn btn-outline" id="btn-bulk-sub" hidden>Add subscription</button>
+          <button type="button" class="btn btn-outline" id="btn-bulk-edit" hidden>Edit</button>
+          <button type="button" class="btn btn-danger" id="btn-bulk-del" hidden>Delete</button>
+          <button type="button" class="btn btn-outline chrome-for-customers" id="btn-deleted">Deleted</button>
+          <button type="button" class="btn btn-outline chrome-for-customers" id="btn-refresh">
+            <svg><use href="#i-refresh" /></svg>Refresh
+          </button>
+          <button type="button" class="btn btn-primary chrome-for-customers" id="btn-new-user">
+            <svg><use href="#i-plus" /></svg>New customer
+          </button>
+          <button type="button" class="btn btn-primary chrome-for-blog" id="btn-blog-publish" hidden>Publish</button>
+          <button type="button" class="btn btn-danger chrome-for-blog" id="btn-blog-delete" hidden>Delete post</button>
+          <button type="button" class="btn btn-primary chrome-for-notice" id="btn-notice-send" hidden>Send</button>
+        </div>
       </div>
 
       <section id="tab-customers" class="tab-panel">
@@ -303,18 +320,13 @@
                 <span class="sr-only">Search customers</span>
                 <input type="search" id="search-users" placeholder="Search name, email, plan..." autocomplete="off" />
               </label>
-              <button type="button" class="btn btn-outline" id="btn-refresh">
-                <svg><use href="#i-refresh" /></svg>Refresh
-              </button>
-              <button type="button" class="btn btn-primary" id="btn-new-user">
-                <svg><use href="#i-plus" /></svg>New customer
-              </button>
             </div>
           </div>
           <div class="table-scroll">
             <table class="data-table">
               <thead>
                 <tr>
+                  <th class="col-check"><input type="checkbox" class="row-check" id="check-all" aria-label="Select all customers" /></th>
                   <th data-sort="name" aria-sort="none"><button type="button" class="th-sort">Name</button></th>
                   <th data-sort="email" aria-sort="ascending"><button type="button" class="th-sort">Email</button></th>
                   <th data-sort="phone" aria-sort="none"><button type="button" class="th-sort">Phone</button></th>
@@ -361,7 +373,7 @@
               <textarea id="blog-body" rows="12" required placeholder="HTML or plain paragraphs…"></textarea>
             </label>
             <p id="blog-msg" class="form-msg" hidden></p>
-            <button type="submit" class="btn btn-primary">Publish post</button>
+            <button type="submit" class="submit-moved" id="blog-publish-btn">Publish post</button>
           </form>
 
           <form class="form-card" id="blog-delete-form">
@@ -374,9 +386,7 @@
               <input id="blog-del-slug" required placeholder="my-post-slug" />
             </label>
             <p id="blog-del-msg" class="form-msg" hidden></p>
-            <button type="submit" class="btn btn-danger">
-              <svg><use href="#i-trash" /></svg>Delete post
-            </button>
+            <button type="submit" class="submit-moved" id="blog-delete-btn">Delete post</button>
           </form>
         </div>
       </section>
@@ -409,7 +419,7 @@
               <div id="notice-country-list" class="country-picker__list" role="group" aria-label="Target countries"></div>
             </div>
             <p id="notice-msg" class="form-msg" hidden></p>
-            <button type="submit" class="btn btn-primary">Send</button>
+            <button type="submit" class="submit-moved" id="notice-send-btn">Send</button>
           </form>
           <div class="form-card">
             <div class="card-head">
@@ -578,9 +588,80 @@
     </div>
   </dialog>
 
+  <dialog id="deleted-dialog" class="modal">
+    <div class="modal__card">
+      <div class="modal__head">
+        <div>
+          <p class="eyebrow">Accounts</p>
+          <h2>Deleted</h2>
+        </div>
+        <button type="button" class="icon-btn modal__close" id="deleted-close" aria-label="Close">
+          <svg aria-hidden="true"><use href="#i-close" /></svg>
+        </button>
+      </div>
+      <div class="modal__body">
+        <p class="muted">These are account IDs removed in the app or here. Email is not kept on a deleted account.</p>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Account ID</th>
+                <th>Deleted</th>
+                <th>How</th>
+                <th>Reason</th>
+                <th>Note</th>
+                <th>Kept until</th>
+              </tr>
+            </thead>
+            <tbody id="deleted-tbody"></tbody>
+          </table>
+        </div>
+        <p id="deleted-empty" class="muted" hidden>No deleted accounts.</p>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="bulk-sub-dialog" class="modal">
+    <form method="dialog" id="bulk-sub-form" class="modal__card">
+      <div class="modal__head">
+        <div>
+          <p class="eyebrow">Customers</p>
+          <h2>Add subscription</h2>
+        </div>
+        <button type="button" class="icon-btn modal__close" id="bulk-sub-cancel" aria-label="Close">
+          <svg aria-hidden="true"><use href="#i-close" /></svg>
+        </button>
+      </div>
+      <div class="modal__body">
+        <p class="muted" id="bulk-sub-count">0 selected</p>
+        <div class="modal__grid">
+          <label>
+            <span>Product</span>
+            <select id="bulk-product">
+              <option value="kharchlog">Kharch Log</option>
+              <option value="pdfbuddy">Pdf Buddy</option>
+            </select>
+          </label>
+          <label>
+            <span>Plan</span>
+            <select id="bulk-plan">
+              <option value="lifetime">Lifetime</option>
+              <option value="yearly">Yearly</option>
+            </select>
+          </label>
+        </div>
+        <p id="bulk-sub-error" class="form-error" hidden></p>
+      </div>
+      <div class="modal__actions">
+        <button type="button" class="btn btn-ghost" id="bulk-sub-cancel-btn">Cancel</button>
+        <button type="submit" class="btn btn-primary">Add subscription</button>
+      </div>
+    </form>
+  </dialog>
+
   <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
 
-  <script src="admin.js?v=20261002otp3"></script>
+  <script src="admin.js?v=20261005admin2"></script>
   <script type="module" src="scene/login-scene.js?v=20261002s"></script>
 </body>
 </html>
