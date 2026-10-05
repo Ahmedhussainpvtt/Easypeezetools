@@ -159,7 +159,7 @@
       <p><strong>Kharch Log</strong> uses Google Sign-In and Google Drive / Sheets so your expense ledger lives in <em>your</em> Google account - not a proprietary cloud you can't export.</p>
       <ul>
         <li><strong>Sign-In</strong> - identify your Google account so we can attach a paid license and open your Sheet.</li>
-        <li><strong>Drive / Sheets (limited scopes)</strong> - create or update expense spreadsheets and folders you choose; we request least-privilege access (typically <code>drive.file</code>-style), not your entire Drive.</li>
+        <li><strong>Drive / Sheets</strong> - create or update the expense spreadsheet and folder Kharch Log makes for you. It cannot read the rest of your Drive.</li>
         <li><strong>What we don't do</strong> - we don't sell your ledger, don't use Sheet contents for ads, and don't need Google access for Pdf Buddy's local PDF tools.</li>
         <li><strong>Revoke anytime</strong> - <a href="https://myaccount.google.com/permissions" rel="noopener">Google Account  ->  Third-party access</a>, or uninstall Kharch Log.</li>
       </ul>
@@ -171,38 +171,38 @@
         <li>Google account email (and name if Google provides it)</li>
         <li>Checkout fields you enter: first name, optional last name, email, phone (with country code)</li>
         <li>License / plan status (free, yearly, lifetime) per product</li>
-        <li>Payment metadata from processors: order/payment/subscription ids, amount, currency, status, timestamps - <strong>not</strong> full card numbers (handled by the payment provider)</li>
+        <li>Payment details from the payment provider: reference, amount, currency, status, and time. We do <strong>not</strong> store full card numbers.</li>
         <li>Support emails and attachments you send us</li>
         <li>Your choice to stop marketing emails, when you use the unsubscribe option or email <a href="mailto:support@easypeeze.com">support@easypeeze.com</a></li>
       </ul>
       <h3>3.2 Technical / security signals</h3>
       <ul>
-        <li>App version, OS (Windows/Android), approximate IP, timestamps, rate-limit / abuse signals</li>
-        <li>Play installs of Kharch Log send crash reports (stack trace, device, app version, and the account id when we have one). Those reports do not include your email, SMS text, or expense amounts. The website APK does not send crash reports.</li>
-        <li>Kharch Log app usage via Google Analytics for Firebase (screens/events, app version, device/OS - not SMS text or expense amounts; advertising ID collection is off)</li>
-        <li>Website hosting logs (URL, user-agent, referrer, IP) on GitHub Pages / similar</li>
-        <li>Website usage via Google Analytics (gtag.js) on easypeeze.com and kharchlog.com - pages viewed, approximate location, device/browser; not form passwords or PDF contents</li>
+        <li>App version, operating system (Windows or Android), approximate IP address, time, and signals used to detect abuse</li>
+        <li>The Play Store version of Kharch Log may send crash and diagnostic information, such as device information, app version, and crash details, so we can fix problems. Those reports do not include your email, SMS text, or expense amounts. The website download does not send crash reports.</li>
+        <li>Kharch Log app usage via Google Analytics (which screens you open, app version, device and operating system). This does not include SMS text or expense amounts, and advertising ID collection is off.</li>
+        <li>Website hosting logs (page address, browser, referrer, IP) kept by our website host</li>
+        <li>Website usage via Google Analytics on easypeeze.com and kharchlog.com: pages viewed, approximate location, device and browser. Not form passwords or PDF contents.</li>
       </ul>
       <h3>3.3 Pdf Buddy (on-device)</h3>
       <ul>
         <li>PDF contents and paths stay on your device for core editing</li>
         <li>Local preferences (UI, free-action counters)</li>
-        <li>After sign-in, license checks may contact our backend with your account email / license token</li>
-        <li><strong>Analytics:</strong> the desktop app uses the same Google Analytics property as easypeeze.com (gtag.js). It records app opens, mode changes, saves, sign-in/out, and upgrade clicks, plus app version. It does not receive PDF contents, file names, or your email.</li>
+        <li>After sign-in, Pdf Buddy checks whether your account is paid. That check uses your account email.</li>
+        <li><strong>Analytics:</strong> the desktop app uses the same Google Analytics as easypeeze.com. It records app opens, mode changes, saves, sign-in and sign-out, and upgrade clicks, plus app version. It does not receive PDF contents, file names, or your email.</li>
       </ul>
       <h3>3.4 Kharch Log (Android)</h3>
       <ul>
         <li>Expense fields you enter (amount, category, mode, notes, person, etc.)</li>
         <li><strong>SMS (optional):</strong> if you grant SMS permission, the app reads bank/UPI-related messages <em>on-device</em> to draft expenses. Drafts go to your review inbox and/or your Google Sheet. We do <strong>not</strong> operate a raw-SMS upload service for ads or resale.</li>
-        <li><strong>Google Drive/Sheets:</strong> files created or selected under scopes you approve (typically limited / <code>drive.file</code>-style access)</li>
+        <li><strong>Google Drive/Sheets:</strong> the expense files Kharch Log creates, or a spreadsheet you pick for the app. Kharch Log does not get access to your whole Drive.</li>
         <li><strong>Microphone (optional):</strong> only for voice entry; speech uses on-device / OS services</li>
         <li>Local app preferences and notification settings</li>
-        <li><strong>Analytics:</strong> Google Analytics for Firebase records app usage (opens, screens) so we can fix bugs and see what features are used. It does not receive your SMS body or ledger amounts. Advertising ID collection is off.</li>
+        <li><strong>Analytics:</strong> Google Analytics in the app records opens and screens so we can fix bugs and see what features are used. It does not receive your SMS text or expense amounts. Advertising ID collection is off.</li>
         <li><strong>Account and marketing emails:</strong> creating an account enrolls you to receive account and marketing emails from Easy Peeze. Marketing emails include an unsubscribe option that allows you to stop receiving marketing communications. You can also contact us at <a href="mailto:support@easypeeze.com">support@easypeeze.com</a> to opt out of marketing emails.</li>
       </ul>
       <h3>3.5 Data we do not intentionally collect</h3>
       <ul>
-        <li>Full payment card PAN / CVV on our servers</li>
+        <li>Full card numbers or card security codes on our servers</li>
         <li>Advertising IDs for cross-app tracking networks</li>
         <li>Contacts / photo libraries except where an OS picker is used for a feature you start (e.g. image to PDF on device)</li>
       </ul>
@@ -215,7 +215,7 @@
         <li><strong>Support</strong> - answer tickets and fix bugs</li>
         <li><strong>Security &amp; integrity</strong> - prevent fraud, abuse, and unauthorized access</li>
         <li><strong>Legal compliance</strong> - respond to lawful requests and enforce our Terms</li>
-        <li><strong>Product reliability</strong> - Play crash reports, website and Pdf Buddy Google Analytics (usage, not ads), and Kharch Log Firebase Analytics for usage (not ads)</li>
+        <li><strong>Product reliability</strong> - Play Store crash and diagnostic reports, plus Google Analytics on the websites, in Pdf Buddy, and in Kharch Log, to see how the products are used. These are not used for ads.</li>
       </ul>
       <p>We do not use your expense ledger or PDF contents for targeted advertising.</p>
 
@@ -238,14 +238,15 @@
       </ul>
       <p>How to exercise rights: email <a href="mailto:info@easypeeze.com">info@easypeeze.com</a> with subject line <strong>&ldquo;DPDP request&rdquo;</strong> and enough detail to verify you control the account email. We will respond within a reasonable period.</p>
       <p>You may also complain to India&rsquo;s <strong>Data Protection Board of India</strong> as and when that mechanism is available under the Act/Rules.</p>
-      <p><strong>Kharch Log deletion:</strong> delete the account in the app. We delete your name, email, expenses, Google Sheet access, plan, and device sessions at that time. We do not keep your email on the deletion record. We keep a limited security and account history for the internal account id for 1 year, then delete that too. That history does not include your expenses. The same Google account can sign up again and gets a new account id.</p>
+      <p><strong>Kharch Log deletion:</strong> when you delete your account in the app, we delete your name, email, expenses, plan, and the phones signed in to that account, and we remove Kharch Log's access to your Google Sheet. We do not keep your email on that deletion. We keep limited security records, without your email or expenses, for 1 year so we can look into abuse, then we delete them. You can sign up again with the same Google account. That is a new account.</p>
       <p><strong>Sheet data:</strong> expense rows in your Google Sheet are under your Google account - edit/delete them there or revoke app access. Account deletion also removes the Kharch Log sheet and folder from Drive when the app can still reach them.</p>
 
       <h2>7. Sharing &amp; processors</h2>
       <ul>
-        <li><strong>Google</strong> - Sign-In, OAuth tokens, Drive/Sheets for Kharch Log features you enable</li>
+        <li><strong>Google</strong> - sign-in, and Drive and Sheets access for Kharch Log features you turn on. Google Analytics and, on the Play Store version, crash and diagnostic reports.</li>
         <li><strong>Razorpay / Cashfree (or similar)</strong> - payment processing</li>
-        <li><strong>Cloud / hosting</strong> - e.g. Google Cloud Run for license API; GitHub Pages for static sites</li>
+        <li><strong>Amplitude</strong> - how visits move through easypeeze.com and kharchlog.com. It does not receive your expenses or PDF contents.</li>
+        <li><strong>Hosting</strong> - Google Cloud hosts the account and payment service. The websites are static pages on our website host.</li>
         <li><strong>Legal / safety</strong> - if required by law or to protect rights, users, or the public</li>
       </ul>
       <p>If you share your Google Sheet with others, those people can see the expense data - that is under your control.</p>
@@ -256,7 +257,7 @@
       <h2>9. Retention</h2>
       <ul>
         <li><strong>License / payment metadata</strong> - retained while the account exists, and for a reasonable period afterward for fraud prevention, accounting, and legal claims</li>
-        <li><strong>After a Kharch Log account deletion</strong> - name, email, expenses, plan, and device sessions are deleted immediately. The security history for that account id is kept for 1 year, then deleted. Your email is not stored in that history.</li>
+        <li><strong>After a Kharch Log account deletion</strong> - your name, email, expenses, plan, and signed-in phones are deleted at that time. Limited security records, without your email or expenses, are kept for 1 year so we can look into abuse, then deleted.</li>
         <li><strong>Marketing emails</strong> - they stop when you use the unsubscribe option in a marketing email, or when you email <a href="mailto:support@easypeeze.com">support@easypeeze.com</a> to opt out</li>
         <li><strong>Support emails</strong> - retained as needed to resolve issues</li>
         <li><strong>Website logs</strong> - short-lived operational retention by the host</li>
@@ -264,13 +265,13 @@
       </ul>
 
       <h2>10. Security</h2>
-      <p>We use reasonable technical and organisational measures (HTTPS, access controls, least-privilege Google scopes where practical). No method is 100% secure. Protect your Google account with a strong password and 2FA.</p>
+      <p>We use HTTPS and limit access to what each feature needs. No method is completely secure. Protect your Google account with a strong password and 2FA.</p>
 
       <h2>11. Children</h2>
       <p>Products are not directed at children under <strong>18</strong>. Do not use them if you are under 18. We do not knowingly collect personal data from children. If you believe a child provided data, contact us for deletion.</p>
 
       <h2>12. Cookies &amp; similar technologies</h2>
-      <p>easypeeze.com and kharchlog.com use Google Analytics to see which pages are visited, plus device and approximate location. We do not use an advertising ID in the Kharch Log app, and we do not run an ad network. Checkout pages may keep your email in the browser only long enough to finish payment.</p>
+      <p>easypeeze.com and kharchlog.com use Google Analytics to see which pages are visited, plus device and approximate location. The same sites use Amplitude to see how a visit moves through the pages. Amplitude does not receive your expenses or PDF contents. We do not use an advertising ID in the Kharch Log app, and we do not run an ad network. Checkout pages may keep your email in the browser only long enough to finish payment.</p>
 
       <h2>13. Automated decision-making</h2>
       <p>We do not use automated decision-making that produces legal or similarly significant effects about you beyond routine license entitlement checks (paid vs free).</p>
