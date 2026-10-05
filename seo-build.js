@@ -182,7 +182,7 @@ function stripAmplitude(html) {
   );
 }
 
-const INTERNAL_SKIP_PATHS = ['/ksadbwefreggh/'];
+const INTERNAL_SKIP_PATHS = ['/khsynloyrebnsbyo/'];
 
 function applyGtagToTree(siteDir, gtagId, dryRun, skipPrefixes = INTERNAL_SKIP_PATHS) {
   let n = 0;
@@ -321,7 +321,7 @@ function applyPageSeo(html, cfg, pagePath, page) {
     ? 'noindex'
     : page.robots || cfg.defaults.robots;
 
-  const isInternal = String(pagePath || '').startsWith('/ksadbwefreggh');
+  const isInternal = String(pagePath || '').startsWith('/khsynloyrebnsbyo');
   if (isInternal) {
     html = stripAmplitude(stripGtag(html));
   } else {
@@ -457,7 +457,7 @@ function buildSite(key, opts) {
     meta.dir,
     cfg.site && cfg.site.amplitudeApiKey,
     opts.dryRun,
-    ['/ksadbwefreggh/']
+    ['/khsynloyrebnsbyo/']
   );
   console.log(`  pages touched: ${updated}/${files.length}${opts.dryRun ? ' (dry-run)' : ''}`);
   console.log(`  gtag: ${gtagPages} html file(s)`);
@@ -517,7 +517,7 @@ function buildLocal(siteDir, opts) {
     siteDir,
     cfg.site && cfg.site.amplitudeApiKey,
     opts.dryRun,
-    ['/ksadbwefreggh/']
+    ['/khsynloyrebnsbyo/']
   );
   console.log(`  pages touched: ${updated}/${files.length}${opts.dryRun ? ' (dry-run)' : ''}`);
   console.log(`  discovered HTML: ${files.length} | sitemap urls: ${sitemapEntries.length}`);

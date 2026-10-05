@@ -37,7 +37,7 @@ module.exports = {
       'User-agent: *',
       'Allow: /',
       'Disallow: /pay/',
-      'Disallow: /ksadbwefreggh/',
+      'Disallow: /khsynloyrebnsbyo/',
       '',
       'Sitemap: https://easypeeze.com/sitemap.xml',
       '',
@@ -48,12 +48,12 @@ module.exports = {
   excludeFromSitemap: [
     '/pay/',
     '/pay/success.html',
-    '/ksadbwefreggh/',
+    '/khsynloyrebnsbyo/',
     '/404.html',
   ],
 
   /** Glob-ish path prefixes skipped entirely by the injector. */
-  skipPaths: ['/ksadbwefreggh/', '/lost/'],
+  skipPaths: ['/khsynloyrebnsbyo/', '/lost/'],
 
   defaults: {
     changefreq: 'monthly',

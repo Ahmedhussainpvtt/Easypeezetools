@@ -732,15 +732,6 @@
     const tab = document.querySelector(".tab.is-active")?.dataset.tab || "customers";
     const onCustomers = tab === "customers";
     const n = selectedEmails.size;
-    document.querySelectorAll(".chrome-for-customers").forEach((el) => {
-      el.hidden = !onCustomers;
-    });
-    document.querySelectorAll(".chrome-for-blog").forEach((el) => {
-      el.hidden = tab !== "blog";
-    });
-    document.querySelectorAll(".chrome-for-notice").forEach((el) => {
-      el.hidden = tab !== "notice";
-    });
     $("sel-count").hidden = !onCustomers || n === 0;
     $("sel-count").textContent = n === 1 ? "1 selected" : `${n} selected`;
     $("btn-bulk-sub").hidden = !onCustomers || n === 0;
@@ -1229,7 +1220,7 @@
   $("cv-update").addEventListener("click", async () => {
     if (!currentCustomerEmail) return;
     if (!beginAction()) return;
-    const btn = $("cv-update");
+    if (!currentCustomerEmail) return;
     const nextEmail = ($("cv-email").value || "").trim();
     if (!nextEmail || nextEmail.indexOf("@") < 1) {
       toast("Enter a valid email", "error");
@@ -1478,19 +1469,6 @@
   });
   $("deleted-close").addEventListener("click", () => $("deleted-dialog").close());
 
-  $("btn-blog-publish").addEventListener("click", () => {
-    if (actionBusy) return;
-    $("blog-form").requestSubmit();
-  });
-  $("btn-blog-delete").addEventListener("click", () => {
-    if (actionBusy) return;
-    $("blog-delete-form").requestSubmit();
-  });
-  $("btn-notice-send").addEventListener("click", () => {
-    if (actionBusy) return;
-    $("notice-form").requestSubmit();
-  });
-
   $("users-tbody").addEventListener("click", async (e) => {
     if (e.target.closest(".row-check")) return;
     if (actionBusy) return;
@@ -1515,6 +1493,7 @@
           method: "POST",
           body: JSON.stringify({ email })
         });
+        selectedEmails.delete(email);
         await loadUsers();
         toast(`Removed ${email}`, "ok");
       } catch (ex) {
