@@ -49,7 +49,7 @@
   <meta name="twitter:description" content="How Easy Peeze Tools handles data for Pdf Buddy and Kharch Log." />
   <meta name="twitter:image" content="https://easypeeze.com/og-image.jpg" />
   
-                                                                                                                                                                      <script type="application/ld+json" id="seo-jsonld">
+                                                                                                                                                                    <script type="application/ld+json" id="seo-jsonld">
 {
     "@context": "https://schema.org",
     "@graph": [
@@ -126,7 +126,7 @@
     <div class="page-hero section">
       <p class="crumbs"><a href="/">Home</a> / Privacy</p>
       <h1>Privacy Policy</h1>
-      <p class="meta">Last updated 2026-09-09 - Easy Peeze Tools - Contact: <a href="mailto:info@easypeeze.com">info@easypeeze.com</a></p>
+      <p class="meta">Last updated 2026-10-05 - Easy Peeze Tools - Contact: <a href="mailto:info@easypeeze.com">info@easypeeze.com</a></p>
     </div>
     <article class="section legal-page__content prose">
       <p><strong>Important:</strong> This policy is written for India&rsquo;s <em>Digital Personal Data Protection Act, 2023</em> (DPDP Act) and related rules, plus Play/desktop store expectations. It is not legal advice. If you need formal counsel for your situation, consult a lawyer.</p>
@@ -173,11 +173,12 @@
         <li>License / plan status (free, yearly, lifetime) per product</li>
         <li>Payment metadata from processors: order/payment/subscription ids, amount, currency, status, timestamps - <strong>not</strong> full card numbers (handled by the payment provider)</li>
         <li>Support emails and attachments you send us</li>
+        <li>If you unsubscribe from account and marketing emails: the email address and the date, so we do not send those emails again</li>
       </ul>
       <h3>3.2 Technical / security signals</h3>
       <ul>
         <li>App version, OS (Windows/Android), approximate IP, timestamps, rate-limit / abuse signals</li>
-        <li>Optional crash or diagnostic info you choose to send</li>
+        <li>Play installs of Kharch Log send crash reports (stack trace, device, app version, and the account id when we have one). Those reports do not include your email, SMS text, or expense amounts. The website APK does not send crash reports.</li>
         <li>Kharch Log app usage via Google Analytics for Firebase (screens/events, app version, device/OS - not SMS text or expense amounts; advertising ID collection is off)</li>
         <li>Website hosting logs (URL, user-agent, referrer, IP) on GitHub Pages / similar</li>
         <li>Website usage via Google Analytics (gtag.js) on easypeeze.com and kharchlog.com - pages viewed, approximate location, device/browser; not form passwords or PDF contents</li>
@@ -196,7 +197,8 @@
         <li><strong>Google Drive/Sheets:</strong> files created or selected under scopes you approve (typically limited / <code>drive.file</code>-style access)</li>
         <li><strong>Microphone (optional):</strong> only for voice entry; speech uses on-device / OS services</li>
         <li>Local app preferences and notification settings</li>
-        <li><strong>Analytics:</strong> Google Analytics for Firebase records anonymous app usage (opens, screens) so we can fix bugs and see what features are used. It does not receive your SMS body or ledger amounts.</li>
+        <li><strong>Analytics:</strong> Google Analytics for Firebase records app usage (opens, screens) so we can fix bugs and see what features are used. It does not receive your SMS body or ledger amounts. Advertising ID collection is off.</li>
+        <li><strong>Account and marketing emails:</strong> creating an account automatically enrolls that email in account and marketing emails. Each email has an unsubscribe link. Confirming on that page stores the address and stops those emails. You can also email <a href="mailto:support@easypeeze.com">support@easypeeze.com</a>.</li>
       </ul>
       <h3>3.5 Data we do not intentionally collect</h3>
       <ul>
@@ -213,14 +215,14 @@
         <li><strong>Support</strong> - answer tickets and fix bugs</li>
         <li><strong>Security &amp; integrity</strong> - prevent fraud, abuse, and unauthorized access</li>
         <li><strong>Legal compliance</strong> - respond to lawful requests and enforce our Terms</li>
-        <li><strong>Product reliability</strong> - optional diagnostics / crash reports you send, website and Pdf Buddy Google Analytics (usage, not ads), and Kharch Log Firebase Analytics for usage (not ads)</li>
+        <li><strong>Product reliability</strong> - Play crash reports, website and Pdf Buddy Google Analytics (usage, not ads), and Kharch Log Firebase Analytics for usage (not ads)</li>
       </ul>
       <p>We do not use your expense ledger or PDF contents for targeted advertising.</p>
 
       <h2>5. Consent, notice &amp; withdrawal (DPDP)</h2>
       <ul>
-        <li>By creating an account, granting permissions (SMS, mic, Drive), or completing checkout, you give informed consent for the related purposes above.</li>
-        <li>You can <strong>withdraw consent</strong> as easily as you gave it, for example: revoke Google access at <a href="https://myaccount.google.com/permissions" rel="noopener">Google Account  ->  Third-party access</a>; disable SMS/mic in Android settings; uninstall the app; email <a href="mailto:info@easypeeze.com">info@easypeeze.com</a> to request license-record deletion where feasible.</li>
+        <li>By creating an account, granting permissions (SMS, mic, Drive), or completing checkout, you give informed consent for the related purposes above. Creating an account also enrolls you in product emails. Use the unsubscribe link in any of those emails to stop them.</li>
+        <li>You can <strong>withdraw consent</strong> as easily as you gave it, for example: open the unsubscribe link in an account or marketing email and confirm, or email <a href="mailto:support@easypeeze.com">support@easypeeze.com</a>; delete the Kharch Log account in the app; revoke Google access at <a href="https://myaccount.google.com/permissions" rel="noopener">Google Account  ->  Third-party access</a>; disable SMS/mic in Android settings; uninstall the app.</li>
         <li>Withdrawing consent may stop related features (e.g. SMS capture or Sheets sync) and may affect paid unlock verification if we can no longer associate your license.</li>
         <li>Some processing is necessary to provide the service you request (e.g. storing that your email is licensed after you pay).</li>
       </ul>
@@ -236,7 +238,8 @@
       </ul>
       <p>How to exercise rights: email <a href="mailto:info@easypeeze.com">info@easypeeze.com</a> with subject line <strong>&ldquo;DPDP request&rdquo;</strong> and enough detail to verify you control the account email. We will respond within a reasonable period.</p>
       <p>You may also complain to India&rsquo;s <strong>Data Protection Board of India</strong> as and when that mechanism is available under the Act/Rules.</p>
-      <p><strong>Sheet data:</strong> expense rows in your Google Sheet are under your Google account - edit/delete them there or revoke app access.</p>
+      <p><strong>Kharch Log deletion:</strong> delete the account in the app. We delete your name, email, expenses, Google Sheet access, plan, and device sessions at that time. We do not keep your email on the deletion record. We keep a limited security and account history for the internal account id for 1 year, then delete that too. That history does not include your expenses. The same Google account can sign up again and gets a new account id.</p>
+      <p><strong>Sheet data:</strong> expense rows in your Google Sheet are under your Google account - edit/delete them there or revoke app access. Account deletion also removes the Kharch Log sheet and folder from Drive when the app can still reach them.</p>
 
       <h2>7. Sharing &amp; processors</h2>
       <ul>
@@ -252,7 +255,9 @@
 
       <h2>9. Retention</h2>
       <ul>
-        <li><strong>License / payment metadata</strong> - retained while you may need access and for a reasonable period afterward for fraud prevention, accounting, and legal claims</li>
+        <li><strong>License / payment metadata</strong> - retained while the account exists, and for a reasonable period afterward for fraud prevention, accounting, and legal claims</li>
+        <li><strong>After a Kharch Log account deletion</strong> - name, email, expenses, plan, and device sessions are deleted immediately. The security history for that account id is kept for 1 year, then deleted. Your email is not stored in that history.</li>
+        <li><strong>Account and marketing email suppression</strong> - if you confirm the unsubscribe link, or you email support@easypeeze.com, we keep the email address so we do not mail you again</li>
         <li><strong>Support emails</strong> - retained as needed to resolve issues</li>
         <li><strong>Website logs</strong> - short-lived operational retention by the host</li>
         <li><strong>On-device data</strong> - until you clear app data / uninstall; PDFs and Sheets remain where you saved them</li>
@@ -265,7 +270,7 @@
       <p>Products are not directed at children under <strong>18</strong>. Do not use them if you are under 18. We do not knowingly collect personal data from children. If you believe a child provided data, contact us for deletion.</p>
 
       <h2>12. Cookies &amp; similar technologies</h2>
-      <p>Our static sites use essential hosting/CDN behaviour. We do not run third-party ad trackers on product pages as a core product feature. Browser storage may be used on checkout pages for short-lived session fields (e.g. email) to complete payment return flows.</p>
+      <p>easypeeze.com and kharchlog.com use Google Analytics to see which pages are visited, plus device and approximate location. We do not use an advertising ID in the Kharch Log app, and we do not run an ad network. Checkout pages may keep your email in the browser only long enough to finish payment.</p>
 
       <h2>13. Automated decision-making</h2>
       <p>We do not use automated decision-making that produces legal or similarly significant effects about you beyond routine license entitlement checks (paid vs free).</p>
