@@ -10,6 +10,20 @@
   const $ = (id) => document.getElementById(id);
   let usersCache = [];
   const selectedEmails = new Set();
+  let actionBusy = false;
+  let usersLoad = null;
+
+  function beginAction() {
+    if (actionBusy) return false;
+    actionBusy = true;
+    document.body.classList.add("is-action-busy");
+    return true;
+  }
+
+  function endAction() {
+    actionBusy = false;
+    document.body.classList.remove("is-action-busy");
+  }
   let sortKey = "email";
   let sortDir = "asc";
   let currentCustomerEmail = "";
@@ -913,16 +927,25 @@
   }
 
   async function loadUsers() {
-    const btn = $("btn-refresh");
-    btn.disabled = true;
-    showTableLoading();
+    if (usersLoad) return usersLoad;
+    const job = (async () => {
+      const btn = $("btn-refresh");
+      btn.disabled = true;
+      showTableLoading();
+      try {
+        const data = await api("/admin/users");
+        usersCache = data.users || [];
+        setKpis(data.stats || {});
+        renderUsers(usersCache);
+      } finally {
+        btn.disabled = false;
+      }
+    })();
+    usersLoad = job;
     try {
-      const data = await api("/admin/users");
-      usersCache = data.users || [];
-      setKpis(data.stats || {});
-      renderUsers(usersCache);
+      return await job;
     } finally {
-      btn.disabled = false;
+      if (usersLoad === job) usersLoad = null;
     }
   }
 
@@ -1123,6 +1146,7 @@
     document.addEventListener("submit", async (e) => {
       if (!e.target || e.target.id !== "login-form") return;
       e.preventDefault();
+      if (!beginAction()) return;
     const btn = $("login-btn");
     const err = $("login-error");
     err.hidden = true;
@@ -1184,6 +1208,7 @@
       btn.disabled = false;
       btn.classList.remove("is-busy");
       btn.removeAttribute("aria-busy");
+      endAction();
     }
   });
   }
@@ -1203,11 +1228,12 @@
   $("customer-back").addEventListener("click", () => closeCustomer());
   $("cv-update").addEventListener("click", async () => {
     if (!currentCustomerEmail) return;
+    if (!beginAction()) return;
     const btn = $("cv-update");
-    if (btn.classList.contains("is-busy")) return;
     const nextEmail = ($("cv-email").value || "").trim();
     if (!nextEmail || nextEmail.indexOf("@") < 1) {
       toast("Enter a valid email", "error");
+      endAction();
       return;
     }
     btn.disabled = true;
@@ -1237,20 +1263,24 @@
       btn.disabled = false;
       btn.classList.remove("is-busy");
       btn.removeAttribute("aria-busy");
+      endAction();
     }
   });
 
   $("cv-release-device").addEventListener("click", async () => {
     if (!currentCustomerEmail) return;
+    if (!beginAction()) return;
     const btn = $("cv-release-device");
-    if (btn.classList.contains("is-busy")) return;
     const ok = await confirmUi({
       title: "Release device",
       message: `Release the device lock for ${currentCustomerEmail}? Their current phone will be signed out. They can sign in on a new phone after this.`,
       okLabel: "Release",
       danger: true
     });
-    if (!ok) return;
+    if (!ok) {
+      endAction();
+      return;
+    }
     btn.disabled = true;
     btn.classList.add("is-busy");
     btn.setAttribute("aria-busy", "true");
@@ -1271,6 +1301,7 @@
       btn.disabled = false;
       btn.classList.remove("is-busy");
       btn.removeAttribute("aria-busy");
+      endAction();
     }
   });
 
@@ -1299,17 +1330,22 @@
   $("cv-kh-plan").addEventListener("change", () => syncSubExpiry("cv-kh"));
   $("cv-pdf-plan").addEventListener("change", () => syncSubExpiry("cv-pdf"));
 
-  $("btn-refresh").addEventListener("click", () =>
+  $("btn-refresh").addEventListener("click", () => {
+    if (!beginAction()) return;
     loadUsers()
       .then(() => toast("Customers refreshed", "ok"))
       .catch((ex) => toast(ex.message, "error"))
-  );
-  $("search-users").addEventListener("input", () => renderUsers(usersCache));
+      .finally(endAction);
+  });
+  $("search-users").addEventListener("input", () => {
+    if (actionBusy) return;
+    renderUsers(usersCache);
+  });
   const customersHead = document.querySelector("#tab-customers thead");
   if (customersHead) {
     customersHead.addEventListener("click", (e) => {
       const th = e.target.closest("th[data-sort]");
-      if (!th) return;
+      if (!th || actionBusy) return;
       const key = th.getAttribute("data-sort");
       if (!key) return;
       if (sortKey === key) sortDir = sortDir === "asc" ? "desc" : "asc";
@@ -1346,19 +1382,23 @@
 
   $("btn-bulk-edit").addEventListener("click", () => {
     const [email] = selectedEmails;
-    if (email) openCustomer(email);
+    if (!email || !beginAction()) return;
+    openCustomer(email).finally(endAction);
   });
 
   $("btn-bulk-del").addEventListener("click", async () => {
     const emails = [...selectedEmails];
-    if (!emails.length) return;
+    if (!emails.length || !beginAction()) return;
     const ok = await confirmUi({
       title: "Remove customers",
       message: `Remove ${emails.length} customer${emails.length === 1 ? "" : "s"}? This deletes their license records.`,
       okLabel: "Delete",
       danger: true
     });
-    if (!ok) return;
+    if (!ok) {
+      endAction();
+      return;
+    }
     try {
       const data = await api("/admin/revoke-access", {
         method: "POST",
@@ -1369,10 +1409,13 @@
       toast(`Removed ${data.count || emails.length}`, "ok");
     } catch (ex) {
       toast(ex.message, "error");
+    } finally {
+      endAction();
     }
   });
 
   $("btn-bulk-sub").addEventListener("click", () => {
+    if (actionBusy) return;
     $("bulk-sub-count").textContent = `${selectedEmails.size} selected`;
     $("bulk-sub-error").hidden = true;
     $("bulk-sub-dialog").showModal();
@@ -1382,7 +1425,7 @@
   $("bulk-sub-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const emails = [...selectedEmails];
-    if (!emails.length) return;
+    if (!emails.length || !beginAction()) return;
     $("bulk-sub-error").hidden = true;
     try {
       const data = await api("/admin/grant-access", {
@@ -1400,10 +1443,13 @@
     } catch (ex) {
       $("bulk-sub-error").hidden = false;
       $("bulk-sub-error").textContent = ex.message || "Could not add subscription";
+    } finally {
+      endAction();
     }
   });
 
   $("btn-deleted").addEventListener("click", async () => {
+    if (!beginAction()) return;
     const body = $("deleted-tbody");
     body.innerHTML = "";
     $("deleted-empty").hidden = true;
@@ -1426,20 +1472,33 @@
         .join("");
     } catch (ex) {
       toast(ex.message || "Could not load deleted accounts", "error");
+    } finally {
+      endAction();
     }
   });
   $("deleted-close").addEventListener("click", () => $("deleted-dialog").close());
 
-  $("btn-blog-publish").addEventListener("click", () => $("blog-form").requestSubmit());
-  $("btn-blog-delete").addEventListener("click", () => $("blog-delete-form").requestSubmit());
-  $("btn-notice-send").addEventListener("click", () => $("notice-form").requestSubmit());
+  $("btn-blog-publish").addEventListener("click", () => {
+    if (actionBusy) return;
+    $("blog-form").requestSubmit();
+  });
+  $("btn-blog-delete").addEventListener("click", () => {
+    if (actionBusy) return;
+    $("blog-delete-form").requestSubmit();
+  });
+  $("btn-notice-send").addEventListener("click", () => {
+    if (actionBusy) return;
+    $("notice-form").requestSubmit();
+  });
 
   $("users-tbody").addEventListener("click", async (e) => {
     if (e.target.closest(".row-check")) return;
+    if (actionBusy) return;
     const del = e.target.closest("[data-del]");
     const edit = e.target.closest("[data-edit]");
     const open = e.target.closest("[data-open]");
     if (del) {
+      if (!beginAction()) return;
       const email = del.getAttribute("data-del");
       const ok = await confirmUi({
         title: "Remove customer",
@@ -1447,7 +1506,10 @@
         okLabel: "Delete",
         danger: true
       });
-      if (!ok) return;
+      if (!ok) {
+        endAction();
+        return;
+      }
       try {
         await api("/admin/revoke-access", {
           method: "POST",
@@ -1457,17 +1519,21 @@
         toast(`Removed ${email}`, "ok");
       } catch (ex) {
         toast(ex.message, "error");
+      } finally {
+        endAction();
       }
       return;
     }
     if (edit) {
       e.preventDefault();
-      openCustomer(edit.getAttribute("data-edit"));
+      if (!beginAction()) return;
+      openCustomer(edit.getAttribute("data-edit")).finally(endAction);
       return;
     }
     if (open) {
       e.preventDefault();
-      openCustomer(open.getAttribute("data-open"));
+      if (!beginAction()) return;
+      openCustomer(open.getAttribute("data-open")).finally(endAction);
     }
   });
 
@@ -1476,6 +1542,7 @@
   $("user-cancel-btn").addEventListener("click", () => $("user-modal").close());
   $("user-form").addEventListener("submit", async (e) => {
     e.preventDefault();
+    if (!beginAction()) return;
     const err = $("user-modal-error");
     const save = $("user-save-btn");
     err.hidden = true;
@@ -1505,6 +1572,7 @@
       err.hidden = false;
     } finally {
       save.disabled = false;
+      endAction();
     }
   });
 
@@ -1614,11 +1682,13 @@
 
   $("notice-form").addEventListener("submit", async (e) => {
     e.preventDefault();
+    if (!beginAction()) return;
     const h1 = $("notice-h1").value.trim();
     const h2 = $("notice-h2").value.trim();
     const { all, countries } = noticeCountrySelection();
     if (!all && !countries.length) {
       toast("Select at least one country", "error");
+      endAction();
       return;
     }
     const scope = all
@@ -1631,7 +1701,10 @@
       message: `Send this notice to ${scope}?`,
       okLabel: "Send"
     });
-    if (!ok) return;
+    if (!ok) {
+      endAction();
+      return;
+    }
     const msg = $("notice-msg");
     const btn = $("notice-form").querySelector('button[type="submit"]');
     msg.hidden = true;
@@ -1652,11 +1725,13 @@
       setFormMsg(msg, ex.message, "error");
     } finally {
       btn.disabled = false;
+      endAction();
     }
   });
 
   $("blog-form").addEventListener("submit", async (e) => {
     e.preventDefault();
+    if (!beginAction()) return;
     const msg = $("blog-msg");
     const btn = $("blog-form").querySelector('button[type="submit"]');
     msg.hidden = true;
@@ -1678,11 +1753,13 @@
       setFormMsg(msg, ex.message, "error");
     } finally {
       btn.disabled = false;
+      endAction();
     }
   });
 
   $("blog-delete-form").addEventListener("submit", async (e) => {
     e.preventDefault();
+    if (!beginAction()) return;
     const slug = $("blog-del-slug").value.trim();
     const ok = await confirmUi({
       title: "Delete blog post",
@@ -1690,7 +1767,10 @@
       okLabel: "Delete",
       danger: true
     });
-    if (!ok) return;
+    if (!ok) {
+      endAction();
+      return;
+    }
     const msg = $("blog-del-msg");
     const btn = $("blog-delete-form").querySelector('button[type="submit"]');
     msg.hidden = true;
@@ -1707,6 +1787,7 @@
       setFormMsg(msg, ex.message, "error");
     } finally {
       btn.disabled = false;
+      endAction();
     }
   });
 

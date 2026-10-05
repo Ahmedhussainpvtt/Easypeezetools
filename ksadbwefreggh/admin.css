@@ -632,6 +632,14 @@ html.admin-mobile-login .login-skip { display: none; }
   margin-bottom: 22px;
 }
 .list-chrome .tabs { margin-bottom: 0; }
+body.is-action-busy #chrome-actions .btn,
+body.is-action-busy .row-actions .icon-btn,
+body.is-action-busy #cv-update,
+body.is-action-busy #cv-release-device,
+body.is-action-busy #user-save-btn,
+body.is-action-busy #login-btn {
+  pointer-events: none;
+}
 .chrome-actions {
   margin-left: auto;
   display: flex;
