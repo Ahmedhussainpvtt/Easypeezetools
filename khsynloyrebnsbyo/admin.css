@@ -199,7 +199,7 @@ h1, h2, h3, p { margin: 0; }
 
 /* Match bare <input> too - input[type="text"] does not select an input that
    omits the attribute, which left those fields with native browser chrome. */
-input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),
+input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):not(.otp-cell),
 select, textarea {
   width: 100%;
   border: 1px solid var(--line-strong);
@@ -1150,6 +1150,15 @@ th[aria-sort="descending"] .th-sort::after {
   padding: 6px 4px 8px;
   z-index: 1;
 }
+.otp-grid.otp-grid--line {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 0;
+}
+.otp-stage.otp-stage--line { min-height: 72px; }
 .otp-row {
   position: relative;
   display: flex;
@@ -1908,7 +1917,8 @@ th[aria-sort="descending"] .th-sort::after {
     margin-left: 0;
   }
   .chrome-actions .count-pill { grid-column: 1 / -1; justify-self: start; }
-  #btn-bulk-sub { grid-column: 1 / -1; }
+  #btn-bulk-sub,
+  #btn-bulk-del { grid-column: 1 / -1; }
   .chrome-actions .btn { width: 100%; min-height: 40px; }
   .app-shell.is-list .table-card__tools {
     display: grid;

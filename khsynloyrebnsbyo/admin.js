@@ -621,6 +621,7 @@
     if (key === "kharchlog") return `${u.kharchlog?.plan || ""} ${u.kharchlog?.status || ""}`;
     if (key === "pdfbuddy") return `${u.pdfbuddy?.plan || ""} ${u.pdfbuddy?.status || ""}`;
     if (key === "version") return u.appVersion || "";
+    if (key === "platform") return u.apps || "";
     return "";
   }
 
@@ -650,7 +651,7 @@
   /** Placeholder rows so the table never flashes an empty/"not found" state. */
   function showTableLoading() {
     $("users-empty").hidden = true;
-    const widths = ["16px", "70%", "85%", "55%", "60%", "65%", "65%", "40%", "40%"];
+    const widths = ["16px", "70%", "85%", "55%", "60%", "65%", "65%", "40%", "50%", "40%"];
     $("users-tbody").innerHTML = Array.from({ length: 5 })
       .map(
         () =>
@@ -673,6 +674,7 @@
             u.phone,
             u.state,
             u.appVersion,
+            u.apps,
             u.kharchlog?.plan,
             u.kharchlog?.status,
             u.pdfbuddy?.plan,
@@ -713,6 +715,7 @@
         <td data-label="Kharch Log">${planCell(u.kharchlog)}</td>
         <td data-label="Pdf Buddy">${planCell(u.pdfbuddy)}</td>
         <td data-label="Version" class="cell-mono">${esc(u.appVersion || " - ")}</td>
+        <td data-label="Platform">${esc(u.apps || " - ")}</td>
         <td data-label="Actions" class="col-actions">
           <div class="row-actions">
             <button type="button" class="icon-btn" title="Edit ${mail}" aria-label="Edit ${mail}" data-edit="${mail}">${icon(
@@ -735,7 +738,6 @@
     $("sel-count").hidden = !onCustomers || n === 0;
     $("sel-count").textContent = n === 1 ? "1 selected" : `${n} selected`;
     $("btn-bulk-sub").hidden = !onCustomers || n === 0;
-    $("btn-bulk-edit").hidden = !onCustomers || n !== 1;
     $("btn-bulk-del").hidden = !onCustomers || n === 0;
     const boxes = [...document.querySelectorAll("#users-tbody .row-check")];
     const picked = boxes.filter((box) => box.checked).length;
@@ -1413,12 +1415,6 @@
 
   $("check-all").addEventListener("change", () => setAllCustomers($("check-all").checked));
   $("check-all-mobile").addEventListener("change", () => setAllCustomers($("check-all-mobile").checked));
-
-  $("btn-bulk-edit").addEventListener("click", () => {
-    const [email] = selectedEmails;
-    if (!email || !beginAction()) return;
-    openCustomer(email).finally(endAction);
-  });
 
   $("btn-bulk-del").addEventListener("click", async () => {
     const emails = [...selectedEmails];
