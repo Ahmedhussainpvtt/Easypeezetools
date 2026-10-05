@@ -22,9 +22,7 @@
   if (productParam === 'kharchlog') planKey = 'lifetime';
   else if (planKey !== 'lifetime') planKey = 'yearly';
   var plan = (cfg.plans && cfg.plans[planKey]) || cfg.plans.yearly || cfg.plans.lifetime;
-  var USD_ENABLED = cfg.usdEnabled !== false;
-  var requestedCurrency = (params.get('currency') || 'INR').toUpperCase();
-  var currency = USD_ENABLED && requestedCurrency === 'USD' ? 'USD' : 'INR';
+  var currency = 'INR';
   var firstNameInput = document.getElementById('firstName');
   var lastNameInput = document.getElementById('lastName');
   var emailInput = document.getElementById('email');
@@ -35,22 +33,6 @@
   var priceEl = document.getElementById('pay-price');
   var titleEl = document.getElementById('pay-title');
   var fineEl = document.getElementById('pay-fine');
-
-  function refreshUsdFromHealth() {
-    if (!cfg.trackerUrl) return Promise.resolve();
-    return fetch(cfg.trackerUrl.replace(/\/$/, '') + '/health', { credentials: 'omit' })
-      .then(function (r) {
-        return r.json();
-      })
-      .then(function (h) {
-        if (!h || !h.ok) return;
-        USD_ENABLED = !!(h.usdEnabled && h.razorpay);
-        if (!USD_ENABLED && currency === 'USD') currency = 'INR';
-        else if (USD_ENABLED && requestedCurrency === 'USD') currency = 'USD';
-        syncPrice();
-      })
-      .catch(function () {});
-  }
 
   function priceLabel() {
     if (!plan) return '';
@@ -75,32 +57,11 @@
     }
     if (fineEl && productParam !== 'kharchlog') {
       fineEl.innerHTML =
-        currency === 'USD'
-          ? 'Secure checkout via Razorpay (USD, PayPal available in the payment window). <a href="../download/" rel="noopener">Download free instead</a> · <a href="../pricing/">Back to pricing</a>'
-          : '<a href="../download/" rel="noopener">Download free instead</a> · <a href="../pricing/">Back to pricing</a>';
+        '<a href="../download/" rel="noopener">Download free instead</a> · <a href="../pricing/">Back to pricing</a>';
     }
-    document.querySelectorAll('.pay-currency__btn').forEach(function (btn) {
-      var isUsd = btn.getAttribute('data-currency') === 'USD';
-      btn.classList.toggle('is-active', (isUsd && currency === 'USD') || (!isUsd && currency === 'INR'));
-      if (isUsd && !USD_ENABLED) {
-        btn.disabled = true;
-        btn.setAttribute('aria-disabled', 'true');
-        btn.classList.add('pay-currency__btn--soon');
-        if (btn.querySelector('.pay-currency__soon') === null) {
-          btn.innerHTML =
-            'Pay in $ USD <span class="pay-currency__soon">Coming soon</span>';
-        }
-      } else if (isUsd && USD_ENABLED) {
-        btn.disabled = false;
-        btn.removeAttribute('aria-disabled');
-        btn.classList.remove('pay-currency__btn--soon');
-        btn.textContent = 'Pay in $ USD';
-      }
-    });
   }
 
   syncPrice();
-  refreshUsdFromHealth();
   if (titleEl && plan) {
     titleEl.textContent =
       plan.label || (productParam === 'kharchlog' ? 'Unlock Kharch Log' : 'Unlock Pdf Buddy');
@@ -121,14 +82,6 @@
       '<a href="https://kharchlog.com/" rel="noopener">Kharch Log home</a> · <a href="../pricing/#kharch-log">Back to pricing</a>';
   }
   if (params.get('email') && emailInput) emailInput.value = params.get('email');
-
-  document.querySelectorAll('.pay-currency__btn').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      if (btn.disabled || btn.getAttribute('aria-disabled') === 'true') return;
-      currency = btn.getAttribute('data-currency') === 'USD' ? 'USD' : 'INR';
-      syncPrice();
-    });
-  });
 
   function setStatus(msg, isError) {
     if (!statusEl) return;
