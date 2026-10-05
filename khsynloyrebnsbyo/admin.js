@@ -737,12 +737,62 @@
     $("btn-bulk-sub").hidden = !onCustomers || n === 0;
     $("btn-bulk-edit").hidden = !onCustomers || n !== 1;
     $("btn-bulk-del").hidden = !onCustomers || n === 0;
-    const all = $("check-all");
-    if (all) {
-      const boxes = [...document.querySelectorAll("#users-tbody .row-check")];
-      const picked = boxes.filter((box) => box.checked).length;
-      all.checked = boxes.length > 0 && picked === boxes.length;
-      all.indeterminate = picked > 0 && picked < boxes.length;
+    const boxes = [...document.querySelectorAll("#users-tbody .row-check")];
+    const picked = boxes.filter((box) => box.checked).length;
+    const allOn = boxes.length > 0 && picked === boxes.length;
+    const mixed = picked > 0 && picked < boxes.length;
+    ["check-all", "check-all-mobile"].forEach((id) => {
+      const all = $(id);
+      if (!all) return;
+      all.checked = allOn;
+      all.indeterminate = mixed;
+    });
+  }
+
+  function setAllCustomers(on) {
+    document.querySelectorAll("#users-tbody .row-check").forEach((box) => {
+      box.checked = on;
+      const email = box.getAttribute("data-check");
+      if (!email) return;
+      if (on) selectedEmails.add(email);
+      else selectedEmails.delete(email);
+    });
+    syncChromeActions();
+  }
+
+  let deletedLoad = null;
+  async function loadDeleted() {
+    if (deletedLoad) return deletedLoad;
+    const job = (async () => {
+      const body = $("deleted-tbody");
+      body.innerHTML = "";
+      $("deleted-empty").hidden = true;
+      try {
+        const data = await api("/admin/deleted");
+        const rows = data.deleted || [];
+        $("deleted-count").textContent = String(rows.length);
+        $("deleted-empty").hidden = rows.length > 0;
+        body.innerHTML = rows
+          .map(
+            (row) => `<tr>
+              <td class="cell-mono" data-label="Account ID">${esc(row.accountId || " - ")}</td>
+              <td data-label="Deleted">${esc(formatWhen(row.deletedAt))}</td>
+              <td data-label="How">${esc(row.method || " - ")}</td>
+              <td data-label="Reason">${esc(row.reason || " - ")}</td>
+              <td data-label="Note">${esc(row.note || " - ")}</td>
+              <td data-label="Kept until">${esc(formatWhen(row.retentionUntil))}</td>
+            </tr>`
+          )
+          .join("");
+      } catch (ex) {
+        toast(ex.message || "Could not load deleted accounts", "error");
+      }
+    })();
+    deletedLoad = job;
+    try {
+      return await job;
+    } finally {
+      if (deletedLoad === job) deletedLoad = null;
     }
   }
 
@@ -1314,8 +1364,10 @@
       $("tab-customers").classList.toggle("hidden", tab !== "customers");
       $("tab-blog").classList.toggle("hidden", tab !== "blog");
       $("tab-notice").classList.toggle("hidden", tab !== "notice");
+      $("tab-deleted").classList.toggle("hidden", tab !== "deleted");
       syncShellLayout();
       syncChromeActions();
+      if (tab === "deleted") loadDeleted();
     });
   });
   $("cv-kh-plan").addEventListener("change", () => syncSubExpiry("cv-kh"));
@@ -1359,17 +1411,8 @@
     syncChromeActions();
   });
 
-  $("check-all").addEventListener("change", () => {
-    const on = $("check-all").checked;
-    document.querySelectorAll("#users-tbody .row-check").forEach((box) => {
-      box.checked = on;
-      const email = box.getAttribute("data-check");
-      if (!email) return;
-      if (on) selectedEmails.add(email);
-      else selectedEmails.delete(email);
-    });
-    syncChromeActions();
-  });
+  $("check-all").addEventListener("change", () => setAllCustomers($("check-all").checked));
+  $("check-all-mobile").addEventListener("change", () => setAllCustomers($("check-all-mobile").checked));
 
   $("btn-bulk-edit").addEventListener("click", () => {
     const [email] = selectedEmails;
@@ -1438,36 +1481,6 @@
       endAction();
     }
   });
-
-  $("btn-deleted").addEventListener("click", async () => {
-    if (!beginAction()) return;
-    const body = $("deleted-tbody");
-    body.innerHTML = "";
-    $("deleted-empty").hidden = true;
-    $("deleted-dialog").showModal();
-    try {
-      const data = await api("/admin/deleted");
-      const rows = data.deleted || [];
-      $("deleted-empty").hidden = rows.length > 0;
-      body.innerHTML = rows
-        .map(
-          (row) => `<tr>
-            <td class="cell-mono">${esc(row.accountId || " - ")}</td>
-            <td>${esc(formatWhen(row.deletedAt))}</td>
-            <td>${esc(row.method || " - ")}</td>
-            <td>${esc(row.reason || " - ")}</td>
-            <td>${esc(row.note || " - ")}</td>
-            <td>${esc(formatWhen(row.retentionUntil))}</td>
-          </tr>`
-        )
-        .join("");
-    } catch (ex) {
-      toast(ex.message || "Could not load deleted accounts", "error");
-    } finally {
-      endAction();
-    }
-  });
-  $("deleted-close").addEventListener("click", () => $("deleted-dialog").close());
 
   $("users-tbody").addEventListener("click", async (e) => {
     if (e.target.closest(".row-check")) return;
