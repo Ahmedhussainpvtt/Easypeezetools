@@ -88,7 +88,7 @@ module.exports = {
     },
     '/pricing/': {
       title: 'Pricing - Pdf Buddy & Kharch Log',
-      description: 'Pdf Buddy from ₹299/year. Kharch Log lifetime ₹149. Pay in INR or USD via Razorpay.',
+      description: 'Pdf Buddy from ₹299/year. Kharch Log lifetime ₹149. Prices in INR for India.',
       priority: 0.8,
       changefreq: 'weekly',
     },
