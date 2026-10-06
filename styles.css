@@ -816,6 +816,35 @@ a:hover { text-decoration: underline; }
   font-size: 0.95rem;
   line-height: 1.5;
 }
+.lang-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+.lang-list li {
+  margin: 0;
+  padding: 16px 10px;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 6px 18px rgba(15, 42, 67, 0.05);
+  text-align: center;
+}
+.lang-list strong {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.lang-list span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
 
 /* - - Sections - - */
 .section {
@@ -1529,6 +1558,7 @@ footer:not(.site-footer) {
 }
 
 @media (max-width: 900px) {
+  .lang-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .hero {
     grid-template-columns: 1fr;
     padding-top: 36px;

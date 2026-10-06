@@ -76,7 +76,7 @@
     ]
   }
   </script>
-                                                                                                                                                                                    <script type="application/ld+json" id="seo-jsonld">
+                                                                                                                                                                      <script type="application/ld+json" id="seo-jsonld">
 {
     "@context": "https://schema.org",
     "@graph": [
@@ -153,7 +153,14 @@
     <div class="page-hero section page-hero--pricing">
       <p class="crumbs"><a href="/">Home</a> / Pricing</p>
       <h1>Pricing of goods &amp; services</h1>
-      <p><strong>Your data stays yours.</strong> Digital software licenses for Pdf Buddy and Kharch Log. Prices are in <strong>INR</strong> for India. Seller: <strong>Easy Peeze Tools</strong> (India).</p>
+      <p><strong>Your data stays yours.</strong> Digital software licenses for Pdf Buddy and Kharch Log. Billed in <strong>INR</strong> or <strong>USD</strong> via Razorpay (PayPal is offered for USD). Seller: <strong>Easy Peeze Tools</strong> (India).</p>
+      <div class="pay-currency pricing-currency" role="group" aria-label="Currency">
+        <button type="button" class="pay-currency__btn is-active" data-currency="INR" id="currencyInr">₹ INR</button>
+        <button type="button" class="pay-currency__btn pay-currency__btn--soon" data-currency="USD" id="currencyUsd"
+                disabled aria-disabled="true">
+          $ USD <span class="pay-currency__soon">Coming soon</span>
+        </button>
+      </div>
     </div>
 
     <section class="section section--pricing-plans" id="pdf-buddy" aria-labelledby="pdf-price-title">
@@ -176,8 +183,8 @@
         <div class="pricing-tease pricing-tease--page" style="margin:0;">
           <p class="pricing-tease__kicker">Yearly</p>
           <h3>
-            <span>₹299</span>
-            <span style="font-size:1rem;font-weight:600;">/ yr</span>
+            <span data-price-inr="₹299" data-price-usd="$5">₹299</span>
+            <span style="font-size:1rem;font-weight:600;" data-suffix-inr="/ yr" data-suffix-usd="/ yr">/ yr</span>
           </h3>
           <p class="pricing-tease__hook">Full Pdf Buddy toolkit for twelve months - still 100% local.</p>
           <ul class="pricing-tease__points">
@@ -186,14 +193,19 @@
             <li>Windows 10 &amp; 11</li>
           </ul>
           <p class="hero__actions" style="justify-content:center;margin-top:18px;">
-            <a class="btn" href="../pay/?plan=yearly&currency=INR">Pay ₹299</a>
+            <a class="btn" data-pay
+               href="../pay/?plan=yearly&currency=INR"
+               data-href-inr="../pay/?plan=yearly&currency=INR"
+               data-href-usd="../pay/?plan=yearly&currency=USD"
+               data-label-inr="Pay ₹299"
+               data-label-usd="Pay $5">Pay ₹299</a>
           </p>
         </div>
         <div class="pricing-tease pricing-tease--page" style="margin:0;">
           <p class="pricing-tease__kicker">Lifetime</p>
           <h3>
-            <span>₹999</span>
-            <span style="font-size:1rem;font-weight:600;">one-time</span>
+            <span data-price-inr="₹999" data-price-usd="$15">₹999</span>
+            <span style="font-size:1rem;font-weight:600;" data-suffix-inr="one-time" data-suffix-usd="one-time">one-time</span>
           </h3>
           <p class="pricing-tease__hook">Pay once. Keep Pdf Buddy without renewals.</p>
           <ul class="pricing-tease__points">
@@ -202,7 +214,12 @@
             <li>Easy Peeze Tools license</li>
           </ul>
           <p class="hero__actions" style="justify-content:center;margin-top:18px;">
-            <a class="btn" href="../pay/?plan=lifetime&currency=INR">Pay ₹999</a>
+            <a class="btn" data-pay
+               href="../pay/?plan=lifetime&currency=INR"
+               data-href-inr="../pay/?plan=lifetime&currency=INR"
+               data-href-usd="../pay/?plan=lifetime&currency=USD"
+               data-label-inr="Pay ₹999"
+               data-label-usd="Pay $15">Pay ₹999</a>
           </p>
         </div>
       </div>
@@ -215,8 +232,8 @@
         <div class="pricing-tease pricing-tease--page" style="margin:0;">
           <p class="pricing-tease__kicker">Lifetime</p>
           <h3>
-            <span>₹149</span>
-            <span style="font-size:1rem;font-weight:600;">one-time</span>
+            <span data-price-inr="₹149" data-price-usd="$2">₹149</span>
+            <span style="font-size:1rem;font-weight:600;" data-suffix-inr="one-time" data-suffix-usd="one-time">one-time</span>
           </h3>
           <p class="pricing-tease__hook">Lifetime access to Kharch Log on Android.</p>
           <ul class="pricing-tease__points">
@@ -225,7 +242,12 @@
             <li>Google Sheets sync - your Sheet</li>
           </ul>
           <p class="hero__actions" style="justify-content:center;margin-top:18px;">
-            <a class="btn" href="../pay/?product=kharchlog&amp;plan=lifetime&amp;currency=INR">Pay ₹149</a>
+            <a class="btn" data-pay
+               href="../pay/?product=kharchlog&amp;plan=lifetime&amp;currency=INR"
+               data-href-inr="../pay/?product=kharchlog&amp;plan=lifetime&amp;currency=INR"
+               data-href-usd="../pay/?product=kharchlog&amp;plan=lifetime&amp;currency=USD"
+               data-label-inr="Pay ₹149"
+               data-label-usd="Pay $2">Pay ₹149</a>
           </p>
           <p style="margin-top:12px;font-size:.9rem;color:var(--muted);text-align:center;">
             App download &amp; docs: <a href="https://kharchlog.com/" rel="noopener">kharchlog.com</a>
@@ -252,27 +274,27 @@
         <a href="../">Home</a>
         <a href="../products/">Products</a>
         <a href="../pricing/">Pricing</a>
-        <a href="../contact/">Contact</a>
-        <div class="nav-dropdown footer-resources">
-          <a href="../blog/" class="nav-dropdown__trigger" aria-haspopup="true">Resources</a>
-          <div class="nav-dropdown__menu" role="menu">
-            <a href="../features/" role="menuitem">Pdf Buddy features</a>
-            <a href="https://kharchlog.com/" role="menuitem" rel="noopener">Kharch Log</a>
-            <a href="../blog/" role="menuitem">Blog</a>
-            <a href="../guides/" role="menuitem">Guides</a>
-            <a href="../install/" role="menuitem">Install</a>
-            <a href="../glossary/" role="menuitem">Glossary</a>
-            <a href="../about/" role="menuitem">About</a>
-            <a href="../refund/" role="menuitem">Refunds</a>
-            <a href="../privacy/" role="menuitem">Privacy</a>
-            <a href="../terms/" role="menuitem">Terms</a>
-          </div>
-        </div>
-        <a href="mailto:support@easypeeze.com">Support</a>
-      </nav>
-      <p class="site-footer__copy">© 2026 Easy Peeze Tools. Pdf Buddy (Windows PDF editor) - <a href="https://kharchlog.com/">Kharch Log</a> (Android expense tracker). Simple tools. Zero hassle.</p>
-    </div>
-  </footer>
-  <script src="../site-motion.js" defer></script>
+        a.setAttribute('href', currency === 'USD' ? a.getAttribute('data-href-usd') : a.getAttribute('data-href-inr'));
+        a.textContent = currency === 'USD' ? a.getAttribute('data-label-usd') : a.getAttribute('data-label-inr');
+      });
+    }
+    document.querySelectorAll('.pay-currency__btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        // Only enabled currencies are selectable.
+        if (btn.disabled || btn.getAttribute('aria-disabled') === 'true') return;
+        currency = btn.getAttribute('data-currency') === 'USD' ? 'USD' : 'INR';
+        apply();
+      });
+    });
+    // Gate USD on Razorpay (/health.usdEnabled).
+    setUsdEnabled(false);
+    fetch(trackerUrl + '/health', { credentials: 'omit' })
+      .then(function (r) { return r.json(); })
+      .then(function (h) {
+        setUsdEnabled(!!(h && h.usdEnabled && h.razorpay));
+      })
+      .catch(function () { setUsdEnabled(false); });
+  })();
+  </script>
 </body>
 </html>
