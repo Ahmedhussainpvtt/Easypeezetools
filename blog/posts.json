@@ -1,5 +1,271 @@
 [
   {
+    "slug": "morning-kyc-upload-checklist-pdf-buddy",
+    "title": "A morning checklist before a KYC upload",
+    "description": "A morning checklist before a KYC upload: order, blank pages, file name, size, and a local copy on your PC.",
+    "date": "2026-10-07",
+    "url": "/blog/morning-kyc-upload-checklist-pdf-buddy/",
+    "image": "/images/blog/morning-kyc-upload-checklist-pdf-buddy.jpg",
+    "tags": [
+      "Pdf Editor",
+      "India",
+      "KYC",
+      "checklist"
+    ]
+  },
+  {
+    "slug": "government-portal-mixed-orientation-pdf",
+    "title": "A portal rejected the file because some pages are sideways",
+    "description": "When a government portal rejects a PDF for sideways pages, fix only those pages, re-export, and upload a new file name.",
+    "date": "2026-10-06",
+    "url": "/blog/government-portal-mixed-orientation-pdf/",
+    "image": "/images/blog/government-portal-mixed-orientation-pdf.jpg",
+    "tags": [
+      "Pdf Editor",
+      "India",
+      "government portal",
+      "page orientation"
+    ]
+  },
+  {
+    "slug": "pdf-that-stays-readable-on-a-phone",
+    "title": "Make a PDF that stays readable on a phone",
+    "description": "Export a PDF that stays readable on a phone: real text, a sensible page size, and send it as a document so chat apps do not recompress it.",
+    "date": "2026-10-05",
+    "url": "/blog/pdf-that-stays-readable-on-a-phone/",
+    "image": "/images/blog/pdf-that-stays-readable-on-a-phone.jpg",
+    "tags": [
+      "Pdf Editor",
+      "India",
+      "phone reading",
+      "PDF export"
+    ]
+  },
+  {
+    "slug": "ca-client-yearly-pdf-folder-layout",
+    "title": "A simple yearly folder layout a CA office can reuse for each client",
+    "description": "A yearly folder layout a CA office can reuse: one client, one year, and clear rules for what not to mix in the same PDF.",
+    "date": "2026-10-04",
+    "url": "/blog/ca-client-yearly-pdf-folder-layout/",
+    "image": "/images/blog/ca-client-yearly-pdf-folder-layout.jpg",
+    "tags": [
+      "Pdf Editor",
+      "India",
+      "CA office",
+      "folder layout"
+    ]
+  },
+  {
+    "slug": "university-migration-certificate-pdf",
+    "title": "Migration or transfer certificate scan, upright pages, readable file name",
+    "description": "Scan a migration or transfer certificate into an upright PDF with a file name a university or employer can read.",
+    "date": "2026-10-03",
+    "url": "/blog/university-migration-certificate-pdf/",
+    "image": "/images/blog/university-migration-certificate-pdf.jpg",
+    "tags": [
+      "Pdf Editor",
+      "India",
+      "migration certificate",
+      "university"
+    ]
+  },
+  {
+    "slug": "apartment-maintenance-receipt-pdf",
+    "title": "Society maintenance receipts as a yearly PDF folder",
+    "description": "Keep society maintenance receipts as named PDFs in a yearly folder, one month at a time, ready for a resale or a loan.",
+    "date": "2026-10-02",
+    "url": "/blog/apartment-maintenance-receipt-pdf/",
+    "image": "/images/blog/apartment-maintenance-receipt-pdf.jpg",
+    "tags": [
+      "Pdf Editor",
+      "India",
+      "society maintenance",
+      "receipts"
+    ]
+  },
+  {
+    "slug": "two-quotation-pdfs-do-not-overwrite",
+    "title": "Two vendor quotations: file names so you do not overwrite the cheaper one",
+    "description": "Name two vendor quotation PDFs with the vendor, date, and total so a second download does not replace the cheaper quote.",
+    "date": "2026-10-01",
+    "url": "/blog/two-quotation-pdfs-do-not-overwrite/",
+    "image": "/images/blog/two-quotation-pdfs-do-not-overwrite.jpg",
+    "tags": [
+      "Pdf Editor",
+      "India",
+      "quotations",
+      "file names"
+    ]
+  },
+  {
+    "slug": "itr-acknowledgement-and-form16-folder",
+    "title": "ITR acknowledgement and Form 16 stored as clearly named PDFs",
+    "description": "Store each year's ITR acknowledgement and Form 16 as clearly named PDFs on Windows, without mixing assessment years.",
+    "date": "2026-09-30",
+    "url": "/blog/itr-acknowledgement-and-form16-folder/",
+    "image": "/images/blog/itr-acknowledgement-and-form16-folder.jpg",
+    "tags": [
+      "Pdf Editor",
+      "India",
+      "ITR",
+      "Form 16"
+    ]
+  },
+  {
+    "slug": "builder-demand-letter-pdf-archive",
+    "title": "Keep builder demand letters as named PDFs by date",
+    "description": "Save each builder demand letter as its own dated PDF so a later milestone does not overwrite the earlier demand.",
+    "date": "2026-09-29",
+    "url": "/blog/builder-demand-letter-pdf-archive/",
+    "image": "/images/blog/builder-demand-letter-pdf-archive.jpg",
+    "tags": [
+      "Pdf Editor",
+      "India",
+      "builder",
+      "demand letter"
+    ]
+  },
+  {
+    "slug": "internship-id-and-certificate-one-pdf",
+    "title": "Internship certificate plus ID as one PDF for a company portal",
+    "description": "Join an internship certificate and an ID into one PDF for a company portal, in the order the form requests.",
+    "date": "2026-09-28",
+    "url": "/blog/internship-id-and-certificate-one-pdf/",
+    "image": "/images/blog/internship-id-and-certificate-one-pdf.jpg",
+    "tags": [
+      "Pdf Editor",
+      "India",
+      "internship",
+      "company portal"
+    ]
+  },
+  {
+    "slug": "school-fee-receipts-pdf-for-reimbursement",
+    "title": "School fee receipts into one PDF for office reimbursement",
+    "description": "Combine school fee receipts into one PDF for office reimbursement, with receipt numbers readable and children separated if HR asks.",
+    "date": "2026-09-27",
+    "url": "/blog/school-fee-receipts-pdf-for-reimbursement/",
+    "image": "/images/blog/school-fee-receipts-pdf-for-reimbursement.jpg",
+    "tags": [
+      "Pdf Editor",
+      "India",
+      "school fees",
+      "reimbursement"
+    ]
+  },
+  {
+    "slug": "property-sale-papers-drop-blank-pages",
+    "title": "Property papers: drop blank scans before you send the pack",
+    "description": "Remove blank scan pages from property sale papers on Windows so the pack matches the deed and stays smaller.",
+    "date": "2026-09-26",
+    "url": "/blog/property-sale-papers-drop-blank-pages/",
+    "image": "/images/blog/property-sale-papers-drop-blank-pages.jpg",
+    "tags": [
+      "Pdf Editor",
+      "India",
+      "property papers",
+      "blank pages"
+    ]
+  },
+  {
+    "slug": "hospital-bill-scan-pdf-for-insurance",
+    "title": "Hospital bill scans into one insurance PDF",
+    "description": "Combine hospital bill scans into one insurance PDF on Windows, in the order the insurer or TPA listed.",
+    "date": "2026-09-25",
+    "url": "/blog/hospital-bill-scan-pdf-for-insurance/",
+    "image": "/images/blog/hospital-bill-scan-pdf-for-insurance.jpg",
+    "tags": [
+      "Pdf Editor",
+      "India",
+      "health insurance",
+      "hospital bills"
+    ]
+  },
+  {
+    "slug": "freelance-contract-sign-pdf-windows",
+    "title": "Sign a freelance contract PDF on Windows",
+    "description": "Sign a freelance contract on Windows, keep the unsigned original, and return a dated PDF the client can file.",
+    "date": "2026-09-24",
+    "url": "/blog/freelance-contract-sign-pdf-windows/",
+    "image": "/images/blog/freelance-contract-sign-pdf-windows.jpg",
+    "tags": [
+      "Pdf Editor",
+      "India",
+      "freelance",
+      "sign PDF"
+    ]
+  },
+  {
+    "slug": "cancelled-cheque-scan-to-pdf-kyc",
+    "title": "Cancelled cheque scan turned into a clean one-page PDF",
+    "description": "Turn your own cancelled cheque into a one-page PDF for a KYC form you are allowed to submit, with the account line readable.",
+    "date": "2026-09-23",
+    "url": "/blog/cancelled-cheque-scan-to-pdf-kyc/",
+    "image": "/images/blog/cancelled-cheque-scan-to-pdf-kyc.jpg",
+    "tags": [
+      "Pdf Editor",
+      "India",
+      "KYC",
+      "cancelled cheque"
+    ]
+  },
+  {
+    "slug": "epfo-claim-attachment-pdf-size",
+    "title": "EPF claim attachments that portals reject for size or mix of scans",
+    "description": "Prepare EPF claim attachments on Windows so each slot gets one PDF, not a mix of photos and oversized scans.",
+    "date": "2026-09-22",
+    "url": "/blog/epfo-claim-attachment-pdf-size/",
+    "image": "/images/blog/epfo-claim-attachment-pdf-size.jpg",
+    "tags": [
+      "Pdf Editor",
+      "India",
+      "EPF",
+      "claim upload"
+    ]
+  },
+  {
+    "slug": "passport-renewal-address-proof-pdf",
+    "title": "Passport renewal address proof PDF from scans",
+    "description": "Turn a passport renewal address proof into one upright PDF on Windows, with the address line readable and the file named for the form.",
+    "date": "2026-09-21",
+    "url": "/blog/passport-renewal-address-proof-pdf/",
+    "image": "/images/blog/passport-renewal-address-proof-pdf.jpg",
+    "tags": [
+      "Pdf Editor",
+      "India",
+      "passport",
+      "address proof"
+    ]
+  },
+  {
+    "slug": "home-loan-pdf-pack-salary-and-statements",
+    "title": "Home loan document pack on Windows",
+    "description": "Assemble a home loan pack on Windows: salary slips, bank statements, and property papers as separate named PDFs a lender can reopen.",
+    "date": "2026-09-20",
+    "url": "/blog/home-loan-pdf-pack-salary-and-statements/",
+    "image": "/images/blog/home-loan-pdf-pack-salary-and-statements.jpg",
+    "tags": [
+      "Pdf Editor",
+      "India",
+      "home loan",
+      "salary slips"
+    ]
+  },
+  {
+    "slug": "schengen-visa-pdf-pack-on-windows",
+    "title": "Schengen or travel visa file: order, size, and one PDF per instruction",
+    "description": "Build a Schengen or travel visa set on Windows as one PDF per checklist line, with names and sizes the upload form can accept.",
+    "date": "2026-09-19",
+    "url": "/blog/schengen-visa-pdf-pack-on-windows/",
+    "image": "/images/blog/schengen-visa-pdf-pack-on-windows.jpg",
+    "tags": [
+      "Pdf Editor",
+      "India",
+      "Schengen visa",
+      "travel documents"
+    ]
+  },
+  {
     "slug": "page-numbers-bookmarks-pdf-editor-india-packs",
     "title": "Page numbers and order: finish a portal pack in a Pdf Editor",
     "description": "Indian portals reject jumbled packs. Use a Pdf Editor to order pages, drop blanks, and keep a readable filename before you hit upload.",
