@@ -175,9 +175,9 @@ a:hover { text-decoration: underline; }
 .site-header .nav-dropdown::after {
   content: "";
   position: absolute;
-  left: -16px;
-  right: -8px;
   top: 100%;
+  right: 0;
+  width: 280px;
   height: 18px;
 }
 .nav-dropdown__menu {
@@ -1193,8 +1193,8 @@ a:hover { text-decoration: underline; }
   content: "";
   position: absolute;
   left: 0;
-  right: 0;
   bottom: 100%;
+  width: 280px;
   height: 16px;
 }
 .site-footer .nav-dropdown__menu {
@@ -2326,6 +2326,19 @@ ol.steps-inline li::before {
   margin: 0 auto;
   padding: 12px 0 48px;
 }
+.legal-page__content.prose {
+  padding-top: 4px;
+  padding-bottom: 8px;
+}
+.legal-page__content.prose h2 {
+  margin: 16px 0 6px;
+}
+.legal-page__content.prose p {
+  margin: 0 0 8px;
+}
+.legal-page__content.prose p:last-child {
+  margin-bottom: 0;
+}
 .prose h2 { margin: 28px 0 10px; font-size: 1.35rem; }
 .prose p, .prose li { color: var(--muted); }
 .prose a { font-weight: 600; }
@@ -2953,6 +2966,7 @@ html.nav-scroll-lock body { overflow: hidden; }
     letter-spacing: 0.06em;
   }
   .site-header.nav-ready .site-nav .nav-dropdown__trigger::after { display: none; }
+  .site-header.nav-ready .site-nav .nav-dropdown::after { display: none; }
   .site-header.nav-ready .site-nav .nav-dropdown__menu {
     position: static;
     top: auto;
