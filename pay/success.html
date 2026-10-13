@@ -65,7 +65,7 @@
   <meta name="twitter:title" content="Payment success - Easy Peeze Tools" />
   <meta name="twitter:description" content="Payment success - Easy Peeze Tools." />
   <meta name="twitter:image" content="https://easypeeze.com/og-image.jpg" />
-                                                                                                                                                                                        <script type="application/ld+json" id="seo-jsonld">
+                                                                                                                                                                      <script type="application/ld+json" id="seo-jsonld">
 {
     "@context": "https://schema.org",
     "@graph": [
@@ -195,22 +195,15 @@
         if (msgEl) {
           msgEl.textContent = staging
             ? (q.get('msg') || 'Staging only - payment verified, license was NOT granted.')
-            : 'Kharch Log lifetime is unlocked. Sign in to the Android app with the same Google email, then download the APK if you have not yet.';
+            : 'Kharch Log lifetime is unlocked. Install from Google Play and sign in with the same Google email.';
         }
         if (primaryBtn) {
-          primaryBtn.textContent = 'Download Kharch Log APK';
-          primaryBtn.href = 'https://kharchlog.com/KharchLog.apk';
+          primaryBtn.textContent = '';
+          primaryBtn.className = 'btn btn--play';
+          primaryBtn.href = 'https://kharchlog.com/play/';
           primaryBtn.rel = 'noopener';
-          if (!document.getElementById('pay-success-play')) {
-            var play = document.createElement('a');
-            play.id = 'pay-success-play';
-            play.className = 'btn btn--play';
-            play.href = 'https://kharchlog.com/play/';
-            play.rel = 'noopener';
-            play.setAttribute('aria-label', 'Get it on Google Play');
-            play.innerHTML = '<span class="btn--play__text"><span class="btn--play__kicker">GET IT ON</span><span class="btn--play__brand">Google Play</span></span>';
-            primaryBtn.insertAdjacentElement('afterend', play);
-          }
+          primaryBtn.setAttribute('aria-label', 'Get it on Google Play');
+          primaryBtn.innerHTML = '<span class="btn--play__text"><span class="btn--play__kicker">GET IT ON</span><span class="btn--play__brand">Google Play</span></span>';
         }
         if (lead) {
           lead.textContent =
