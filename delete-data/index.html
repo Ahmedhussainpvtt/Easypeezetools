@@ -21,6 +21,59 @@
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <link rel="canonical" href="https://easypeeze.com/delete-data/" />
   <link rel="stylesheet" href="../styles.css" />
+  <style>
+    .delete-page .page-hero,
+    .delete-page .page-hero p,
+    .delete-page .seo-phrase,
+    .delete-page .contact-card,
+    .delete-page .contact-note,
+    .delete-page .contact-label {
+      text-align: center;
+    }
+    .delete-page .page-hero p,
+    .delete-page .seo-phrase {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .delete-page .seo-phrase {
+      width: min(40rem, calc(100% - 40px));
+      padding-bottom: 28px;
+    }
+    .delete-page .contact-card {
+      width: 100%;
+      max-width: 38rem;
+      margin-left: auto;
+      margin-right: auto;
+      box-sizing: border-box;
+    }
+    .delete-page .contact-card ol {
+      list-style-position: inside;
+      padding-left: 0;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+    .delete-page .contact-captcha {
+      justify-content: center;
+    }
+    .delete-page .contact-captcha .g-recaptcha {
+      transform-origin: center top;
+    }
+    .delete-page .contact-input {
+      text-align: left;
+    }
+    @media (max-width: 720px) {
+      .delete-page .contact-card { padding: 22px 16px; }
+      .delete-page .page-hero { padding-top: 28px; }
+    }
+    @media (max-width: 400px) {
+      .delete-page .contact-captcha .g-recaptcha { transform: scale(0.88); }
+      .delete-page .contact-captcha { min-height: 70px; }
+    }
+    @media (max-width: 340px) {
+      .delete-page .contact-captcha .g-recaptcha { transform: scale(0.77); }
+    }
+  </style>
   <link rel="icon" href="https://easypeeze.com/favicon.png" type="image/png" />
   <meta name="googlebot" content="index, follow" />
   <meta name="author" content="Easy Peeze Tools" />
@@ -71,7 +124,7 @@
   }
   </script>
 </head>
-<body>
+<body class="delete-page">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="site-header__inner">
@@ -209,7 +262,7 @@
     var statusEl = document.getElementById('contact-status');
     if (!form || !btn) return;
     window.__contactCaptchaOk = false;
-    var TO = 'support@easypeeze.com';
+    var TO = 'bb0033eda504d34e27e0864635f86c3c';
     var API = 'https://easypeeze-tools-j6dbitzprq-el.a.run.app/contact';
     var SITE = 'Easy Peeze Tools';
     var SOURCE = 'easypeeze.com/delete-data';
