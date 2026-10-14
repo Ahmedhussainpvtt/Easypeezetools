@@ -295,6 +295,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://easypeeze.com/delete-data/</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://easypeeze.com/download/</loc>
     <lastmod>2026-10-13</lastmod>
     <changefreq>monthly</changefreq>
