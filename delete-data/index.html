@@ -262,9 +262,7 @@
     var statusEl = document.getElementById('contact-status');
     if (!form || !btn) return;
     window.__contactCaptchaOk = false;
-    var TO = 'bb0033eda504d34e27e0864635f86c3c';
     var API = 'https://easypeeze-tools-j6dbitzprq-el.a.run.app/contact';
-    var SITE = 'Easy Peeze Tools';
     var SOURCE = 'easypeeze.com/delete-data';
     var sending = false;
 
@@ -323,50 +321,27 @@
       setBusy(true);
       setStatus('Sending...', false);
 
-      var mailPayload = {
-        name: name,
-        email: email,
-        message: message,
-        _subject: name + ' - Delete data request for ' + SITE,
-        _template: 'table',
-        _captcha: 'false',
-        source: SOURCE
-      };
-      var apiPayload = Object.assign({}, mailPayload, { 'g-recaptcha-response': token });
-
-      Promise.all([
-        fetch('https://formsubmit.co/ajax/' + encodeURIComponent(TO), {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(mailPayload)
-        }).then(function (r) {
+      fetch(API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          message: message,
+          source: SOURCE,
+          'g-recaptcha-response': token
+        })
+      })
+        .then(function (r) {
           return r.text().then(function (t) {
             var j = null;
             try { j = t ? JSON.parse(t) : null; } catch (_e) { j = null; }
-            return { httpOk: r.ok, j: j };
+            if (!r.ok || !j || j.ok !== true) {
+              throw new Error((j && j.error) || 'Could not send. Email support@easypeeze.com instead.');
+            }
           });
-        }),
-        fetch(API, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(apiPayload)
-        }).then(function (r) {
-          return r.text().then(function (t) {
-            var j = null;
-            try { j = t ? JSON.parse(t) : null; } catch (_e) { j = null; }
-            return { httpOk: r.ok, j: j };
-          });
-        }).catch(function () { return { httpOk: false, j: null }; })
-      ])
-        .then(function (results) {
-          var mail = results[0];
-          var api = results[1];
-          var mailOk = mail.httpOk && mail.j && (mail.j.success === true || mail.j.success === 'true');
-          var apiOk = api.httpOk && api.j && api.j.ok === true;
-          if (!mailOk && !apiOk) {
-            var msg = (mail.j && mail.j.message) || (api.j && api.j.error) || 'Could not send. Email support@easypeeze.com instead.';
-            throw new Error(msg);
-          }
+        })
+        .then(function () {
           form.reset();
           resetCaptcha();
           setStatus('Thanks. We received your deletion request and usually reply in 1-2 business days.', false);
