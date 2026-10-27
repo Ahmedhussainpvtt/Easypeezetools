@@ -579,6 +579,17 @@ function lazyBelowFold(html) {
   return head + tail;
 }
 
+// Inner pages: the first image in <main> is usually the LCP image, and lazy-loading it delays LCP.
+function eagerFirstImage(html) {
+  const main = html.search(/<main\b/i);
+  if (main < 0) return html;
+  const m = /<img\b[^>]*>/i.exec(html.slice(main));
+  if (!m || !/\sloading=["']lazy["']/i.test(m[0])) return html;
+  const at = main + m.index;
+  const tag = m[0].replace(/\sloading=["']lazy["']/i, '');
+  return html.slice(0, at) + tag + html.slice(at + m[0].length);
+}
+
 // "Learn more" alone is not descriptive link text; add the target for screen readers and Lighthouse.
 function describeLearnMore(html) {
   return html.replace(/<a\b([^>]*)>\s*Learn more\s*<\/a>/gi, (m, attrs) => {
@@ -621,7 +632,7 @@ function applyPerf(html, siteDir, cfg, pagePath) {
   html = inlineLocalCss(html, siteDir, pagePath);
   html = selfHostFonts(html, siteDir);
   html = optimizeImages(html, siteDir, pagePath, origin);
-  html = lazyBelowFold(html);
+  html = pagePath === '/' ? lazyBelowFold(html) : eagerFirstImage(html);
   html = html.replace(/<img\b[^>]*fetchpriority=["']high["'][^>]*>/gi, (tag) => tag.replace(/\sdecoding=["']async["']/i, ''));
   html = describeLearnMore(html);
   html = deferHero3d(html);
