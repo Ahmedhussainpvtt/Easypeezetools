@@ -105,7 +105,18 @@ function getMetaContent(html, name) {
     'i'
   );
   const m = html.match(re);
-  return m ? m[1] || m[2] || '' : '';
+  return m ? decodeAttr(m[1] || m[2] || '') : '';
+}
+
+// Values read back from the page are escaped already; decode so upsert does not escape twice.
+// The &amp; collapse also repairs chains left by earlier runs.
+function decodeAttr(s) {
+  return String(s)
+    .replace(/&(?:amp;)+/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&#39;/g, "'");
 }
 
 function getTitle(html) {
@@ -295,7 +306,7 @@ function upsertJsonLd(html, json) {
 
   if (/id=["']seo-jsonld["']/i.test(html)) {
     return html.replace(
-      /<script\b[^>]*id=["']seo-jsonld["'][^>]*>[\s\S]*?<\/script>\s*/i,
+      /[ \t]*<script\b[^>]*id=["']seo-jsonld["'][^>]*>[\s\S]*?<\/script>\s*/i,
       block
     );
   }
@@ -406,6 +417,217 @@ function excludedFromSitemap(cfg, pagePath) {
   return list.some((p) => pagePath === p || pagePath.startsWith(p.replace(/\/?$/, '/')));
 }
 
+// ---------------------------------------------------------------------------
+// Performance pass (Lighthouse). Idempotent on purpose: it runs here before a
+// push and again in the site repo's Pages workflow, and both runs must leave
+// the same HTML. Assets it points at (fonts/, *-NNN.webp, hero poster) are
+// committed files; it only switches to them when they exist.
+// ---------------------------------------------------------------------------
+const PERF_FONT = '/fonts/manrope.woff2';
+const PERF_FONT_CSS =
+  '@font-face{font-family:"Manrope Fallback";src:local("Arial"),local("ArialMT"),local("Roboto");' +
+  'ascent-override:103.3095%;descent-override:29.074%;line-gap-override:0%;size-adjust:103.1851%}' +
+  `@font-face{font-family:"Manrope";font-style:normal;font-weight:400 800;font-display:optional;src:url(${PERF_FONT}) format("woff2")}`;
+const PERF_EVENTS = "['scroll','wheel','pointerdown','pointermove','keydown','touchstart']";
+const PERF_IDLE_MS = 6000;
+
+function pageDirOf(pagePath) {
+  return pagePath.endsWith('/') ? pagePath : path.posix.dirname(pagePath) + '/';
+}
+
+function attrOf(tag, name) {
+  const m = tag.match(new RegExp(`\\s${name}=(["'])([^"']*)\\1`, 'i'));
+  return m ? m[2] : null;
+}
+
+// Runs a loader on the first real interaction, or a while after load.
+function onIntent(body) {
+  return `(function(){var on=0,ev=${PERF_EVENTS};function go(){if(on++)return;ev.forEach(function(n){removeEventListener(n,go,true)});${body}}` +
+    `ev.forEach(function(n){addEventListener(n,go,{capture:true,passive:true})});` +
+    `if(document.readyState==='complete')setTimeout(go,${PERF_IDLE_MS});else addEventListener('load',function(){setTimeout(go,${PERF_IDLE_MS})})})();`;
+}
+
+function analyticsLoader(gtagId, ampKey) {
+  const queue = gtagId
+    ? `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gtagId}');`
+    : '';
+  const loads = ["function add(s,cb){var e=document.createElement('script');e.src=s;e.async=true;if(cb)e.onload=cb;document.head.appendChild(e)}"];
+  if (gtagId) loads.push(`add('https://www.googletagmanager.com/gtag/js?id=${gtagId}');`);
+  if (ampKey) {
+    loads.push(
+      `add('https://cdn.amplitude.com/script/${ampKey}.js',function(){try{window.amplitude.add(window.sessionReplay.plugin({sampleRate:1}));` +
+        `window.amplitude.init('${ampKey}',{"fetchRemoteConfig":true,"autocapture":true})}catch(e){}});`
+    );
+  }
+  return `<!-- Analytics (deferred) -->\n<script>${queue}${onIntent(loads.join(''))}</script>\n<!-- /Analytics -->`;
+}
+
+// gtag + Amplitude load on first interaction (or after load) instead of blocking the head.
+function deferAnalytics(html, cfg) {
+  const site = cfg.site || {};
+  const blockRe = /\s*<!-- Analytics \(deferred\) -->[\s\S]*?<!-- \/Analytics -->\s*/;
+  const original = html;
+  const withoutBlock = html.replace(blockRe, '\n');
+  const stripped = stripAmplitude(stripGtag(withoutBlock));
+  if (withoutBlock === original && stripped === withoutBlock) return original;
+  const gtagId = /gtag\/js\?id=/.test(original) ? site.gtagId : null;
+  const ampKey = /cdn\.amplitude\.com\/script\//.test(original) ? site.amplitudeApiKey : null;
+  if (!gtagId && !ampKey) return stripped;
+  const loader = analyticsLoader(gtagId, ampKey);
+  // After <meta charset> (ensureCharsetFirst keeps that first), so reruns leave the order alone.
+  const charset = stripped.match(/<head[^>]*>\s*<meta\b[^>]*charset\b[^>]*>/i);
+  if (charset) {
+    const at = charset.index + charset[0].length;
+    return `${stripped.slice(0, at)}\n${loader}${stripped.slice(at)}`;
+  }
+  return stripped.replace(/<head[^>]*>/i, (open) => `${open}\n${loader}`);
+}
+
+// Google Fonts (render-blocking, 2 subsets) -> one self-hosted subset with a metric-matched fallback.
+function selfHostFonts(html, siteDir) {
+  if (!fs.existsSync(path.join(siteDir, PERF_FONT))) return html;
+  if (!/fonts\.googleapis\.com/.test(html) && !/data-perf-fonts/.test(html)) return html;
+  html = html.replace(/\s*<link\b[^>]*href=["']https:\/\/fonts\.(?:googleapis|gstatic)\.com[^"']*["'][^>]*>/gi, '');
+  html = html.replace(/\s*<link\b[^>]*data-perf-font[^>]*>/gi, '').replace(/\s*<style data-perf-fonts>[\s\S]*?<\/style>/gi, '');
+  const tags = `<link rel="preload" href="${PERF_FONT}" as="font" type="font/woff2" crossorigin data-perf-font />\n  <style data-perf-fonts>${PERF_FONT_CSS}</style>\n  `;
+  const at = html.search(/<link\b[^>]*rel=["']stylesheet["']|<style data-perf-css/i);
+  const end = html.search(/<\/head>/i);
+  const pos = at >= 0 && (end < 0 || at < end) ? at : end;
+  return pos >= 0 ? html.slice(0, pos) + tags + html.slice(pos) : html;
+}
+
+function readSiteCss(siteDir, pagePath, href) {
+  const clean = href.split(/[?#]/)[0];
+  const rel = clean.startsWith('/') ? clean : path.posix.normalize(path.posix.join(pageDirOf(pagePath), clean));
+  const file = path.join(siteDir, rel);
+  if (!fs.existsSync(file)) return null;
+  const cssDir = path.posix.dirname(rel) + '/';
+  return fs
+    .readFileSync(file, 'utf8')
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/url\(\s*(["']?)(?!data:|https?:|\/|#)([^"')]+)\1\s*\)/g, (m, q, u) => `url(${q}${path.posix.normalize(cssDir + u)}${q})`)
+    .replace(/\s*\n\s*/g, '\n')
+    .replace(/<\/style/gi, '<\\/style')
+    .trim();
+}
+
+// Local stylesheets are inlined (no render-blocking request). Re-inlined on every run so they never go stale.
+function inlineLocalCss(html, siteDir, pagePath) {
+  const block = (href, css) => `<style data-perf-css="${href}">${css}</style>`;
+  html = html.replace(/<style data-perf-css="([^"]+)">[\s\S]*?<\/style>/g, (m, href) => {
+    const css = readSiteCss(siteDir, pagePath, href);
+    return css == null ? m : block(href, css);
+  });
+  return html.replace(/<link\b[^>]*\brel=["']stylesheet["'][^>]*>/gi, (tag) => {
+    const href = attrOf(tag, 'href');
+    if (!href || /^(https?:)?\/\//i.test(href)) return tag;
+    const css = readSiteCss(siteDir, pagePath, href);
+    return css == null ? tag : block(href, css);
+  });
+}
+
+const variantCache = new Map();
+function imageVariants(siteDir, rel) {
+  const dir = path.join(siteDir, path.posix.dirname(rel));
+  if (!variantCache.has(dir)) variantCache.set(dir, fs.existsSync(dir) ? fs.readdirSync(dir) : []);
+  const base = path.posix.basename(rel).replace(/\.(png|jpe?g)$/i, '');
+  const re = new RegExp(`^${base.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}-(\\d+)\\.webp$`);
+  return variantCache.get(dir).map((n) => (n.match(re) || [])[1]).filter(Boolean).map(Number).sort((a, b) => a - b);
+}
+
+// <img> PNG/JPG -> WebP variants made by scripts/make-web-images.mjs (srcset when there are several).
+function optimizeImages(html, siteDir, pagePath, origin) {
+  return html.replace(/<img\b[^>]*>/gi, (tag) => {
+    const src = attrOf(tag, 'src');
+    if (!src) return tag;
+    let rel = origin && src.startsWith(origin) ? src.slice(origin.length) : src;
+    if (/^(https?:|data:|\/\/)/i.test(rel)) return tag;
+    rel = rel.split(/[?#]/)[0];
+    if (!/\.(png|jpe?g)$/i.test(rel)) return tag;
+    const abs = rel.startsWith('/') ? rel : path.posix.normalize(path.posix.join(pageDirOf(pagePath), rel));
+    const widths = imageVariants(siteDir, abs);
+    if (!widths.length) return tag;
+    const url = (w) => abs.replace(/\.(png|jpe?g)$/i, `-${w}.webp`);
+    let next = tag.replace(/\s(src|srcset|sizes)=(["'])[^"']*\2/gi, '');
+    let attrs;
+    if (widths.length === 1) {
+      attrs = ` src="${url(widths[0])}"`;
+    } else {
+      const w = parseInt(attrOf(tag, 'width') || '', 10);
+      const shown = Number.isFinite(w) && w > 0 ? Math.min(w, 760) : 760;
+      const pick = widths.filter((x) => x <= 960).pop() || widths[0];
+      attrs =
+        ` src="${url(pick)}" srcset="${widths.map((x) => `${url(x)} ${x}w`).join(', ')}"` +
+        ` sizes="${attrOf(tag, 'sizes') || `(max-width: 760px) 92vw, ${shown}px`}"`;
+    }
+    if (!/\sdecoding=/i.test(next) && !/fetchpriority=["']high/i.test(next)) attrs += ' decoding="async"';
+    return next.replace(/^<img/i, `<img${attrs}`);
+  });
+}
+
+// Images after the first <section> of <main> are below the fold on load: lazy-load them
+// so they do not compete with the hero for bandwidth.
+function lazyBelowFold(html) {
+  const main = html.search(/<main\b/i);
+  if (main < 0) return html;
+  const firstEnd = html.indexOf('</section>', main);
+  if (firstEnd < 0) return html;
+  const head = html.slice(0, firstEnd);
+  const tail = html.slice(firstEnd).replace(/<img\b[^>]*>/gi, (tag) =>
+    /\s(loading|fetchpriority)=/i.test(tag) ? tag : tag.replace(/^<img/i, '<img loading="lazy"')
+  );
+  return head + tail;
+}
+
+// "Learn more" alone is not descriptive link text; add the target for screen readers and Lighthouse.
+function describeLearnMore(html) {
+  return html.replace(/<a\b([^>]*)>\s*Learn more\s*<\/a>/gi, (m, attrs) => {
+    const href = (attrs.match(/\bhref=["']([^"']+)["']/i) || [])[1] || '';
+    const slug = href.replace(/[?#].*$/, '').replace(/\/(index\.html)?$/, '').split('/').pop();
+    if (!slug) return m;
+    const label = slug
+      .replace(/-/g, ' ')
+      .replace(/\b(pdf|upi|sms|ocr|ai|gst|kyc)\b/gi, (s) => s.toUpperCase())
+      .replace(/^./, (c) => c.toUpperCase());
+    return `<a${attrs}>Learn more<span class="sr-only"> about ${label}</span></a>`;
+  });
+}
+
+// Easy Peeze home: the 3D Peezy (three.js + an 8 MB model) starts on first interaction;
+// a still of the same pose shows until the scene is live.
+function deferHero3d(html) {
+  if (!/id=["']home-peezy-scene["']/.test(html)) return html;
+  html = html.replace(/<script type="module" src="(hero\/hero\.js[^"]*)"><\/script>/i, (m, src) => {
+    const load =
+      `var s=document.createElement('script');s.type='module';s.src='${src}';document.head.appendChild(s);` +
+      "var el=document.getElementById('home-peezy-scene');if(!el)return;var done=function(){el.classList.add('is-live');mo.disconnect()};" +
+      "var mo=new MutationObserver(function(){if(el.querySelector('canvas')&&el.querySelector('.peezy-say.is-on'))setTimeout(done,150)});" +
+      'mo.observe(el,{subtree:true,childList:true,attributes:true,attributeFilter:["class"]});setTimeout(done,20000);';
+    return `<script data-perf-hero>${onIntent(load)}</script>`;
+  });
+  if (!/data-perf-poster/.test(html) && /data-perf-hero/.test(html)) {
+    const preload =
+      '<link rel="preload" as="image" href="/hero/peezy-poster-920.webp" ' +
+      'imagesrcset="/hero/peezy-poster-460.webp 1x, /hero/peezy-poster-920.webp 2x" fetchpriority="high" data-perf-poster />\n  ';
+    const at = html.search(/<link\b[^>]*data-perf-font|<style data-perf-css/i);
+    if (at >= 0) html = html.slice(0, at) + preload + html.slice(at);
+  }
+  return html;
+}
+
+function applyPerf(html, siteDir, cfg, pagePath) {
+  const origin = (cfg.site && cfg.site.origin ? cfg.site.origin : '').replace(/\/$/, '');
+  html = deferAnalytics(html, cfg);
+  html = inlineLocalCss(html, siteDir, pagePath);
+  html = selfHostFonts(html, siteDir);
+  html = optimizeImages(html, siteDir, pagePath, origin);
+  html = lazyBelowFold(html);
+  html = html.replace(/<img\b[^>]*fetchpriority=["']high["'][^>]*>/gi, (tag) => tag.replace(/\sdecoding=["']async["']/i, ''));
+  html = describeLearnMore(html);
+  html = deferHero3d(html);
+  return html;
+}
+
 function buildSite(key, opts) {
   const meta = SITES[key];
   if (!meta) throw new Error(`Unknown site ${key}`);
@@ -425,7 +647,7 @@ function buildSite(key, opts) {
 
     const before = html;
     const result = applyPageSeo(html, cfg, pagePath, page);
-    html = result.html;
+    html = applyPerf(result.html, meta.dir, cfg, pagePath);
 
     if (html !== before) {
       if (!opts.dryRun) fs.writeFileSync(file, html, 'utf8');
@@ -485,7 +707,7 @@ function buildLocal(siteDir, opts) {
 
     const before = html;
     const result = applyPageSeo(html, cfg, pagePath, page);
-    html = result.html;
+    html = applyPerf(result.html, siteDir, cfg, pagePath);
 
     if (html !== before) {
       if (!opts.dryRun) fs.writeFileSync(file, html, 'utf8');

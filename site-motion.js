@@ -97,7 +97,9 @@
   });
 })();
 
-(() => {
+// Reveal setup waits for idle time and leaves blocks already on screen alone,
+// so first paint is never re-hidden or held up by a full-page style pass.
+const initMotion = () => {
   const doc = document.documentElement;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce) {
@@ -121,11 +123,12 @@
 
   const revealNodes = [];
   const seen = new Set();
+  const onScreen = (node) => node.getBoundingClientRect().top < window.innerHeight;
 
   slideGroups.forEach((groupSelector) => {
     document.querySelectorAll(groupSelector).forEach((group) => {
       [...group.children].forEach((node, index) => {
-        if (seen.has(node)) return;
+        if (seen.has(node) || onScreen(node)) return;
         seen.add(node);
         node.classList.add('motion-reveal');
         node.classList.add(index % 2 === 0 ? 'motion-enter-left' : 'motion-enter-right');
@@ -138,7 +141,7 @@
   liftGroups.forEach((groupSelector) => {
     document.querySelectorAll(groupSelector).forEach((group) => {
       [...group.children].forEach((node, index) => {
-        if (seen.has(node)) return;
+        if (seen.has(node) || onScreen(node)) return;
         seen.add(node);
         node.classList.add('motion-reveal', 'motion-enter-scale');
         node.style.setProperty('--reveal-delay', `${Math.min(index, 5) * 80}ms`);
@@ -149,7 +152,7 @@
 
   // Section headings: fade up and draw their accent rule
   document.querySelectorAll('.section__head, .section > h2, .precision').forEach((node) => {
-    if (seen.has(node)) return;
+    if (seen.has(node) || onScreen(node)) return;
     seen.add(node);
     node.classList.add('motion-reveal', 'motion-enter-up');
     revealNodes.push(node);
@@ -158,7 +161,7 @@
   // Trust pills / chip rows stagger in one by one
   document.querySelectorAll('.trust__list, .hero__chips, .chip-row').forEach((list) => {
     [...list.children].forEach((node, index) => {
-      if (seen.has(node)) return;
+      if (seen.has(node) || onScreen(node)) return;
       seen.add(node);
       node.classList.add('motion-chip');
       node.style.setProperty('--reveal-delay', `${Math.min(index, 8) * 60}ms`);
@@ -168,7 +171,7 @@
 
   // Showcase rows: copy from one side, media from the other
   document.querySelectorAll('.showcase').forEach((showcase, index) => {
-    if (seen.has(showcase)) return;
+    if (seen.has(showcase) || onScreen(showcase)) return;
     seen.add(showcase);
     showcase.classList.add('motion-reveal');
     showcase.classList.add(index % 2 === 0 ? 'motion-enter-left' : 'motion-enter-right');
@@ -376,7 +379,10 @@
     document.addEventListener('mouseleave', clearTrail);
     window.addEventListener('blur', clearTrail);
   }
-})();
+};
+(window.requestIdleCallback
+  ? (cb) => window.requestIdleCallback(cb, { timeout: 2000 })
+  : (cb) => setTimeout(cb, 200))(initMotion);
 
 /* APK-style yellow busy orbit on CTAs so every click shows feedback. */
 (() => {
