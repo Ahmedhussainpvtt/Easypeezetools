@@ -28,7 +28,21 @@ module.exports = {
     name: 'Easy Peeze Tools',
     url: 'https://easypeeze.com/',
     logo: 'https://easypeeze.com/logo.png',
+    description:
+      'Easy Peeze Tools makes simple, privacy-first apps for India: Pdf Buddy, a local Windows PDF editor, and Kharch Log, an Android expense tracker that writes to your own Google Sheet.',
     email: 'support@easypeeze.com',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      email: 'support@easypeeze.com',
+      url: 'https://easypeeze.com/contact/',
+      availableLanguage: ['English', 'Hindi'],
+      areaServed: 'IN',
+    },
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'IN',
+    },
     sameAs: ['https://kharchlog.com/'],
   },
 
@@ -69,10 +83,13 @@ module.exports = {
     '/': {
       title: 'Easy Peeze Tools - Pdf Buddy & Kharch Log | Simple tools. Zero hassle.',
       description:
-        'Easy Peeze Tools: your data stays yours. Pdf Buddy - 100% local Windows PDF editor (2 free edits/day after Google sign-in, then ₹299/year or ₹999 lifetime). Kharch Log - expenses in your Google Sheet (₹149 lifetime).',
+        'Pdf Buddy: a 100% local Windows PDF editor from ₹299/year. Kharch Log: Android expenses in your own Google Sheet for ₹149 lifetime. Your data stays yours.',
       changefreq: 'weekly',
       priority: 1.0,
       schemaType: 'WebSite',
+      speakable: ['h1', '.hero__lead'],
+      dateModified: '2026-10-29',
+      faqFromDetails: true,
     },
     '/products/': {
       title: 'Products - Pdf Buddy & Kharch Log',

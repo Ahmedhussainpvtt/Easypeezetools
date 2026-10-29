@@ -259,11 +259,58 @@ function upsertLink(html, rel, href, extra = '') {
   return html.replace(/<\/head>/i, `  ${tag}\n</head>`);
 }
 
-function buildJsonLd(cfg, pagePath, page, title, description) {
+function plainText(fragment) {
+  return String(fragment || '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/** Visible <details><summary>Q</summary>A</details> pairs, so FAQ schema always matches the page. */
+function faqFromDetails(html) {
+  const out = [];
+  const re = /<details\b[^>]*>\s*<summary\b[^>]*>([\s\S]*?)<\/summary>([\s\S]*?)<\/details>/gi;
+  let m;
+  while ((m = re.exec(html)) && out.length < 30) {
+    const q = plainText(m[1]);
+    const a = plainText(m[2]);
+    if (!q || !a) continue;
+    out.push({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    });
+  }
+  return out;
+}
+
+function buildJsonLd(cfg, pagePath, page, title, description, html = '') {
   const origin = cfg.site.origin.replace(/\/$/, '');
   const url = origin + (pagePath === '/' ? '/' : pagePath);
   const org = { ...cfg.organization };
   const graph = [org];
+  const lang = cfg.site.language || 'en-IN';
+
+  const pageNode = {
+    '@type': 'WebPage',
+    '@id': `${url}#webpage`,
+    url,
+    name: title,
+    description,
+    isPartOf: { '@id': `${origin}/#website` },
+    publisher: { '@id': org['@id'] },
+    inLanguage: lang,
+  };
+  if (page.speakable && page.speakable.length) {
+    pageNode.speakable = { '@type': 'SpeakableSpecification', cssSelector: page.speakable };
+  }
+  if (page.dateModified) pageNode.dateModified = page.dateModified;
 
   const schemaType = page.schemaType || 'WebPage';
   if (schemaType === 'WebSite') {
@@ -274,19 +321,24 @@ function buildJsonLd(cfg, pagePath, page, title, description) {
       name: cfg.site.name,
       description: description,
       publisher: { '@id': org['@id'] },
-      inLanguage: cfg.site.language || 'en-IN',
+      inLanguage: lang,
     });
+    if (pageNode.speakable || pageNode.dateModified) graph.push(pageNode);
   } else {
-    graph.push({
-      '@type': schemaType,
-      '@id': `${url}#webpage`,
-      url,
-      name: title,
-      description,
-      isPartOf: { '@id': `${origin}/#website` },
-      publisher: { '@id': org['@id'] },
-      inLanguage: cfg.site.language || 'en-IN',
-    });
+    graph.push({ ...pageNode, '@type': schemaType });
+  }
+
+  if (page.faqFromDetails) {
+    const questions = faqFromDetails(html);
+    if (questions.length) {
+      graph.push({
+        '@type': 'FAQPage',
+        '@id': `${url}#faq`,
+        url,
+        inLanguage: lang,
+        mainEntity: questions,
+      });
+    }
   }
 
   return {
@@ -367,7 +419,7 @@ function applyPageSeo(html, cfg, pagePath, page) {
     html = html.replace(/<html\b[^>]*>/i, `<html lang="${cfg.site.language}">`);
   }
 
-  const jsonLd = buildJsonLd(cfg, pagePath, page, title, description);
+  const jsonLd = buildJsonLd(cfg, pagePath, page, title, description, html);
   html = upsertJsonLd(html, jsonLd);
   html = ensureCharsetFirst(html);
 
