@@ -2,7 +2,23 @@
   var API = 'https://easypeeze-tools-j6dbitzprq-el.a.run.app';
   var btn = document.getElementById('payBtn');
   var statusEl = document.getElementById('status');
-  var busy = false;
+  var busy = true;
+  var payLabel = 'Pay';
+
+  fetch(API + '/client-payment/config', { cache: 'no-store' })
+    .then(function (r) { return r.json(); })
+    .then(function (cfg) {
+      if (!cfg || !cfg.ok || !(Number(cfg.amountUsd) > 0)) throw new Error('config');
+      var amount = '$' + Number(cfg.amountUsd).toFixed(2);
+      document.getElementById('amount').textContent = amount;
+      payLabel = 'Pay ' + amount;
+      setBusy(false);
+    })
+    .catch(function () {
+      document.getElementById('amount').textContent = '$--';
+      btn.textContent = 'Unavailable';
+      setStatus('Payments are not available right now. Please refresh or email support@easypeeze.com.', true);
+    });
 
   function setStatus(msg, isError) {
     statusEl.hidden = !msg;
@@ -13,7 +29,7 @@
   function setBusy(on, label) {
     busy = on;
     btn.disabled = on;
-    btn.textContent = label || (on ? 'Please wait...' : 'Pay $50.00');
+    btn.textContent = label || (on ? 'Please wait...' : payLabel);
   }
 
   function post(path, body) {

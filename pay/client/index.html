@@ -2900,6 +2900,11 @@ min-height: 42px;
 }</style>
   <style>
     .client-pay { max-width: 480px; }
+    .client-pay .pay-label { display: block; margin: 1rem 0 0.35rem; }
+    .client-pay .pay-input { display: block; width: 100%; }
+    .client-pay .pay-btn { display: block; width: 100%; margin-top: 1.75rem; }
+    .client-pay .pay-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .client-pay .pay-fine { margin-top: 1rem; }
     .client-pay__amount { font-size: 2.4rem; font-weight: 800; margin: 0 0 0.25rem; color: var(--text); }
     .client-pay__amount span { font-size: 1rem; font-weight: 600; color: var(--muted); }
     .client-pay__done { padding: 1.25rem; border-radius: var(--radius); background: var(--secondary-soft); }
@@ -2985,7 +2990,7 @@ min-height: 42px;
     </div>
     <section class="section client-pay">
       <div id="payForm">
-        <p class="client-pay__amount">$50.00 <span>USD</span></p>
+        <p class="client-pay__amount"><span id="amount" style="font-size:inherit;font-weight:inherit;color:inherit">$...</span> <span>USD</span></p>
         <p class="pay-status" id="status" role="status" aria-live="assertive" hidden></p>
         <label class="pay-label" for="name">Full name <span class="req" aria-hidden="true">*</span></label>
         <input class="pay-input" id="name" type="text" autocomplete="name" maxlength="80" placeholder="Your name" required />
@@ -2995,7 +3000,7 @@ min-height: 42px;
         <input class="pay-input" id="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="24" placeholder="+1 555 123 4567" />
         <label class="pay-label" for="reference">Payment for <span class="opt">(optional)</span></label>
         <input class="pay-input" id="reference" type="text" maxlength="120" placeholder="Invoice number or project name" />
-        <button class="pay-btn btn" type="button" id="payBtn">Pay $50.00</button>
+        <button class="pay-btn btn" type="button" id="payBtn" disabled>Loading...</button>
         <p class="pay-fine">Payments are processed securely by Razorpay. You will receive a receipt by email.</p>
       </div>
       <div class="client-pay__done" id="payDone" hidden>
