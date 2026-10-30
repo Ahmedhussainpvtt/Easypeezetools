@@ -1,618 +1,674 @@
 [
-  {
-    "slug": "morning-kyc-upload-checklist-pdf-buddy",
-    "title": "A morning checklist before a KYC upload",
-    "description": "A morning checklist before a KYC upload: order, blank pages, file name, size, and a local copy on your PC.",
-    "date": "2026-10-07",
-    "url": "/blog/morning-kyc-upload-checklist-pdf-buddy/",
-    "image": "/images/blog/morning-kyc-upload-checklist-pdf-buddy.jpg",
-    "tags": [
-      "Pdf Editor",
-      "India",
-      "KYC",
-      "checklist"
-    ]
-  },
-  {
-    "slug": "government-portal-mixed-orientation-pdf",
-    "title": "A portal rejected the file because some pages are sideways",
-    "description": "When a government portal rejects a PDF for sideways pages, fix only those pages, re-export, and upload a new file name.",
-    "date": "2026-10-06",
-    "url": "/blog/government-portal-mixed-orientation-pdf/",
-    "image": "/images/blog/government-portal-mixed-orientation-pdf.jpg",
-    "tags": [
-      "Pdf Editor",
-      "India",
-      "government portal",
-      "page orientation"
-    ]
-  },
-  {
-    "slug": "pdf-that-stays-readable-on-a-phone",
-    "title": "Make a PDF that stays readable on a phone",
-    "description": "Export a PDF that stays readable on a phone: real text, a sensible page size, and send it as a document so chat apps do not recompress it.",
-    "date": "2026-10-05",
-    "url": "/blog/pdf-that-stays-readable-on-a-phone/",
-    "image": "/images/blog/pdf-that-stays-readable-on-a-phone.jpg",
-    "tags": [
-      "Pdf Editor",
-      "India",
-      "phone reading",
-      "PDF export"
-    ]
-  },
-  {
-    "slug": "ca-client-yearly-pdf-folder-layout",
-    "title": "A simple yearly folder layout a CA office can reuse for each client",
-    "description": "A yearly folder layout a CA office can reuse: one client, one year, and clear rules for what not to mix in the same PDF.",
-    "date": "2026-10-04",
-    "url": "/blog/ca-client-yearly-pdf-folder-layout/",
-    "image": "/images/blog/ca-client-yearly-pdf-folder-layout.jpg",
-    "tags": [
-      "Pdf Editor",
-      "India",
-      "CA office",
-      "folder layout"
-    ]
-  },
-  {
-    "slug": "university-migration-certificate-pdf",
-    "title": "Migration or transfer certificate scan, upright pages, readable file name",
-    "description": "Scan a migration or transfer certificate into an upright PDF with a file name a university or employer can read.",
-    "date": "2026-10-03",
-    "url": "/blog/university-migration-certificate-pdf/",
-    "image": "/images/blog/university-migration-certificate-pdf.jpg",
-    "tags": [
-      "Pdf Editor",
-      "India",
-      "migration certificate",
-      "university"
-    ]
-  },
-  {
-    "slug": "apartment-maintenance-receipt-pdf",
-    "title": "Society maintenance receipts as a yearly PDF folder",
-    "description": "Keep society maintenance receipts as named PDFs in a yearly folder, one month at a time, ready for a resale or a loan.",
-    "date": "2026-10-02",
-    "url": "/blog/apartment-maintenance-receipt-pdf/",
-    "image": "/images/blog/apartment-maintenance-receipt-pdf.jpg",
-    "tags": [
-      "Pdf Editor",
-      "India",
-      "society maintenance",
-      "receipts"
-    ]
-  },
-  {
-    "slug": "two-quotation-pdfs-do-not-overwrite",
-    "title": "Two vendor quotations: file names so you do not overwrite the cheaper one",
-    "description": "Name two vendor quotation PDFs with the vendor, date, and total so a second download does not replace the cheaper quote.",
-    "date": "2026-10-01",
-    "url": "/blog/two-quotation-pdfs-do-not-overwrite/",
-    "image": "/images/blog/two-quotation-pdfs-do-not-overwrite.jpg",
-    "tags": [
-      "Pdf Editor",
-      "India",
-      "quotations",
-      "file names"
-    ]
-  },
-  {
-    "slug": "itr-acknowledgement-and-form16-folder",
-    "title": "ITR acknowledgement and Form 16 stored as clearly named PDFs",
-    "description": "Store each year's ITR acknowledgement and Form 16 as clearly named PDFs on Windows, without mixing assessment years.",
-    "date": "2026-09-30",
-    "url": "/blog/itr-acknowledgement-and-form16-folder/",
-    "image": "/images/blog/itr-acknowledgement-and-form16-folder.jpg",
-    "tags": [
-      "Pdf Editor",
-      "India",
-      "ITR",
-      "Form 16"
-    ]
-  },
-  {
-    "slug": "builder-demand-letter-pdf-archive",
-    "title": "Keep builder demand letters as named PDFs by date",
-    "description": "Save each builder demand letter as its own dated PDF so a later milestone does not overwrite the earlier demand.",
-    "date": "2026-09-29",
-    "url": "/blog/builder-demand-letter-pdf-archive/",
-    "image": "/images/blog/builder-demand-letter-pdf-archive.jpg",
-    "tags": [
-      "Pdf Editor",
-      "India",
-      "builder",
-      "demand letter"
-    ]
-  },
-  {
-    "slug": "internship-id-and-certificate-one-pdf",
-    "title": "Internship certificate plus ID as one PDF for a company portal",
-    "description": "Join an internship certificate and an ID into one PDF for a company portal, in the order the form requests.",
-    "date": "2026-09-28",
-    "url": "/blog/internship-id-and-certificate-one-pdf/",
-    "image": "/images/blog/internship-id-and-certificate-one-pdf.jpg",
-    "tags": [
-      "Pdf Editor",
-      "India",
-      "internship",
-      "company portal"
-    ]
-  },
-  {
-    "slug": "school-fee-receipts-pdf-for-reimbursement",
-    "title": "School fee receipts into one PDF for office reimbursement",
-    "description": "Combine school fee receipts into one PDF for office reimbursement, with receipt numbers readable and children separated if HR asks.",
-    "date": "2026-09-27",
-    "url": "/blog/school-fee-receipts-pdf-for-reimbursement/",
-    "image": "/images/blog/school-fee-receipts-pdf-for-reimbursement.jpg",
-    "tags": [
-      "Pdf Editor",
-      "India",
-      "school fees",
-      "reimbursement"
-    ]
-  },
-  {
-    "slug": "property-sale-papers-drop-blank-pages",
-    "title": "Property papers: drop blank scans before you send the pack",
-    "description": "Remove blank scan pages from property sale papers on Windows so the pack matches the deed and stays smaller.",
-    "date": "2026-09-26",
-    "url": "/blog/property-sale-papers-drop-blank-pages/",
-    "image": "/images/blog/property-sale-papers-drop-blank-pages.jpg",
-    "tags": [
-      "Pdf Editor",
-      "India",
-      "property papers",
-      "blank pages"
-    ]
-  },
-  {
-    "slug": "hospital-bill-scan-pdf-for-insurance",
-    "title": "Hospital bill scans into one insurance PDF",
-    "description": "Combine hospital bill scans into one insurance PDF on Windows, in the order the insurer or TPA listed.",
-    "date": "2026-09-25",
-    "url": "/blog/hospital-bill-scan-pdf-for-insurance/",
-    "image": "/images/blog/hospital-bill-scan-pdf-for-insurance.jpg",
-    "tags": [
-      "Pdf Editor",
-      "India",
-      "health insurance",
-      "hospital bills"
-    ]
-  },
-  {
-    "slug": "freelance-contract-sign-pdf-windows",
-    "title": "Sign a freelance contract PDF on Windows",
-    "description": "Sign a freelance contract on Windows, keep the unsigned original, and return a dated PDF the client can file.",
-    "date": "2026-09-24",
-    "url": "/blog/freelance-contract-sign-pdf-windows/",
-    "image": "/images/blog/freelance-contract-sign-pdf-windows.jpg",
-    "tags": [
-      "Pdf Editor",
-      "India",
-      "freelance",
-      "sign PDF"
-    ]
-  },
-  {
-    "slug": "cancelled-cheque-scan-to-pdf-kyc",
-    "title": "Cancelled cheque scan turned into a clean one-page PDF",
-    "description": "Turn your own cancelled cheque into a one-page PDF for a KYC form you are allowed to submit, with the account line readable.",
-    "date": "2026-09-23",
-    "url": "/blog/cancelled-cheque-scan-to-pdf-kyc/",
-    "image": "/images/blog/cancelled-cheque-scan-to-pdf-kyc.jpg",
-    "tags": [
-      "Pdf Editor",
-      "India",
-      "KYC",
-      "cancelled cheque"
-    ]
-  },
-  {
-    "slug": "epfo-claim-attachment-pdf-size",
-    "title": "EPF claim attachments that portals reject for size or mix of scans",
-    "description": "Prepare EPF claim attachments on Windows so each slot gets one PDF, not a mix of photos and oversized scans.",
-    "date": "2026-09-22",
-    "url": "/blog/epfo-claim-attachment-pdf-size/",
-    "image": "/images/blog/epfo-claim-attachment-pdf-size.jpg",
-    "tags": [
-      "Pdf Editor",
-      "India",
-      "EPF",
-      "claim upload"
-    ]
-  },
-  {
-    "slug": "passport-renewal-address-proof-pdf",
-    "title": "Passport renewal address proof PDF from scans",
-    "description": "Turn a passport renewal address proof into one upright PDF on Windows, with the address line readable and the file named for the form.",
-    "date": "2026-09-21",
-    "url": "/blog/passport-renewal-address-proof-pdf/",
-    "image": "/images/blog/passport-renewal-address-proof-pdf.jpg",
-    "tags": [
-      "Pdf Editor",
-      "India",
-      "passport",
-      "address proof"
-    ]
-  },
-  {
-    "slug": "home-loan-pdf-pack-salary-and-statements",
-    "title": "Home loan document pack on Windows",
-    "description": "Assemble a home loan pack on Windows: salary slips, bank statements, and property papers as separate named PDFs a lender can reopen.",
-    "date": "2026-09-20",
-    "url": "/blog/home-loan-pdf-pack-salary-and-statements/",
-    "image": "/images/blog/home-loan-pdf-pack-salary-and-statements.jpg",
-    "tags": [
-      "Pdf Editor",
-      "India",
-      "home loan",
-      "salary slips"
-    ]
-  },
-  {
-    "slug": "schengen-visa-pdf-pack-on-windows",
-    "title": "Schengen or travel visa file: order, size, and one PDF per instruction",
-    "description": "Build a Schengen or travel visa set on Windows as one PDF per checklist line, with names and sizes the upload form can accept.",
-    "date": "2026-09-19",
-    "url": "/blog/schengen-visa-pdf-pack-on-windows/",
-    "image": "/images/blog/schengen-visa-pdf-pack-on-windows.jpg",
-    "tags": [
-      "Pdf Editor",
-      "India",
-      "Schengen visa",
-      "travel documents"
-    ]
-  },
-  {
-    "slug": "page-numbers-bookmarks-pdf-editor-india-packs",
-    "title": "Page numbers and order: finish a portal pack in a Pdf Editor",
-    "description": "Indian portals reject jumbled packs. Use a Pdf Editor to order pages, drop blanks, and keep a readable filename before you hit upload.",
-    "date": "2026-09-18",
-    "url": "/blog/page-numbers-bookmarks-pdf-editor-india-packs/",
-    "image": "/images/hero-tools.jpg",
-    "tags": [
-      "Pdf Editor",
-      "merge PDF",
-      "split PDF",
-      "KYC PDF pack",
-      "India portals"
-    ]
-  },
-  {
-    "slug": "print-to-pdf-vs-real-pdf-editor-forms",
-    "title": "Print to PDF is not a Pdf Editor: filling Indian forms on Windows",
-    "description": "Chrome print-to-PDF flattens a page. A real Pdf Editor lets you type on the form, keep a copy, and avoid re-printing when one field was wrong.",
-    "date": "2026-09-17",
-    "url": "/blog/print-to-pdf-vs-real-pdf-editor-forms/",
-    "image": "/images/blog-forms.jpg",
-    "tags": [
-      "Pdf Editor",
-      "fill PDF form",
-      "type on PDF",
-      "Windows PDF editor",
-      "India"
-    ]
-  },
-  {
-    "slug": "ca-month-end-batch-pdf-editor-windows",
-    "title": "CA month-end packs: batch work in a Windows Pdf Editor",
-    "description": "Month-end GST and client folders mean dozens of invoices. How a desktop Pdf Editor on Windows beats tab-by-tab online tools for merge, compress, and naming.",
-    "date": "2026-09-16",
-    "url": "/blog/ca-month-end-batch-pdf-editor-windows/",
-    "image": "/images/merge-files.jpg",
-    "tags": [
-      "Pdf Editor",
-      "PDF editor Windows",
-      "merge PDF",
-      "compress PDF",
-      "GST",
-      "India"
-    ]
-  },
-  {
-    "slug": "offline-pdf-editor-vs-browser-local-tools",
-    "title": "Offline Windows PDF editor vs in-browser “no upload” tools",
-    "description": "Browser WebAssembly tools can stay on-device - but a desktop app still wins for daily KYC packs, batch compress, and working without the tab dying.",
-    "date": "2026-09-15",
-    "url": "/blog/offline-pdf-editor-vs-browser-local-tools/",
-    "image": "/images/blog-compare.jpg",
-    "tags": [
-      "offline PDF editor",
-      "privacy",
-      "Windows"
-    ]
-  },
-  {
-    "slug": "pdf-size-limits-epfo-bank-portals-india",
-    "title": "PDF size limits for EPFO, bank & gov portals (practical compress)",
-    "description": "Common Indian portal caps sit around 500KB-2MB. A local compress checklist that keeps text readable for verification teams.",
-    "date": "2026-09-14",
-    "url": "/blog/pdf-size-limits-epfo-bank-portals-india/",
-    "image": "/images/compress-send.jpg",
-    "tags": [
-      "compress PDF",
-      "EPFO",
-      "portal limits",
-      "India"
-    ]
-  },
-  {
-    "slug": "redact-sensitive-info-pdf-before-sharing",
-    "title": "Cover sensitive lines on a PDF before you share it",
-    "description": "Sharing a statement or ID scan? Cover Aadhaar digits, account numbers, and addresses locally on Windows before email or WhatsApp.",
-    "date": "2026-09-13",
-    "url": "/blog/redact-sensitive-info-pdf-before-sharing/",
-    "image": "/images/edit-desk.jpg",
-    "tags": [
-      "PDF privacy",
-      "edit PDF",
-      "Aadhaar"
-    ]
-  },
-  {
-    "slug": "split-bank-statement-pdf-pages",
-    "title": "Split bank statement PDF pages before you upload",
-    "description": "Portals rarely want a 40-page passbook PDF. Split the pages you need, keep the rest offline, and avoid uploading full statements to random tools.",
-    "date": "2026-09-12",
-    "url": "/blog/split-bank-statement-pdf-pages/",
-    "image": "/images/split-pages.jpg",
-    "tags": [
-      "split PDF",
-      "bank statement",
-      "privacy"
-    ]
-  },
-  {
-    "slug": "image-to-pdf-indian-portal-upload",
-    "title": "Image to PDF for Indian portal uploads (size + clarity)",
-    "description": "Portals reject heavy JPGs and unreadable scans. Convert images to PDF on Windows, keep stamps readable, and hit common KB/MB limits.",
-    "date": "2026-09-11",
-    "url": "/blog/image-to-pdf-indian-portal-upload/",
-    "image": "/images/convert-office.jpg",
-    "tags": [
-      "image to PDF",
-      "portal upload",
-      "compress PDF"
-    ]
-  },
-  {
-    "slug": "merge-aadhaar-pan-salary-slip-kyc-pdf",
-    "title": "Merge Aadhaar, PAN & salary slip into one KYC PDF (locally)",
-    "description": "Banks and NBFCs want one KYC pack. How to merge Aadhaar, PAN, and salary slips on Windows without uploading IDs to a random online editor.",
-    "date": "2026-09-10",
-    "url": "/blog/merge-aadhaar-pan-salary-slip-kyc-pdf/",
-    "image": "/images/merge-files.jpg",
-    "tags": [
-      "KYC PDF",
-      "merge PDF",
-      "Aadhaar",
-      "India"
-    ]
-  },
-  {
-    "slug": "cheap-adobe-acrobat-alternative-india",
-    "title": "Cheap Adobe Acrobat alternative for India (honest take)",
-    "description": "When Pdf Buddy at ₹299/year beats Acrobat for KYC packs, WhatsApp compress, and offline edit - and when you still need Acrobat or a DSC.",
-    "date": "2026-09-09",
-    "url": "/blog/cheap-adobe-acrobat-alternative-india/",
-    "image": "/images/blog-compare.jpg",
-    "tags": [
-      "Adobe alternative",
-      "cheap PDF editor",
-      "India"
-    ]
-  },
-  {
-    "slug": "aadhaar-kyc-pdf-do-not-upload",
-    "title": "Aadhaar & KYC PDFs: do not upload to random editors",
-    "description": "Why Aadhaar, PAN, and bank statement PDFs should stay on your PC - and how a local Windows PDF editor fits Indian KYC packs.",
-    "date": "2026-09-09",
-    "url": "/blog/aadhaar-kyc-pdf-do-not-upload/",
-    "image": "/images/blog-privacy.jpg",
-    "tags": [
-      "Aadhaar",
-      "KYC",
-      "privacy",
-      "local PDF"
-    ]
-  },
-  {
-    "slug": "gst-invoice-pdf-merge-india",
-    "title": "Merge GST invoice PDFs for CA / portal packs",
-    "description": "How Indian freelancers and SMEs merge monthly GST invoice PDFs, compress the pack, and keep files offline on Windows.",
-    "date": "2026-09-09",
-    "url": "/blog/gst-invoice-pdf-merge-india/",
-    "image": "/images/merge-files.jpg",
-    "tags": [
-      "GST",
-      "merge PDF",
-      "invoice",
-      "India"
-    ]
-  },
-  {
-    "slug": "college-admission-pdf-checklist-india",
-    "title": "College admission PDF checklist (India portals)",
-    "description": "Photo, ID, marksheet, signature - merge and compress under common Indian admission portal limits without uploading to random sites.",
-    "date": "2026-09-09",
-    "url": "/blog/college-admission-pdf-checklist-india/",
-    "image": "/images/blog-india-office.jpg",
-    "tags": [
-      "admission",
-      "KYC pack",
-      "compress PDF",
-      "India"
-    ]
-  },
-  {
-    "slug": "easy-peeze-tools-pdf-buddy-kharch-log",
-    "title": "Easy Peeze Tools: Pdf Buddy + Kharch Log under one brand",
-    "description": "What Easy Peeze Tools is, how Pdf Buddy and Kharch Log fit together, and who each app is for - students, freelancers, SMEs in India.",
-    "date": "2026-09-04",
-    "url": "/blog/easy-peeze-tools-pdf-buddy-kharch-log/",
-    "image": "/images/blog-india-office.jpg",
-    "tags": [
-      "Easy Peeze Tools",
-      "Pdf Buddy",
-      "Kharch Log"
-    ]
-  },
-  {
-    "slug": "rotate-pdf-pages-windows",
-    "title": "Rotate PDF pages on Windows before you merge",
-    "description": "Fix sideways phone-scan PDFs on Windows before merge or portal upload. Why orientation matters for KYC and college forms.",
-    "date": "2026-09-04",
-    "url": "/blog/rotate-pdf-pages-windows/",
-    "image": "/images/edit-desk.jpg",
-    "tags": [
-      "rotate PDF",
-      "merge PDF",
-      "Windows"
-    ]
-  },
-  {
-    "slug": "password-protect-pdf-before-email",
-    "title": "Password-protect a PDF before you email it",
-    "description": "When to lock a PDF with a password on Windows, how unlock differs, and why you should not use random online unlock sites on files you own.",
-    "date": "2026-09-04",
-    "url": "/blog/password-protect-pdf-before-email/",
-    "image": "/images/unlock-lock.jpg",
-    "tags": [
-      "protect PDF",
-      "unlock PDF",
-      "privacy"
-    ]
-  },
-  {
-    "slug": "whatsapp-pdf-size-limit-india",
-    "title": "WhatsApp PDF size limits: compress without wrecking text",
-    "description": "How to compress PDFs for WhatsApp and Indian portals so invoices and KYC packs stay readable under common MB caps.",
-    "date": "2026-09-04",
-    "url": "/blog/whatsapp-pdf-size-limit-india/",
-    "image": "/images/compress-send.jpg",
-    "tags": [
-      "compress PDF",
-      "WhatsApp",
-      "India"
-    ]
-  },
-  {
-    "slug": "ocr-scanned-pdf-searchable",
-    "title": "Make a scanned PDF searchable with OCR",
-    "description": "Turn image-only scans into searchable PDFs with OCR on Windows. Pdf Buddy OCR for invoices and photocopies.",
-    "date": "2026-09-03",
-    "url": "/blog/ocr-scanned-pdf-searchable/",
-    "image": "/images/blog-ocr.jpg",
-    "tags": [
-      "OCR PDF",
-      "searchable PDF"
-    ]
-  },
-  {
-    "slug": "pdf-seo-metadata-filenames",
-    "title": "PDF SEO: metadata, filenames, and landing pages",
-    "description": "How to optimize PDFs for Google: title/subject/keywords metadata, hyphenated filenames, and HTML landing pages that outrank raw PDFs.",
-    "date": "2026-09-03",
-    "url": "/blog/pdf-seo-metadata-filenames/",
-    "image": "/images/blog-seo.jpg",
-    "tags": [
-      "PDF SEO",
-      "metadata"
-    ]
-  },
-  {
-    "slug": "online-pdf-editor-privacy",
-    "title": "Why upload-based online PDF editors are risky",
-    "description": "Privacy risks of free online PDF editors. Prefer a local Windows PDF editor for ID proofs, bank statements, and contracts.",
-    "date": "2026-09-03",
-    "url": "/blog/online-pdf-editor-privacy/",
-    "image": "/images/blog-privacy.jpg",
-    "tags": [
-      "privacy",
-      "online PDF editor"
-    ]
-  },
-  {
-    "slug": "pdf-buddy-vs-online-editors",
-    "title": "Pdf Buddy vs iLovePDF, Smallpdf, Sejda & pdfFiller",
-    "description": "When to use a local Windows PDF editor instead of iLovePDF, Smallpdf, Sejda, or pdfFiller - India pricing, privacy, and portal uploads.",
-    "date": "2026-09-03",
-    "url": "/blog/pdf-buddy-vs-online-editors/",
-    "image": "/images/blog-compare.jpg",
-    "tags": [
-      "PDF editor",
-      "iLovePDF",
-      "Smallpdf",
-      "Sejda",
-      "pdfFiller"
-    ]
-  },
-  {
-    "slug": "fill-and-type-on-pdf-windows",
-    "title": "Type on a PDF and fill forms on Windows (without Acrobat)",
-    "description": "How to type on a PDF, fill AcroForm fields, and overlay text on scans using a desktop editor - plus when you still need Acrobat or a cloud form tool.",
-    "date": "2026-09-03",
-    "url": "/blog/fill-and-type-on-pdf-windows/",
-    "image": "/images/blog-forms.jpg",
-    "tags": [
-      "type on PDF",
-      "fill PDF form",
-      "Windows"
-    ]
-  },
-  {
-    "slug": "pdf-pack-for-indian-portals",
-    "title": "Build a PDF pack that Indian portals will actually accept",
-    "description": "Checklist for GST, college, bank, and job portals: page order, MB limits, orientation, OCR, and filenames - using a local Windows PDF editor.",
-    "date": "2026-09-03",
-    "url": "/blog/pdf-pack-for-indian-portals/",
-    "image": "/images/hero-tools.jpg",
-    "tags": [
-      "GST",
-      "KYC",
-      "compress PDF",
-      "India"
-    ]
-  },
-  {
-    "slug": "merge-split-compress-pdf-guide",
-    "title": "How to merge, split, and compress PDFs on Windows",
-    "description": "Step-by-step guide to merge PDF, split PDF pages, and compress PDF size for email and portals - without uploading files.",
-    "date": "2026-09-02",
-    "url": "/blog/merge-split-compress-pdf-guide/",
-    "image": "/images/blog-merge-guide.jpg",
-    "tags": [
-      "merge PDF",
-      "split PDF",
-      "compress PDF"
-    ]
-  },
-  {
-    "slug": "sign-pdf-without-adobe",
-    "title": "Sign a PDF without Adobe Acrobat Pro",
-    "description": "eSign-style PDF signatures on Windows: draw or place a signature locally with Pdf Buddy - no Acrobat subscription.",
-    "date": "2026-09-02",
-    "url": "/blog/sign-pdf-without-adobe/",
-    "image": "/images/sign-contract.jpg",
-    "tags": [
-      "sign PDF",
-      "eSign",
-      "Adobe alternative"
-    ]
-  },
-  {
-    "slug": "best-pdf-editor-windows-india",
-    "title": "Best PDF editor for Windows in India (2026)",
-    "description": "Compare Adobe Acrobat, free online PDF editors, and desktop apps. Why Pdf Buddy by Easy Peeze Tools fits Indian students and SMEs.",
-    "date": "2026-09-01",
-    "url": "/blog/best-pdf-editor-windows-india/",
-    "image": "/images/blog-india-office.jpg",
-    "tags": [
-      "PDF editor",
-      "Windows",
-      "India"
-    ]
-  }
+    {
+        "slug": "life-certificate-november-pension-papers-pdf",
+        "title": "Life certificate in November: keep pension papers ready as PDF",
+        "description": "Pensioners submit the life certificate from 1 to 30 November, or from 1 October at 80 and above. Keep the PPO, bank, and proof PDFs ready and private on your PC.",
+        "date": "2026-10-30",
+        "url": "/blog/life-certificate-november-pension-papers-pdf/",
+        "image": "/images/blog/life-certificate-november-pension-papers-pdf.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "Pension",
+            "Life certificate"
+        ]
+    },
+    {
+        "slug": "belated-itr-december-31-documents-pdf",
+        "title": "Belated ITR by 31 December: get Form 16, AIS, and proofs in order",
+        "description": "A belated return for AY 2026-27 can be filed until 31 December 2026. Name, merge, and check your tax PDFs against AIS on your Windows PC before filing.",
+        "date": "2026-10-30",
+        "url": "/blog/belated-itr-december-31-documents-pdf/",
+        "image": "/images/blog/belated-itr-december-31-documents-pdf.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "Income tax",
+            "ITR"
+        ]
+    },
+    {
+        "slug": "festive-orders-gst-invoices-challans-pdf",
+        "title": "Festive orders: GST invoices and challans as clean PDFs",
+        "description": "A festive-season routine for small businesses: name invoices, merge them with challans for buyers, compress for email and WhatsApp, and keep a local archive.",
+        "date": "2026-10-30",
+        "url": "/blog/festive-orders-gst-invoices-challans-pdf/",
+        "image": "/images/blog/festive-orders-gst-invoices-challans-pdf.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "GST",
+            "Small business"
+        ]
+    },
+    {
+        "slug": "festive-loan-documents-salary-slips-statements-pdf",
+        "title": "Festive loan offers: salary slips and bank statements as tidy PDFs",
+        "description": "Prepare loan documents on Windows: merge salary slips and statements by type, fix passwords and file size, and keep a copy of everything you send.",
+        "date": "2026-10-30",
+        "url": "/blog/festive-loan-documents-salary-slips-statements-pdf/",
+        "image": "/images/blog/festive-loan-documents-salary-slips-statements-pdf.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "Loan",
+            "Bank statement"
+        ]
+    },
+    {
+        "slug": "morning-kyc-upload-checklist-pdf-buddy",
+        "title": "A morning checklist before a KYC upload",
+        "description": "A morning checklist before a KYC upload: order, blank pages, file name, size, and a local copy on your PC.",
+        "date": "2026-10-07",
+        "url": "/blog/morning-kyc-upload-checklist-pdf-buddy/",
+        "image": "/images/blog/morning-kyc-upload-checklist-pdf-buddy.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "KYC",
+            "checklist"
+        ]
+    },
+    {
+        "slug": "government-portal-mixed-orientation-pdf",
+        "title": "A portal rejected the file because some pages are sideways",
+        "description": "When a government portal rejects a PDF for sideways pages, fix only those pages, re-export, and upload a new file name.",
+        "date": "2026-10-06",
+        "url": "/blog/government-portal-mixed-orientation-pdf/",
+        "image": "/images/blog/government-portal-mixed-orientation-pdf.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "government portal",
+            "page orientation"
+        ]
+    },
+    {
+        "slug": "pdf-that-stays-readable-on-a-phone",
+        "title": "Make a PDF that stays readable on a phone",
+        "description": "Export a PDF that stays readable on a phone: real text, a sensible page size, and send it as a document so chat apps do not recompress it.",
+        "date": "2026-10-05",
+        "url": "/blog/pdf-that-stays-readable-on-a-phone/",
+        "image": "/images/blog/pdf-that-stays-readable-on-a-phone.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "phone reading",
+            "PDF export"
+        ]
+    },
+    {
+        "slug": "ca-client-yearly-pdf-folder-layout",
+        "title": "A simple yearly folder layout a CA office can reuse for each client",
+        "description": "A yearly folder layout a CA office can reuse: one client, one year, and clear rules for what not to mix in the same PDF.",
+        "date": "2026-10-04",
+        "url": "/blog/ca-client-yearly-pdf-folder-layout/",
+        "image": "/images/blog/ca-client-yearly-pdf-folder-layout.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "CA office",
+            "folder layout"
+        ]
+    },
+    {
+        "slug": "university-migration-certificate-pdf",
+        "title": "Migration or transfer certificate scan, upright pages, readable file name",
+        "description": "Scan a migration or transfer certificate into an upright PDF with a file name a university or employer can read.",
+        "date": "2026-10-03",
+        "url": "/blog/university-migration-certificate-pdf/",
+        "image": "/images/blog/university-migration-certificate-pdf.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "migration certificate",
+            "university"
+        ]
+    },
+    {
+        "slug": "apartment-maintenance-receipt-pdf",
+        "title": "Society maintenance receipts as a yearly PDF folder",
+        "description": "Keep society maintenance receipts as named PDFs in a yearly folder, one month at a time, ready for a resale or a loan.",
+        "date": "2026-10-02",
+        "url": "/blog/apartment-maintenance-receipt-pdf/",
+        "image": "/images/blog/apartment-maintenance-receipt-pdf.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "society maintenance",
+            "receipts"
+        ]
+    },
+    {
+        "slug": "two-quotation-pdfs-do-not-overwrite",
+        "title": "Two vendor quotations: file names so you do not overwrite the cheaper one",
+        "description": "Name two vendor quotation PDFs with the vendor, date, and total so a second download does not replace the cheaper quote.",
+        "date": "2026-10-01",
+        "url": "/blog/two-quotation-pdfs-do-not-overwrite/",
+        "image": "/images/blog/two-quotation-pdfs-do-not-overwrite.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "quotations",
+            "file names"
+        ]
+    },
+    {
+        "slug": "itr-acknowledgement-and-form16-folder",
+        "title": "ITR acknowledgement and Form 16 stored as clearly named PDFs",
+        "description": "Store each year's ITR acknowledgement and Form 16 as clearly named PDFs on Windows, without mixing assessment years.",
+        "date": "2026-09-30",
+        "url": "/blog/itr-acknowledgement-and-form16-folder/",
+        "image": "/images/blog/itr-acknowledgement-and-form16-folder.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "ITR",
+            "Form 16"
+        ]
+    },
+    {
+        "slug": "builder-demand-letter-pdf-archive",
+        "title": "Keep builder demand letters as named PDFs by date",
+        "description": "Save each builder demand letter as its own dated PDF so a later milestone does not overwrite the earlier demand.",
+        "date": "2026-09-29",
+        "url": "/blog/builder-demand-letter-pdf-archive/",
+        "image": "/images/blog/builder-demand-letter-pdf-archive.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "builder",
+            "demand letter"
+        ]
+    },
+    {
+        "slug": "internship-id-and-certificate-one-pdf",
+        "title": "Internship certificate plus ID as one PDF for a company portal",
+        "description": "Join an internship certificate and an ID into one PDF for a company portal, in the order the form requests.",
+        "date": "2026-09-28",
+        "url": "/blog/internship-id-and-certificate-one-pdf/",
+        "image": "/images/blog/internship-id-and-certificate-one-pdf.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "internship",
+            "company portal"
+        ]
+    },
+    {
+        "slug": "school-fee-receipts-pdf-for-reimbursement",
+        "title": "School fee receipts into one PDF for office reimbursement",
+        "description": "Combine school fee receipts into one PDF for office reimbursement, with receipt numbers readable and children separated if HR asks.",
+        "date": "2026-09-27",
+        "url": "/blog/school-fee-receipts-pdf-for-reimbursement/",
+        "image": "/images/blog/school-fee-receipts-pdf-for-reimbursement.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "school fees",
+            "reimbursement"
+        ]
+    },
+    {
+        "slug": "property-sale-papers-drop-blank-pages",
+        "title": "Property papers: drop blank scans before you send the pack",
+        "description": "Remove blank scan pages from property sale papers on Windows so the pack matches the deed and stays smaller.",
+        "date": "2026-09-26",
+        "url": "/blog/property-sale-papers-drop-blank-pages/",
+        "image": "/images/blog/property-sale-papers-drop-blank-pages.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "property papers",
+            "blank pages"
+        ]
+    },
+    {
+        "slug": "hospital-bill-scan-pdf-for-insurance",
+        "title": "Hospital bill scans into one insurance PDF",
+        "description": "Combine hospital bill scans into one insurance PDF on Windows, in the order the insurer or TPA listed.",
+        "date": "2026-09-25",
+        "url": "/blog/hospital-bill-scan-pdf-for-insurance/",
+        "image": "/images/blog/hospital-bill-scan-pdf-for-insurance.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "health insurance",
+            "hospital bills"
+        ]
+    },
+    {
+        "slug": "freelance-contract-sign-pdf-windows",
+        "title": "Sign a freelance contract PDF on Windows",
+        "description": "Sign a freelance contract on Windows, keep the unsigned original, and return a dated PDF the client can file.",
+        "date": "2026-09-24",
+        "url": "/blog/freelance-contract-sign-pdf-windows/",
+        "image": "/images/blog/freelance-contract-sign-pdf-windows.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "freelance",
+            "sign PDF"
+        ]
+    },
+    {
+        "slug": "cancelled-cheque-scan-to-pdf-kyc",
+        "title": "Cancelled cheque scan turned into a clean one-page PDF",
+        "description": "Turn your own cancelled cheque into a one-page PDF for a KYC form you are allowed to submit, with the account line readable.",
+        "date": "2026-09-23",
+        "url": "/blog/cancelled-cheque-scan-to-pdf-kyc/",
+        "image": "/images/blog/cancelled-cheque-scan-to-pdf-kyc.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "KYC",
+            "cancelled cheque"
+        ]
+    },
+    {
+        "slug": "epfo-claim-attachment-pdf-size",
+        "title": "EPF claim attachments that portals reject for size or mix of scans",
+        "description": "Prepare EPF claim attachments on Windows so each slot gets one PDF, not a mix of photos and oversized scans.",
+        "date": "2026-09-22",
+        "url": "/blog/epfo-claim-attachment-pdf-size/",
+        "image": "/images/blog/epfo-claim-attachment-pdf-size.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "EPF",
+            "claim upload"
+        ]
+    },
+    {
+        "slug": "passport-renewal-address-proof-pdf",
+        "title": "Passport renewal address proof PDF from scans",
+        "description": "Turn a passport renewal address proof into one upright PDF on Windows, with the address line readable and the file named for the form.",
+        "date": "2026-09-21",
+        "url": "/blog/passport-renewal-address-proof-pdf/",
+        "image": "/images/blog/passport-renewal-address-proof-pdf.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "passport",
+            "address proof"
+        ]
+    },
+    {
+        "slug": "home-loan-pdf-pack-salary-and-statements",
+        "title": "Home loan document pack on Windows",
+        "description": "Assemble a home loan pack on Windows: salary slips, bank statements, and property papers as separate named PDFs a lender can reopen.",
+        "date": "2026-09-20",
+        "url": "/blog/home-loan-pdf-pack-salary-and-statements/",
+        "image": "/images/blog/home-loan-pdf-pack-salary-and-statements.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "home loan",
+            "salary slips"
+        ]
+    },
+    {
+        "slug": "schengen-visa-pdf-pack-on-windows",
+        "title": "Schengen or travel visa file: order, size, and one PDF per instruction",
+        "description": "Build a Schengen or travel visa set on Windows as one PDF per checklist line, with names and sizes the upload form can accept.",
+        "date": "2026-09-19",
+        "url": "/blog/schengen-visa-pdf-pack-on-windows/",
+        "image": "/images/blog/schengen-visa-pdf-pack-on-windows.jpg",
+        "tags": [
+            "Pdf Editor",
+            "India",
+            "Schengen visa",
+            "travel documents"
+        ]
+    },
+    {
+        "slug": "page-numbers-bookmarks-pdf-editor-india-packs",
+        "title": "Page numbers and order: finish a portal pack in a Pdf Editor",
+        "description": "Indian portals reject jumbled packs. Use a Pdf Editor to order pages, drop blanks, and keep a readable filename before you hit upload.",
+        "date": "2026-09-18",
+        "url": "/blog/page-numbers-bookmarks-pdf-editor-india-packs/",
+        "image": "/images/hero-tools.jpg",
+        "tags": [
+            "Pdf Editor",
+            "merge PDF",
+            "split PDF",
+            "KYC PDF pack",
+            "India portals"
+        ]
+    },
+    {
+        "slug": "print-to-pdf-vs-real-pdf-editor-forms",
+        "title": "Print to PDF is not a Pdf Editor: filling Indian forms on Windows",
+        "description": "Chrome print-to-PDF flattens a page. A real Pdf Editor lets you type on the form, keep a copy, and avoid re-printing when one field was wrong.",
+        "date": "2026-09-17",
+        "url": "/blog/print-to-pdf-vs-real-pdf-editor-forms/",
+        "image": "/images/blog-forms.jpg",
+        "tags": [
+            "Pdf Editor",
+            "fill PDF form",
+            "type on PDF",
+            "Windows PDF editor",
+            "India"
+        ]
+    },
+    {
+        "slug": "ca-month-end-batch-pdf-editor-windows",
+        "title": "CA month-end packs: batch work in a Windows Pdf Editor",
+        "description": "Month-end GST and client folders mean dozens of invoices. How a desktop Pdf Editor on Windows beats tab-by-tab online tools for merge, compress, and naming.",
+        "date": "2026-09-16",
+        "url": "/blog/ca-month-end-batch-pdf-editor-windows/",
+        "image": "/images/merge-files.jpg",
+        "tags": [
+            "Pdf Editor",
+            "PDF editor Windows",
+            "merge PDF",
+            "compress PDF",
+            "GST",
+            "India"
+        ]
+    },
+    {
+        "slug": "offline-pdf-editor-vs-browser-local-tools",
+        "title": "Offline Windows PDF editor vs in-browser “no upload” tools",
+        "description": "Browser WebAssembly tools can stay on-device - but a desktop app still wins for daily KYC packs, batch compress, and working without the tab dying.",
+        "date": "2026-09-15",
+        "url": "/blog/offline-pdf-editor-vs-browser-local-tools/",
+        "image": "/images/blog-compare.jpg",
+        "tags": [
+            "offline PDF editor",
+            "privacy",
+            "Windows"
+        ]
+    },
+    {
+        "slug": "pdf-size-limits-epfo-bank-portals-india",
+        "title": "PDF size limits for EPFO, bank & gov portals (practical compress)",
+        "description": "Common Indian portal caps sit around 500KB-2MB. A local compress checklist that keeps text readable for verification teams.",
+        "date": "2026-09-14",
+        "url": "/blog/pdf-size-limits-epfo-bank-portals-india/",
+        "image": "/images/compress-send.jpg",
+        "tags": [
+            "compress PDF",
+            "EPFO",
+            "portal limits",
+            "India"
+        ]
+    },
+    {
+        "slug": "redact-sensitive-info-pdf-before-sharing",
+        "title": "Cover sensitive lines on a PDF before you share it",
+        "description": "Sharing a statement or ID scan? Cover Aadhaar digits, account numbers, and addresses locally on Windows before email or WhatsApp.",
+        "date": "2026-09-13",
+        "url": "/blog/redact-sensitive-info-pdf-before-sharing/",
+        "image": "/images/edit-desk.jpg",
+        "tags": [
+            "PDF privacy",
+            "edit PDF",
+            "Aadhaar"
+        ]
+    },
+    {
+        "slug": "split-bank-statement-pdf-pages",
+        "title": "Split bank statement PDF pages before you upload",
+        "description": "Portals rarely want a 40-page passbook PDF. Split the pages you need, keep the rest offline, and avoid uploading full statements to random tools.",
+        "date": "2026-09-12",
+        "url": "/blog/split-bank-statement-pdf-pages/",
+        "image": "/images/split-pages.jpg",
+        "tags": [
+            "split PDF",
+            "bank statement",
+            "privacy"
+        ]
+    },
+    {
+        "slug": "image-to-pdf-indian-portal-upload",
+        "title": "Image to PDF for Indian portal uploads (size + clarity)",
+        "description": "Portals reject heavy JPGs and unreadable scans. Convert images to PDF on Windows, keep stamps readable, and hit common KB/MB limits.",
+        "date": "2026-09-11",
+        "url": "/blog/image-to-pdf-indian-portal-upload/",
+        "image": "/images/convert-office.jpg",
+        "tags": [
+            "image to PDF",
+            "portal upload",
+            "compress PDF"
+        ]
+    },
+    {
+        "slug": "merge-aadhaar-pan-salary-slip-kyc-pdf",
+        "title": "Merge Aadhaar, PAN & salary slip into one KYC PDF (locally)",
+        "description": "Banks and NBFCs want one KYC pack. How to merge Aadhaar, PAN, and salary slips on Windows without uploading IDs to a random online editor.",
+        "date": "2026-09-10",
+        "url": "/blog/merge-aadhaar-pan-salary-slip-kyc-pdf/",
+        "image": "/images/merge-files.jpg",
+        "tags": [
+            "KYC PDF",
+            "merge PDF",
+            "Aadhaar",
+            "India"
+        ]
+    },
+    {
+        "slug": "cheap-adobe-acrobat-alternative-india",
+        "title": "Cheap Adobe Acrobat alternative for India (honest take)",
+        "description": "When Pdf Buddy at ₹299/year beats Acrobat for KYC packs, WhatsApp compress, and offline edit - and when you still need Acrobat or a DSC.",
+        "date": "2026-09-09",
+        "url": "/blog/cheap-adobe-acrobat-alternative-india/",
+        "image": "/images/blog-compare.jpg",
+        "tags": [
+            "Adobe alternative",
+            "cheap PDF editor",
+            "India"
+        ]
+    },
+    {
+        "slug": "aadhaar-kyc-pdf-do-not-upload",
+        "title": "Aadhaar & KYC PDFs: do not upload to random editors",
+        "description": "Why Aadhaar, PAN, and bank statement PDFs should stay on your PC - and how a local Windows PDF editor fits Indian KYC packs.",
+        "date": "2026-09-09",
+        "url": "/blog/aadhaar-kyc-pdf-do-not-upload/",
+        "image": "/images/blog-privacy.jpg",
+        "tags": [
+            "Aadhaar",
+            "KYC",
+            "privacy",
+            "local PDF"
+        ]
+    },
+    {
+        "slug": "gst-invoice-pdf-merge-india",
+        "title": "Merge GST invoice PDFs for CA / portal packs",
+        "description": "How Indian freelancers and SMEs merge monthly GST invoice PDFs, compress the pack, and keep files offline on Windows.",
+        "date": "2026-09-09",
+        "url": "/blog/gst-invoice-pdf-merge-india/",
+        "image": "/images/merge-files.jpg",
+        "tags": [
+            "GST",
+            "merge PDF",
+            "invoice",
+            "India"
+        ]
+    },
+    {
+        "slug": "college-admission-pdf-checklist-india",
+        "title": "College admission PDF checklist (India portals)",
+        "description": "Photo, ID, marksheet, signature - merge and compress under common Indian admission portal limits without uploading to random sites.",
+        "date": "2026-09-09",
+        "url": "/blog/college-admission-pdf-checklist-india/",
+        "image": "/images/blog-india-office.jpg",
+        "tags": [
+            "admission",
+            "KYC pack",
+            "compress PDF",
+            "India"
+        ]
+    },
+    {
+        "slug": "easy-peeze-tools-pdf-buddy-kharch-log",
+        "title": "Easy Peeze Tools: Pdf Buddy + Kharch Log under one brand",
+        "description": "What Easy Peeze Tools is, how Pdf Buddy and Kharch Log fit together, and who each app is for - students, freelancers, SMEs in India.",
+        "date": "2026-09-04",
+        "url": "/blog/easy-peeze-tools-pdf-buddy-kharch-log/",
+        "image": "/images/blog-india-office.jpg",
+        "tags": [
+            "Easy Peeze Tools",
+            "Pdf Buddy",
+            "Kharch Log"
+        ]
+    },
+    {
+        "slug": "rotate-pdf-pages-windows",
+        "title": "Rotate PDF pages on Windows before you merge",
+        "description": "Fix sideways phone-scan PDFs on Windows before merge or portal upload. Why orientation matters for KYC and college forms.",
+        "date": "2026-09-04",
+        "url": "/blog/rotate-pdf-pages-windows/",
+        "image": "/images/edit-desk.jpg",
+        "tags": [
+            "rotate PDF",
+            "merge PDF",
+            "Windows"
+        ]
+    },
+    {
+        "slug": "password-protect-pdf-before-email",
+        "title": "Password-protect a PDF before you email it",
+        "description": "When to lock a PDF with a password on Windows, how unlock differs, and why you should not use random online unlock sites on files you own.",
+        "date": "2026-09-04",
+        "url": "/blog/password-protect-pdf-before-email/",
+        "image": "/images/unlock-lock.jpg",
+        "tags": [
+            "protect PDF",
+            "unlock PDF",
+            "privacy"
+        ]
+    },
+    {
+        "slug": "whatsapp-pdf-size-limit-india",
+        "title": "WhatsApp PDF size limits: compress without wrecking text",
+        "description": "How to compress PDFs for WhatsApp and Indian portals so invoices and KYC packs stay readable under common MB caps.",
+        "date": "2026-09-04",
+        "url": "/blog/whatsapp-pdf-size-limit-india/",
+        "image": "/images/compress-send.jpg",
+        "tags": [
+            "compress PDF",
+            "WhatsApp",
+            "India"
+        ]
+    },
+    {
+        "slug": "ocr-scanned-pdf-searchable",
+        "title": "Make a scanned PDF searchable with OCR",
+        "description": "Turn image-only scans into searchable PDFs with OCR on Windows. Pdf Buddy OCR for invoices and photocopies.",
+        "date": "2026-09-03",
+        "url": "/blog/ocr-scanned-pdf-searchable/",
+        "image": "/images/blog-ocr.jpg",
+        "tags": [
+            "OCR PDF",
+            "searchable PDF"
+        ]
+    },
+    {
+        "slug": "pdf-seo-metadata-filenames",
+        "title": "PDF SEO: metadata, filenames, and landing pages",
+        "description": "How to optimize PDFs for Google: title/subject/keywords metadata, hyphenated filenames, and HTML landing pages that outrank raw PDFs.",
+        "date": "2026-09-03",
+        "url": "/blog/pdf-seo-metadata-filenames/",
+        "image": "/images/blog-seo.jpg",
+        "tags": [
+            "PDF SEO",
+            "metadata"
+        ]
+    },
+    {
+        "slug": "online-pdf-editor-privacy",
+        "title": "Why upload-based online PDF editors are risky",
+        "description": "Privacy risks of free online PDF editors. Prefer a local Windows PDF editor for ID proofs, bank statements, and contracts.",
+        "date": "2026-09-03",
+        "url": "/blog/online-pdf-editor-privacy/",
+        "image": "/images/blog-privacy.jpg",
+        "tags": [
+            "privacy",
+            "online PDF editor"
+        ]
+    },
+    {
+        "slug": "pdf-buddy-vs-online-editors",
+        "title": "Pdf Buddy vs iLovePDF, Smallpdf, Sejda & pdfFiller",
+        "description": "When to use a local Windows PDF editor instead of iLovePDF, Smallpdf, Sejda, or pdfFiller - India pricing, privacy, and portal uploads.",
+        "date": "2026-09-03",
+        "url": "/blog/pdf-buddy-vs-online-editors/",
+        "image": "/images/blog-compare.jpg",
+        "tags": [
+            "PDF editor",
+            "iLovePDF",
+            "Smallpdf",
+            "Sejda",
+            "pdfFiller"
+        ]
+    },
+    {
+        "slug": "fill-and-type-on-pdf-windows",
+        "title": "Type on a PDF and fill forms on Windows (without Acrobat)",
+        "description": "How to type on a PDF, fill AcroForm fields, and overlay text on scans using a desktop editor - plus when you still need Acrobat or a cloud form tool.",
+        "date": "2026-09-03",
+        "url": "/blog/fill-and-type-on-pdf-windows/",
+        "image": "/images/blog-forms.jpg",
+        "tags": [
+            "type on PDF",
+            "fill PDF form",
+            "Windows"
+        ]
+    },
+    {
+        "slug": "pdf-pack-for-indian-portals",
+        "title": "Build a PDF pack that Indian portals will actually accept",
+        "description": "Checklist for GST, college, bank, and job portals: page order, MB limits, orientation, OCR, and filenames - using a local Windows PDF editor.",
+        "date": "2026-09-03",
+        "url": "/blog/pdf-pack-for-indian-portals/",
+        "image": "/images/hero-tools.jpg",
+        "tags": [
+            "GST",
+            "KYC",
+            "compress PDF",
+            "India"
+        ]
+    },
+    {
+        "slug": "merge-split-compress-pdf-guide",
+        "title": "How to merge, split, and compress PDFs on Windows",
+        "description": "Step-by-step guide to merge PDF, split PDF pages, and compress PDF size for email and portals - without uploading files.",
+        "date": "2026-09-02",
+        "url": "/blog/merge-split-compress-pdf-guide/",
+        "image": "/images/blog-merge-guide.jpg",
+        "tags": [
+            "merge PDF",
+            "split PDF",
+            "compress PDF"
+        ]
+    },
+    {
+        "slug": "sign-pdf-without-adobe",
+        "title": "Sign a PDF without Adobe Acrobat Pro",
+        "description": "eSign-style PDF signatures on Windows: draw or place a signature locally with Pdf Buddy - no Acrobat subscription.",
+        "date": "2026-09-02",
+        "url": "/blog/sign-pdf-without-adobe/",
+        "image": "/images/sign-contract.jpg",
+        "tags": [
+            "sign PDF",
+            "eSign",
+            "Adobe alternative"
+        ]
+    },
+    {
+        "slug": "best-pdf-editor-windows-india",
+        "title": "Best PDF editor for Windows in India (2026)",
+        "description": "Compare Adobe Acrobat, free online PDF editors, and desktop apps. Why Pdf Buddy by Easy Peeze Tools fits Indian students and SMEs.",
+        "date": "2026-09-01",
+        "url": "/blog/best-pdf-editor-windows-india/",
+        "image": "/images/blog-india-office.jpg",
+        "tags": [
+            "PDF editor",
+            "Windows",
+            "India"
+        ]
+    }
 ]
