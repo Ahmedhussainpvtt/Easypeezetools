@@ -167,5 +167,11 @@ module.exports = {
       noindex: true,
       sitemap: false,
     },
+    '/pay/client/': {
+      title: 'Payment | Easy Peeze Tools',
+      description: 'Secure payment to Easy Peeze Tools.',
+      noindex: true,
+      sitemap: false,
+    },
   },
 };
