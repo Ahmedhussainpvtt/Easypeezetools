@@ -49,8 +49,11 @@
     return when(iso);
   }
 
-  function subBadge(lic) {
-    if (lic.active) return `<span class="badge badge-ok">Active ${esc(lic.plan)}</span>`;
+  function subBadge(lic, bill) {
+    const pay = bill && bill.type === "autopay"
+      ? (bill.cancelAtCycleEnd ? " · autopay off" : " · autopay")
+      : lic.grantedBy && lic.grantedBy !== "razorpay" ? " · manual" : "";
+    if (lic.active) return `<span class="badge badge-ok">Active ${esc(lic.plan)}${esc(pay)}</span>`;
     if (lic.status === "expired") return `<span class="badge badge-warn">Expired</span>`;
     return `<span class="badge badge-off">None</span>`;
   }
@@ -67,7 +70,7 @@
         <td>${esc(r.name || "-")}</td>
         <td>${esc(r.email)}</td>
         <td>${esc(r.businessName || "-")}</td>
-        <td>${subBadge(r.license)}</td>
+        <td>${subBadge(r.license, r.billing)}</td>
         <td>${when(r.license.expiresAt)}</td>
         <td>${r.deviceActive ? esc(r.deviceModel || "Signed in") : '<span class="muted">Signed out</span>'}</td>
         <td>${r.twilio.connected ? `<span class="badge badge-ok">${r.twilio.numbers.length} number(s)</span>` : '<span class="badge badge-off">Not connected</span>'}</td>
