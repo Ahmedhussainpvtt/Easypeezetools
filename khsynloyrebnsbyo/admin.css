@@ -1963,3 +1963,9 @@ th[aria-sort="descending"] .th-sort::after {
   .app-shell.is-list #tab-customers,
   .app-shell.is-list .table-card { overflow: visible; height: auto; }
 }
+
+/* EP Business Voice tab */
+.btn.btn-sm { min-height: 30px; padding: 4px 10px; font-size: 12px; }
+#tab-voice .split { margin-top: 16px; }
+#voice-tbody .col-actions { white-space: nowrap; }
+

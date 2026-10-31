@@ -1367,9 +1367,11 @@
       $("tab-blog").classList.toggle("hidden", tab !== "blog");
       $("tab-notice").classList.toggle("hidden", tab !== "notice");
       $("tab-deleted").classList.toggle("hidden", tab !== "deleted");
+      $("tab-voice")?.classList.toggle("hidden", tab !== "voice");
       syncShellLayout();
       syncChromeActions();
       if (tab === "deleted") loadDeleted();
+      window.dispatchEvent(new CustomEvent("ep-admin-tab", { detail: tab }));
     });
   });
   $("cv-kh-plan").addEventListener("change", () => syncSubExpiry("cv-kh"));
@@ -1803,6 +1805,18 @@
     if (Date.now() - lastActivity > IDLE_MS) {
       expireSession("Session expired - please log in again", "idle");
     }
+  });
+
+  // Shared with voice.js (EP Business Voice tab). The session token itself stays in memory here.
+  window.EP_ADMIN = Object.freeze({
+    token: () => token(),
+    toast,
+    confirmUi,
+    setFormMsg,
+    esc,
+    beginAction,
+    endAction,
+    expire: () => expireSession("Session expired - please log in again", "session")
   });
 
   boot();

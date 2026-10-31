@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="admin.css?v=20261005admin8" />
+  <link rel="stylesheet" href="admin.css?v=20261031voice1" />
   <link rel="stylesheet" href="scene/login-scene.css?v=20261005otp6" />
   <link rel="icon" href="/favicon.png" type="image/png" />
 </head>
@@ -262,6 +262,7 @@
           <button type="button" class="tab" data-tab="blog" role="tab">Blog</button>
           <button type="button" class="tab" data-tab="notice" role="tab">Notice</button>
           <button type="button" class="tab" data-tab="deleted" role="tab">Deleted</button>
+          <button type="button" class="tab" data-tab="voice" role="tab">Business Voice</button>
         </nav>
         <div class="chrome-actions" id="chrome-actions">
           <span class="count-pill" id="sel-count" hidden>0 selected</span>
@@ -467,6 +468,116 @@
           <p id="deleted-empty" class="empty" hidden>No deleted accounts.</p>
         </div>
       </section>
+
+      <section id="tab-voice" class="tab-panel hidden">
+        <div class="kpi-row">
+          <article class="kpi kpi--total">
+            <p class="kpi__label">Users</p>
+            <p class="kpi__value" id="vkpi-users"> - </p>
+          </article>
+          <article class="kpi kpi--active">
+            <p class="kpi__label">Active subscriptions</p>
+            <p class="kpi__value" id="vkpi-active"> - </p>
+          </article>
+          <article class="kpi kpi--expired">
+            <p class="kpi__label">Expired</p>
+            <p class="kpi__value" id="vkpi-expired"> - </p>
+          </article>
+          <article class="kpi kpi--kharch">
+            <p class="kpi__label">Twilio connected</p>
+            <p class="kpi__value" id="vkpi-connected"> - </p>
+          </article>
+          <article class="kpi kpi--pdf">
+            <p class="kpi__label">Monthly revenue</p>
+            <p class="kpi__value" id="vkpi-mrr"> - </p>
+          </article>
+        </div>
+
+        <div class="table-card">
+          <div class="table-card__head">
+            <div class="table-card__title">
+              <h2>Business Voice customers</h2>
+              <span class="count-pill" id="voice-count">0</span>
+            </div>
+            <div class="table-card__tools">
+              <label class="search-field">
+                <svg aria-hidden="true"><use href="#i-search" /></svg>
+                <span class="sr-only">Search Business Voice customers</span>
+                <input type="search" id="voice-search" placeholder="Search name, email, business..." autocomplete="off" />
+              </label>
+              <button type="button" class="btn btn-outline" id="voice-refresh">
+                <svg><use href="#i-refresh" /></svg>Refresh
+              </button>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Business</th>
+                  <th>Subscription</th>
+                  <th>Renews / ends</th>
+                  <th>Phone</th>
+                  <th>Twilio</th>
+                  <th>Last seen</th>
+                  <th class="col-actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="voice-tbody"></tbody>
+            </table>
+          </div>
+          <p id="voice-empty" class="empty" hidden>No Business Voice customers yet.</p>
+        </div>
+
+        <div class="split">
+          <form class="form-card" id="voice-grant-form">
+            <div class="card-head">
+              <h2>Add or extend subscription</h2>
+              <p class="muted" id="voice-price-note">Monthly plan. Extending an active plan adds to its end date.</p>
+            </div>
+            <label>
+              <span>Email</span>
+              <input id="voice-grant-email" type="email" required placeholder="customer@gmail.com" autocomplete="off" />
+            </label>
+            <label>
+              <span>Months</span>
+              <input id="voice-grant-months" type="number" min="1" max="24" value="1" required />
+            </label>
+            <p id="voice-grant-msg" class="form-msg" hidden></p>
+            <button type="submit" class="btn btn-primary">Save subscription</button>
+          </form>
+
+          <form class="form-card" id="voice-notice-form">
+            <div class="card-head">
+              <h2>Business Voice notice</h2>
+              <p class="muted">Shows as a notification on EP Business Voice phones.</p>
+            </div>
+            <label>
+              <span>Title</span>
+              <input id="voice-notice-title" required maxlength="80" placeholder="New feature" />
+            </label>
+            <label>
+              <span>Message</span>
+              <input id="voice-notice-body" required maxlength="220" placeholder="Voicemail now plays inside the app" />
+            </label>
+            <label>
+              <span>Send to</span>
+              <select id="voice-notice-target">
+                <option value="">Everyone with the app</option>
+                <option value="one">One customer</option>
+              </select>
+            </label>
+            <label id="voice-notice-email-wrap" hidden>
+              <span>Customer email</span>
+              <input id="voice-notice-email" type="email" placeholder="customer@gmail.com" autocomplete="off" />
+            </label>
+            <p id="voice-notice-msg" class="form-msg" hidden></p>
+            <button type="submit" class="btn btn-primary">Send notice</button>
+          </form>
+        </div>
+      </section>
     </main>
   </div>
 
@@ -656,7 +767,8 @@
 
   <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
 
-  <script src="admin.js?v=20261005admin8"></script>
+  <script src="admin.js?v=20261031voice1"></script>
+  <script src="voice.js?v=20261031voice1"></script>
   <script type="module" src="scene/login-scene.js?v=20261005otp6"></script>
 </body>
 </html>
