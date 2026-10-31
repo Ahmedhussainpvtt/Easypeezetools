@@ -3,6 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="referrer" content="no-referrer" />
+  <style id="anti-clickjack">html{display:none!important}</style>
+  <script>
+    // Clickjacking guard (GitHub Pages cannot send X-Frame-Options): only render as the top window.
+    if (window.self === window.top) {
+      document.getElementById('anti-clickjack').remove();
+    } else {
+      try { window.top.location = window.self.location.href; } catch (e) {}
+    }
+  </script>
   <script>
     (function () {
       try {
