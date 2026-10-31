@@ -1,0 +1,11 @@
+{
+    "versionCode":  3,
+    "versionName":  "1.0.2",
+    "notes":  "Pick the one Twilio number this app uses. Your other numbers are never changed. Calls and texts show only that number. Swipe up to answer, decline, or reply with a quick text. Light and dark mode. Clearer calls with less delay. Updates now install from inside the app.",
+    "sha256":  "d0e6e9fb8081da48a2b8157fecba1147acf1147ef13f491e0cfdb08d43592844",
+    "size":  36132823,
+    "apk":  "EPBusinessVoice.apk",
+    "minVersionCode":  0,
+    "force":  false,
+    "published":  "2026-10-31T23:51:32Z"
+}
