@@ -1,6 +1,6 @@
 (() => {
-  // EP Business Voice tab. Uses the Super Admin session; the EP Voice API verifies it with Easy Peeze.
-  const VOICE_API = window.EPVOICE_ADMIN_API || "https://epvoice-api-273130308560.us-central1.run.app";
+  // EP Business Voice tab. Goes through the Easy Peeze API (/admin/voice/*), which asks for the
+  // emailed OTP on every change and then talks to the EP Voice API server to server.
   const $ = (id) => document.getElementById(id);
   const A = () => window.EP_ADMIN;
   let rows = [];
@@ -8,24 +8,8 @@
   let busy = false;
 
   async function call(path, opts = {}) {
-    const tok = A()?.token();
-    if (!tok) throw new Error("Please log in again");
-    const res = await fetch(`${VOICE_API}${path}`, {
-      ...opts,
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${tok}`,
-        ...(opts.headers || {})
-      }
-    });
-    const data = await res.json().catch(() => ({}));
-    if (res.status === 401) {
-      A()?.expire();
-      throw new Error("Session expired - please log in again");
-    }
-    if (!res.ok || data.ok === false) throw new Error(data.error || `Request failed (${res.status})`);
-    return data;
+    if (!A()) throw new Error("Please log in again");
+    return A().api(`/admin/voice${path}`, opts);
   }
 
   const esc = (v) => (A() ? A().esc(v) : String(v ?? ""));
@@ -84,7 +68,7 @@
 
   async function load() {
     try {
-      const data = await call("/admin/customers");
+      const data = await call("/customers");
       rows = data.customers || [];
       const t = data.totals || {};
       $("vkpi-users").textContent = String(t.users ?? 0);
@@ -102,7 +86,7 @@
   }
 
   async function grant(email, months) {
-    const data = await call("/admin/grant", { method: "POST", body: JSON.stringify({ email, months }) });
+    const data = await call("/grant", { method: "POST", body: JSON.stringify({ email, months }) });
     A()?.toast(`${email} active until ${when(data.license.expiresAt)}`, "ok");
     await load();
   }
@@ -127,7 +111,7 @@
     try {
       if (ext) await grant(email, 1);
       else {
-        await call("/admin/revoke", { method: "POST", body: JSON.stringify({ email }) });
+        await call("/revoke", { method: "POST", body: JSON.stringify({ email }) });
         A().toast(`Revoked ${email}`, "ok");
         await load();
       }
@@ -188,7 +172,7 @@
     const msg = $("voice-notice-msg");
     msg.hidden = true;
     try {
-      const data = await call("/admin/notice", { method: "POST", body: JSON.stringify({ title, body, email }) });
+      const data = await call("/notice", { method: "POST", body: JSON.stringify({ title, body, email }) });
       A().setFormMsg(msg, one ? `Sent to ${data.sent} phone(s)` : "Sent to everyone", "ok");
       A().toast("Notice sent", "ok");
     } catch (ex) {

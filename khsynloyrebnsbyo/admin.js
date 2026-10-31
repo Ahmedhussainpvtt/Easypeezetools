@@ -206,6 +206,9 @@
     }
     if (p === "/admin/fanout") return "fanout";
     if (p === "/admin/release-device") return "release-device";
+    if (p === "/admin/voice/grant") return "voice-grant";
+    if (p === "/admin/voice/revoke") return "voice-revoke";
+    if (p === "/admin/voice/notice") return "voice-notice";
     return "";
   }
 
@@ -1807,9 +1810,10 @@
     }
   });
 
-  // Shared with voice.js (EP Business Voice tab). The session token itself stays in memory here.
+  // Shared with voice.js (EP Business Voice tab). Calls go through api(), so every write asks
+  // for the emailed OTP; the session token itself never leaves this file.
   window.EP_ADMIN = Object.freeze({
-    token: () => token(),
+    api: (path, opts) => api(path, opts),
     toast,
     confirmUi,
     setFormMsg,
