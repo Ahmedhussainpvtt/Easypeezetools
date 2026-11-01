@@ -1,11 +1,11 @@
 {
-    "versionCode":  26,
-    "versionName":  "1.0.25",
-    "notes":  "Messages and errors now use the app\u0027s own style with the logo. Call forwarding, Follow me and Simultaneous ring have a country picker for each number (United States by default) and check the number fits that country. Keypad number sits right next to the country flag.",
-    "sha256":  "48f30461998aaaf79cc7283b9c5c91829327a6f5567b6a8a6ddc50e5514abcda",
-    "size":  37426462,
+    "versionCode":  27,
+    "versionName":  "1.0.26",
+    "notes":  "New colourful tab icons for Calls, Messages, Contacts and Settings, matching the Settings screen.",
+    "sha256":  "c6a489df763fdc8f5b7fcc3cd5d8c0ee59280450cdb2b2f1391c87207ffff5da",
+    "size":  37426466,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-01T23:47:05Z"
+    "published":  "2026-11-01T23:52:11Z"
 }
