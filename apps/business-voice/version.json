@@ -1,11 +1,11 @@
 {
-    "versionCode":  17,
-    "versionName":  "1.0.16",
-    "notes":  "Smoother app: new screen transitions, lists that slide in, springy buttons with light haptics, animated counts and message bubbles, and a livelier call screen.",
-    "sha256":  "b3e02d9ac1c778f0f74d16cbd5108e47b5abfc61c124d666e826be0e57e7fe1a",
-    "size":  37015186,
+    "versionCode":  18,
+    "versionName":  "1.0.17",
+    "notes":  "Swipe a call or text right to call back, left to SMS. Pin favorite contacts to the top. Saved quick replies above the SMS box. Add notes after a call. Live timer on the call banner. Missed calls chip. Sent tick on texts. Smooth theme switch and a highlighted + button.",
+    "sha256":  "0872d6bab048127d82f1fbc9d8060a4d858ded242ce89d007e64a63a8b91b531",
+    "size":  37054113,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-01T19:58:08Z"
+    "published":  "2026-11-01T20:25:54Z"
 }
