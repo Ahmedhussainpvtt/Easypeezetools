@@ -1,11 +1,11 @@
 {
-    "versionCode":  5,
-    "versionName":  "1.0.4",
-    "notes":  "Voicemail greetings now use a natural voice. Your own recording replaces the built-in one. Incoming calls show full screen while you use your phone. Call forwarding number boxes fixed, with clear First and Then steps. Subaccounts show this month\u0027s spend. Add new contacts to your phone from Contacts. Search and menu moved to the right.",
-    "sha256":  "9b992e9e63e78f278aa1119c038ddcdae998ba4b81a95b871d7f5e1cf18274f3",
-    "size":  36190744,
+    "versionCode":  6,
+    "versionName":  "1.0.5",
+    "notes":  "Calls now show one row per person with a count, plus a new Voicemail tab. Red counts for missed calls, unread texts and new voicemails. Voicemail plays right on the missed call. Shorter contact screen. Your Google photo on top. Pick any of your numbers on the keypad for outgoing calls. Text alerts always on.",
+    "sha256":  "0082062e03ab2f12d66c2bda4fd7d53f1d607c6baec501e61344a2403de2f9a9",
+    "size":  36209892,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-01T00:48:20Z"
+    "published":  "2026-11-01T03:23:15Z"
 }
