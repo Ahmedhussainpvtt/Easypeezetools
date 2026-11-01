@@ -1,11 +1,11 @@
 {
-    "versionCode":  3,
-    "versionName":  "1.0.2",
-    "notes":  "Pick the one Twilio number this app uses. Your other numbers are never changed. Calls and texts show only that number. Swipe up to answer, decline, or reply with a quick text. Light and dark mode. Clearer calls with less delay. Updates now install from inside the app.",
-    "sha256":  "d0e6e9fb8081da48a2b8157fecba1147acf1147ef13f491e0cfdb08d43592844",
-    "size":  36132823,
+    "versionCode":  4,
+    "versionName":  "1.0.3",
+    "notes":  "Tap a call to see that person\u0027s full history by day, with Call and Message. Search and Clear all in Calls and Messages. Call forwarding: voicemail only, forward all, follow me, or ring together. Record your own voicemail greetings. Music while on hold. Caller photo and details on the call screen. Call button in text chats.",
+    "sha256":  "4aaa71773effcaf91b121db772490e63a84ff0e6f4d26c93ad3a83da7efe714b",
+    "size":  36190864,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-10-31T23:51:32Z"
+    "published":  "2026-11-01T00:17:50Z"
 }
