@@ -1,11 +1,11 @@
 {
-    "versionCode":  10,
-    "versionName":  "1.0.9",
+    "versionCode":  11,
+    "versionName":  "1.0.10",
     "notes":  "",
-    "sha256":  "a3ca3e9924ddd6ed8e9a06fb60f121857c79f22d4041ce46a94ffe4f781b881f",
-    "size":  36629317,
+    "sha256":  "b3da975742b06e0f698d779b53fbe49a602a860d94b2b06ed48c72338fa5112d",
+    "size":  36648402,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-01T12:54:17Z"
+    "published":  "2026-11-01T13:17:15Z"
 }
