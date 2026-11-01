@@ -1,11 +1,11 @@
 {
-    "versionCode":  23,
-    "versionName":  "1.0.22",
-    "notes":  "Speed dials: set up to 9 in Settings, then hold that number on the keypad to call. Follow me and forwarding no longer loop when a number you forward to sends the call back; the caller goes to voicemail instead.",
-    "sha256":  "b26005eb020280c28ec770c7d818a5152d6f97598b2dda9305b11b61cd9d9973",
-    "size":  37115135,
+    "versionCode":  24,
+    "versionName":  "1.0.23",
+    "notes":  "Follow me is simpler: this app rings, then one number, then voicemail. Fresh colorful icons in Settings. A cleaner country picker on the keypad. Missed call, voicemail and text counts clear as soon as you come back after seeing them.",
+    "sha256":  "35f25a43a8f110301480534bd00a936046e53ce665b60fa984a899724beab98a",
+    "size":  37125084,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-01T23:09:46Z"
+    "published":  "2026-11-01T23:26:45Z"
 }
