@@ -1,11 +1,11 @@
 {
-    "versionCode":  21,
-    "versionName":  "1.0.20",
-    "notes":  "Help and feedback now opens a ready email draft in Gmail. Texts show Sent, Delivered or Seen instead of a tick. Pick your calling country on the keypad (United States +1 by default). The recording notice now plays only to the other person, and the call timer starts when they actually answer. Cleaner Settings.",
-    "sha256":  "bfa4df95123bf327b4a14c892f73204c2a39d423480613d7f59d97cd305855a2",
-    "size":  37098079,
+    "versionCode":  22,
+    "versionName":  "1.0.21",
+    "notes":  "Hold a text in a chat to copy or delete it. Voicemails and call recordings show a yellow ring as they play. The end call button no longer stays on screen after a call. Fixed calls ringing in a loop when a follow-me number forwards back to you. Safer updates and better protection for your Twilio account.",
+    "sha256":  "0b09ae00cee511a08533720f2e739b9086821a63f44c2af563aa6d1d32b3f82f",
+    "size":  37098655,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-01T21:42:45Z"
+    "published":  "2026-11-01T22:38:15Z"
 }
