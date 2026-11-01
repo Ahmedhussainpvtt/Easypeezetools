@@ -1,11 +1,11 @@
 {
-    "versionCode":  18,
-    "versionName":  "1.0.17",
-    "notes":  "Swipe a call or text right to call back, left to SMS. Pin favorite contacts to the top. Saved quick replies above the SMS box. Add notes after a call. Live timer on the call banner. Missed calls chip. Sent tick on texts. Smooth theme switch and a highlighted + button.",
-    "sha256":  "0872d6bab048127d82f1fbc9d8060a4d858ded242ce89d007e64a63a8b91b531",
-    "size":  37054113,
+    "versionCode":  19,
+    "versionName":  "1.0.18",
+    "notes":  "Transfer a call: send it to someone else, or add them and talk together. Hold 0 on the keypad for +. Calls and texts now show up even if the app lost your number. Lists and Settings slide in smoothly.",
+    "sha256":  "4cba2e2b56b9e3270367927c1fd9f7b6c2e2a9112cab53699629280e36f272ef",
+    "size":  37072593,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-01T20:25:54Z"
+    "published":  "2026-11-01T20:54:34Z"
 }
