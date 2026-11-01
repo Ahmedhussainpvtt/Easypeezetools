@@ -1,11 +1,11 @@
 {
-    "versionCode":  24,
-    "versionName":  "1.0.23",
-    "notes":  "Follow me is simpler: this app rings, then one number, then voicemail. Fresh colorful icons in Settings. A cleaner country picker on the keypad. Missed call, voicemail and text counts clear as soon as you come back after seeing them.",
-    "sha256":  "35f25a43a8f110301480534bd00a936046e53ce665b60fa984a899724beab98a",
-    "size":  37125084,
+    "versionCode":  25,
+    "versionName":  "1.0.24",
+    "notes":  "The keypad number now fits fully next to the country. Before you call or text, the app checks the number matches the country you picked and offers the right one if it doesn\u0027t.",
+    "sha256":  "ec9bb79b9590086118e080f299e29c540a4fe8f1418f9245c556b64de09d5d9e",
+    "size":  37424877,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-01T23:26:45Z"
+    "published":  "2026-11-01T23:37:22Z"
 }
