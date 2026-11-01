@@ -1,11 +1,11 @@
 {
-    "versionCode":  27,
-    "versionName":  "1.0.26",
-    "notes":  "New colourful tab icons for Calls, Messages, Contacts and Settings, matching the Settings screen.",
-    "sha256":  "c6a489df763fdc8f5b7fcc3cd5d8c0ee59280450cdb2b2f1391c87207ffff5da",
-    "size":  37426466,
+    "versionCode":  28,
+    "versionName":  "1.0.27",
+    "notes":  "Fresh 3D icons across the app: tabs, settings, empty screens and the keypad.",
+    "sha256":  "25282359793445edae615a2be671f70c36c205ca1036973de48936b94fbcede9",
+    "size":  37426446,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-01T23:52:11Z"
+    "published":  "2026-11-01T23:57:58Z"
 }
