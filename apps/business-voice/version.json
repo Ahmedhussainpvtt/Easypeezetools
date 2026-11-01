@@ -1,11 +1,11 @@
 {
-    "versionCode":  20,
-    "versionName":  "1.0.19",
-    "notes":  "Call details now have Calls and Notes tabs: add, edit or delete notes in bulk. Blocked numbers stay in Calls and SMS with a red sign and a quick Unblock. You now hear the recording notice too when you call. New Help and feedback in Settings: report a bug, request a feature, contact support.",
-    "sha256":  "928b767c667423edd9b3870346b9d4c3de1e7d7867d75263248171626f43037a",
-    "size":  37097331,
+    "versionCode":  21,
+    "versionName":  "1.0.20",
+    "notes":  "Help and feedback now opens a ready email draft in Gmail. Texts show Sent, Delivered or Seen instead of a tick. Pick your calling country on the keypad (United States +1 by default). The recording notice now plays only to the other person, and the call timer starts when they actually answer. Cleaner Settings.",
+    "sha256":  "bfa4df95123bf327b4a14c892f73204c2a39d423480613d7f59d97cd305855a2",
+    "size":  37098079,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-01T21:22:12Z"
+    "published":  "2026-11-01T21:42:45Z"
 }
