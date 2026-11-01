@@ -1,11 +1,11 @@
 {
-    "versionCode":  25,
-    "versionName":  "1.0.24",
-    "notes":  "The keypad number now fits fully next to the country. Before you call or text, the app checks the number matches the country you picked and offers the right one if it doesn\u0027t.",
-    "sha256":  "ec9bb79b9590086118e080f299e29c540a4fe8f1418f9245c556b64de09d5d9e",
-    "size":  37424877,
+    "versionCode":  26,
+    "versionName":  "1.0.25",
+    "notes":  "Messages and errors now use the app\u0027s own style with the logo. Call forwarding, Follow me and Simultaneous ring have a country picker for each number (United States by default) and check the number fits that country. Keypad number sits right next to the country flag.",
+    "sha256":  "48f30461998aaaf79cc7283b9c5c91829327a6f5567b6a8a6ddc50e5514abcda",
+    "size":  37426462,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-01T23:37:22Z"
+    "published":  "2026-11-01T23:47:05Z"
 }
