@@ -1,11 +1,11 @@
 {
-    "versionCode":  19,
-    "versionName":  "1.0.18",
-    "notes":  "Transfer a call: send it to someone else, or add them and talk together. Hold 0 on the keypad for +. Calls and texts now show up even if the app lost your number. Lists and Settings slide in smoothly.",
-    "sha256":  "4cba2e2b56b9e3270367927c1fd9f7b6c2e2a9112cab53699629280e36f272ef",
-    "size":  37072593,
+    "versionCode":  20,
+    "versionName":  "1.0.19",
+    "notes":  "Call details now have Calls and Notes tabs: add, edit or delete notes in bulk. Blocked numbers stay in Calls and SMS with a red sign and a quick Unblock. You now hear the recording notice too when you call. New Help and feedback in Settings: report a bug, request a feature, contact support.",
+    "sha256":  "928b767c667423edd9b3870346b9d4c3de1e7d7867d75263248171626f43037a",
+    "size":  37097331,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-01T20:54:34Z"
+    "published":  "2026-11-01T21:22:12Z"
 }
