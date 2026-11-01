@@ -1,11 +1,11 @@
 {
-    "versionCode":  4,
-    "versionName":  "1.0.3",
-    "notes":  "Tap a call to see that person\u0027s full history by day, with Call and Message. Search and Clear all in Calls and Messages. Call forwarding: voicemail only, forward all, follow me, or ring together. Record your own voicemail greetings. Music while on hold. Caller photo and details on the call screen. Call button in text chats.",
-    "sha256":  "4aaa71773effcaf91b121db772490e63a84ff0e6f4d26c93ad3a83da7efe714b",
-    "size":  36190864,
+    "versionCode":  5,
+    "versionName":  "1.0.4",
+    "notes":  "Voicemail greetings now use a natural voice. Your own recording replaces the built-in one. Incoming calls show full screen while you use your phone. Call forwarding number boxes fixed, with clear First and Then steps. Subaccounts show this month\u0027s spend. Add new contacts to your phone from Contacts. Search and menu moved to the right.",
+    "sha256":  "9b992e9e63e78f278aa1119c038ddcdae998ba4b81a95b871d7f5e1cf18274f3",
+    "size":  36190744,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-01T00:17:50Z"
+    "published":  "2026-11-01T00:48:20Z"
 }
