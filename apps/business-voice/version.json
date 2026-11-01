@@ -1,11 +1,11 @@
 {
-    "versionCode":  16,
-    "versionName":  "1.0.15",
-    "notes":  "",
-    "sha256":  "7a7466cdc443fc1a7200501cf6f89399ca01da596802dc6771dd0eba798db7d3",
-    "size":  37011660,
+    "versionCode":  17,
+    "versionName":  "1.0.16",
+    "notes":  "Smoother app: new screen transitions, lists that slide in, springy buttons with light haptics, animated counts and message bubbles, and a livelier call screen.",
+    "sha256":  "b3e02d9ac1c778f0f74d16cbd5108e47b5abfc61c124d666e826be0e57e7fe1a",
+    "size":  37015186,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-01T19:49:12Z"
+    "published":  "2026-11-01T19:58:08Z"
 }
