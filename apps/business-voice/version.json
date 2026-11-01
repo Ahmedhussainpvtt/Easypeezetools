@@ -1,11 +1,11 @@
 {
-    "versionCode":  22,
-    "versionName":  "1.0.21",
-    "notes":  "Hold a text in a chat to copy or delete it. Voicemails and call recordings show a yellow ring as they play. The end call button no longer stays on screen after a call. Fixed calls ringing in a loop when a follow-me number forwards back to you. Safer updates and better protection for your Twilio account.",
-    "sha256":  "0b09ae00cee511a08533720f2e739b9086821a63f44c2af563aa6d1d32b3f82f",
-    "size":  37098655,
+    "versionCode":  23,
+    "versionName":  "1.0.22",
+    "notes":  "Speed dials: set up to 9 in Settings, then hold that number on the keypad to call. Follow me and forwarding no longer loop when a number you forward to sends the call back; the caller goes to voicemail instead.",
+    "sha256":  "b26005eb020280c28ec770c7d818a5152d6f97598b2dda9305b11b61cd9d9973",
+    "size":  37115135,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-01T22:38:15Z"
+    "published":  "2026-11-01T23:09:46Z"
 }
