@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="admin.css?v=20261031voice1" />
+  <link rel="stylesheet" href="admin.css?v=20261101cust1" />
   <link rel="stylesheet" href="scene/login-scene.css?v=20261005otp6" />
   <link rel="icon" href="/favicon.png" type="image/png" />
 </head>
@@ -136,6 +136,9 @@
               <div><dt>Phone</dt><dd><input id="cv-phone" class="cell-mono" type="tel" maxlength="20" autocomplete="off" /></dd></div>
               <div><dt>First seen</dt><dd id="cv-first-seen"> - </dd></div>
               <div><dt>Last seen</dt><dd id="cv-last-seen"> - </dd></div>
+              <div><dt>Last app</dt><dd id="cv-last-app"> - </dd></div>
+              <div><dt>Apps used</dt><dd id="cv-apps"> - </dd></div>
+              <div id="cv-biz-wrap" hidden><dt>Business name (Business Voice)</dt><dd><input id="cv-biz" type="text" maxlength="80" autocomplete="off" /></dd></div>
               <div><dt>Country</dt><dd id="cv-country"> - </dd></div>
               <div><dt>Notes</dt><dd><textarea id="cv-notes" rows="3" maxlength="400"></textarea></dd></div>
             </dl>
@@ -161,7 +164,7 @@
                       <th>S.No</th>
                       <th>Login time</th>
                       <th>IP address</th>
-                      <th>Platform</th>
+                      <th>App</th>
                       <th>App version</th>
                     </tr>
                   </thead>
@@ -259,6 +262,31 @@
                   </select>
                 </label>
               </article>
+              <article class="sub-card" data-product="voice" id="cv-voice-card">
+                <h3>Business Voice</h3>
+                <p>Plan: <span id="cv-voice-plan"> - </span></p>
+                <p>Status: <span id="cv-voice-status"> - </span></p>
+                <p>Ends: <span id="cv-voice-exp"> - </span></p>
+                <p class="sub-meta">Granted by: <span id="cv-voice-granted"> - </span></p>
+                <p class="sub-meta">Autopay: <span id="cv-voice-billing"> - </span></p>
+                <p class="sub-meta">Twilio: <span id="cv-voice-twilio"> - </span></p>
+                <p class="sub-meta">Phone: <span id="cv-voice-device"> - </span></p>
+                <label>
+                  <span>Add months (extends an active plan)</span>
+                  <select id="cv-voice-months">
+                    <option value="1">1 month</option>
+                    <option value="3">3 months</option>
+                    <option value="6">6 months</option>
+                    <option value="12">12 months</option>
+                    <option value="24">24 months</option>
+                  </select>
+                </label>
+                <div class="sub-actions">
+                  <button type="button" class="btn btn-primary btn-sm" id="cv-voice-grant">Add months</button>
+                  <button type="button" class="btn btn-outline btn-sm" id="cv-voice-revoke">Revoke</button>
+                </div>
+                <button type="button" class="btn btn-danger btn-sm sub-danger" id="cv-voice-delete">Delete Business Voice account</button>
+              </article>
             </div>
           </div>
         </section>
@@ -272,7 +300,6 @@
           <button type="button" class="tab" data-tab="blog" role="tab">Blog</button>
           <button type="button" class="tab" data-tab="notice" role="tab">Notice</button>
           <button type="button" class="tab" data-tab="deleted" role="tab">Deleted</button>
-          <button type="button" class="tab" data-tab="voice" role="tab">Business Voice</button>
         </nav>
         <div class="chrome-actions" id="chrome-actions">
           <span class="count-pill" id="sel-count" hidden>0 selected</span>
@@ -306,6 +333,10 @@
           <article class="kpi kpi--pdf">
             <p class="kpi__label">Pdf Buddy</p>
             <p class="kpi__value" id="kpi-pdf"> - </p>
+          </article>
+          <article class="kpi kpi--voice">
+            <p class="kpi__label">Business Voice</p>
+            <p class="kpi__value" id="kpi-voice"> - </p>
           </article>
         </div>
 
@@ -344,8 +375,9 @@
                   <th data-sort="status" aria-sort="none"><button type="button" class="th-sort">Status</button></th>
                   <th data-sort="kharchlog" aria-sort="none"><button type="button" class="th-sort">Kharch Log</button></th>
                   <th data-sort="pdfbuddy" aria-sort="none"><button type="button" class="th-sort">Pdf Buddy</button></th>
+                  <th data-sort="voice" aria-sort="none"><button type="button" class="th-sort">Business Voice</button></th>
+                  <th data-sort="lastApp" aria-sort="none"><button type="button" class="th-sort">Last app</button></th>
                   <th data-sort="version" aria-sort="none"><button type="button" class="th-sort">Version</button></th>
-                  <th data-sort="platform" aria-sort="none"><button type="button" class="th-sort">Platform</button></th>
                   <th class="col-actions">Actions</th>
                 </tr>
               </thead>
@@ -518,87 +550,6 @@
         </div>
       </section>
 
-      <section id="tab-voice" class="tab-panel hidden">
-        <div class="kpi-row">
-          <article class="kpi kpi--total">
-            <p class="kpi__label">Users</p>
-            <p class="kpi__value" id="vkpi-users"> - </p>
-          </article>
-          <article class="kpi kpi--active">
-            <p class="kpi__label">Active subscriptions</p>
-            <p class="kpi__value" id="vkpi-active"> - </p>
-          </article>
-          <article class="kpi kpi--expired">
-            <p class="kpi__label">Expired</p>
-            <p class="kpi__value" id="vkpi-expired"> - </p>
-          </article>
-          <article class="kpi kpi--kharch">
-            <p class="kpi__label">Twilio connected</p>
-            <p class="kpi__value" id="vkpi-connected"> - </p>
-          </article>
-          <article class="kpi kpi--pdf">
-            <p class="kpi__label">Monthly revenue</p>
-            <p class="kpi__value" id="vkpi-mrr"> - </p>
-          </article>
-        </div>
-
-        <div class="table-card">
-          <div class="table-card__head">
-            <div class="table-card__title">
-              <h2>Business Voice customers</h2>
-              <span class="count-pill" id="voice-count">0</span>
-            </div>
-            <div class="table-card__tools">
-              <label class="search-field">
-                <svg aria-hidden="true"><use href="#i-search" /></svg>
-                <span class="sr-only">Search Business Voice customers</span>
-                <input type="search" id="voice-search" placeholder="Search name, email, business..." autocomplete="off" />
-              </label>
-              <button type="button" class="btn btn-outline" id="voice-refresh">
-                <svg><use href="#i-refresh" /></svg>Refresh
-              </button>
-            </div>
-          </div>
-          <div class="table-scroll">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Business</th>
-                  <th>Subscription</th>
-                  <th>Renews / ends</th>
-                  <th>Phone</th>
-                  <th>Twilio</th>
-                  <th>Last seen</th>
-                  <th class="col-actions">Actions</th>
-                </tr>
-              </thead>
-              <tbody id="voice-tbody"></tbody>
-            </table>
-          </div>
-          <p id="voice-empty" class="empty" hidden>No Business Voice customers yet.</p>
-        </div>
-
-        <div class="split">
-          <form class="form-card" id="voice-grant-form">
-            <div class="card-head">
-              <h2>Add or extend subscription</h2>
-              <p class="muted" id="voice-price-note">Monthly plan. Extending an active plan adds to its end date.</p>
-            </div>
-            <label>
-              <span>Email</span>
-              <input id="voice-grant-email" type="email" required placeholder="customer@gmail.com" autocomplete="off" />
-            </label>
-            <label>
-              <span>Months</span>
-              <input id="voice-grant-months" type="number" min="1" max="24" value="1" required />
-            </label>
-            <p id="voice-grant-msg" class="form-msg" hidden></p>
-            <button type="submit" class="btn btn-primary">Save subscription</button>
-          </form>
-        </div>
-      </section>
     </main>
   </div>
 
@@ -664,6 +615,7 @@
               <select id="u-product">
                 <option value="kharchlog">Kharch Log</option>
                 <option value="pdfbuddy">Pdf Buddy</option>
+                <option value="voice">Business Voice</option>
               </select>
             </label>
             <label>
@@ -788,8 +740,8 @@
 
   <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
 
-  <script src="admin.js?v=20261031otp1"></script>
-  <script src="voice.js?v=20261031otp1"></script>
+  <script src="admin.js?v=20261101cust1"></script>
+  <script src="voice.js?v=20261101cust1"></script>
   <script type="module" src="scene/login-scene.js?v=20261005otp6"></script>
 </body>
 </html>

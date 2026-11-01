@@ -1,151 +1,15 @@
 (() => {
-  // EP Business Voice tab. Goes through the Easy Peeze API (/admin/voice/*), which asks for the
-  // emailed OTP on every change and then talks to the EP Voice API server to server.
+  // EP Business Voice notices (Notice tab). Customers, subscriptions and deletes live on the shared
+  // Customers list / customer page. Calls go through the Easy Peeze API (/admin/voice/*), which asks
+  // for the emailed OTP on every change and then talks to the EP Voice API server to server.
   const $ = (id) => document.getElementById(id);
   const A = () => window.EP_ADMIN;
-  let rows = [];
-  let loaded = false;
   let busy = false;
 
   async function call(path, opts = {}) {
     if (!A()) throw new Error("Please log in again");
     return A().api(`/admin/voice${path}`, opts);
   }
-
-  const esc = (v) => (A() ? A().esc(v) : String(v ?? ""));
-  const inr = (n) => `₹${Number(n || 0).toLocaleString("en-IN")}`;
-
-  function when(iso) {
-    if (!iso) return "-";
-    const d = new Date(iso);
-    if (Number.isNaN(d.getTime())) return "-";
-    return d.toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" });
-  }
-
-  function ago(iso) {
-    if (!iso) return "never";
-    const ms = Date.now() - new Date(iso).getTime();
-    if (ms < 60_000) return "just now";
-    const m = Math.round(ms / 60_000);
-    if (m < 60) return `${m} min ago`;
-    const h = Math.round(m / 60);
-    if (h < 48) return `${h} h ago`;
-    return when(iso);
-  }
-
-  function subBadge(lic, bill) {
-    const pay = bill && bill.type === "autopay"
-      ? (bill.cancelAtCycleEnd ? " · autopay off" : " · autopay")
-      : lic.grantedBy && lic.grantedBy !== "razorpay" ? " · manual" : "";
-    if (lic.active) return `<span class="badge badge-ok">Active ${esc(lic.plan)}${esc(pay)}</span>`;
-    if (lic.status === "expired") return `<span class="badge badge-warn">Expired</span>`;
-    return `<span class="badge badge-off">None</span>`;
-  }
-
-  function render() {
-    const q = ($("voice-search").value || "").trim().toLowerCase();
-    const list = rows.filter((r) =>
-      !q || [r.name, r.email, r.businessName, r.license.plan].some((v) => String(v || "").toLowerCase().includes(q))
-    );
-    $("voice-count").textContent = String(list.length);
-    $("voice-empty").hidden = list.length > 0;
-    $("voice-tbody").innerHTML = list.map((r) => `
-      <tr>
-        <td>${esc(r.name || "-")}</td>
-        <td>${esc(r.email)}</td>
-        <td>${esc(r.businessName || "-")}</td>
-        <td>${subBadge(r.license, r.billing)}</td>
-        <td>${when(r.license.expiresAt)}</td>
-        <td>${r.deviceActive ? esc(r.deviceModel || "Signed in") : '<span class="muted">Signed out</span>'}</td>
-        <td>${r.twilio.connected ? `<span class="badge badge-ok">${r.twilio.numbers.length} number(s)</span>` : '<span class="badge badge-off">Not connected</span>'}</td>
-        <td>${ago(r.lastSeenAt)}</td>
-        <td class="col-actions">
-          <button type="button" class="btn btn-outline btn-sm" data-voice-extend="${esc(r.email)}">+1 month</button>
-          ${r.license.active ? `<button type="button" class="btn btn-danger btn-sm" data-voice-revoke="${esc(r.email)}">Revoke</button>` : ""}
-        </td>
-      </tr>`).join("");
-  }
-
-  async function load() {
-    try {
-      const data = await call("/customers");
-      rows = data.customers || [];
-      const t = data.totals || {};
-      $("vkpi-users").textContent = String(t.users ?? 0);
-      $("vkpi-active").textContent = String(t.active ?? 0);
-      $("vkpi-expired").textContent = String(t.expired ?? 0);
-      $("vkpi-connected").textContent = String(t.connected ?? 0);
-      $("vkpi-mrr").textContent = inr(t.mrrInr);
-      $("voice-price-note").textContent =
-        `Monthly plan at ${inr(data.priceInr)} per phone. Extending an active plan adds to its end date.`;
-      loaded = true;
-      render();
-    } catch (ex) {
-      A()?.toast(ex.message, "error");
-    }
-  }
-
-  async function grant(email, months) {
-    const data = await call("/grant", { method: "POST", body: JSON.stringify({ email, months }) });
-    A()?.toast(`${email} active until ${when(data.license.expiresAt)}`, "ok");
-    await load();
-  }
-
-  window.addEventListener("ep-admin-tab", (e) => {
-    if (e.detail === "voice" && !loaded) load();
-  });
-
-  $("voice-refresh")?.addEventListener("click", load);
-  $("voice-search")?.addEventListener("input", render);
-
-  $("voice-tbody")?.addEventListener("click", async (e) => {
-    const ext = e.target.closest("[data-voice-extend]");
-    const rev = e.target.closest("[data-voice-revoke]");
-    if ((!ext && !rev) || busy) return;
-    const email = (ext || rev).dataset.voiceExtend || (ext || rev).dataset.voiceRevoke;
-    const ok = await A().confirmUi(ext
-      ? { title: "Extend subscription", message: `Add 1 month for ${email}?`, okLabel: "Extend" }
-      : { title: "Revoke subscription", message: `Stop EP Business Voice for ${email} now? Their phone stops working right away.`, okLabel: "Revoke", danger: true });
-    if (!ok) return;
-    busy = true;
-    try {
-      if (ext) await grant(email, 1);
-      else {
-        await call("/revoke", { method: "POST", body: JSON.stringify({ email }) });
-        A().toast(`Revoked ${email}`, "ok");
-        await load();
-      }
-    } catch (ex) {
-      A().toast(ex.message, "error");
-    } finally {
-      busy = false;
-    }
-  });
-
-  $("voice-grant-form")?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    if (busy) return;
-    const email = $("voice-grant-email").value.trim().toLowerCase();
-    const months = Math.max(1, Math.min(24, parseInt($("voice-grant-months").value, 10) || 1));
-    const ok = await A().confirmUi({
-      title: "Save subscription",
-      message: `Give ${email} ${months} month(s) of EP Business Voice?`,
-      okLabel: "Save"
-    });
-    if (!ok) return;
-    busy = true;
-    const msg = $("voice-grant-msg");
-    msg.hidden = true;
-    try {
-      await grant(email, months);
-      A().setFormMsg(msg, "Saved", "ok");
-      $("voice-grant-form").reset();
-    } catch (ex) {
-      A().setFormMsg(msg, ex.message, "error");
-    } finally {
-      busy = false;
-    }
-  });
 
   $("voice-notice-target")?.addEventListener("change", (e) => {
     $("voice-notice-email-wrap").hidden = e.target.value !== "one";

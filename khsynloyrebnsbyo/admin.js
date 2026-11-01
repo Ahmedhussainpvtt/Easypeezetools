@@ -27,6 +27,8 @@
   let sortKey = "email";
   let sortDir = "asc";
   let currentCustomerEmail = "";
+  /** Last loaded customer (all products), so Update only sends what changed. */
+  let currentCustomer = null;
   let sessionTimer = null;
   let memoryToken = "";
   let memoryEmail = "";
@@ -209,6 +211,8 @@
     if (p === "/admin/voice/grant") return "voice-grant";
     if (p === "/admin/voice/revoke") return "voice-revoke";
     if (p === "/admin/voice/notice") return "voice-notice";
+    if (p === "/admin/voice/profile") return "voice-profile";
+    if (p === "/admin/voice/delete") return "voice-delete";
     return "";
   }
 
@@ -623,8 +627,9 @@
     if (key === "status") return STATE_RANK[u.state] || 0;
     if (key === "kharchlog") return `${u.kharchlog?.plan || ""} ${u.kharchlog?.status || ""}`;
     if (key === "pdfbuddy") return `${u.pdfbuddy?.plan || ""} ${u.pdfbuddy?.status || ""}`;
+    if (key === "voice") return `${u.voice?.plan || ""} ${u.voice?.status || ""}`;
+    if (key === "lastApp") return `${u.lastApp || ""} ${u.lastActiveAt || ""}`;
     if (key === "version") return u.appVersion || "";
-    if (key === "platform") return u.apps || "";
     return "";
   }
 
@@ -654,7 +659,7 @@
   /** Placeholder rows so the table never flashes an empty/"not found" state. */
   function showTableLoading() {
     $("users-empty").hidden = true;
-    const widths = ["16px", "70%", "85%", "55%", "60%", "65%", "65%", "40%", "50%", "40%"];
+    const widths = ["16px", "70%", "85%", "55%", "60%", "65%", "65%", "65%", "60%", "40%", "40%"];
     $("users-tbody").innerHTML = Array.from({ length: 5 })
       .map(
         () =>
@@ -681,7 +686,10 @@
             u.kharchlog?.plan,
             u.kharchlog?.status,
             u.pdfbuddy?.plan,
-            u.pdfbuddy?.status
+            u.pdfbuddy?.status,
+            u.voice?.plan,
+            u.voice?.status,
+            u.lastApp
           ]
             .join(" ")
             .toLowerCase()
@@ -717,8 +725,11 @@
         <td data-label="Status">${stateCell(u)}</td>
         <td data-label="Kharch Log">${planCell(u.kharchlog)}</td>
         <td data-label="Pdf Buddy">${planCell(u.pdfbuddy)}</td>
+        <td data-label="Business Voice">${planCell(u.voice)}</td>
+        <td data-label="Last app" title="${esc(u.apps ? `Uses: ${u.apps}` : "")}">${esc(u.lastApp || " - ")}${
+          u.lastActiveAt ? `<span class="muted cell-sub">${esc(formatWhen(u.lastActiveAt))}</span>` : ""
+        }</td>
         <td data-label="Version" class="cell-mono">${esc(u.appVersion || " - ")}</td>
-        <td data-label="Platform">${esc(u.apps || " - ")}</td>
         <td data-label="Actions" class="col-actions">
           <div class="row-actions">
             <button type="button" class="icon-btn" title="Edit ${mail}" aria-label="Edit ${mail}" data-edit="${mail}">${icon(
@@ -834,6 +845,7 @@
 
   function closeCustomer() {
     currentCustomerEmail = "";
+    currentCustomer = null;
     setCustomerMode(false);
   }
 
@@ -849,7 +861,7 @@
         <td data-label="S.No">${i + 1}</td>
         <td data-label="Login time">${esc(formatWhen(row.at))}</td>
         <td data-label="IP address" class="cell-mono">${esc(dash(row.ip))}</td>
-        <td data-label="Platform">${esc(dash(row.platform))}</td>
+        <td data-label="App">${esc(dash(row.product || row.platform))}</td>
         <td data-label="App version">${esc(dash(row.appVersion))}</td>`;
       tbody.appendChild(tr);
     });
@@ -934,9 +946,40 @@
     $("cv-last-seen").textContent = formatWhen(user.lastSeen);
     $("cv-country").textContent = countryLabel(user.countryIso);
     $("cv-notes").value = user.notes || "";
+    $("cv-last-app").textContent = dash(user.lastApp);
+    const apps = [...new Set((user.loginHistory || []).map((r) => r.product).filter((p) => p && p !== "Website"))];
+    if (user.voice?.signedUp && !apps.includes("Business Voice")) apps.push("Business Voice");
+    $("cv-apps").textContent = dash(apps.join(", "));
     renderLoginHistory(user.loginHistory);
     fillSubFields("cv-kh", user.kharchlog);
     fillSubFields("cv-pdf", user.pdfbuddy);
+    fillVoiceCard(user.voice || {});
+    currentCustomer = user;
+  }
+
+  /** Business Voice card: monthly plan, add months / revoke / delete (each asks for the emailed OTP). */
+  function fillVoiceCard(v) {
+    const has = v.plan && v.plan !== "none";
+    $("cv-voice-plan").textContent = has ? "Monthly" : "None";
+    $("cv-voice-status").textContent = dash(v.status && v.status !== "none" ? v.status : v.signedUp ? "free" : "not signed up");
+    $("cv-voice-exp").textContent = v.expiresAt ? formatWhen(v.expiresAt) : " - ";
+    $("cv-voice-granted").textContent = dash(v.grantedBy);
+    const bill = v.billing || {};
+    $("cv-voice-billing").textContent =
+      bill.type === "autopay" ? (bill.cancelAtCycleEnd ? "on, stops at period end" : "on") : bill.type === "one_month" ? "one month link" : "off";
+    const tw = v.twilio || {};
+    $("cv-voice-twilio").textContent = tw.connected
+      ? `${tw.accountName || "Connected"}${tw.numbers && tw.numbers.length ? ` · ${tw.numbers.join(", ")}` : ""}`
+      : "Not connected";
+    $("cv-voice-device").textContent = v.signedUp
+      ? `${v.deviceModel || "Android"}${v.version ? ` · v${v.version}` : ""}${v.deviceActive ? "" : " · signed out"}`
+      : " - ";
+    $("cv-voice-revoke").disabled = v.status !== "active";
+    $("cv-voice-delete").disabled = !v.signedUp && !has;
+    $("cv-voice-card").dataset.off = v.available === false ? "true" : "false";
+    if (v.available === false) $("cv-voice-status").textContent = "Business Voice server not reachable";
+    $("cv-biz-wrap").hidden = !v.signedUp;
+    $("cv-biz").value = v.businessName || "";
   }
 
   function countryLabel(iso) {
@@ -970,6 +1013,7 @@
     $("kpi-inactive").textContent = stats?.inactive ?? " - ";
     $("kpi-kharch").textContent = stats?.kharchlogActive ?? " - ";
     $("kpi-pdf").textContent = stats?.pdfbuddyActive ?? " - ";
+    $("kpi-voice").textContent = stats?.voiceActive ?? " - ";
   }
 
   async function loadUsers() {
@@ -1024,10 +1068,17 @@
     }
   }
 
-  /** Kharch Log is lifetime-only; Pdf Buddy offers yearly + lifetime. */
+  /** Kharch Log is lifetime-only; Pdf Buddy offers yearly + lifetime; Business Voice is monthly (pick months). */
   function syncPlanOptions(preferred) {
     const product = $("u-product").value;
     const planEl = $("u-plan");
+    if (product === "voice") {
+      planEl.innerHTML = [1, 3, 6, 12, 24]
+        .map((m) => `<option value="${m}">${m} month${m === 1 ? "" : "s"}</option>`)
+        .join("");
+      planEl.value = "1";
+      return;
+    }
     const want =
       product === "kharchlog"
         ? "lifetime"
@@ -1275,31 +1326,58 @@
   $("cv-update").addEventListener("click", async () => {
     if (!currentCustomerEmail) return;
     if (!beginAction()) return;
-    if (!currentCustomerEmail) return;
+    const btn = $("cv-update");
     const nextEmail = ($("cv-email").value || "").trim();
     if (!nextEmail || nextEmail.indexOf("@") < 1) {
       toast("Enter a valid email", "error");
       endAction();
       return;
     }
+    const before = currentCustomer || {};
+    const voice = before.voice || {};
+    const first = $("cv-first").value.trim();
+    const last = $("cv-last").value.trim();
+    const kh = productPayload("cv-kh");
+    const pdf = productPayload("cv-pdf");
+    // Kharch Log / Pdf Buddy record: only for people who have one, or when a plan is being given.
+    const touchesKharch = before.kharchRecord || kh.plan !== "none" || pdf.plan !== "none" || nextEmail !== currentCustomerEmail;
+    const fullName = [first, last].filter(Boolean).join(" ");
+    const voiceChanged =
+      voice.signedUp && ($("cv-biz").value.trim() !== (voice.businessName || "") || (fullName && fullName !== (voice.name || "")));
+    if (nextEmail !== currentCustomerEmail && voice.signedUp) {
+      toast("Business Voice signs in with Google: its email can't be changed here.", "info");
+    }
     btn.disabled = true;
     btn.classList.add("is-busy");
     btn.setAttribute("aria-busy", "true");
     try {
-      const data = await api("/admin/update-user", {
-        method: "POST",
-        body: JSON.stringify({
-          email: currentCustomerEmail,
-          nextEmail,
-          firstName: $("cv-first").value.trim(),
-          lastName: $("cv-last").value.trim(),
-          phone: $("cv-phone").value.trim(),
-          notes: $("cv-notes").value.trim(),
-          kharchlog: productPayload("cv-kh"),
-          pdfbuddy: productPayload("cv-pdf")
-        })
-      });
-      const email = data.email || nextEmail;
+      let email = currentCustomerEmail;
+      if (touchesKharch) {
+        const data = await api("/admin/update-user", {
+          method: "POST",
+          body: JSON.stringify({
+            email: currentCustomerEmail,
+            nextEmail,
+            firstName: first,
+            lastName: last,
+            phone: $("cv-phone").value.trim(),
+            notes: $("cv-notes").value.trim(),
+            kharchlog: kh,
+            pdfbuddy: pdf
+          })
+        });
+        email = data.email || nextEmail;
+      }
+      if (voiceChanged) {
+        await api("/admin/voice/profile", {
+          method: "POST",
+          body: JSON.stringify({ email: currentCustomerEmail, name: fullName || voice.name || "", businessName: $("cv-biz").value.trim() })
+        });
+      }
+      if (!touchesKharch && !voiceChanged) {
+        toast("Nothing to update", "info");
+        return;
+      }
       await loadUsers();
       await openCustomer(email);
       toast("Updated", "ok");
@@ -1311,6 +1389,73 @@
       btn.removeAttribute("aria-busy");
       endAction();
     }
+  });
+
+  /** One Business Voice action from the customer page (asks for the emailed OTP through api()). */
+  async function voiceAction(btn, confirmOpts, path, body, done) {
+    if (!currentCustomerEmail || !beginAction()) return;
+    const ok = await confirmUi(confirmOpts);
+    if (!ok) {
+      endAction();
+      return;
+    }
+    const email = currentCustomerEmail;
+    btn.disabled = true;
+    btn.classList.add("is-busy");
+    try {
+      const data = await api(path, { method: "POST", body: JSON.stringify({ email, ...body }) });
+      toast(done(data), "ok");
+      await loadUsers();
+      if (path === "/admin/voice/delete" && !currentCustomer?.kharchRecord) closeCustomer();
+      else await openCustomer(email);
+    } catch (ex) {
+      toast(ex.message || "Could not save", "error");
+    } finally {
+      btn.disabled = false;
+      btn.classList.remove("is-busy");
+      endAction();
+    }
+  }
+
+  $("cv-voice-grant").addEventListener("click", () => {
+    const months = Number($("cv-voice-months").value) || 1;
+    voiceAction(
+      $("cv-voice-grant"),
+      { title: "Business Voice subscription", message: `Add ${months} month(s) of Business Voice for ${currentCustomerEmail}?`, okLabel: "Add" },
+      "/admin/voice/grant",
+      { months },
+      (d) => `Business Voice active until ${formatWhen(d.license && d.license.expiresAt)}`
+    );
+  });
+
+  $("cv-voice-revoke").addEventListener("click", () => {
+    voiceAction(
+      $("cv-voice-revoke"),
+      {
+        title: "Revoke Business Voice",
+        message: `Stop Business Voice for ${currentCustomerEmail} now? Their phone stops working right away and callers go to voicemail.`,
+        okLabel: "Revoke",
+        danger: true
+      },
+      "/admin/voice/revoke",
+      {},
+      () => "Business Voice revoked"
+    );
+  });
+
+  $("cv-voice-delete").addEventListener("click", () => {
+    voiceAction(
+      $("cv-voice-delete"),
+      {
+        title: "Delete Business Voice account",
+        message: `Delete the Business Voice account of ${currentCustomerEmail}? Their phone is signed out, their Twilio numbers get their own settings back, and their subscription is removed. Kharch Log and Pdf Buddy are not touched.`,
+        okLabel: "Delete",
+        danger: true
+      },
+      "/admin/voice/delete",
+      {},
+      () => "Business Voice account deleted"
+    );
   });
 
   $("cv-release-device").addEventListener("click", async () => {
@@ -1370,7 +1515,6 @@
       $("tab-blog").classList.toggle("hidden", tab !== "blog");
       $("tab-notice").classList.toggle("hidden", tab !== "notice");
       $("tab-deleted").classList.toggle("hidden", tab !== "deleted");
-      $("tab-voice")?.classList.toggle("hidden", tab !== "voice");
       syncShellLayout();
       syncChromeActions();
       if (tab === "deleted") loadDeleted();
@@ -1492,9 +1636,15 @@
     if (del) {
       if (!beginAction()) return;
       const email = del.getAttribute("data-del");
+      const row = usersCache.find((x) => x.email === email) || {};
+      const hasVoice = !!(row.voice && (row.voice.plan !== "none" || String(row.apps || "").includes("Business Voice")));
+      const hasKharch = row.kharchRecord !== false;
+      const parts = [];
+      if (hasKharch) parts.push("their Kharch Log / Pdf Buddy license records");
+      if (hasVoice) parts.push("their Business Voice account (phone signed out, Twilio numbers get their own settings back, subscription removed)");
       const ok = await confirmUi({
         title: "Remove customer",
-        message: `Remove ${email}? This deletes their license records.`,
+        message: `Remove ${email}? This deletes ${parts.join(" and ") || "their records"}.`,
         okLabel: "Delete",
         danger: true
       });
@@ -1503,10 +1653,18 @@
         return;
       }
       try {
-        await api("/admin/revoke-access", {
-          method: "POST",
-          body: JSON.stringify({ email })
-        });
+        if (hasKharch) {
+          await api("/admin/revoke-access", {
+            method: "POST",
+            body: JSON.stringify({ email })
+          });
+        }
+        if (hasVoice) {
+          await api("/admin/voice/delete", {
+            method: "POST",
+            body: JSON.stringify({ email })
+          });
+        }
         selectedEmails.delete(email);
         await loadUsers();
         toast(`Removed ${email}`, "ok");
@@ -1544,22 +1702,34 @@
       const email = $("u-email").value.trim();
       const product = $("u-product").value;
       const planType = $("u-plan").value;
-      await api("/admin/grant-access", {
-        method: "POST",
-        body: JSON.stringify({
-          email,
-          name: $("u-name").value.trim(),
-          product,
-          planType,
-          notes: $("u-notes").value.trim()
-        })
-      });
+      if (product === "voice") {
+        await api("/admin/voice/grant", {
+          method: "POST",
+          body: JSON.stringify({ email, months: Number(planType) || 1 })
+        });
+      } else {
+        await api("/admin/grant-access", {
+          method: "POST",
+          body: JSON.stringify({
+            email,
+            name: $("u-name").value.trim(),
+            product,
+            planType,
+            notes: $("u-notes").value.trim()
+          })
+        });
+      }
       $("user-modal").close();
       await loadUsers();
       if (currentCustomerEmail && currentCustomerEmail === email) {
         await openCustomer(email);
       }
-      toast(`Granted ${planType} on ${product} to ${email}`, "ok");
+      toast(
+        product === "voice"
+          ? `Business Voice: ${planType} month(s) for ${email}`
+          : `Granted ${planType} on ${product} to ${email}`,
+        "ok"
+      );
     } catch (ex) {
       err.textContent = ex.message;
       err.hidden = false;

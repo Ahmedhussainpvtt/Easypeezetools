@@ -699,7 +699,7 @@ body.is-action-busy #login-btn {
 
 .kpi-row {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 14px;
 }
 .kpi {
@@ -724,6 +724,8 @@ body.is-action-busy #login-btn {
 .kpi--inactive::before { background: #94a3b8; }
 .kpi--kharch::before { background: var(--accent); }
 .kpi--pdf::before { background: var(--warn); }
+.kpi--voice::before { background: var(--ok); }
+.cell-sub { display: block; font-size: 0.72rem; font-weight: 500; margin-top: 2px; }
 .kpi__label {
   color: var(--muted);
   font-size: 0.78rem;
@@ -1874,9 +1876,17 @@ th[aria-sort="descending"] .th-sort::after {
 }
 .sub-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 12px;
 }
+.sub-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+.sub-card .sub-danger { margin-top: 14px; width: 100%; }
+.sub-card[data-off="true"] { opacity: 0.7; }
 .sub-card {
   border: 1px solid var(--line);
   border-radius: var(--radius);
