@@ -968,6 +968,7 @@ th[aria-sort="descending"] .th-sort::after {
   align-items: start;
 }
 .form-card { padding: 20px; display: grid; gap: 14px; align-content: start; }
+.notice-stack { display: grid; gap: 16px; align-content: start; min-width: 0; }
 .form-card h2 { font-size: 1.02rem; letter-spacing: -0.01em; }
 .country-picker {
   display: grid;

@@ -1577,13 +1577,27 @@
   }
 
   function syncNoticePreview() {
-    const h1 = ($("notice-h1").value || "").trim() || "We Are Live on playstore";
-    const h2 = ($("notice-h2").value || "").trim() || "Download it from playstore now";
+    const voice = $("notice-app")?.value === "voice";
+    const h1 = voice
+      ? ($("voice-notice-title").value || "").trim() || "New feature"
+      : ($("notice-h1").value || "").trim() || "We Are Live on playstore";
+    const h2 = voice
+      ? ($("voice-notice-body").value || "").trim() || "Voicemail now plays inside the app"
+      : ($("notice-h2").value || "").trim() || "Download it from playstore now";
     $("notice-preview-h1").textContent = h1;
     $("notice-preview-h2").textContent = h2;
+    $("notice-preview-mark").textContent = voice ? "EP" : "K";
   }
   $("notice-h1").addEventListener("input", syncNoticePreview);
   $("notice-h2").addEventListener("input", syncNoticePreview);
+  $("voice-notice-title")?.addEventListener("input", syncNoticePreview);
+  $("voice-notice-body")?.addEventListener("input", syncNoticePreview);
+  $("notice-app")?.addEventListener("change", (e) => {
+    const voice = e.target.value === "voice";
+    $("notice-form").classList.toggle("hidden", voice);
+    $("voice-notice-form").classList.toggle("hidden", !voice);
+    syncNoticePreview();
+  });
 
   const NOTICE_COUNTRIES = (() => {
     const codes = [

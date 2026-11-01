@@ -405,9 +405,19 @@
 
       <section id="tab-notice" class="tab-panel hidden">
         <div class="split">
+          <div class="notice-stack">
+          <div class="form-card">
+            <label>
+              <span>App</span>
+              <select id="notice-app">
+                <option value="kharchlog">Kharch Log</option>
+                <option value="voice">EP Business Voice</option>
+              </select>
+            </label>
+          </div>
           <form class="form-card" id="notice-form">
             <div class="card-head">
-              <h2>Notice</h2>
+              <h2>Kharch Log notice</h2>
               <p class="muted">H1 is the title. H2 is the second line. Send only after you are signed in.</p>
             </div>
             <label>
@@ -433,13 +443,42 @@
             <p id="notice-msg" class="form-msg" hidden></p>
             <button type="submit" class="btn btn-primary" id="notice-send-btn">Send</button>
           </form>
+
+          <form class="form-card hidden" id="voice-notice-form">
+            <div class="card-head">
+              <h2>EP Business Voice notice</h2>
+              <p class="muted">Shows as a notification on EP Business Voice phones.</p>
+            </div>
+            <label>
+              <span>Title</span>
+              <input id="voice-notice-title" required maxlength="80" placeholder="New feature" />
+            </label>
+            <label>
+              <span>Message</span>
+              <input id="voice-notice-body" required maxlength="220" placeholder="Voicemail now plays inside the app" />
+            </label>
+            <label>
+              <span>Send to</span>
+              <select id="voice-notice-target">
+                <option value="">Everyone with the app</option>
+                <option value="one">One customer</option>
+              </select>
+            </label>
+            <label id="voice-notice-email-wrap" hidden>
+              <span>Customer email</span>
+              <input id="voice-notice-email" type="email" placeholder="customer@gmail.com" autocomplete="off" />
+            </label>
+            <p id="voice-notice-msg" class="form-msg" hidden></p>
+            <button type="submit" class="btn btn-primary">Send notice</button>
+          </form>
+          </div>
           <div class="form-card">
             <div class="card-head">
               <h2>Preview</h2>
             </div>
             <div class="notice-shade" aria-hidden="true">
               <div class="notice-chip">
-                <span class="notice-chip__mark">K</span>
+                <span class="notice-chip__mark" id="notice-preview-mark">K</span>
                 <div class="notice-chip__copy">
                   <p class="notice-chip__h1" id="notice-preview-h1">We Are Live on playstore</p>
                   <p class="notice-chip__h2" id="notice-preview-h2">Download it from playstore now</p>
@@ -557,34 +596,6 @@
             </label>
             <p id="voice-grant-msg" class="form-msg" hidden></p>
             <button type="submit" class="btn btn-primary">Save subscription</button>
-          </form>
-
-          <form class="form-card" id="voice-notice-form">
-            <div class="card-head">
-              <h2>Business Voice notice</h2>
-              <p class="muted">Shows as a notification on EP Business Voice phones.</p>
-            </div>
-            <label>
-              <span>Title</span>
-              <input id="voice-notice-title" required maxlength="80" placeholder="New feature" />
-            </label>
-            <label>
-              <span>Message</span>
-              <input id="voice-notice-body" required maxlength="220" placeholder="Voicemail now plays inside the app" />
-            </label>
-            <label>
-              <span>Send to</span>
-              <select id="voice-notice-target">
-                <option value="">Everyone with the app</option>
-                <option value="one">One customer</option>
-              </select>
-            </label>
-            <label id="voice-notice-email-wrap" hidden>
-              <span>Customer email</span>
-              <input id="voice-notice-email" type="email" placeholder="customer@gmail.com" autocomplete="off" />
-            </label>
-            <p id="voice-notice-msg" class="form-msg" hidden></p>
-            <button type="submit" class="btn btn-primary">Send notice</button>
           </form>
         </div>
       </section>
