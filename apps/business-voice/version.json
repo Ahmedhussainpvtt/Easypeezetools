@@ -1,11 +1,11 @@
 {
-    "versionCode":  45,
-    "versionName":  "1.0.44",
-    "notes":  "Settings has a new Business details section with Business hours and Holidays. Public holidays now load for India and many more countries. Add your own days off from a calendar with a name.",
-    "sha256":  "a99fea3482f025987c01f0c46e7697158c5d21e0a4f71e6051681b6ee58c2f5d",
-    "size":  38738073,
+    "versionCode":  46,
+    "versionName":  "1.0.45",
+    "notes":  "Call screening: friendlier message when you reject a screened call. Business details section with Business hours and Holidays, holidays for India and more countries, and your own days off.",
+    "sha256":  "04249f4e8e27d9b021145fae4491fc79eff8b7589ac6d4b7c503eeccea008815",
+    "size":  38738077,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-02T22:55:19Z"
+    "published":  "2026-11-02T22:58:47Z"
 }
