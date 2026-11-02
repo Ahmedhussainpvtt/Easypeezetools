@@ -1,11 +1,11 @@
 {
-    "versionCode":  29,
-    "versionName":  "1.0.28",
-    "notes":  "Icons are back to the classic look.",
-    "sha256":  "ed13eaa22f8fa3db9fd811aaccf7ba93cee59f68951bc64b7ac137ca6ff14120",
-    "size":  37426466,
+    "versionCode":  30,
+    "versionName":  "1.0.29",
+    "notes":  "Settings icons are back to the original look. The country list is now a clean searchable sheet in the app\u0027s style, and menus, pop-ups and the date picker match the app too.",
+    "sha256":  "b624da6056b0bd31aeebdd3c674738d2bbed215372033bdbe755f50fefbdff3c",
+    "size":  37429008,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-02T00:07:32Z"
+    "published":  "2026-11-02T00:15:57Z"
 }
