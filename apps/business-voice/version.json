@@ -1,11 +1,11 @@
 {
-    "versionCode":  42,
-    "versionName":  "1.0.41",
-    "notes":  "Settings now has separate Missed call text, Business hours and Do not disturb. Call forwarding / IVR with a clear explanation of the IVR. Type @ in any message to add a variable like {first_name} or {business}. New friendly missed-call text, and Do not disturb says your business name.",
-    "sha256":  "431961b8654cb6ed4a4693df764a3dacf8b775c2f0cbd0dd42957daef3bc2820",
-    "size":  38702877,
+    "versionCode":  43,
+    "versionName":  "1.0.42",
+    "notes":  "Call screening for unknown callers: they say who they are and why, you pick Answer, Voicemail or Reject. IVR option to request a callback. Export the last 30 days of calls and texts as CSV. Public holidays in Business hours with per-holiday switches. Cleaner IVR editor.",
+    "sha256":  "29c61f26d4145a28d1f66bc2a74683f201aa4d9ffcddca15604d8512734edee7",
+    "size":  38721225,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-02T21:04:49Z"
+    "published":  "2026-11-02T22:27:11Z"
 }
