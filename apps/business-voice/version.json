@@ -1,11 +1,11 @@
 {
-    "versionCode":  33,
-    "versionName":  "1.0.32",
-    "notes":  "Faster start: the app now opens straight to your calls and texts with fewer background checks.",
-    "sha256":  "a271a6926f35d866a0139de34253b49373e94a0a96b62875d61712c47649112d",
-    "size":  38645429,
+    "versionCode":  34,
+    "versionName":  "1.0.33",
+    "notes":  "Pinned contacts now stand out with a yellow card and a pin on their photo. Updates install right away to keep everyone on the latest version.",
+    "sha256":  "04dcbed94aafe68e653cae2d694a1c0d9b541aaad569ac177ec636a394c2c488",
+    "size":  38646717,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-02T01:21:37Z"
+    "published":  "2026-11-02T01:28:01Z"
 }
