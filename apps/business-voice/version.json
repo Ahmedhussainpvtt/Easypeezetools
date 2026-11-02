@@ -1,11 +1,11 @@
 {
-    "versionCode":  35,
-    "versionName":  "1.0.34",
-    "notes":  "Dark mode now goes all the way to the bottom of the screen, behind the gesture bar.",
-    "sha256":  "255991d3edcd4dd84d6ff086805879185ce9f23274121b49ecd742a36ad05dbd",
-    "size":  38651609,
+    "versionCode":  36,
+    "versionName":  "1.0.35",
+    "notes":  "New app icon and logo. Background battery and auto-start now open the right page for your phone (including Samsung Never sleeping apps), so calls reach you when the app is closed. Cleaner buttons.",
+    "sha256":  "cd4ab21179090ea318c412f5f83e60e0b6520c35bc495f9f3bf774dd11f3661d",
+    "size":  38619557,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-02T01:32:30Z"
+    "published":  "2026-11-02T13:07:24Z"
 }
