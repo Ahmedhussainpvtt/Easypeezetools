@@ -1,11 +1,11 @@
 {
-    "versionCode":  41,
-    "versionName":  "1.0.40",
-    "notes":  "New call menu: callers press 1, 2, 3 to reach the right place. Business hours with a closed greeting that says your hours, and Do not disturb. Missed-call and after-hours texts can greet callers by first name. Voicemail transcripts. Low balance alerts. Schedule bulk texts. Clearer voicemail messages.",
-    "sha256":  "7ad94450c1497d5be408f2db5cb81b7d85269dcedb607ac16821335b9b486dd1",
-    "size":  38702769,
+    "versionCode":  42,
+    "versionName":  "1.0.41",
+    "notes":  "Settings now has separate Missed call text, Business hours and Do not disturb. Call forwarding / IVR with a clear explanation of the IVR. Type @ in any message to add a variable like {first_name} or {business}. New friendly missed-call text, and Do not disturb says your business name.",
+    "sha256":  "431961b8654cb6ed4a4693df764a3dacf8b775c2f0cbd0dd42957daef3bc2820",
+    "size":  38702877,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-02T20:34:00Z"
+    "published":  "2026-11-02T21:04:49Z"
 }
