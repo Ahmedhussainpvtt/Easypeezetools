@@ -1,11 +1,11 @@
 {
-    "versionCode":  32,
-    "versionName":  "1.0.31",
-    "notes":  "Call details are tidier: pin a contact with the pin icon on their card. Add notes from the Notes tab.",
-    "sha256":  "8aa4db5b16d26f3755fce307310991db4d7e304ac97114b02737acf1bf17d89e",
+    "versionCode":  33,
+    "versionName":  "1.0.32",
+    "notes":  "Faster start: the app now opens straight to your calls and texts with fewer background checks.",
+    "sha256":  "a271a6926f35d866a0139de34253b49373e94a0a96b62875d61712c47649112d",
     "size":  38645429,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-02T01:08:48Z"
+    "published":  "2026-11-02T01:21:37Z"
 }
