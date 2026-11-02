@@ -1,11 +1,11 @@
 {
-    "versionCode":  36,
-    "versionName":  "1.0.35",
-    "notes":  "New app icon and logo. Background battery and auto-start now open the right page for your phone (including Samsung Never sleeping apps), so calls reach you when the app is closed. Cleaner buttons.",
-    "sha256":  "cd4ab21179090ea318c412f5f83e60e0b6520c35bc495f9f3bf774dd11f3661d",
-    "size":  38619557,
+    "versionCode":  37,
+    "versionName":  "1.0.36",
+    "notes":  "The app now reminds you about any permission that is still off, with a notification you can tap to fix it. Fewer permissions: no auto-start or Nearby devices needed.",
+    "sha256":  "0d0dd6a355bf739b44627fa681055362195f8ab35e038e1cfd8d5fdb99d8e8f5",
+    "size":  38619273,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-02T13:07:24Z"
+    "published":  "2026-11-02T14:50:14Z"
 }
