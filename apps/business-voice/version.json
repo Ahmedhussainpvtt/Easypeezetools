@@ -1,11 +1,11 @@
 {
-    "versionCode":  38,
-    "versionName":  "1.0.37",
-    "notes":  "Sharing one Twilio account across phones? If you pick a number that is already in use on another phone, you are asked first. If you continue, that phone gets a notice that the number moved and can pick another. Each phone now rings and shows calls, texts and voicemail only for its own number.",
-    "sha256":  "d68b6ef844f59393ea82e1236015d11b5d50781f1b4dfe57f8c9c45f97f2ad95",
-    "size":  38635661,
+    "versionCode":  39,
+    "versionName":  "1.0.38",
+    "notes":  "Conference calls: add someone while the other person hears hold music, then tap Merge so everyone talks. Up to 5 people on one call. Tap Manage to see everyone and hang up anyone. New Note button lets you write notes during the call.",
+    "sha256":  "66ce95bc36e0aadd9c2279c69a60df38db309fbc80c6123abd55bdb5d175d686",
+    "size":  38636405,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-02T15:58:06Z"
+    "published":  "2026-11-02T16:57:52Z"
 }
