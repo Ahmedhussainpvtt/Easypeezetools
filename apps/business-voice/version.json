@@ -1,11 +1,11 @@
 {
-    "versionCode":  37,
-    "versionName":  "1.0.36",
-    "notes":  "The app now reminds you about any permission that is still off, with a notification you can tap to fix it. Fewer permissions: no auto-start or Nearby devices needed.",
-    "sha256":  "0d0dd6a355bf739b44627fa681055362195f8ab35e038e1cfd8d5fdb99d8e8f5",
-    "size":  38619273,
+    "versionCode":  38,
+    "versionName":  "1.0.37",
+    "notes":  "Sharing one Twilio account across phones? If you pick a number that is already in use on another phone, you are asked first. If you continue, that phone gets a notice that the number moved and can pick another. Each phone now rings and shows calls, texts and voicemail only for its own number.",
+    "sha256":  "d68b6ef844f59393ea82e1236015d11b5d50781f1b4dfe57f8c9c45f97f2ad95",
+    "size":  38635661,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-02T14:50:14Z"
+    "published":  "2026-11-02T15:58:06Z"
 }
