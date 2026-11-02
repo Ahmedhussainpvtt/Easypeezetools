@@ -1,11 +1,11 @@
 {
-    "versionCode":  43,
-    "versionName":  "1.0.42",
-    "notes":  "Call screening for unknown callers: they say who they are and why, you pick Answer, Voicemail or Reject. IVR option to request a callback. Export the last 30 days of calls and texts as CSV. Public holidays in Business hours with per-holiday switches. Cleaner IVR editor.",
-    "sha256":  "29c61f26d4145a28d1f66bc2a74683f201aa4d9ffcddca15604d8512734edee7",
-    "size":  38721225,
+    "versionCode":  44,
+    "versionName":  "1.0.43",
+    "notes":  "Cleaner IVR editor. New Callbacks tab in Calls: tick a request to close it. Call screening: swipe buttons like a normal call, and Reject now lets the caller leave a message. Faster screening and transcripts.",
+    "sha256":  "c869a9f7701d6171555541adfb879026baa639617f497c9244fb4669f0a4546e",
+    "size":  38738005,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-02T22:27:11Z"
+    "published":  "2026-11-02T22:45:40Z"
 }
