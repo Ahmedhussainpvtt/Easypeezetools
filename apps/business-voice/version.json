@@ -1,11 +1,11 @@
 {
-    "versionCode":  31,
-    "versionName":  "1.0.30",
-    "notes":  "Behind-the-scenes improvements to help us make the app better. No personal details, numbers or messages are collected.",
-    "sha256":  "be35e30ea08b7608665fd3e7906695210245ee9c1e5d359db2cfa427f3ba2f91",
-    "size":  38643853,
+    "versionCode":  32,
+    "versionName":  "1.0.31",
+    "notes":  "Call details are tidier: pin a contact with the pin icon on their card. Add notes from the Notes tab.",
+    "sha256":  "8aa4db5b16d26f3755fce307310991db4d7e304ac97114b02737acf1bf17d89e",
+    "size":  38645429,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-02T00:58:16Z"
+    "published":  "2026-11-02T01:08:48Z"
 }
