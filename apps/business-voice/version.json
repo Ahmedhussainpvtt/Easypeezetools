@@ -1,11 +1,11 @@
 {
-    "versionCode":  28,
-    "versionName":  "1.0.27",
-    "notes":  "Fresh 3D icons across the app: tabs, settings, empty screens and the keypad.",
-    "sha256":  "25282359793445edae615a2be671f70c36c205ca1036973de48936b94fbcede9",
-    "size":  37426446,
+    "versionCode":  29,
+    "versionName":  "1.0.28",
+    "notes":  "Icons are back to the classic look.",
+    "sha256":  "ed13eaa22f8fa3db9fd811aaccf7ba93cee59f68951bc64b7ac137ca6ff14120",
+    "size":  37426466,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-01T23:57:58Z"
+    "published":  "2026-11-02T00:07:32Z"
 }
