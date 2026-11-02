@@ -1,11 +1,11 @@
 {
-    "versionCode":  44,
-    "versionName":  "1.0.43",
-    "notes":  "Cleaner IVR editor. New Callbacks tab in Calls: tick a request to close it. Call screening: swipe buttons like a normal call, and Reject now lets the caller leave a message. Faster screening and transcripts.",
-    "sha256":  "c869a9f7701d6171555541adfb879026baa639617f497c9244fb4669f0a4546e",
-    "size":  38738005,
+    "versionCode":  45,
+    "versionName":  "1.0.44",
+    "notes":  "Settings has a new Business details section with Business hours and Holidays. Public holidays now load for India and many more countries. Add your own days off from a calendar with a name.",
+    "sha256":  "a99fea3482f025987c01f0c46e7697158c5d21e0a4f71e6051681b6ee58c2f5d",
+    "size":  38738073,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-02T22:45:40Z"
+    "published":  "2026-11-02T22:55:19Z"
 }
