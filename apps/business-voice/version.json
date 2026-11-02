@@ -1,11 +1,11 @@
 {
-    "versionCode":  39,
-    "versionName":  "1.0.38",
-    "notes":  "Conference calls: add someone while the other person hears hold music, then tap Merge so everyone talks. Up to 5 people on one call. Tap Manage to see everyone and hang up anyone. New Note button lets you write notes during the call.",
-    "sha256":  "66ce95bc36e0aadd9c2279c69a60df38db309fbc80c6123abd55bdb5d175d686",
-    "size":  38636405,
+    "versionCode":  40,
+    "versionName":  "1.0.39",
+    "notes":  "Cleaner call screen: the line label and Done button are proper pills, and the Manage screen has room on both sides. Pop-ups no longer show grey corners or a grey strip under the gesture bar.",
+    "sha256":  "85c433008e6dcce20172582469747798ccfb6964714fb8b71a42c962100a06ca",
+    "size":  38637073,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-02T16:57:52Z"
+    "published":  "2026-11-02T17:10:46Z"
 }
