@@ -102,6 +102,17 @@ module.exports = {
       speakable: ['h1', '.feature-quick-answer'],
       dateModified: '2026-11-03',
     },
+    '/products/kharch-log/': {
+      title: 'Kharch Log: UPI & SMS Expense Tracker App for India | Google Sheets',
+      description:
+        'Android expense tracker that logs UPI and bank SMS in seconds into your own Google Sheet. No bank login, no ads, Credits for money lent. ₹149 lifetime.',
+      ogImage: 'https://easypeeze.com/images/kharch-log/kl-og-1200.jpg',
+      priority: 0.9,
+      changefreq: 'weekly',
+      faqFromDetails: true,
+      speakable: ['h1', '.feature-quick-answer'],
+      dateModified: '2026-11-03',
+    },
     '/products/': {
       title: 'Products - Pdf Buddy & Kharch Log',
       description: 'Pdf Buddy for Windows and Kharch Log for Android - simple tools from Easy Peeze Tools.',
