@@ -3098,6 +3098,7 @@ min-height: 42px;
     ]
   }
   </script>
+
 <style data-page="business-voice">
 .bv-hero{align-items:center}
 .bv-hero .hero__copy{max-width:38rem}
@@ -3113,6 +3114,9 @@ min-height: 42px;
 .bv .showcase__media.bv-shot img{max-height:none;aspect-ratio:6/5;object-fit:contain;border-radius:24px}
 .bv .seo-block h2{margin-top:32px}
 .bv .compare-table td:nth-child(2){color:var(--text);font-weight:600}
+.bv-early{scroll-margin-top:90px}
+.bv-early__card{max-width:40rem;margin:0 auto;border-color:rgba(0,196,154,.35);box-shadow:0 18px 44px rgba(15,42,67,.1)}
+.bv-early__card .bv-h{margin-top:0}
 </style>
 <script type="application/ld+json" data-page="business-voice">
 {
@@ -3276,7 +3280,7 @@ min-height: 42px;
         <h1 id="bv-h1">Your Twilio number, a complete business phone on Android</h1>
         <p class="hero__lead">EP Business Voice turns the phone number in your own Twilio account into a real business line: native calls, SMS, an IVR call menu, call screening, voicemail, business hours, holidays and missed call text back. You keep your Twilio account and pay Twilio's own rates, with no markup.</p>
         <div class="hero__actions">
-          <a class="btn btn--primary" href="mailto:support@easypeeze.com?subject=EP%20Business%20Voice%20early%20access">Get early access</a>
+          <a class="btn btn--primary" href="#early-access">Get early access</a>
           <a class="btn btn--ghost" href="#features">See every feature</a>
         </div>
         <p class="hero__meta">Coming soon to Google Play · Android 8 or newer · ₹499 per month · Twilio usage billed by Twilio</p>
@@ -3288,7 +3292,7 @@ min-height: 42px;
         </ul>
       </div>
       <div class="hero__visual bv-hero__visual">
-        <img src="../../images/business-voice/bv-hero-1400.webp" srcset="../../images/business-voice/bv-hero-700.webp 700w, ../../images/business-voice/bv-hero-1400.webp 1400w" sizes="(max-width: 860px) 92vw, 560px" alt="EP Business Voice on Android: calls list, call forwarding and IVR, and business hours screens" width="1400" height="1200" fetchpriority="high" />
+        <img src="../../images/business-voice/bv-hero-1400.webp" srcset="../../images/business-voice/bv-hero-700.webp 700w, ../../images/business-voice/bv-hero-1400.webp 1400w" sizes="(max-width: 860px) 92vw, 560px" alt="EP Business Voice on Android: calls list, call forwarding and IVR, and business hours screens" width="1400" height="1200" fetchpriority="high" decoding="async" />
       </div>
     </section>
 
@@ -3578,6 +3582,131 @@ min-height: 42px;
       </ul>
     </section>
 
+    <section class="section bv-early" id="early-access" aria-labelledby="bv-early-h">
+      <div class="contact-card bv-early__card">
+        <p class="showcase__kicker">Early access</p>
+        <h2 id="bv-early-h" class="bv-h">Get EP Business Voice first</h2>
+        <p>Leave your details and we will email you when EP Business Voice is ready on Google Play, with help setting up your Twilio number.</p>
+        <form class="contact-form" id="ea-form" novalidate>
+          <label class="contact-label" for="ea-name">Name <span class="req" aria-hidden="true">*</span></label>
+          <input class="contact-input" id="ea-name" name="name" type="text" autocomplete="name" required maxlength="80" placeholder="Your name" />
+
+          <label class="contact-label" for="ea-email">Email <span class="req" aria-hidden="true">*</span></label>
+          <input class="contact-input" id="ea-email" name="email" type="email" autocomplete="email" required maxlength="120" placeholder="you@gmail.com" />
+
+          <label class="contact-label" for="ea-company">Business name</label>
+          <input class="contact-input" id="ea-company" name="company" type="text" autocomplete="organization" maxlength="120" placeholder="Optional" />
+
+          <label class="contact-label" for="ea-message">Anything we should know?</label>
+          <textarea class="contact-input contact-textarea" id="ea-message" name="message" maxlength="4000" rows="4" placeholder="Optional: how many Twilio numbers you have, which country, what you need most (IVR, call screening, texting...)"></textarea>
+
+          <div class="contact-captcha">
+            <div class="g-recaptcha" data-sitekey="6Lf-LsEtAAAAAKGPRWhI5GDDjIYNOa_hWohbAJ9c" data-callback="onEaCaptchaOk" data-expired-callback="onEaCaptchaExpired" data-error-callback="onEaCaptchaExpired"></div>
+          </div>
+
+          <p class="contact-status" id="ea-status" role="status" aria-live="polite" hidden></p>
+          <button class="btn contact-submit" type="submit" id="ea-submit" disabled aria-disabled="true">Request early access</button>
+        </form>
+        <p class="contact-note">Or email <a href="mailto:support@easypeeze.com?subject=EP%20Business%20Voice%20early%20access">support@easypeeze.com</a>. We reply in 1-2 business days. <a href="../../privacy/">Privacy</a></p>
+      </div>
+    </section>
+    <script>
+    window.onEaCaptchaOk = function () {
+      window.__eaCaptchaOk = true;
+      var btn = document.getElementById('ea-submit');
+      if (btn && !btn.classList.contains('is-busy')) { btn.disabled = false; btn.setAttribute('aria-disabled', 'false'); }
+    };
+    window.onEaCaptchaExpired = function () {
+      window.__eaCaptchaOk = false;
+      var btn = document.getElementById('ea-submit');
+      if (btn) { btn.disabled = true; btn.setAttribute('aria-disabled', 'true'); }
+    };
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+    (function () {
+      var form = document.getElementById('ea-form');
+      var btn = document.getElementById('ea-submit');
+      var statusEl = document.getElementById('ea-status');
+      if (!form || !btn) return;
+      window.__eaCaptchaOk = false;
+      var API = 'https://easypeeze-tools-j6dbitzprq-el.a.run.app/contact';
+      var SOURCE = 'easypeeze.com/products/business-voice (early access)';
+      var LABEL = 'Request early access';
+      var sending = false;
+      function val(id) { return (document.getElementById(id).value || '').trim(); }
+      function setStatus(msg, isError) {
+        statusEl.hidden = !msg;
+        statusEl.textContent = msg || '';
+        statusEl.className = 'contact-status' + (isError ? ' contact-status--error' : ' contact-status--ok');
+      }
+      function captchaToken() {
+        try { return (window.grecaptcha && grecaptcha.getResponse()) || ''; } catch (_e) { return ''; }
+      }
+      function resetCaptcha() {
+        window.__eaCaptchaOk = false;
+        try { if (window.grecaptcha) grecaptcha.reset(); } catch (_e) { /* ignore */ }
+        btn.disabled = true;
+        btn.setAttribute('aria-disabled', 'true');
+      }
+      function setBusy(on) {
+        sending = !!on;
+        btn.classList.toggle('is-busy', !!on);
+        btn.setAttribute('aria-busy', on ? 'true' : 'false');
+        btn.textContent = on ? 'Sending...' : LABEL;
+        if (on) { btn.disabled = true; btn.setAttribute('aria-disabled', 'true'); }
+        else if (window.__eaCaptchaOk && captchaToken()) { btn.disabled = false; btn.setAttribute('aria-disabled', 'false'); }
+        else resetCaptcha();
+      }
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (sending) return;
+        var name = val('ea-name');
+        var email = val('ea-email');
+        var company = val('ea-company');
+        var note = val('ea-message');
+        var token = captchaToken();
+        if (!name) { setStatus('Please enter your name.', true); document.getElementById('ea-name').focus(); return; }
+        if (!email || email.indexOf('@') < 0) { setStatus('Please enter a valid email.', true); document.getElementById('ea-email').focus(); return; }
+        if (!token || !window.__eaCaptchaOk) { setStatus('Please complete the reCAPTCHA before sending.', true); resetCaptcha(); return; }
+        setBusy(true);
+        setStatus('Sending...', false);
+        fetch(API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            company: company,
+            service: 'EP Business Voice early access',
+            message: 'Early access request for EP Business Voice.' + (note ? '\n\n' + note : ''),
+            source: SOURCE,
+            'g-recaptcha-response': token
+          })
+        })
+          .then(function (r) {
+            return r.text().then(function (t) {
+              var j = null;
+              try { j = t ? JSON.parse(t) : null; } catch (_e) { j = null; }
+              if (!r.ok || !j || j.ok !== true) throw new Error((j && j.error) || 'Could not send. Email support@easypeeze.com instead.');
+            });
+          })
+          .then(function () {
+            form.reset();
+            resetCaptcha();
+            setStatus('Thanks, you are on the list. We will email you as soon as EP Business Voice is ready.', false);
+            btn.classList.add('is-success');
+            setTimeout(function () { btn.classList.remove('is-success'); }, 800);
+          })
+          .catch(function (err) {
+            setStatus((err && err.message) || 'Could not send. Email support@easypeeze.com instead.', true);
+            resetCaptcha();
+          })
+          .finally(function () { setBusy(false); });
+      });
+    })();
+    </script>
+
     <section class="section" aria-labelledby="bv-faq">
       <h2 id="bv-faq">Frequently asked questions</h2>
       <div class="faq">
@@ -3595,14 +3724,14 @@ min-height: 42px;
         <details><summary>What happens if I disconnect Twilio?</summary><p>Your number gets its own Twilio settings back. Your forwarding, IVR and hours are saved with that Twilio account and number, so reconnecting brings them back.</p></details>
         <details><summary>Does it work with numbers outside the United States?</summary><p>It works with any Twilio number that supports voice or SMS. Which numbers you can buy, and the rules for each country, are set by Twilio.</p></details>
         <details><summary>Can I call 911 or other emergency numbers?</summary><p>No. Emergency calls are not supported. Use your regular phone for emergencies.</p></details>
-        <details><summary>When can I get it?</summary><p>EP Business Voice is coming soon to Google Play. Email support@easypeeze.com for early access.</p></details>
+        <details><summary>When can I get it?</summary><p>EP Business Voice is coming soon to Google Play. Fill in the early access form on this page and we will email you as soon as it is ready.</p></details>
       </div>
     </section>
 
     <section class="cta-band" aria-labelledby="bv-cta">
       <h2 id="bv-cta">Put your Twilio number in your pocket</h2>
       <p>Calls, texts, IVR and call screening for the number you already own.</p>
-      <a class="btn btn--primary" href="mailto:support@easypeeze.com?subject=EP%20Business%20Voice%20early%20access">Get early access</a>
+      <a class="btn btn--primary" href="#early-access">Get early access</a>
       <p class="cta-band__support">Questions? <a href="mailto:support@easypeeze.com">support@easypeeze.com</a></p>
     </section>
   </main>
