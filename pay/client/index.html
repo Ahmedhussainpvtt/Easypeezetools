@@ -2907,7 +2907,16 @@ min-height: 42px;
     .client-pay .pay-fine { margin-top: 1rem; }
     .client-pay__amount { font-size: 2.4rem; font-weight: 800; margin: 0 0 0.25rem; color: var(--text); }
     .client-pay__amount span { font-size: 1rem; font-weight: 600; color: var(--muted); }
-    .client-pay__done { padding: 1.25rem; border-radius: var(--radius); background: var(--secondary-soft); }
+    .client-pay__presets { display: flex; flex-wrap: wrap; gap: 8px; margin: 0.25rem 0 0.75rem; }
+.client-pay__preset { padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--text); font: inherit; font-weight: 700; cursor: pointer; }
+.client-pay__preset:hover { border-color: var(--primary); }
+.client-pay__preset.is-on { background: var(--primary); border-color: var(--primary); color: #fff; }
+.client-pay__amount-box { position: relative; }
+.client-pay__amount-box .client-pay__amount-input { padding-left: 2rem; padding-right: 3.4rem; font-size: 1.6rem; font-weight: 800; }
+.client-pay__currency { position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%); font-size: 1.5rem; font-weight: 800; color: var(--muted); pointer-events: none; }
+.client-pay__usd { position: absolute; right: 0.9rem; top: 50%; transform: translateY(-50%); font-weight: 700; color: var(--muted); pointer-events: none; }
+.client-pay__range { margin-top: 0.4rem; }
+.client-pay__done { padding: 1.25rem; border-radius: var(--radius); background: var(--secondary-soft); }
     .client-pay__done h2 { margin-top: 0; }
   </style>
   <meta name="author" content="Easy Peeze Tools" />
@@ -2990,7 +2999,14 @@ min-height: 42px;
     </div>
     <section class="section client-pay">
       <div id="payForm">
-        <p class="client-pay__amount"><span id="amount" style="font-size:inherit;font-weight:inherit;color:inherit">$...</span> <span>USD</span></p>
+        <label class="pay-label" for="amountInput">Amount (USD) <span class="req" aria-hidden="true">*</span></label>
+        <div class="client-pay__presets" id="presets" role="group" aria-label="Quick amounts"></div>
+        <div class="client-pay__amount-box">
+          <span class="client-pay__currency" aria-hidden="true">$</span>
+          <input class="pay-input client-pay__amount-input" id="amountInput" type="text" inputmode="decimal" autocomplete="off" maxlength="10" placeholder="Enter any amount" required />
+          <span class="client-pay__usd" aria-hidden="true">USD</span>
+        </div>
+        <p class="pay-fine client-pay__range" id="amountHint">Tap an amount or type your own.</p>
         <p class="pay-status" id="status" role="status" aria-live="assertive" hidden></p>
         <label class="pay-label" for="name">Full name <span class="req" aria-hidden="true">*</span></label>
         <input class="pay-input" id="name" type="text" autocomplete="name" maxlength="80" placeholder="Your name" required />
@@ -3011,6 +3027,6 @@ min-height: 42px;
     </section>
   </main>
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-  <script src="client.js?v=20261030b"></script>
+  <script src="client.js?v=20261103a"></script>
 </body>
 </html>
