@@ -1,11 +1,11 @@
 {
-    "versionCode":  50,
-    "versionName":  "1.0.49",
-    "notes":  "IVR follows your business hours only: Do not disturb no longer affects it. Call forwarding shows your main number and your IVR number both turned on.",
-    "sha256":  "de8523322e13ed93e9ab887e0581e386d7fcc705666b2e16e5f7279fb2bcea5b",
-    "size":  38739337,
+    "versionCode":  51,
+    "versionName":  "1.0.50",
+    "notes":  "Turn off IVR with one tap, on your main number or a second number. Your keys and greeting are kept for next time.",
+    "sha256":  "31cb2e1145d4a007e52c1323326bfe32fddc4b15df52271cf8e0a12e376e236e",
+    "size":  38755721,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-03T01:49:40Z"
+    "published":  "2026-11-03T01:56:22Z"
 }
