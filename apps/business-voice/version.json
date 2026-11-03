@@ -1,11 +1,11 @@
 {
-    "versionCode":  46,
-    "versionName":  "1.0.45",
-    "notes":  "Call screening: friendlier message when you reject a screened call. Business details section with Business hours and Holidays, holidays for India and more countries, and your own days off.",
-    "sha256":  "04249f4e8e27d9b021145fae4491fc79eff8b7589ac6d4b7c503eeccea008815",
-    "size":  38738077,
+    "versionCode":  47,
+    "versionName":  "1.0.46",
+    "notes":  "Callback requests, voicemail and text alerts now arrive right away. Settings stay with each Twilio account and number. Export saves straight to Downloads, calls or texts only. New icons for Business hours, Holidays and Call recording.",
+    "sha256":  "b88abbd06fe534dbe46cfa160d61715b62cfb9ba939f3ebe053cb3805ed77a8f",
+    "size":  38739337,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-02T22:58:47Z"
+    "published":  "2026-11-03T00:35:10Z"
 }
