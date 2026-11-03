@@ -91,6 +91,17 @@ module.exports = {
       dateModified: '2026-10-29',
       faqFromDetails: true,
     },
+    '/products/business-voice/': {
+      title: 'Twilio Calls & SMS App for Android | EP Business Voice',
+      description:
+        'Use your Twilio number on Android: native calls, SMS, IVR call menu, call screening, voicemail, business hours and missed call text back. No markup.',
+      ogImage: 'https://easypeeze.com/images/business-voice/bv-og-1200.jpg',
+      priority: 0.8,
+      changefreq: 'weekly',
+      faqFromDetails: true,
+      speakable: ['h1', '.feature-quick-answer'],
+      dateModified: '2026-11-03',
+    },
     '/products/': {
       title: 'Products - Pdf Buddy & Kharch Log',
       description: 'Pdf Buddy for Windows and Kharch Log for Android - simple tools from Easy Peeze Tools.',
