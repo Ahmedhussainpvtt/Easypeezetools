@@ -1,11 +1,11 @@
 {
-    "versionCode":  48,
-    "versionName":  "1.0.47",
-    "notes":  "Callbacks tab in Calls shows only when your calls go to the IVR menu. Includes call screening, IVR callback requests, Business hours and Holidays, CSV export and faster alerts.",
-    "sha256":  "0f90856255b27cb7279c9599d2882144dd9f5bcc3a78a0d70219822fc3e77e14",
+    "versionCode":  49,
+    "versionName":  "1.0.48",
+    "notes":  "IVR on its own number: pick another number from your Twilio account to answer with the IVR while your main number keeps ringing you.",
+    "sha256":  "df39b922078032f819b10b37845df8c7244e421f972211be15915560655418e0",
     "size":  38739337,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-03T01:04:42Z"
+    "published":  "2026-11-03T01:35:53Z"
 }
