@@ -84,7 +84,6 @@ module.exports = {
       title: 'Easy Peeze Tools: Pdf Buddy PDF Editor, Kharch Log Expense Tracker & More',
       description:
         'Simple, private apps from India: Pdf Buddy offline PDF editor for Windows, Kharch Log UPI expense tracker for Android, plus EP Business Voice, Book Karo and Kidly.',
-      ogImage: 'https://easypeeze.com/images/pdf-buddy/pb-og-1200.jpg',
       changefreq: 'weekly',
       priority: 1.0,
       schemaType: 'WebSite',
@@ -107,7 +106,6 @@ module.exports = {
       title: 'Pdf Buddy: Offline PDF Editor for Windows | Edit, Sign, Merge, Compress',
       description:
         'Edit, sign, merge, split, compress and convert PDFs offline on Windows 10 and 11. Files never leave your PC. 2 free edits a day, ₹299 a year or ₹999 lifetime.',
-      ogImage: 'https://easypeeze.com/images/pdf-buddy/pb-og-1200.jpg',
       priority: 0.9,
       changefreq: 'weekly',
       faqFromDetails: true,
