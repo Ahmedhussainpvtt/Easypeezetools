@@ -1,11 +1,11 @@
 {
-    "versionCode":  47,
-    "versionName":  "1.0.46",
-    "notes":  "Callback requests, voicemail and text alerts now arrive right away. Settings stay with each Twilio account and number. Export saves straight to Downloads, calls or texts only. New icons for Business hours, Holidays and Call recording.",
-    "sha256":  "b88abbd06fe534dbe46cfa160d61715b62cfb9ba939f3ebe053cb3805ed77a8f",
+    "versionCode":  48,
+    "versionName":  "1.0.47",
+    "notes":  "Callbacks tab in Calls shows only when your calls go to the IVR menu. Includes call screening, IVR callback requests, Business hours and Holidays, CSV export and faster alerts.",
+    "sha256":  "0f90856255b27cb7279c9599d2882144dd9f5bcc3a78a0d70219822fc3e77e14",
     "size":  38739337,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-03T00:35:10Z"
+    "published":  "2026-11-03T01:04:42Z"
 }
