@@ -81,14 +81,15 @@ module.exports = {
    */
   pages: {
     '/': {
-      title: 'Easy Peeze Tools - Pdf Buddy & Kharch Log | Simple tools. Zero hassle.',
+      title: 'Easy Peeze Tools: Pdf Buddy PDF Editor, Kharch Log Expense Tracker & More',
       description:
-        'Pdf Buddy: a 100% local Windows PDF editor from ₹299/year. Kharch Log: Android expenses in your own Google Sheet for ₹149 lifetime. Your data stays yours.',
+        'Simple, private apps from India: Pdf Buddy offline PDF editor for Windows, Kharch Log UPI expense tracker for Android, plus EP Business Voice, Book Karo and Kidly.',
+      ogImage: 'https://easypeeze.com/images/pdf-buddy/pb-og-1200.jpg',
       changefreq: 'weekly',
       priority: 1.0,
       schemaType: 'WebSite',
       speakable: ['h1', '.hero__lead'],
-      dateModified: '2026-10-29',
+      dateModified: '2026-11-03',
       faqFromDetails: true,
     },
     '/products/business-voice/': {
@@ -97,6 +98,17 @@ module.exports = {
         'Use your Twilio number on Android: native calls, SMS, IVR call menu, call screening, voicemail, business hours and missed call text back. No markup.',
       ogImage: 'https://easypeeze.com/images/business-voice/bv-og-1200.jpg',
       priority: 0.8,
+      changefreq: 'weekly',
+      faqFromDetails: true,
+      speakable: ['h1', '.feature-quick-answer'],
+      dateModified: '2026-11-03',
+    },
+    '/products/pdf-buddy/': {
+      title: 'Pdf Buddy: Offline PDF Editor for Windows | Edit, Sign, Merge, Compress',
+      description:
+        'Edit, sign, merge, split, compress and convert PDFs offline on Windows 10 and 11. Files never leave your PC. 2 free edits a day, ₹299 a year or ₹999 lifetime.',
+      ogImage: 'https://easypeeze.com/images/pdf-buddy/pb-og-1200.jpg',
+      priority: 0.9,
       changefreq: 'weekly',
       faqFromDetails: true,
       speakable: ['h1', '.feature-quick-answer'],
