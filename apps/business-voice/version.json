@@ -1,11 +1,11 @@
 {
-    "versionCode":  51,
-    "versionName":  "1.0.50",
-    "notes":  "Turn off IVR with one tap, on your main number or a second number. Your keys and greeting are kept for next time.",
-    "sha256":  "31cb2e1145d4a007e52c1323326bfe32fddc4b15df52271cf8e0a12e376e236e",
-    "size":  38755721,
+    "versionCode":  52,
+    "versionName":  "1.0.51",
+    "notes":  "Use up to 3 Twilio numbers in one app, with each call and text labelled. Buy a new number in the app with search filters. See Calls, SMS and MMS status for every number. People who text STOP are never texted again. Optional caller lookup shows names and line type.",
+    "sha256":  "2cd6ba7bd10ec6ef60d7a0ecec86a1c494677d7c22909afee8c4f265c8993bc7",
+    "size":  38788625,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-03T01:56:22Z"
+    "published":  "2026-11-04T23:54:05Z"
 }
