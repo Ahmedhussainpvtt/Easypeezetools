@@ -1,11 +1,11 @@
 {
-    "versionCode":  53,
-    "versionName":  "1.0.52",
-    "notes":  "Call details show which number called and which number was called, so you always know your line. Cleaner Buy a number screen with collapsible location filters. Number status chips are easier to read in dark mode.",
-    "sha256":  "f66778fcc9fe6d3365bcb4753e79c641132c413fd64b8ed9042f4da4b44d3600",
-    "size":  38788725,
+    "versionCode":  54,
+    "versionName":  "1.0.53",
+    "notes":  "Call details show the From and To numbers once, with a loader while they load. Clearer Location button on the Buy a number screen.",
+    "sha256":  "42aefd9295ca445f9e4a36280abbe23119dc3384d8c6f8c7b72377e83c39cc69",
+    "size":  38788801,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-05T00:10:26Z"
+    "published":  "2026-11-05T00:57:08Z"
 }
