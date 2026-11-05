@@ -1,11 +1,11 @@
 {
-    "versionCode":  52,
-    "versionName":  "1.0.51",
-    "notes":  "Use up to 3 Twilio numbers in one app, with each call and text labelled. Buy a new number in the app with search filters. See Calls, SMS and MMS status for every number. People who text STOP are never texted again. Optional caller lookup shows names and line type.",
-    "sha256":  "2cd6ba7bd10ec6ef60d7a0ecec86a1c494677d7c22909afee8c4f265c8993bc7",
-    "size":  38788625,
+    "versionCode":  53,
+    "versionName":  "1.0.52",
+    "notes":  "Call details show which number called and which number was called, so you always know your line. Cleaner Buy a number screen with collapsible location filters. Number status chips are easier to read in dark mode.",
+    "sha256":  "f66778fcc9fe6d3365bcb4753e79c641132c413fd64b8ed9042f4da4b44d3600",
+    "size":  38788725,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-04T23:54:05Z"
+    "published":  "2026-11-05T00:10:26Z"
 }
