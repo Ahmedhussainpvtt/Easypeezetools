@@ -1,11 +1,11 @@
 {
-    "versionCode":  54,
-    "versionName":  "1.0.53",
-    "notes":  "Call details show the From and To numbers once, with a loader while they load. Clearer Location button on the Buy a number screen.",
-    "sha256":  "42aefd9295ca445f9e4a36280abbe23119dc3384d8c6f8c7b72377e83c39cc69",
-    "size":  38788801,
+    "versionCode":  55,
+    "versionName":  "1.0.54",
+    "notes":  "Smoother loading everywhere: shimmer placeholders for your numbers, number search, chats, holidays and your Twilio balance. Settings screens open instantly. Call details stay clean while they load.",
+    "sha256":  "f0603ee25b54cc28614518223a4f6a1d6e24a7dbee7c9b2cd37bfd15f0dd4e49",
+    "size":  38789065,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-05T00:57:08Z"
+    "published":  "2026-11-05T01:09:03Z"
 }
