@@ -1,11 +1,11 @@
 {
-    "versionCode":  56,
-    "versionName":  "1.0.55",
-    "notes":  "New name: Easy Peeze - Twilio Calls \u0026 SMS (EP - Voice on your home screen). Business Calls \u0026 Messaging, Powered by Twilio.",
-    "sha256":  "a6028c6a01d55cef3caca455689f5d1f4bef9830e30c44ed84c143c9190b3ff7",
-    "size":  38789561,
+    "versionCode":  57,
+    "versionName":  "1.0.56",
+    "notes":  "New Easy Peeze Voice logo.",
+    "sha256":  "efe733f3691c372e5fd8536bbea0c91cf21b1b25801e3a9e966a826a7fdd783a",
+    "size":  38815145,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-05T01:40:25Z"
+    "published":  "2026-11-05T02:02:15Z"
 }
