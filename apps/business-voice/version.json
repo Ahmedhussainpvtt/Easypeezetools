@@ -1,11 +1,11 @@
 {
-    "versionCode":  55,
-    "versionName":  "1.0.54",
-    "notes":  "Smoother loading everywhere: shimmer placeholders for your numbers, number search, chats, holidays and your Twilio balance. Settings screens open instantly. Call details stay clean while they load.",
-    "sha256":  "f0603ee25b54cc28614518223a4f6a1d6e24a7dbee7c9b2cd37bfd15f0dd4e49",
-    "size":  38789065,
+    "versionCode":  56,
+    "versionName":  "1.0.55",
+    "notes":  "New name: Easy Peeze - Twilio Calls \u0026 SMS (EP - Voice on your home screen). Business Calls \u0026 Messaging, Powered by Twilio.",
+    "sha256":  "a6028c6a01d55cef3caca455689f5d1f4bef9830e30c44ed84c143c9190b3ff7",
+    "size":  38789561,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-05T01:09:03Z"
+    "published":  "2026-11-05T01:40:25Z"
 }
