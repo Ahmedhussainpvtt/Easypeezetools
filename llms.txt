@@ -2,7 +2,7 @@
 
 > Easy Peeze Tools makes simple privacy-first apps: Pdf Buddy (100% local Windows PDF editor, 2 free actions/day, then INR 299/year or INR 999 lifetime) and Kharch Log (Android expense tracker on Google Sheets, INR 149 lifetime). Site: easypeeze.com - expenses product also at kharchlog.com.
 
-Last updated: 2026-10-06
+Last updated: 2026-11-17
 Canonical site: https://easypeeze.com/
 Sitemap: https://easypeeze.com/sitemap.xml
 Full corpus: https://easypeeze.com/llms-full.txt
@@ -61,32 +61,73 @@ Contact: support@easypeeze.com
 
 ## Blog
 
+- [Aadhaar Email Update Receipt To Pdf](https://easypeeze.com/blog/aadhaar-email-update-receipt-to-pdf/): Blog: Aadhaar Email Update Receipt To Pdf.
 - [Aadhaar Kyc Pdf Do Not Upload](https://easypeeze.com/blog/aadhaar-kyc-pdf-do-not-upload/): Blog: Aadhaar Kyc Pdf Do Not Upload.
+- [Advance Tax 15 December Form26As Pdf](https://easypeeze.com/blog/advance-tax-15-december-form26as-pdf/): Blog: Advance Tax 15 December Form26As Pdf.
+- [Advance Tax Challan Pdf Naming](https://easypeeze.com/blog/advance-tax-challan-pdf-naming/): Blog: Advance Tax Challan Pdf Naming.
+- [Apartment Maintenance Receipt Pdf](https://easypeeze.com/blog/apartment-maintenance-receipt-pdf/): Blog: Apartment Maintenance Receipt Pdf.
+- [Belated Itr December 31 Documents Pdf](https://easypeeze.com/blog/belated-itr-december-31-documents-pdf/): Blog: Belated Itr December 31 Documents Pdf.
 - [Best Pdf Editor Windows India](https://easypeeze.com/blog/best-pdf-editor-windows-india/): Blog: Best Pdf Editor Windows India.
+- [Builder Demand Letter Pdf Archive](https://easypeeze.com/blog/builder-demand-letter-pdf-archive/): Blog: Builder Demand Letter Pdf Archive.
+- [Ca Client Yearly Pdf Folder Layout](https://easypeeze.com/blog/ca-client-yearly-pdf-folder-layout/): Blog: Ca Client Yearly Pdf Folder Layout.
 - [Ca Month End Batch Pdf Editor Windows](https://easypeeze.com/blog/ca-month-end-batch-pdf-editor-windows/): Blog: Ca Month End Batch Pdf Editor Windows.
+- [Ca November Client Folder Cleanup Pdf](https://easypeeze.com/blog/ca-november-client-folder-cleanup-pdf/): Blog: Ca November Client Folder Cleanup Pdf.
+- [Cancelled Cheque Scan To Pdf Kyc](https://easypeeze.com/blog/cancelled-cheque-scan-to-pdf-kyc/): Blog: Cancelled Cheque Scan To Pdf Kyc.
 - [Cheap Adobe Acrobat Alternative India](https://easypeeze.com/blog/cheap-adobe-acrobat-alternative-india/): Blog: Cheap Adobe Acrobat Alternative India.
 - [College Admission Pdf Checklist India](https://easypeeze.com/blog/college-admission-pdf-checklist-india/): Blog: College Admission Pdf Checklist India.
+- [Dhanteras Gold Invoice Pdf Keep](https://easypeeze.com/blog/dhanteras-gold-invoice-pdf-keep/): Blog: Dhanteras Gold Invoice Pdf Keep.
+- [Digital Life Certificate Camp Printouts Pdf](https://easypeeze.com/blog/digital-life-certificate-camp-printouts-pdf/): Blog: Digital Life Certificate Camp Printouts Pdf.
+- [Diwali Day Einvoice Whatsapp Compress](https://easypeeze.com/blog/diwali-day-einvoice-whatsapp-compress/): Blog: Diwali Day Einvoice Whatsapp Compress.
+- [Diwali Holiday Circular Pdf Archive](https://easypeeze.com/blog/diwali-holiday-circular-pdf-archive/): Blog: Diwali Holiday Circular Pdf Archive.
+- [Diwali Leave Application Pdf Office](https://easypeeze.com/blog/diwali-leave-application-pdf-office/): Blog: Diwali Leave Application Pdf Office.
+- [Diwali Shop E Invoice Backup Folder](https://easypeeze.com/blog/diwali-shop-e-invoice-backup-folder/): Blog: Diwali Shop E Invoice Backup Folder.
 - [Easy Peeze Tools Pdf Buddy Kharch Log](https://easypeeze.com/blog/easy-peeze-tools-pdf-buddy-kharch-log/): Blog: Easy Peeze Tools Pdf Buddy Kharch Log.
+- [Epfo Claim Attachment Pdf Size](https://easypeeze.com/blog/epfo-claim-attachment-pdf-size/): Blog: Epfo Claim Attachment Pdf Size.
+- [Festive Loan Documents Salary Slips Statements Pdf](https://easypeeze.com/blog/festive-loan-documents-salary-slips-statements-pdf/): Blog: Festive Loan Documents Salary Slips Statements Pdf.
+- [Festive Orders Gst Invoices Challans Pdf](https://easypeeze.com/blog/festive-orders-gst-invoices-challans-pdf/): Blog: Festive Orders Gst Invoices Challans Pdf.
 - [Fill And Type On Pdf Windows](https://easypeeze.com/blog/fill-and-type-on-pdf-windows/): Blog: Fill And Type On Pdf Windows.
+- [Freelance Contract Sign Pdf Windows](https://easypeeze.com/blog/freelance-contract-sign-pdf-windows/): Blog: Freelance Contract Sign Pdf Windows.
+- [Government Portal Mixed Orientation Pdf](https://easypeeze.com/blog/government-portal-mixed-orientation-pdf/): Blog: Government Portal Mixed Orientation Pdf.
 - [Gst Invoice Pdf Merge India](https://easypeeze.com/blog/gst-invoice-pdf-merge-india/): Blog: Gst Invoice Pdf Merge India.
+- [Gst November Gstr1 Invoice Pdf Pack](https://easypeeze.com/blog/gst-november-gstr1-invoice-pdf-pack/): Blog: Gst November Gstr1 Invoice Pdf Pack.
+- [Guru Nanak Jayanti Travel Ticket Pdf](https://easypeeze.com/blog/guru-nanak-jayanti-travel-ticket-pdf/): Blog: Guru Nanak Jayanti Travel Ticket Pdf.
+- [Home Loan Pdf Pack Salary And Statements](https://easypeeze.com/blog/home-loan-pdf-pack-salary-and-statements/): Blog: Home Loan Pdf Pack Salary And Statements.
+- [Hospital Bill Scan Pdf For Insurance](https://easypeeze.com/blog/hospital-bill-scan-pdf-for-insurance/): Blog: Hospital Bill Scan Pdf For Insurance.
 - [Image To Pdf Indian Portal Upload](https://easypeeze.com/blog/image-to-pdf-indian-portal-upload/): Blog: Image To Pdf Indian Portal Upload.
+- [Internship Id And Certificate One Pdf](https://easypeeze.com/blog/internship-id-and-certificate-one-pdf/): Blog: Internship Id And Certificate One Pdf.
+- [Itr Acknowledgement And Form16 Folder](https://easypeeze.com/blog/itr-acknowledgement-and-form16-folder/): Blog: Itr Acknowledgement And Form16 Folder.
+- [Life Certificate November Pension Papers Pdf](https://easypeeze.com/blog/life-certificate-november-pension-papers-pdf/): Blog: Life Certificate November Pension Papers Pdf.
 - [Merge Aadhaar Pan Salary Slip Kyc Pdf](https://easypeeze.com/blog/merge-aadhaar-pan-salary-slip-kyc-pdf/): Blog: Merge Aadhaar Pan Salary Slip Kyc Pdf.
 - [Merge Split Compress Pdf Guide](https://easypeeze.com/blog/merge-split-compress-pdf-guide/): Blog: Merge Split Compress Pdf Guide.
+- [Morning Kyc Upload Checklist Pdf Buddy](https://easypeeze.com/blog/morning-kyc-upload-checklist-pdf-buddy/): Blog: Morning Kyc Upload Checklist Pdf Buddy.
 - [Ocr Scanned Pdf Searchable](https://easypeeze.com/blog/ocr-scanned-pdf-searchable/): Blog: Ocr Scanned Pdf Searchable.
 - [Offline Pdf Editor Vs Browser Local Tools](https://easypeeze.com/blog/offline-pdf-editor-vs-browser-local-tools/): Blog: Offline Pdf Editor Vs Browser Local Tools.
 - [Online Pdf Editor Privacy](https://easypeeze.com/blog/online-pdf-editor-privacy/): Blog: Online Pdf Editor Privacy.
 - [Page Numbers Bookmarks Pdf Editor India Packs](https://easypeeze.com/blog/page-numbers-bookmarks-pdf-editor-india-packs/): Blog: Page Numbers Bookmarks Pdf Editor India Packs.
+- [Passport Renewal Address Proof Pdf](https://easypeeze.com/blog/passport-renewal-address-proof-pdf/): Blog: Passport Renewal Address Proof Pdf.
 - [Password Protect Pdf Before Email](https://easypeeze.com/blog/password-protect-pdf-before-email/): Blog: Password Protect Pdf Before Email.
 - [Pdf Buddy Vs Online Editors](https://easypeeze.com/blog/pdf-buddy-vs-online-editors/): Blog: Pdf Buddy Vs Online Editors.
 - [Pdf Pack For Indian Portals](https://easypeeze.com/blog/pdf-pack-for-indian-portals/): Blog: Pdf Pack For Indian Portals.
 - [Pdf Seo Metadata Filenames](https://easypeeze.com/blog/pdf-seo-metadata-filenames/): Blog: Pdf Seo Metadata Filenames.
 - [Pdf Size Limits Epfo Bank Portals India](https://easypeeze.com/blog/pdf-size-limits-epfo-bank-portals-india/): Blog: Pdf Size Limits Epfo Bank Portals India.
+- [Pdf That Stays Readable On A Phone](https://easypeeze.com/blog/pdf-that-stays-readable-on-a-phone/): Blog: Pdf That Stays Readable On A Phone.
+- [Post Diwali Credit Note Pdf Returns](https://easypeeze.com/blog/post-diwali-credit-note-pdf-returns/): Blog: Post Diwali Credit Note Pdf Returns.
 - [Print To Pdf Vs Real Pdf Editor Forms](https://easypeeze.com/blog/print-to-pdf-vs-real-pdf-editor-forms/): Blog: Print To Pdf Vs Real Pdf Editor Forms.
+- [Property Sale Papers Drop Blank Pages](https://easypeeze.com/blog/property-sale-papers-drop-blank-pages/): Blog: Property Sale Papers Drop Blank Pages.
 - [Redact Sensitive Info Pdf Before Sharing](https://easypeeze.com/blog/redact-sensitive-info-pdf-before-sharing/): Blog: Redact Sensitive Info Pdf Before Sharing.
 - [Rotate Pdf Pages Windows](https://easypeeze.com/blog/rotate-pdf-pages-windows/): Blog: Rotate Pdf Pages Windows.
+- [Schengen Visa Pdf Pack On Windows](https://easypeeze.com/blog/schengen-visa-pdf-pack-on-windows/): Blog: Schengen Visa Pdf Pack On Windows.
+- [School Fee Receipts Pdf For Reimbursement](https://easypeeze.com/blog/school-fee-receipts-pdf-for-reimbursement/): Blog: School Fee Receipts Pdf For Reimbursement.
+- [School Winter Fee Challan Merge Pdf](https://easypeeze.com/blog/school-winter-fee-challan-merge-pdf/): Blog: School Winter Fee Challan Merge Pdf.
 - [Sign Pdf Without Adobe](https://easypeeze.com/blog/sign-pdf-without-adobe/): Blog: Sign Pdf Without Adobe.
 - [Split Bank Statement Pdf Pages](https://easypeeze.com/blog/split-bank-statement-pdf-pages/): Blog: Split Bank Statement Pdf Pages.
+- [Two Quotation Pdfs Do Not Overwrite](https://easypeeze.com/blog/two-quotation-pdfs-do-not-overwrite/): Blog: Two Quotation Pdfs Do Not Overwrite.
+- [University Migration Certificate Pdf](https://easypeeze.com/blog/university-migration-certificate-pdf/): Blog: University Migration Certificate Pdf.
+- [Upsc Application Document Scan Pack Windows](https://easypeeze.com/blog/upsc-application-document-scan-pack-windows/): Blog: Upsc Application Document Scan Pack Windows.
+- [Upsc Upload Pdf Size Limit Checklist](https://easypeeze.com/blog/upsc-upload-pdf-size-limit-checklist/): Blog: Upsc Upload Pdf Size Limit Checklist.
+- [Voter List Form6 Address Proof Pdf](https://easypeeze.com/blog/voter-list-form6-address-proof-pdf/): Blog: Voter List Form6 Address Proof Pdf.
 - [Whatsapp Pdf Size Limit India](https://easypeeze.com/blog/whatsapp-pdf-size-limit-india/): Blog: Whatsapp Pdf Size Limit India.
+- [Year End Document Index Pdf Windows](https://easypeeze.com/blog/year-end-document-index-pdf-windows/): Blog: Year End Document Index Pdf Windows.
 
 ## Glossary
 
@@ -119,10 +160,14 @@ Contact: support@easypeeze.com
 ## Optional
 
 - [Contact](https://easypeeze.com/contact/): Support: support@easypeeze.com.
+- [Delete Data](https://easypeeze.com/delete-data/): Delete Data.
 - [Privacy](https://easypeeze.com/privacy/): Privacy policy - Pdf Buddy runs locally; Kharch Log uses your Google Sheet.
 - [Products/Book Karo](https://easypeeze.com/products/book-karo/): Book Karo.
+- [Products/Business Voice](https://easypeeze.com/products/business-voice/): Business Voice.
+- [Products/Business Voice/Delete Account](https://easypeeze.com/products/business-voice/delete-account/): Delete Account.
+- [Products/Kharch Log](https://easypeeze.com/products/kharch-log/): Kharch Log.
 - [Products/Kidly](https://easypeeze.com/products/kidly/): Kidly.
-- [Products/Easy Peeze Voice](https://easypeeze.com/products/business-voice/): Easy Peeze: Twilio Calls & SMS (Easy Peeze Voice), a Twilio calls and SMS app for Android (coming soon to Google Play). Bring your own Twilio number: native calls, SMS/MMS, IVR call menu, call screening, voicemail with transcripts, call forwarding, business hours, holidays, Do not disturb, missed call text back, bulk and scheduled SMS, conference calls. ₹499 per month; Twilio bills usage with no markup. It does not sell phone numbers.
+- [Products/Pdf Buddy](https://easypeeze.com/products/pdf-buddy/): Pdf Buddy.
 - [Refund](https://easypeeze.com/refund/): Refund.
 - [Terms](https://easypeeze.com/terms/): Terms of use for Easy Peeze Tools products.
 - [robots.txt](https://easypeeze.com/robots.txt): Crawl rules and sitemap pointer.
