@@ -10,7 +10,7 @@ module.exports = {
     locale: 'en_IN',
     language: 'en-IN',
     themeColor: '#0085FF',
-    defaultTitle: 'Easy Peeze Tools - Pdf Buddy & Kharch Log | Simple tools. Zero hassle.',
+    defaultTitle: 'Easy Peeze Tools - Pdf Buddy, Kharch Log & more | Simple tools. Zero hassle.',
     titleTemplate: '%s | Easy Peeze Tools',
     defaultDescription:
       'Easy Peeze Tools: your data stays yours. Pdf Buddy - local Windows PDF editor. Kharch Log - expenses in your Google Sheet.',
@@ -81,15 +81,33 @@ module.exports = {
    */
   pages: {
     '/': {
-      title: 'Easy Peeze Tools - Pdf Buddy & Kharch Log | Simple tools. Zero hassle.',
+      title: 'Easy Peeze Tools - Pdf Buddy, Kharch Log & more | Simple tools. Zero hassle.',
       description:
         'Pdf Buddy: a 100% local Windows PDF editor from ₹299/year. Kharch Log: Android expenses in your own Google Sheet for ₹149 lifetime. Your data stays yours.',
       changefreq: 'weekly',
       priority: 1.0,
       schemaType: 'WebSite',
       speakable: ['h1', '.hero__lead'],
-      dateModified: '2026-10-29',
+      dateModified: '2026-11-17',
       faqFromDetails: true,
+    },
+    '/products/pdf-buddy/': {
+      title: 'Pdf Buddy: Offline PDF Editor for Windows | Edit, Sign, Merge, Compress',
+      description:
+        'Edit, sign, merge, split, compress and convert PDFs offline on Windows. 2 free edits a day. From ₹299/year or ₹999 lifetime. Files stay on your PC.',
+      priority: 0.9,
+      changefreq: 'weekly',
+      faqFromDetails: true,
+      dateModified: '2026-11-17',
+    },
+    '/products/kharch-log/': {
+      title: 'Kharch Log - Best Free Expense Tracker for Android India | UPI SMS + Google Sheets',
+      description:
+        'Android expense tracker that logs UPI and bank SMS in seconds into your own Google Sheet. No bank login, no ads. ₹149 lifetime.',
+      priority: 0.9,
+      changefreq: 'weekly',
+      faqFromDetails: true,
+      dateModified: '2026-11-17',
     },
     '/products/business-voice/': {
       title: 'Twilio Calls & SMS App for Android | Easy Peeze Voice',
@@ -103,8 +121,8 @@ module.exports = {
       dateModified: '2026-11-04',
     },
     '/products/': {
-      title: 'Products - Pdf Buddy & Kharch Log',
-      description: 'Pdf Buddy for Windows and Kharch Log for Android - simple tools from Easy Peeze Tools.',
+      title: 'Products - Pdf Buddy, Kharch Log & Easy Peeze Voice',
+      description: 'Pdf Buddy for Windows, Kharch Log for Android, and Easy Peeze Voice - simple tools from Easy Peeze Tools.',
       priority: 0.7,
       changefreq: 'weekly',
     },
@@ -115,7 +133,7 @@ module.exports = {
       changefreq: 'weekly',
     },
     '/pricing/': {
-      title: 'Pricing - Pdf Buddy & Kharch Log',
+      title: 'Pricing - Pdf Buddy & Kharch Log | Easy Peeze Tools',
       description: 'Pdf Buddy from ₹299/year. Kharch Log lifetime ₹149. Prices in INR for India.',
       priority: 0.8,
       changefreq: 'weekly',
