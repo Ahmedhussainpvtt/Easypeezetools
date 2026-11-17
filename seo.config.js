@@ -94,7 +94,7 @@ module.exports = {
     '/products/pdf-buddy/': {
       title: 'Pdf Buddy: Offline PDF Editor for Windows | Edit, Sign, Merge, Compress',
       description:
-        'Edit, sign, merge, split, compress and convert PDFs offline on Windows. 2 free edits a day. From ₹299/year or ₹999 lifetime. Files stay on your PC.',
+        'Edit, sign, merge, split, compress and convert PDFs offline on Windows. Get 2 free PDF edits every day, even without a paid plan. No surprises or payment required at the end. From ₹299/year or ₹999 lifetime.',
       priority: 0.9,
       changefreq: 'weekly',
       faqFromDetails: true,
@@ -140,7 +140,7 @@ module.exports = {
     },
     '/download/': {
       title: 'Download Pdf Buddy for Windows',
-      description: 'Download Pdf Buddy - free PDF editor for Windows with 2 edits/day after Google sign-in. No upload, files stay local.',
+      description: 'Download Pdf Buddy for Windows. Get 2 free PDF edits every day, even without a paid plan. No surprises or payment required at the end. Files stay local.',
       priority: 0.8,
     },
     '/blog/': {
