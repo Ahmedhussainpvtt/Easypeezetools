@@ -1,11 +1,11 @@
 {
-    "versionCode":  59,
-    "versionName":  "1.0.58",
-    "notes":  "Starred contacts still ring during Do not disturb (on this phone only). See my QR on Profile. Edit contacts. Saved SMS replies. In-call Record start/stop with red timer, no announce.",
-    "sha256":  "58a557b327db44bdfd1403f8b3e8fdab46a4d3eefbb7d7d23a4aae237922c929",
-    "size":  39046629,
+    "versionCode":  60,
+    "versionName":  "1.0.59",
+    "notes":  "Contact Edit is a clear pencil on the contact screen (and tap the name). Star VIP, Profile QR, saved SMS replies, in-call Record.",
+    "sha256":  "89cf8799db3784209f40d3eb700f6b7a79af207cd562ec4cf027578c9080e652",
+    "size":  39046709,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-18T21:01:55Z"
+    "published":  "2026-11-18T21:08:31Z"
 }
