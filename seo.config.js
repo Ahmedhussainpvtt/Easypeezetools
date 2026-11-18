@@ -10,7 +10,7 @@ module.exports = {
     locale: 'en_IN',
     language: 'en-IN',
     themeColor: '#0085FF',
-    defaultTitle: 'Easy Peeze Tools - Pdf Buddy, Kharch Log & more | Simple tools. Zero hassle.',
+    defaultTitle: 'Easy Peeze Tools - Pdf Buddy & Kharch Log',
     titleTemplate: '%s | Easy Peeze Tools',
     defaultDescription:
       'Easy Peeze Tools: your data stays yours. Pdf Buddy - local Windows PDF editor. Kharch Log - expenses in your Google Sheet.',
@@ -81,14 +81,14 @@ module.exports = {
    */
   pages: {
     '/': {
-      title: 'Easy Peeze Tools - Pdf Buddy, Kharch Log & more | Simple tools. Zero hassle.',
+      title: 'Easy Peeze Tools - Pdf Buddy & Kharch Log',
       description:
         'Pdf Buddy: a 100% local Windows PDF editor from ₹299/year. Kharch Log: Android expenses in your own Google Sheet for ₹149 lifetime. Your data stays yours.',
       changefreq: 'weekly',
       priority: 1.0,
       schemaType: 'WebSite',
       speakable: ['h1', '.hero__lead'],
-      dateModified: '2026-11-17',
+      dateModified: '2026-11-18',
       faqFromDetails: true,
     },
     '/products/pdf-buddy/': {
