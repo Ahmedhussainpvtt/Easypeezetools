@@ -1,11 +1,11 @@
 {
-    "versionCode":  57,
-    "versionName":  "1.0.56",
-    "notes":  "New Easy Peeze Voice logo.",
-    "sha256":  "efe733f3691c372e5fd8536bbea0c91cf21b1b25801e3a9e966a826a7fdd783a",
-    "size":  38815145,
+    "versionCode":  59,
+    "versionName":  "1.0.58",
+    "notes":  "Starred contacts still ring during Do not disturb (on this phone only). See my QR on Profile. Edit contacts. Saved SMS replies. In-call Record start/stop with red timer, no announce.",
+    "sha256":  "58a557b327db44bdfd1403f8b3e8fdab46a4d3eefbb7d7d23a4aae237922c929",
+    "size":  39046629,
     "apk":  "EPBusinessVoice.apk",
     "minVersionCode":  0,
     "force":  false,
-    "published":  "2026-11-05T02:02:15Z"
+    "published":  "2026-11-18T21:01:55Z"
 }
