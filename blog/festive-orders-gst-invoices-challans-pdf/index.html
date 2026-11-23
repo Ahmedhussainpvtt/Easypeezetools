@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,17 +3145,35 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / Festive orders: GST invoices and challans as clean PDFs</p>
       <h1>Festive orders: GST invoices and challans as clean PDFs</h1>
-      <p>2026-10-30 · Pdf Editor, India, GST, Small business</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-10-30">30 October 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/festive-orders-gst-invoices-challans-pdf-960.webp" srcset="/images/blog/festive-orders-gst-invoices-challans-pdf-480.webp 480w, /images/blog/festive-orders-gst-invoices-challans-pdf-960.webp 960w, /images/blog/festive-orders-gst-invoices-challans-pdf-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Festive orders: GST invoices and challans as clean PDFs" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#name-every-invoice-the-same-way">Name every invoice the same way</a></li>
+              <li><a href="#merge-for-corporate-buyers">Merge for corporate buyers</a></li>
+              <li><a href="#compress-for-email-and-whatsapp">Compress for email and WhatsApp</a></li>
+              <li><a href="#paper-bills-from-suppliers">Paper bills from suppliers</a></li>
+              <li><a href="#keep-customer-data-on-your-own-pc">Keep customer data on your own PC</a></li>
+              <li><a href="#after-the-festival-close-the-month">After the festival: close the month</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/festive-orders-gst-invoices-challans-pdf-960.webp" srcset="/images/blog/festive-orders-gst-invoices-challans-pdf-480.webp 480w, /images/blog/festive-orders-gst-invoices-challans-pdf-960.webp 960w, /images/blog/festive-orders-gst-invoices-challans-pdf-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Festive orders: GST invoices and challans as clean PDFs" width="1400" height="900" />
 <p>For small businesses in India, the weeks before Diwali are the busiest of the year. Gift hampers, sweets, dry fruit boxes, corporate orders, decorations, and clothing all move fast. With volume comes paperwork: quotations, purchase orders, GST invoices, delivery challans, and payment receipts. When a corporate buyer asks for "all invoices for October in one PDF" or a customer wants a corrected copy, the shop that can send a clean file in five minutes looks professional. The one that sends twelve photos of paper does not.</p>
 <p>This post is a practical routine for festive-season invoices on a Windows PC. It covers naming, merging, compressing for email and WhatsApp, and keeping a local archive. It is not tax advice. Your invoice format and GST details should follow what your accountant has set up.</p>
-<h2>Name every invoice the same way</h2>
+<h2 id="name-every-invoice-the-same-way">Name every invoice the same way</h2>
 <p>Pick one naming pattern and use it for every file: invoice number, customer, and date. For example "INV-1042 Sharma Traders 2026-10-28.pdf". When a customer calls about an order, you search the number or the name and find it at once. Billing software often exports files with generic names. Rename them on the day, not at the end of the month.</p>
 <p>Keep one folder per month, and inside it, separate folders for invoices, challans, and purchase bills. During the festive rush you will thank yourself for this in November, when the accountant asks for everything at once.</p>
 <ul>
@@ -3016,10 +3181,10 @@ min-height: 42px;
 <li>One folder per month, split by invoices, challans, purchases</li>
 <li>Rename exports on the same day</li>
 </ul>
-<h2>Merge for corporate buyers</h2>
+<h2 id="merge-for-corporate-buyers">Merge for corporate buyers</h2>
 <p>Corporate clients often ask for one PDF with every invoice for an order, plus the delivery challans, so their accounts team can match them. Merge the invoices in invoice-number order, then the challans in the same order. Add a simple first page if the client wants a summary, but do not change anything on the invoices themselves. If an invoice has an error, issue a corrected document or a credit note as your accountant advises. Editing amounts on an already issued invoice PDF is not a fix.</p>
 <p>Before sending, open the merged file and scroll through it once. Check that every page is upright, nothing is cut off, and no blank pages from the scanner sneaked in. A two-minute check saves a reply that says "page 4 is missing".</p>
-<h2>Compress for email and WhatsApp</h2>
+<h2 id="compress-for-email-and-whatsapp">Compress for email and WhatsApp</h2>
 <p>Scanned invoices and challans are often large. Email attachments and some buyer portals have size limits, and WhatsApp on a slow connection struggles with heavy files. Compress the merged PDF so it is easy to send while staying readable. Zoom in on the GSTIN and the totals after compressing. If small text becomes blurry, use a lighter setting. Readable is more important than tiny.</p>
 <ul>
 <li>Merge invoices, then challans, in number order</li>
@@ -3027,20 +3192,28 @@ min-height: 42px;
 <li>Compress, then zoom in on GSTIN and totals to check</li>
 <li>Remove blank scanner pages before sending</li>
 </ul>
-<h2>Paper bills from suppliers</h2>
+<h2 id="paper-bills-from-suppliers">Paper bills from suppliers</h2>
 <p>Festive purchases from wholesalers often come as paper bills. Scan or photograph them the same day, convert the images to PDF, and file them in the purchase folder. These bills matter for input tax credit and for your own records. A shoebox of paper in December is where purchase bills go missing. If a bill is long, split it so each supplier bill is its own file with a clear name.</p>
-<h2>Keep customer data on your own PC</h2>
+<h2 id="keep-customer-data-on-your-own-pc">Keep customer data on your own PC</h2>
 <p>Invoices carry customer names, phone numbers, addresses, GSTINs, and amounts. Uploading them to a free online tool to merge or compress sends that data to a server you do not control. Pdf Buddy is a Windows PDF editor that merges, splits, compresses, converts images to PDF, and adds signatures locally, so the files stay on your computer. For a small business, that is both safer and faster when you do it twenty times a day in October.</p>
-<h2>After the festival: close the month</h2>
+<h2 id="after-the-festival-close-the-month">After the festival: close the month</h2>
 <p>When the rush ends, sit down once with the month's folders. Check every invoice number is present with no gaps, every challan matches an invoice, and every supplier bill is filed. Merge the month into one archive PDF per type if your accountant prefers that. Back up the folder. The festive month is the one most likely to be checked later, because it is the largest.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>Can I correct a typo on an invoice PDF I already sent?</strong> Ask your accountant. Usually the right step is a revised invoice or a credit note, not editing the original file. Keep both copies.</p>
 <p><strong>A buyer wants invoices and challans together. Which order?</strong> Invoices in number order, then challans in the same order, unless the buyer asks for invoice and challan pairs. Follow the buyer's instruction.</p>
 <p><strong>How small should the PDF be for email?</strong> Small enough to attach without errors, often a few megabytes, and still readable. Always zoom in on the totals after compressing.</p>
 <p>A festive rush is a good problem. Clear names, merged files, readable compression, and a local archive keep the paperwork from slowing you down. Pdf Buddy, by Easy Peeze Tools, does that on Windows without uploading your invoices. Free for 2 actions a day after Google sign-in, with plans from ₹299 a year. See the <a href="../../features/">features</a> or <a href="../../download/">download Pdf Buddy</a>. For GST invoice tips, read <a href="../../blog/gst-invoice-pdf-merge-india/">merging GST invoice PDFs</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

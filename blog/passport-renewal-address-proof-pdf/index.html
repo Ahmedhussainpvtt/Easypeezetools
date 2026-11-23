@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,16 +3145,32 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / Passport renewal address proof PDF from scans</p>
       <h1>Passport renewal address proof PDF from scans</h1>
-      <p>2026-09-21 · Pdf Editor, India, passport, address proof</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-09-21">21 September 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/passport-renewal-address-proof-pdf-960.webp" srcset="/images/blog/passport-renewal-address-proof-pdf-480.webp 480w, /images/blog/passport-renewal-address-proof-pdf-960.webp 960w, /images/blog/passport-renewal-address-proof-pdf-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Passport renewal address proof PDF from scans" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#use-the-proof-the-form-already-allows">Use the proof the form already allows</a></li>
+              <li><a href="#scan-so-the-address-line-survives">Scan so the address line survives</a></li>
+              <li><a href="#one-proof-one-file-name">One proof, one file name</a></li>
+              <li><a href="#after-the-appointment-keep-the-file">After the appointment, keep the file</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/passport-renewal-address-proof-pdf-960.webp" srcset="/images/blog/passport-renewal-address-proof-pdf-480.webp 480w, /images/blog/passport-renewal-address-proof-pdf-960.webp 960w, /images/blog/passport-renewal-address-proof-pdf-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Passport renewal address proof PDF from scans" width="1400" height="900" />
 <p>Passport renewal stalls when the address proof is a tilted photo, a two-page bill with the address cut off, or a rent agreement scanned in the wrong order. The Passport Seva form names which proofs it will take, and the upload or the counter expects a PDF that shows the same address you typed. On a Windows PC you can turn that scan into one readable file, check the house number and pin code, and save a copy before the appointment. Do this with a document you already have. If the bill is in someone else's name and the form does not allow that, get a proof that matches the rule instead of editing the page.</p>
-<h2>Use the proof the form already allows</h2>
+<h2 id="use-the-proof-the-form-already-allows">Use the proof the form already allows</h2>
 <p>The renewal screen lists acceptable address proofs and sometimes how recent they must be. Pick one that matches your case, such as a utility bill or a bank statement, and ignore extra IDs that the line did not ask for. Adding more pages does not make a weak proof stronger. It makes the file larger and it mixes addresses. If your present address and permanent address differ, follow the form: each address has its own slot. Do not staple both proofs into one PDF unless that slot says to. Officers compare the text on the PDF with the text you typed. One address per file keeps that check short.</p>
 <p>Read the name on the proof before you export. If the document is in a parent's name and you are the applicant, the form's note will say whether that is allowed and what extra page you need. Follow that note. Do not crop the name off to hide a mismatch, and do not type a new name over the scan. Those are not cleanup steps. They change a document. If the proof is wrong, collect a correct one from the issuer and scan that page instead.</p>
 <ul>
@@ -3016,23 +3179,31 @@ min-height: 42px;
 <li>House number, street, city, and pin code all visible</li>
 <li>Applicant name handled the way the instruction describes</li>
 </ul>
-<h2>Scan so the address line survives</h2>
+<h2 id="scan-so-the-address-line-survives">Scan so the address line survives</h2>
 <p>Place the bill flat, with all four corners in the frame, and enough light that the pin code is not a grey smudge. A phone photo is fine as a start. On the PC, turn that image into a one-page or two-page PDF and rotate it until the lines are upright. Crop only the dark border, not the printed address. If the bill has a payment receipt on the back and the form wants both sides, include both as pages in order. If the back is blank, do not add it. Blank pages make the officer wonder if the scan failed.</p>
 <p>Zoom to 100 percent and read the address aloud from the PDF, not from the paper in your hand. The file is what gets uploaded. A crease through the pin code, a thumb on the house number, or a shadow from a window is enough to get a remark. Rescan that page rather than painting over the digits. If you need the text to be searchable later, run OCR on your own PC and still keep the original image page so the seal and the logo remain visible.</p>
-<h2>One proof, one file name</h2>
+<h2 id="one-proof-one-file-name">One proof, one file name</h2>
 <p>Save the PDF with the proof type and the month, such as Address-Electricity-Aug2026.pdf. You will reuse this name if the appointment is rescheduled. Do not call it scan.pdf or final-final.pdf. If the portal wants a maximum size, compress only after the address is readable, then read the pin code again. A smaller file that loses a digit is not an improvement. Keep the heavier original beside it until the application number is generated.</p>
 <p>Some centres still take a print as well as an upload. Print from the PDF you will upload so the paper and the file match. Printing a different photo from the gallery is how people walk in with two versions. If the PDF is password protected because a bank generated it, open it with the password you already have and export a copy the counter can open. If you do not know the password, download a fresh statement from net banking rather than trying to break the lock.</p>
-<h2>After the appointment, keep the file</h2>
+<h2 id="after-the-appointment-keep-the-file">After the appointment, keep the file</h2>
 <p>Police verification and a later renewal can ask for the same address again. Store the PDF in a folder named with the application year. Do not keep only the acknowledgement mail. The proof itself is what you will need if a letter comes back. Make a second copy on a drive you control. Chat apps are a bad cabinet for this page because they recompress images and the pin code fades.</p>
 <p>You are filing a renewal with a proof you are allowed to submit, on the official channel the passport service gave you. Do not mail the same scan to a random website that promises a faster appointment. Finish the PDF on the PC, upload it where the form says, and leave the local copy in place. If the address has genuinely changed, update the proof. Do not stretch an old bill by editing the date.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>Can I merge my passport copy and the electricity bill?</strong> Only if the renewal instruction puts them in one upload box. Address proof is usually its own slot. A merged file makes it harder to replace a blurry bill without resending the passport pages. Keep them separate until the form says otherwise.</p>
 <p><strong>The bill is sideways and the pin code is in the shadow. Is that acceptable?</strong> No. Rotate the page until the print is upright and rescan if a digit is hidden. The officer and the upload preview need to read the same address you typed. A darker second photo is better than a corrected digit drawn on the page.</p>
 <p><strong>What if the bank statement I wanted to use is locked?</strong> Sign in to net banking and use the password the bank already issued, or download a copy that opens. If you cannot get that password, choose another proof the form allows. Do not remove a password you do not know.</p>
 <p>Finish the address proof on your own PC before the passport appointment. Pdf Buddy, by Easy Peeze Tools, is a Windows desktop PDF editor that works on the PC. The scan is not uploaded to a random website. The free tier is 2 files a day. Pricing starts at ₹149. Use the <a href="../../download/">download page</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

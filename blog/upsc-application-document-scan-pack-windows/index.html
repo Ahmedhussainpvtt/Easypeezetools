@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,16 +3145,32 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / UPSC application documents: a scan pack you prepare once on Windows</p>
       <h1>UPSC application documents: a scan pack you prepare once on Windows</h1>
-      <p>2026-11-05 · Pdf Editor, India, UPSC, exam application, document scan</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-11-05">5 November 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/upsc-application-document-scan-pack-windows-960.webp" srcset="/images/blog/upsc-application-document-scan-pack-windows-480.webp 480w, /images/blog/upsc-application-document-scan-pack-windows-960.webp 960w, /images/blog/upsc-application-document-scan-pack-windows-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="UPSC application documents: a scan pack you prepare once on Windows" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#collect-the-originals-before-you-scan-anything">Collect the originals before you scan anything</a></li>
+              <li><a href="#make-master-scans-at-good-quality">Make master scans at good quality</a></li>
+              <li><a href="#a-folder-layout-that-outlasts-one-attempt">A folder layout that outlasts one attempt</a></li>
+              <li><a href="#check-each-upload-as-the-portal-will-see-it">Check each upload as the portal will see it</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/upsc-application-document-scan-pack-windows-960.webp" srcset="/images/blog/upsc-application-document-scan-pack-windows-480.webp 480w, /images/blog/upsc-application-document-scan-pack-windows-960.webp 960w, /images/blog/upsc-application-document-scan-pack-windows-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="UPSC application documents: a scan pack you prepare once on Windows" width="1400" height="900" />
 <p>A UPSC aspirant fills more than one form in a year. There is the registration, the application for each examination, and later a detailed form that asks for certificates. Each of them wants a photograph, a signature, a photo identity document and sometimes more, in a format and size that the notice spells out. Most candidates rebuild these files in a cyber cafe on the last evening, from whatever is in the phone gallery. Build the pack once on your own Windows PC instead, keep the originals, and export the size each notice asks for when the time comes.</p>
-<h2>Collect the originals before you scan anything</h2>
+<h2 id="collect-the-originals-before-you-scan-anything">Collect the originals before you scan anything</h2>
 <p>Start with a list drawn from the current notice and the instructions on the UPSC online application site, not from a coaching group message. The usual core is a recent passport size photograph, your signature on white paper, and one government photo ID. For later stages, add the Class 10 certificate that shows your date of birth, your degree or provisional certificate, and any category, EWS or disability certificate in the format the Commission prescribes.</p>
 <p>Check the details across them before scanning. The name and date of birth on the Class 10 certificate are the reference, and the photo ID you choose should match. If a certificate has a spelling difference, sort that out with the issuing authority now. A scan pack cannot fix a mismatch, and nobody should try to fix one by editing the scan. For category certificates, check the issue date and format against the notice, since an outdated format is a common problem at the document stage.</p>
 <ul>
@@ -3016,23 +3179,31 @@ min-height: 42px;
 <li>One photo ID, the same one you will carry to the exam</li>
 <li>Class 10 certificate, degree, and any category or EWS certificate</li>
 </ul>
-<h2>Make master scans at good quality</h2>
+<h2 id="make-master-scans-at-good-quality">Make master scans at good quality</h2>
 <p>Scan each certificate flat at a good resolution, in colour, with all four edges visible. A flatbed scanner at a shop is ideal for certificates. If you use a phone, shoot in daylight from directly above and avoid the shadow of your hand. Save these as master files and never overwrite them. Every smaller version you need later should be exported from the master, not from a copy that has already been compressed twice.</p>
 <p>The photograph and signature are usually wanted as image files, and documents as PDF. Keep the master photo as a clean JPG with a plain background, and crop the signature close so it fills the frame without touching the edges. For each certificate, convert the scan to a PDF, rotate it upright, and remove the blank back side unless the back carries a seal or an entry. Open every file once and read the name, date of birth and certificate number from the screen.</p>
-<h2>A folder layout that outlasts one attempt</h2>
+<h2 id="a-folder-layout-that-outlasts-one-attempt">A folder layout that outlasts one attempt</h2>
 <p>Create a UPSC folder with two parts. Masters holds the high quality scans and is never touched. Inside a second folder, make one subfolder per application, named with the exam and year. When a notice says the ID must be a PDF within a certain size, export a copy from the master into that application's subfolder and name it plainly, such as Photo-ID-Aadhaar.pdf. The master stays as it was.</p>
 <p>This layout matters because limits differ between forms and change between years. A file that was perfect for one application can be too large for the next or too small to be read at the document verification stage. With masters intact, a new size takes two minutes. Keep a short text file in each application folder with the registration ID, the date you applied and the limits that notice gave, so you are not guessing later.</p>
-<h2>Check each upload as the portal will see it</h2>
+<h2 id="check-each-upload-as-the-portal-will-see-it">Check each upload as the portal will see it</h2>
 <p>Before you log in, check every export against the notice: file type, size range, and for images the pixel dimensions if they are given. A file can fail for being too small as well as too large. After uploading, the form shows a preview. Look at it properly. The face should be clear and centred, the signature complete, and the ID readable. If the preview looks soft, replace the file before final submission, because most forms do not allow a change afterwards.</p>
 <p>Save the final submitted application as a PDF in the same subfolder, along with the fee receipt. Months later the detailed form will ask for the same facts, and consistency between the two is checked. Pdf Buddy converts images to PDF, rotates, removes blank pages and compresses on Windows, which covers the document side of this pack. The work stays on your PC, which is where your certificates should stay as well.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>Can I reuse the same photo and signature for every UPSC form?</strong> Only if each notice allows it. Some notices ask for a photograph taken within a recent period or with specific details. Keep the master files, read the photo rule in every new notice, and take a fresh photograph when the rule calls for one.</p>
 <p><strong>Should all certificates be merged into one PDF?</strong> No, unless a form gives one upload box and says so. Application portals normally have a separate box for each document. Keep one PDF per certificate in the masters folder and merge only for the specific form that asks for a combined file.</p>
 <p><strong>Is it safe to prepare these at a cyber cafe?</strong> It is common, but it leaves copies of your ID and certificates on a shared computer. Preparing the pack on your own PC avoids that. If you must use a cafe, delete the files from its desktop and downloads folder, and empty the recycle bin before you leave.</p>
 <p>Build the pack once and every application starts from clean files. Pdf Buddy, by Easy Peeze Tools, is a Windows desktop PDF editor that works on the PC, so your certificates are not uploaded to a random website. The free tier is 2 files a day. Pricing starts at ₹149. Get it from the <a href="../../download/">download page</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

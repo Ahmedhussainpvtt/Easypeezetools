@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,16 +3145,33 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / Year-end document index: one PDF map of the folders you already have</p>
       <h1>Year-end document index: one PDF map of the folders you already have</h1>
-      <p>2026-11-17 · Pdf Editor, India, document index, year end, organise PDF</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-11-17">17 November 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/year-end-document-index-pdf-windows-960.webp" srcset="/images/blog/year-end-document-index-pdf-windows-480.webp 480w, /images/blog/year-end-document-index-pdf-windows-960.webp 960w, /images/blog/year-end-document-index-pdf-windows-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Year-end document index: one PDF map of the folders you already have" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#list-the-buckets-that-matter-for-year-end">List the buckets that matter for year end</a></li>
+              <li><a href="#make-the-index-a-real-pdf">Make the index a real PDF</a></li>
+              <li><a href="#update-rules-that-do-not-rely-on-memory">Update rules that do not rely on memory</a></li>
+              <li><a href="#privacy-and-sharing">Privacy and sharing</a></li>
+              <li><a href="#a-practical-checklist-you-can-reuse">A practical checklist you can reuse</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/year-end-document-index-pdf-windows-960.webp" srcset="/images/blog/year-end-document-index-pdf-windows-480.webp 480w, /images/blog/year-end-document-index-pdf-windows-960.webp 960w, /images/blog/year-end-document-index-pdf-windows-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Year-end document index: one PDF map of the folders you already have" width="1400" height="900" />
 <p>By mid-November the folders already exist: GST packs, advance-tax challans, school fees, insurance, and KYC renewals. What is missing is a map. A one-page index PDF that lists those folders and the key file names saves you from re-discovering your own disk in the last week of December. Build that index on Windows now, while you still remember what you filed after Diwali.</p>
-<h2>List the buckets that matter for year end</h2>
+<h2 id="list-the-buckets-that-matter-for-year-end">List the buckets that matter for year end</h2>
 <p>Write five to eight buckets, not forty. Examples: GST returns, advance tax, salary Form 16 when it arrives, insurance premiums, school fees, home loan interest, and KYC. Against each bucket, write the Windows path and the naming pattern you already use.</p>
 <p>If a bucket is empty, leave it on the list with a blank. The blank is a reminder, not a failure. Fill it when the document arrives instead of inventing a placeholder PDF.</p>
 <ul>
@@ -3016,16 +3180,16 @@ min-height: 42px;
 <li>File naming pattern</li>
 <li>Owner if more than one person in the house</li>
 </ul>
-<h2>Make the index a real PDF</h2>
+<h2 id="make-the-index-a-real-pdf">Make the index a real PDF</h2>
 <p>Type the list in a simple document and export to PDF, or write it as pages in your PDF tool. Put the tax year in the title, such as Document-Index-FY2026-27.pdf. Keep it at the root of Documents or in a Finance folder everyone in the house knows.</p>
 <p>Optional: merge a blank checklist page behind the index for December tasks like belated ITR reminders and AIS download. Do not merge the actual challans into the index. The index points. The packs stay where they are.</p>
-<h2>Update rules that do not rely on memory</h2>
+<h2 id="update-rules-that-do-not-rely-on-memory">Update rules that do not rely on memory</h2>
 <p>When you add a new challan or fee PDF, add one line to the index the same day. If that feels heavy, update every Sunday in November and December. A stale index is still better than none, but a weekly pass keeps it honest.</p>
 <p>Couples should agree who owns the update. Two people editing two copies is how conflicting maps appear.</p>
-<h2>Privacy and sharing</h2>
+<h2 id="privacy-and-sharing">Privacy and sharing</h2>
 <p>The index may contain paths and file names that reveal PAN or school names. Share it only with someone who already handles your tax pack. When a CA asks for a subset, send the pack, not the whole map of your disk.</p>
 <p>Pdf Buddy can keep the index and packs local. Free tier 2/day. Pricing from ₹149.</p>
-<h2>A practical checklist you can reuse</h2>
+<h2 id="a-practical-checklist-you-can-reuse">A practical checklist you can reuse</h2>
 <p>Re-open this page the next time the same situation appears. The checklist under Year-end document index: one PDF map of the folders you already have is meant to be boring on purpose: same order, same names, same place on the disk or in the Sheet. Boring is how you avoid a second scramble. Write the date you last followed the steps in a note at the top of the folder or the month tab, so you know whether the pack is fresh.</p>
 <p>If two people share the work, put one name as owner for year end document index pdf windows. Two owners without a rule create two half-finished packs. Keep originals when you merge or categorise, and only send the cleaned pack outward. That habit survives busy weeks better than a perfect system you abandon.</p>
 <p>When a portal, a CA, or a family member asks for one item, send that item. Do not forward the whole archive. Smaller sends are easier to verify and safer when the file carries personal numbers. After they confirm, you still keep your own copy where you can find it without searching chat history.</p>
@@ -3035,15 +3199,23 @@ min-height: 42px;
 <li>Originals kept, cleaned pack sent outward</li>
 <li>Date stamp on the folder or month tab</li>
 </ul>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>Is a spreadsheet better than a PDF index?</strong> A spreadsheet is fine for editing. Export a PDF snapshot when you want a stable map you can mail or print.</p>
 <p><strong>Should the index include passwords?</strong> No. Never. Keep secrets in your password manager.</p>
 <p><strong>How long should I keep this year's index?</strong> Keep it with that year's tax pack for the same retention period you already use for returns and challans.</p>
 <p><strong>How often should I repeat this cleanup?</strong> Repeat when the season or the deadline returns, not every idle evening. A dated pack or a dated Sheet total is enough to know you are current.</p>
 <p>A one-page map beats a perfect memory. Pdf Buddy, by Easy Peeze Tools, helps you build and store that index on Windows. Free 2/day. From ₹149. <a href="../../download/">Download</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

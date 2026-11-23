@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,16 +3145,32 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / Diwali leave application: a one-page PDF your office can file</p>
       <h1>Diwali leave application: a one-page PDF your office can file</h1>
-      <p>2026-11-07 · Pdf Editor, India, leave application, office documents, Diwali</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-11-07">7 November 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/diwali-leave-application-pdf-office-960.webp" srcset="/images/blog/diwali-leave-application-pdf-office-480.webp 480w, /images/blog/diwali-leave-application-pdf-office-960.webp 960w, /images/blog/diwali-leave-application-pdf-office-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Diwali leave application: a one-page PDF your office can file" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#what-the-page-should-say">What the page should say</a></li>
+              <li><a href="#why-a-pdf-and-not-a-chat-message">Why a PDF and not a chat message</a></li>
+              <li><a href="#sign-it-without-printing">Sign it without printing</a></li>
+              <li><a href="#keep-the-approval-with-the-request">Keep the approval with the request</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/diwali-leave-application-pdf-office-960.webp" srcset="/images/blog/diwali-leave-application-pdf-office-480.webp 480w, /images/blog/diwali-leave-application-pdf-office-960.webp 960w, /images/blog/diwali-leave-application-pdf-office-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Diwali leave application: a one-page PDF your office can file" width="1400" height="900" />
 <p>Half the office wants the same week off around Diwali, and managers approve leave from a crowded inbox. A request typed into a chat window gets a thumbs up and is forgotten by payroll. A Word file opens with broken spacing on the HR laptop. A photo of a handwritten letter is tilted and grey. The version that gets approved, filed and found again is a one-page PDF with clear dates and a signature. It takes fifteen minutes on a Windows PC, and the same file works for the HR portal, the manager's mail and your own records.</p>
-<h2>What the page should say</h2>
+<h2 id="what-the-page-should-say">What the page should say</h2>
 <p>Keep it to one page and put the dates in the first paragraph. State the first and last day of leave, the date you will be back at work, and the number of working days it comes to after excluding the declared holidays and weekends. Name the type of leave you are applying under, such as earned or casual leave, using the words your company policy uses. A manager reading on a phone should get the whole request in ten seconds.</p>
 <p>The second paragraph is the handover. Say who will cover your work, what is pending, and where the files are. Add a phone number where you can be reached for something urgent, and say plainly if you will be travelling and out of network for part of the time. If your company wants travel proof for leave travel concessions, mention that the ticket is attached. Close with your name, employee code, department and the date.</p>
 <ul>
@@ -3016,23 +3179,31 @@ min-height: 42px;
 <li>Who covers your work and what is pending</li>
 <li>Contact number, employee code and department</li>
 </ul>
-<h2>Why a PDF and not a chat message</h2>
+<h2 id="why-a-pdf-and-not-a-chat-message">Why a PDF and not a chat message</h2>
 <p>A PDF looks the same on every screen and prints the same on every printer. A Word file shifts its lines when the other computer has a different font, and an editable file can also be changed after it leaves you. A chat message has no place in a personnel file. When appraisal season or a payroll query comes, HR looks for a document with a date on it. Make that document easy to file by sending one that is already in its final form.</p>
 <p>Type the letter in whatever you use, then export or print to PDF rather than photographing the screen. Name the file with your name and the dates, such as Leave-Diwali-2026-Neha-Rao-06Nov-to-11Nov.pdf. HR receives dozens of files called leave.pdf in the same week. A clear name means yours is attached to the right record. If you wrote the letter by hand, scan it, rotate it upright and crop it, so it reads like a page and not like a picture of a desk.</p>
-<h2>Sign it without printing</h2>
+<h2 id="sign-it-without-printing">Sign it without printing</h2>
 <p>Many offices still expect a signature, and printing a page only to sign and scan it is a waste of an evening when shops are closing early. Place your signature on the PDF directly. Draw it or add a saved image of it above your typed name, at a sensible size, and save the result as a new file. This is your own signature on your own request, which is exactly what a signature tool is for.</p>
 <p>If the letter needs your manager's countersignature before it goes to HR, send them the PDF and let them add theirs the same way, or approve by reply. Do not place anyone else's signature for them, even when they say it is fine over the phone. An approval by mail from their own account is cleaner and takes them less time. Attach supporting pages, such as a train ticket, after the letter in the same PDF.</p>
-<h2>Keep the approval with the request</h2>
+<h2 id="keep-the-approval-with-the-request">Keep the approval with the request</h2>
 <p>The request is half the record. When the approval arrives, save that mail as a PDF as well and merge it behind your application, or upload both to the HR portal if it has a place for attachments. Then check that the leave shows correctly in the attendance system before you travel. Festival weeks are when a missed entry turns approved leave into loss of pay, and nobody notices until salary day at the end of the month.</p>
 <p>Store the merged file in a Work folder on your own PC under the year. It is useful when the leave balance looks wrong in March, and when you plan next year's trip and want to recall how many days you took. Pdf Buddy can sign, merge and compress the file on Windows without sending your letter anywhere. If the portal limits attachment size, compress and then open the file once to confirm the dates are sharp.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>Is an email not enough for a leave request?</strong> Often it is, if your company policy says leave is applied through mail or the HR portal. The PDF is for offices that want a signed letter on file, and it also helps you when you need to show exactly what was asked for and approved. Follow your own policy first.</p>
 <p><strong>Can I sign the PDF digitally with a drawn signature?</strong> For an internal leave letter, a drawn or image signature on the PDF is normally accepted, because it shows the request came from you. If your organisation requires a certificate based digital signature for HR documents, use what they specify.</p>
 <p><strong>How early should the request go in?</strong> As early as your policy asks, and for Diwali week earlier than that, because several people in a team want the same days. A dated PDF sent two or three weeks ahead gives your manager room to plan cover, which is the main reason requests are refused.</p>
 <p>One clear page gets approved faster than a long chat thread. Pdf Buddy, by Easy Peeze Tools, is a Windows desktop PDF editor that works on the PC, so office letters are not uploaded to a random website. The free tier is 2 files a day. Pricing starts at ₹149. Get it from the <a href="../../download/">download page</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,16 +3145,32 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / Property papers: drop blank scans before you send the pack</p>
       <h1>Property papers: drop blank scans before you send the pack</h1>
-      <p>2026-09-26 · Pdf Editor, India, property papers, blank pages</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-09-26">26 September 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/property-sale-papers-drop-blank-pages-960.webp" srcset="/images/blog/property-sale-papers-drop-blank-pages-480.webp 480w, /images/blog/property-sale-papers-drop-blank-pages-960.webp 960w, /images/blog/property-sale-papers-drop-blank-pages-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Property papers: drop blank scans before you send the pack" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#blank-backs-are-still-pages-until-you-remove-them">Blank backs are still pages until you remove them</a></li>
+              <li><a href="#order-and-page-numbers-must-still-match">Order and page numbers must still match</a></li>
+              <li><a href="#size-colour-and-sideways-plans">Size, colour, and sideways plans</a></li>
+              <li><a href="#send-the-cleaned-pack-and-keep-a-record">Send the cleaned pack and keep a record</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/property-sale-papers-drop-blank-pages-960.webp" srcset="/images/blog/property-sale-papers-drop-blank-pages-480.webp 480w, /images/blog/property-sale-papers-drop-blank-pages-960.webp 960w, /images/blog/property-sale-papers-drop-blank-pages-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Property papers: drop blank scans before you send the pack" width="1400" height="900" />
 <p>Sale packs in India pick up blank pages because scanners grab the empty back of every stamp paper, and the builder or the typist sends that pile as one PDF. The buyer, the bank, and the lawyer then scroll through grey sheets and miss the schedule that actually describes the flat. Before you forward the pack, drop the blanks, keep the real pages in their original order, and check the count against the index or the page numbers printed on the deed. You are cleaning a copy of papers you already have. Do not delete a clause, a map, or a signature page because it looks inconvenient.</p>
-<h2>Blank backs are still pages until you remove them</h2>
+<h2 id="blank-backs-are-still-pages-until-you-remove-them">Blank backs are still pages until you remove them</h2>
 <p>A duplex scan of a one-sided deed produces a pattern: text, blank, text, blank. Those blanks count toward size limits on a bank mail gateway and they make a 40-page deed look like 80. Open the PDF on the PC and step through it. Mark pages that have no text, no seal, no signature, and no faint endorsement. Remove only those. A page with a small notary stamp in the corner is not blank. A page with a schedule table in light print is not blank. When you are unsure, keep the page.</p>
 <p>Do this on a copy. Save the scanner's original as Deed-raw.pdf and the cleaned file as Deed-sent.pdf. If a lawyer says a page went missing, you can compare. Never clean the only copy. Property work runs for months, and people ask for the same annexure again. A raw file in a folder named with the flat number is the safety net. The sent file is what you attach. Keep both until the bank is done.</p>
 <ul>
@@ -3016,23 +3179,31 @@ min-height: 42px;
 <li>Leave the signed order of clauses unchanged</li>
 <li>Work on a copy and keep the raw scan</li>
 </ul>
-<h2>Order and page numbers must still match</h2>
+<h2 id="order-and-page-numbers-must-still-match">Order and page numbers must still match</h2>
 <p>Deeds often print a page number. After you drop blanks, the PDF page count will be lower than the scanner count, and that is expected. The printed page numbers on the real sheets should still run in order. If printed page 7 is missing, you did not remove a blank. You lost a sheet. Go back to the raw scan or rescan. Do not renumber the deed inside an editor to hide the gap. Ask the seller or the advocate for the missing sheet.</p>
 <p>Maps, floor plans, and society NOC letters sometimes sit at the end. Keep them at the end if that is where the index puts them. Moving a plan to page 2 because it looks important changes the document people initialled. If the bank wants the NOC as a separate upload, split that letter out into its own PDF and leave the deed intact. Two purposes, two files, same source pages.</p>
-<h2>Size, colour, and sideways plans</h2>
+<h2 id="size-colour-and-sideways-plans">Size, colour, and sideways plans</h2>
 <p>Colour scans of stamp paper are heavy. After blanks are gone, check the file size against the bank's mail limit. Compress the copy you will send, then zoom into the stamp value and the flat number. If those fade, use a lighter compress or split the pack into deed and annexures. Plans that were scanned in landscape should stay readable. Rotate a page only so the drawing is upright or clearly landscape, not tilted. A tilted plan is not a style. It is a scan that missed the glass.</p>
 <p>If a society letter is password protected, open it with the password the society or the downloader already has. If you do not have the password, ask them for an open copy. Do not strip a lock. And do not crop out a co-owner name to make the pack match one applicant. Names on the deed are facts. The bank needs to see them. Send the page with every owner still visible.</p>
-<h2>Send the cleaned pack and keep a record</h2>
+<h2 id="send-the-cleaned-pack-and-keep-a-record">Send the cleaned pack and keep a record</h2>
 <p>Name the file with the flat or plot and the document, such as A-1204-Sale-Deed.pdf. Put the date you sent it in a note or in a covering mail, not by editing the deed. When a second bank asks for the same papers, send this cleaned PDF or split what they need. You should not have to pay the scan shop again to remove blanks. Pdf Buddy can delete the empty pages, rotate a plan, split the NOC, and compress on the PC. The title papers stay off random websites.</p>
 <p>After registration or disbursement, keep both the raw and the sent PDFs. Later sales and home loans ask for the same deed. A chat image of page one is not the pack. Store the files. If a page in the original paper set is truly absent, get it from the registrar copy or the advocate. Do not draft a replacement page and slip it into the scan. The advocate's copy is the one to request.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>I removed blanks and the PDF is shorter than the printed page numbers. Is that wrong?</strong> It is fine when the shorter count is only the empty backs you removed. The numbers printed on the deed pages should still follow each other. If a printed number is skipped, that sheet is missing. Restore it from the raw scan.</p>
 <p><strong>The bank wants the society NOC separately. Should I crop it out of the deed scan?</strong> Split the NOC pages into their own PDF and keep them in the deed too if they were part of that scan. Do not cut the letter out of the image so the deed loses a page the index still lists.</p>
 <p><strong>A floor plan is sideways and huge. What is the safe fix?</strong> Rotate it so the drawing can be read, and compress only while the flat number and dimensions stay clear. Keep the plan where the index placed it. Save the heavy original until the bank accepts the copy. Then send that lighter copy.</p>
 <p>Clean the sale pack on a copy, on your PC, before you mail the bank or the buyer. Pdf Buddy, by Easy Peeze Tools, is a Windows desktop PDF editor that works on the PC. Papers are not uploaded to a random website. The free tier is 2 files a day. Pricing starts at ₹149. Read <a href="../../pricing/">pricing</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

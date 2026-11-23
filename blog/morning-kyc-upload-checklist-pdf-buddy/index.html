@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,16 +3145,32 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / A morning checklist before a KYC upload</p>
       <h1>A morning checklist before a KYC upload</h1>
-      <p>2026-10-07 · Pdf Editor, India, KYC, checklist</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-10-07">7 October 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/morning-kyc-upload-checklist-pdf-buddy-960.webp" srcset="/images/blog/morning-kyc-upload-checklist-pdf-buddy-480.webp 480w, /images/blog/morning-kyc-upload-checklist-pdf-buddy-960.webp 960w, /images/blog/morning-kyc-upload-checklist-pdf-buddy-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="A morning checklist before a KYC upload" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#order-matches-the-form">Order matches the form</a></li>
+              <li><a href="#no-blank-pages-in-the-middle">No blank pages in the middle</a></li>
+              <li><a href="#file-name-and-size-before-you-leave">File name and size before you leave</a></li>
+              <li><a href="#a-local-copy-after-the-upload">A local copy after the upload</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/morning-kyc-upload-checklist-pdf-buddy-960.webp" srcset="/images/blog/morning-kyc-upload-checklist-pdf-buddy-480.webp 480w, /images/blog/morning-kyc-upload-checklist-pdf-buddy-960.webp 960w, /images/blog/morning-kyc-upload-checklist-pdf-buddy-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="A morning checklist before a KYC upload" width="1400" height="900" />
 <p>KYC uploads fail in small ways: the pages are in the wrong order, a blank sheet sits in the middle, the file name is scan.pdf, or the size is over the slot limit you only noticed at the door. A ten-minute check on Windows the morning of the upload avoids a second visit. Walk the file in order, drop blanks, set a plain name, confirm the size, and keep a local copy after the site accepts it. Use documents you are allowed to submit on that official form. Do not add pages you were not asked for, and do not edit a name or a number to force a match.</p>
-<h2>Order matches the form</h2>
+<h2 id="order-matches-the-form">Order matches the form</h2>
 <p>Open the KYC instruction and list the slots, or the order inside the one slot, on a piece of paper. Then open your PDF and check page one against the first item. Identity, address, and a photo are often separate uploads. Do not merge them because it feels simpler, unless that form has a single box that lists a sequence. If there is a sequence, follow it exactly. Reviewers compare the list to the pages. A correct document in the wrong place looks like a missing document.</p>
 <p>Read the name on each page against the name you typed in the form. If they differ, stop and use the correction route the institution provides. Do not cover the printed name. Check dates the form cares about, such as a bill not older than the stated months. An expired page should be replaced with a fresh proof you are allowed to use, not with a date typed on the old scan.</p>
 <ul>
@@ -3016,23 +3179,31 @@ min-height: 42px;
 <li>Name on the PDF matches the form</li>
 <li>No expired page with a typed new date</li>
 </ul>
-<h2>No blank pages in the middle</h2>
+<h2 id="no-blank-pages-in-the-middle">No blank pages in the middle</h2>
 <p>Click through every page. A blank back from a duplex scan, or a dark frame where a photo failed, will look like a broken upload. Remove those pages and save. Count the pages you expect and compare with the PDF page count. If you expected four and you have five, find the extra before you upload. If you expected four and you have three, find the missing proof. Do not add a blank to make a count. A blank fixes nothing.</p>
 <p>Look for a sideways page in the same pass. A form can reject orientation even when the morning rush is about size. Rotate that page and export again. This pass is also when you notice a second person's document that was scanned in the same batch. Take it out. KYC files get copied into records. The wrong page is hard to recall later. Remove it before you leave the house.</p>
-<h2>File name and size before you leave</h2>
+<h2 id="file-name-and-size-before-you-leave">File name and size before you leave</h2>
 <p>Rename the file to the document and the date, such as KYC-Address-2026-10-07.pdf. You may upload from a phone later, and a clear name is the only way to pick the right file in a crowd of downloads. Avoid special punctuation the portal might reject. Check the maximum size on the slot and the size Windows shows. If you are over, compress a copy and then read the important line again, whether that is an address or an account number. If the line breaks up, compress less or remove a blank you missed.</p>
 <p>If the PDF asks for a password, use the password you already have and export a copy the portal can open, if the form says it will not accept locked files. If you do not know the password, get it from the issuer or download an unlocked copy from the official source. Do not upload a file you could not open. You would be sending a document you have not read.</p>
-<h2>A local copy after the upload</h2>
+<h2 id="a-local-copy-after-the-upload">A local copy after the upload</h2>
 <p>When the site shows success, save the acknowledgement and the exact PDF you sent into a folder for that KYC. Do not delete the file because the upload worked. Portals ask for a re-upload, and the camera roll will have changed. Pdf Buddy can reorder, drop blanks, rotate, compress, and export that PDF on the PC before you go online. Do the cleanup locally. Then upload only on the bank, broker, or employer page that asked. A random site does not need your KYC pack.</p>
 <p>If the upload fails, change one thing at a time: name, then size, then a bad page. A new file name for each attempt keeps the versions straight. You are submitting your own proofs for an account or a job you are opening. If a proof is missing, collect it. Do not manufacture a page to satisfy the checklist. A missing proof is a trip to the issuer, not a page you design on the laptop.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>How long should the morning check take?</strong> About ten minutes if the scans already exist: confirm order against the form, delete blanks, set the file name, and compare the size with the slot. Fix a sideways page in the same pass. Leave home only after the PDF opens cleanly on the PC.</p>
 <p><strong>The form has three slots. Should I still make one combined PDF as a backup?</strong> Prepare the file each slot asked for, and keep those separate. A combined backup tempts you to upload it into the first slot. Store the separate PDFs in one folder so you can find them, without merging until a slot's own text says to.</p>
 <p><strong>The portal accepted the file. Can I delete the local PDF?</strong> Keep it with the acknowledgement until the KYC is fully cleared and you have no reason to expect a re-upload. The portal copy is not a convenient archive. The named file on your PC is the one you can send again without rescanning.</p>
 <p>Run the morning check on the PC, then upload on the official KYC page. Pdf Buddy, by Easy Peeze Tools, is a Windows desktop PDF editor that works on the PC. Files are not uploaded to a random website. The free tier is 2 files a day. Pricing starts at ₹149. Start from <a href="../../pricing/">pricing</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,16 +3145,32 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / Digital Life Certificate camps: turn the printouts into one PDF</p>
       <h1>Digital Life Certificate camps: turn the printouts into one PDF</h1>
-      <p>2026-11-01 · Pdf Editor, India, life certificate, pension, Jeevan Pramaan</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-11-01">1 November 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/digital-life-certificate-camp-printouts-pdf-960.webp" srcset="/images/blog/digital-life-certificate-camp-printouts-pdf-480.webp 480w, /images/blog/digital-life-certificate-camp-printouts-pdf-960.webp 960w, /images/blog/digital-life-certificate-camp-printouts-pdf-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Digital Life Certificate camps: turn the printouts into one PDF" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#what-you-actually-bring-home-from-a-camp">What you actually bring home from a camp</a></li>
+              <li><a href="#scan-so-the-pramaan-id-survives">Scan so the Pramaan ID survives</a></li>
+              <li><a href="#one-pdf-per-pensioner-per-year">One PDF per pensioner, per year</a></li>
+              <li><a href="#check-the-status-before-you-file-it-away">Check the status before you file it away</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/digital-life-certificate-camp-printouts-pdf-960.webp" srcset="/images/blog/digital-life-certificate-camp-printouts-pdf-480.webp 480w, /images/blog/digital-life-certificate-camp-printouts-pdf-960.webp 960w, /images/blog/digital-life-certificate-camp-printouts-pdf-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Digital Life Certificate camps: turn the printouts into one PDF" width="1400" height="900" />
 <p>November is life certificate month for most pensioners in India, and banks, post offices and pensioner associations run Digital Life Certificate camps to handle the rush. A camp visit ends with a few loose things: an SMS with a Pramaan ID, sometimes a printed acknowledgement, and the photocopies you carried. Three weeks later, when the pension office or a family member asks whether the certificate went through, those papers are in three places. Turn them into one small PDF on a Windows PC the same evening. It takes ten minutes and can save a second trip in December.</p>
-<h2>What you actually bring home from a camp</h2>
+<h2 id="what-you-actually-bring-home-from-a-camp">What you actually bring home from a camp</h2>
 <p>A Digital Life Certificate is generated through Jeevan Pramaan with Aadhaar based fingerprint, iris or face authentication. When it succeeds, the pensioner receives an SMS with a Pramaan ID, and the certificate can later be downloaded from the Jeevan Pramaan website using that ID. Some camps print the acknowledgement on the spot. Others only show a success screen. Ask for the print if it is offered, and photograph the screen if it is not.</p>
 <p>Alongside that, you carried the usual details: the PPO number, the pension account number, the Aadhaar number and the mobile number that receives the OTP. Note the camp date, the branch or post office that ran it, and the name of the person at the desk if you have it. These small facts are what a pension clerk asks for when a certificate shows as pending, and nobody remembers them a month later.</p>
 <ul>
@@ -3016,10 +3179,10 @@ min-height: 42px;
 <li>PPO number and pension account number as typed at the camp</li>
 <li>Camp date and the branch or post office that ran it</li>
 </ul>
-<h2>Scan so the Pramaan ID survives</h2>
+<h2 id="scan-so-the-pramaan-id-survives">Scan so the Pramaan ID survives</h2>
 <p>Camp printouts are often thermal slips or light laser prints, and both fade. Scan or photograph the slip the same day, flat, in daylight, with all four corners in the frame. On the PC, convert the image to a PDF, rotate it upright and crop the table surface away. Then zoom to normal size and read the Pramaan ID and the date from the screen, not from the paper. If one digit is doubtful, capture it again now, while the slip is still dark.</p>
 <p>Add the SMS screenshot as the second page. A screenshot is already sharp, so it only needs to be converted and placed after the slip. If you downloaded the certificate PDF from the Jeevan Pramaan site, put that first and keep the slip behind it. Do not type over any field, even to fix a spelling. If the name or PPO number on the certificate is wrong, the fix is at the bank or the pension office, not in a PDF editor.</p>
-<h2>One PDF per pensioner, per year</h2>
+<h2 id="one-pdf-per-pensioner-per-year">One PDF per pensioner, per year</h2>
 <p>Many families handle this for two parents on the same day, and the papers mix. Make one PDF per pensioner and name it with the person and the year, such as Life-Certificate-2026-Kamala-Devi.pdf. Keep both inside a Pension folder with a subfolder for each year. Next November you will open last year's file to copy the PPO number and to see which branch you used, and a clear name is what makes that a one minute job.</p>
 <p>Keep the file small and plain. Three or four pages are enough: certificate or slip, SMS, and a copy of the PPO front page if you carried one. Leave the Aadhaar copy out unless the pension office specifically asks for it. If you must share the PDF with a relative or an agent, send a copy with the Aadhaar number masked the way UIDAI's own masked Aadhaar shows it, and keep the full copy on your own PC.</p>
 <ul>
@@ -3027,17 +3190,25 @@ min-height: 42px;
 <li>Certificate or slip first, SMS second, PPO page last</li>
 <li>No Aadhaar copy unless the office asks for it</li>
 </ul>
-<h2>Check the status before you file it away</h2>
+<h2 id="check-the-status-before-you-file-it-away">Check the status before you file it away</h2>
 <p>Submission is not the last step. The pension disbursing bank or office still has to accept the certificate, and a mismatch in the PPO or account number can lead to a rejection that arrives as an SMS some days later. A week after the camp, check the status with the Pramaan ID or ask the branch. Save a screenshot of the accepted status as the final page of the same PDF, so the file shows the whole story from camp to acceptance.</p>
 <p>If the pension has not been credited as expected, the PDF is what you carry or mail. A clerk can act on a Pramaan ID, a date and a PPO number. A clerk cannot act on a memory that the camp was sometime in early November. Store a second copy on a pen drive or a cloud drive you control. Chat apps are a poor cabinet for this, because forwarded photos lose sharpness and vanish when a phone is changed.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>Is the camp printout the same as the life certificate?</strong> Not quite. The printout or SMS confirms that a certificate was generated and gives the Pramaan ID. The certificate itself can be downloaded from the Jeevan Pramaan site with that ID. Keep both in one PDF. The ID is the part a bank or pension office will ask for first.</p>
 <p><strong>Can I prepare this file for my parents on my own laptop?</strong> Yes. You are only scanning and arranging papers they already hold. Keep the PDF on a PC you control, name it with the pensioner's name, and give them a printed copy for their own file. Do not upload it to a random website to convert a photo.</p>
 <p><strong>Should I mail the PDF to the bank straight away?</strong> Only if the bank asks. The digital certificate reaches the pension disbursing agency through the system. Your PDF is a personal record for follow up. If a branch does ask for a copy, send it from your own mail and mask the Aadhaar number unless they need it in full.</p>
 <p>Scan the camp papers the same evening and the December follow up is one attachment. Pdf Buddy, by Easy Peeze Tools, is a Windows desktop PDF editor that works on the PC, so a parent's pension papers are not uploaded to a random website. The free tier is 2 files a day. Pricing starts at ₹149. Start from the <a href="../../download/">download page</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

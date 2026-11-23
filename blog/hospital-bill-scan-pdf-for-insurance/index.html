@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,16 +3145,32 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / Hospital bill scans into one insurance PDF</p>
       <h1>Hospital bill scans into one insurance PDF</h1>
-      <p>2026-09-25 · Pdf Editor, India, health insurance, hospital bills</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-09-25">25 September 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/hospital-bill-scan-pdf-for-insurance-960.webp" srcset="/images/blog/hospital-bill-scan-pdf-for-insurance-480.webp 480w, /images/blog/hospital-bill-scan-pdf-for-insurance-960.webp 960w, /images/blog/hospital-bill-scan-pdf-for-insurance-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Hospital bill scans into one insurance PDF" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#collect-pages-in-the-order-the-form-lists">Collect pages in the order the form lists</a></li>
+              <li><a href="#turn-ward-photos-into-real-pages">Turn ward photos into real pages</a></li>
+              <li><a href="#name-the-file-with-the-claim-clue">Name the file with the claim clue</a></li>
+              <li><a href="#store-the-pack-until-the-claim-ends">Store the pack until the claim ends</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/hospital-bill-scan-pdf-for-insurance-960.webp" srcset="/images/blog/hospital-bill-scan-pdf-for-insurance-480.webp 480w, /images/blog/hospital-bill-scan-pdf-for-insurance-960.webp 960w, /images/blog/hospital-bill-scan-pdf-for-insurance-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Hospital bill scans into one insurance PDF" width="1400" height="900" />
 <p>Health claims in India stall when the discharge summary, the final bill, the pharmacy slips, and the reports sit in four chats as photos. The insurer or TPA usually wants a PDF in a stated order, with the claim or admission number visible, and without last year's reports mixed in. On Windows you can turn those scans into pages, drop blanks, merge only what the form listed, and name the file so the helpdesk can find it. Use bills from the treatment you are claiming. Do not change amounts, dates, or hospital names on the scan. If a figure looks wrong, ask the hospital for a revised bill.</p>
-<h2>Collect pages in the order the form lists</h2>
+<h2 id="collect-pages-in-the-order-the-form-lists">Collect pages in the order the form lists</h2>
 <p>Open the claim checklist and write the sequence, which is often discharge summary, final bill, payment receipt, reports, and pharmacy invoices. Sort your scans to that sequence before you merge. A beautiful single PDF in the wrong order still gets a query. If a report has two sides, keep the back immediately after the front. If a bill has a blank reverse, leave that reverse out so the reviewer does not think a page failed to scan. Page count should match the papers you mean to send, not every sheet the scanner pulled in.</p>
 <p>Keep each hospital document type identifiable. If the TPA wants separate uploads, do not merge yet. Build one PDF per slot and name them. If the TPA wants one file, merge only after each piece is upright and readable. Add a simple first page only when they asked for a covering list. Otherwise the summary should be page one because that is what their checklist named first. Then count the pages against the list.</p>
 <ul>
@@ -3016,23 +3179,31 @@ min-height: 42px;
 <li>Pharmacy invoices for this admission only</li>
 <li>No reports from an older, unrelated visit</li>
 </ul>
-<h2>Turn ward photos into real pages</h2>
+<h2 id="turn-ward-photos-into-real-pages">Turn ward photos into real pages</h2>
 <p>Photos taken in a corridor are skewed and grey. On the PC, crop to the paper, rotate until the print is upright, and export PDF pages. Read the patient name, the admission date, and the total. A thumb over the total is a reshoot, not a chance to type the total in a box. Stamps and signatures should remain visible. Do not raise contrast so far that a seal disappears. If the hospital gave a digital bill PDF, use that file instead of a photo of the printout. Digital pages stay sharp.</p>
 <p>Split a long scan if it mixed two patients or two admissions. Claim files are personal. Another patient's page in your PDF is a serious mistake. Delete that page and rescan yours. If your own bill runs to many pages, keep them all if the checklist says the full bill. Do not drop the page that shows discounts or deposits. Reviewers compare the amount you claimed with the amount on that page.</p>
-<h2>Name the file with the claim clue</h2>
+<h2 id="name-the-file-with-the-claim-clue">Name the file with the claim clue</h2>
 <p>Use the patient name, the hospital short name, and the admission month, or the claim number once you have it. Example: Claim-Mehta-CityHospital-Sep2026.pdf. Avoid bill-final.pdf when the family has more than one claim in a year. If you must resubmit after a query, add a version and say in the mail which pages changed. Replace a blurry report. Do not reorder the whole story unless they asked for a new sequence.</p>
 <p>Check the size cap on the TPA portal before you upload. Compress the merged PDF if needed, then reopen and read the bill total and the patient UHID or hospital number. Those identifiers are how the cashless or reimbursement desk matches you. A file that is small but unreadable will be queried, and you will rebuild it under a deadline. Keep the uncompressed copy at home until the claim is closed.</p>
-<h2>Store the pack until the claim ends</h2>
+<h2 id="store-the-pack-until-the-claim-ends">Store the pack until the claim ends</h2>
 <p>Insurers ask for the same PDF again when a query is raised weeks later. Keep a folder with the merged file, the separate originals, and the acknowledgement. Do not rely on the upload history in the portal alone. Pdf Buddy can merge the pages, rotate the sideways ones, and compress on your PC. The medical file does not need to sit on a random website that offers free joining. Upload only on the insurer or TPA channel named in your policy.</p>
 <p>When the claim is paid or closed, keep the PDF with the year. Families often need the same papers for a second policy or for employer reimbursement. You are organising bills you received for care that happened. If a receipt is missing, ask the hospital billing desk for a duplicate. Do not recreate a bill in a writer to fill a gap in the pack. A duplicate from the billing desk is the right page.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>The TPA wants one PDF. Should I include old MRI plates from last year?</strong> Include only the documents this claim's checklist names for this admission. Old reports confuse the medical reviewer and add size. If a doctor letter says an older report is required, add that report as its own clearly labelled section, not as loose pages at the end.</p>
 <p><strong>A bill photo is dark. Can I type the total on the page?</strong> Reshoot or ask the hospital for a digital bill. The total must be the hospital's print, readable in the PDF. Typing a figure over a dark photo changes the document. Compress only after the printed numbers are already clear. Read the total before you upload.</p>
 <p><strong>Some pages are sideways after the merge. Will the portal mind?</strong> Yes. Rotate those pages upright and export again before you upload. Reviewers and their print queues assume portrait bills. A sideways total is a common reason a complete claim is marked unreadable. Fix it on the PC, then send the new file.</p>
 <p>Build the insurance PDF on the PC and upload it on the insurer or TPA site. Pdf Buddy, by Easy Peeze Tools, is a Windows desktop PDF editor that works on the PC. Bills are not uploaded to a random website. The free tier is 2 files a day. Pricing starts at ₹149. Open <a href="../../pricing/">pricing</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

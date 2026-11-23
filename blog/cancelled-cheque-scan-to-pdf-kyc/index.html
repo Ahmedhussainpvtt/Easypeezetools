@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,16 +3145,32 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / Cancelled cheque scan turned into a clean one-page PDF</p>
       <h1>Cancelled cheque scan turned into a clean one-page PDF</h1>
-      <p>2026-09-23 · Pdf Editor, India, KYC, cancelled cheque</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-09-23">23 September 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/cancelled-cheque-scan-to-pdf-kyc-960.webp" srcset="/images/blog/cancelled-cheque-scan-to-pdf-kyc-480.webp 480w, /images/blog/cancelled-cheque-scan-to-pdf-kyc-960.webp 960w, /images/blog/cancelled-cheque-scan-to-pdf-kyc-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Cancelled cheque scan turned into a clean one-page PDF" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#start-from-the-cheque-you-are-allowed-to-send">Start from the cheque you are allowed to send</a></li>
+              <li><a href="#make-it-one-page-not-a-collage">Make it one page, not a collage</a></li>
+              <li><a href="#name-the-file-so-the-kyc-desk-can-see-what-it-is">Name the file so the KYC desk can see what it is</a></li>
+              <li><a href="#send-it-only-on-the-form-that-asked">Send it only on the form that asked</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/cancelled-cheque-scan-to-pdf-kyc-960.webp" srcset="/images/blog/cancelled-cheque-scan-to-pdf-kyc-480.webp 480w, /images/blog/cancelled-cheque-scan-to-pdf-kyc-960.webp 960w, /images/blog/cancelled-cheque-scan-to-pdf-kyc-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Cancelled cheque scan turned into a clean one-page PDF" width="1400" height="900" />
 <p>Banks, brokers, and employers still ask for a cancelled cheque when they need the account number, IFSC, and the name printed by the bank. The scan that arrives from a phone is often crooked, includes the whole passbook, or cuts off the MICR line. For a KYC form you are allowed to submit, make a single-page PDF of that cheque on Windows, check every digit, and upload only that page. Cancel the cheque the way your bank expects, usually with a pen line and the word cancelled, before you scan. Do not draw a new account number or paste another person's cheque into the page.</p>
-<h2>Start from the cheque you are allowed to send</h2>
+<h2 id="start-from-the-cheque-you-are-allowed-to-send">Start from the cheque you are allowed to send</h2>
 <p>Use a cheque from the account you are registering, in the name the KYC form already has. Write cancelled across it as your bank or the form instructs, without hiding the account number, IFSC, or the printed name. Then photograph or scan it flat, with the four corners visible and the long number along the bottom in the frame. Leave other cheques out of the picture. A second leaf in the same photo makes the reviewer wonder which account you meant. One cheque, one page, one account.</p>
 <p>If the leaf is from an old book and the printed name is a previous spelling, do not cover it with a text box. Order a fresh cheque book or ask the branch for a proof they accept instead. KYC is a match between the form and the instrument. Editing the name on the image breaks that match and can be treated as a false document. Your job is a faithful copy of a cheque you hold, for a form you are permitted to file.</p>
 <ul>
@@ -3016,23 +3179,31 @@ min-height: 42px;
 <li>The word cancelled does not hide those lines</li>
 <li>No second cheque in the same photo</li>
 </ul>
-<h2>Make it one page, not a collage</h2>
+<h2 id="make-it-one-page-not-a-collage">Make it one page, not a collage</h2>
 <p>Crop to the cheque and a small margin. Do not include the table, your fingers, or a photo of the banking app beside it. Export a PDF with a single page. Many KYC slots reject a three-page file or an image that is still a JPG with a renamed extension. Open the PDF and zoom until you can read the account number without guessing a 5 from a 6. If a digit is soft, rescan under a lamp. Do not paint the digit darker by hand.</p>
 <p>Rotate the page so the cheque reads left to right in the normal way. A sideways cheque is a common reject even when the photo was sharp. If the form also wants a passbook front page, that is a second file unless the instruction says to combine them. Keep the cheque PDF small enough for the slot after you have checked the digits. Compress only if Windows shows you are over the cap, then read the account number again.</p>
-<h2>Name the file so the KYC desk can see what it is</h2>
+<h2 id="name-the-file-so-the-kyc-desk-can-see-what-it-is">Name the file so the KYC desk can see what it is</h2>
 <p>Save it as Cancelled-Cheque-YourBank.pdf or a similar plain name, without your full account number in the file name if the mail will pass through other people. The number belongs on the page, where the reviewer expects it. Avoid names like image1.pdf. If you must resubmit, add a version, not the word final twice. Put the file in a KYC folder on the PC next to the form acknowledgement. That folder is the one you will reopen if the desk asks again.</p>
 <p>Some forms ask for the cheque and a bank letter in one upload. Follow that sentence only. If it says one file, put the cheque first and the letter second, both upright. If it says two uploads, do not merge. Preview the PDF on the PC before you switch to the browser. A last-minute merge on a phone is how blank pages and the wrong leaf get included. Check the account digits once more in that preview.</p>
-<h2>Send it only on the form that asked</h2>
+<h2 id="send-it-only-on-the-form-that-asked">Send it only on the form that asked</h2>
 <p>Upload the PDF on the official KYC page or attach it to the employer's known process. Do not drop the same scan into a random website that offers to host KYC packs. The cheque shows a live account. Keep the local PDF until the account is verified, then store it with the rest of that application. Delete extra shots from the gallery so an old leaf is not picked up later.</p>
 <p>If the reviewer says the image is unclear, send a new scan of the same cancelled cheque, not a different account, unless you are changing the account through the proper form. Do not sharpen numbers inside an editor. A clean second photo is the right fix. Pdf Buddy can turn the image into a one-page PDF, rotate it, and compress it on Windows after you have checked the print with your own eyes.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>Can I type the account number onto a blank cheque image?</strong> No. Submit a scan of the cheque the bank issued for the account you are registering, with the numbers the bank printed. Typing a new number, or borrowing a cheque image, is not a cleanup step. If the leaf is damaged, ask the bank for another leaf or for a letter they accept.</p>
 <p><strong>The KYC slot wants a PDF under a small size. What should I do?</strong> Crop to one cheque, export a single page, and compress only until the account number and IFSC are still easy to read. Check the size in Windows against the number on that slot. A blurry tiny file will be rejected after you thought the upload had worked.</p>
 <p><strong>Should the passbook photo sit on the same page?</strong> Keep the cheque as its own page. Add the passbook only when the instruction puts both in one file, and then as the next page, upright. Two documents squeezed into one photo are hard to read and often fail the preview.</p>
 <p>Make the one-page cheque PDF on your PC, then upload it only on the KYC form that asked. Pdf Buddy, by Easy Peeze Tools, is a Windows desktop PDF editor that works on the PC. The scan is not uploaded to a random website. The free tier is 2 files a day. Pricing starts at ₹149. Get it from <a href="../../download/">download</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

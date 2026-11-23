@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,16 +3145,32 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / GSTR-1 in November: build the October invoice PDF pack on Windows</p>
       <h1>GSTR-1 in November: build the October invoice PDF pack on Windows</h1>
-      <p>2026-10-31 · Pdf Editor, India, GST, GSTR-1, invoices</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-10-31">31 October 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/gst-november-gstr1-invoice-pdf-pack-960.webp" srcset="/images/blog/gst-november-gstr1-invoice-pdf-pack-480.webp 480w, /images/blog/gst-november-gstr1-invoice-pdf-pack-960.webp 960w, /images/blog/gst-november-gstr1-invoice-pdf-pack-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="GSTR-1 in November: build the October invoice PDF pack on Windows" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#start-from-the-invoice-series-not-from-the-inbox">Start from the invoice series, not from the inbox</a></li>
+              <li><a href="#name-files-so-they-sort-themselves">Name files so they sort themselves</a></li>
+              <li><a href="#merge-per-series-then-add-page-numbers">Merge per series, then add page numbers</a></li>
+              <li><a href="#credit-notes-amendments-and-what-stays-with-you">Credit notes, amendments, and what stays with you</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/gst-november-gstr1-invoice-pdf-pack-960.webp" srcset="/images/blog/gst-november-gstr1-invoice-pdf-pack-480.webp 480w, /images/blog/gst-november-gstr1-invoice-pdf-pack-960.webp 960w, /images/blog/gst-november-gstr1-invoice-pdf-pack-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="GSTR-1 in November: build the October invoice PDF pack on Windows" width="1400" height="900" />
 <p>October is the heaviest billing month of the year for many Indian shops, wholesalers and service firms, and every one of those festive invoices has to show up in the GSTR-1 filed in November. Monthly filers normally face the 11th, and quarterly filers under QRMP can push B2B invoices through the IFF by the 13th, but the GST portal is the place to confirm the date that applies to you. The return is data, not PDFs. Still, your accountant will ask for the invoice copies to tally that data, and a folder of WhatsApp forwards is where the evening goes. Build the October pack on a Windows PC before the reminder call comes.</p>
-<h2>Start from the invoice series, not from the inbox</h2>
+<h2 id="start-from-the-invoice-series-not-from-the-inbox">Start from the invoice series, not from the inbox</h2>
 <p>GSTR-1 asks for the documents issued during the month, with a summary of each series you used: from which number to which number, and how many were cancelled. So the first job is a list, not a merge. Open the billing software or the bill book and write down the first and last October number for each series, such as tax invoices, bills of supply, and exports if you have them. Then check that a PDF exists for every number in between.</p>
 <p>A gap in the series is the most common question an accountant sends back. If invoice 412 was cancelled, keep its PDF with CANCELLED in the file name and do not delete it. If a number was skipped by mistake, write that in a small note file inside the folder. Do not create a back-dated invoice to fill the hole. The pack should show what actually happened in October, and the note saves a phone call on the 10th.</p>
 <ul>
@@ -3016,23 +3179,31 @@ min-height: 42px;
 <li>B2B invoices with a buyer GSTIN kept apart from counter sales</li>
 <li>A short note for any number that was skipped</li>
 </ul>
-<h2>Name files so they sort themselves</h2>
+<h2 id="name-files-so-they-sort-themselves">Name files so they sort themselves</h2>
 <p>Billing software exports names like Invoice(3).pdf or a long random string. Rename each file with the series, the number padded with zeros, and the buyer, for example INV-0412-Sharma-Traders.pdf. Padding matters: without it, Windows sorts 1000 before 200 and the pack looks out of order when it is not. A date at the front, written as 2026-10-18, helps when two series ran in the same month. Pick one pattern and use it for the whole year.</p>
 <p>Scanned handwritten bills need one more step. A phone photo of a bill book page is an image, and a folder of mixed JPG and PDF files is hard to merge and harder to search. Turn each image into a PDF, rotate it upright, and crop the table edge out of the frame. If the GSTIN or the tax amount is not readable at normal zoom, photograph the page again in daylight. A blurred invoice is the same as a missing one when the tally starts.</p>
-<h2>Merge per series, then add page numbers</h2>
+<h2 id="merge-per-series-then-add-page-numbers">Merge per series, then add page numbers</h2>
 <p>One giant October.pdf feels complete and is painful to use. Merge by series instead: one PDF for B2B tax invoices, one for B2C, one for credit and debit notes. Inside each file, keep invoice number order. The accountant can then scroll in the same order as the sales register. If you have hundreds of invoices, split the B2B file by week so each part stays small enough to mail.</p>
 <p>After the merge, add page numbers and, if you can, a bookmark at every tenth invoice. When a query arrives saying the taxable value on invoice 455 does not match, you can reply with a page number instead of resending the file. Pdf Buddy can merge, number and bookmark on the PC. Check the page count against your list before you send anything. A merge that silently dropped a two-page invoice is worse than no merge.</p>
-<h2>Credit notes, amendments, and what stays with you</h2>
+<h2 id="credit-notes-amendments-and-what-stays-with-you">Credit notes, amendments, and what stays with you</h2>
 <p>Festive sales bring returns, and returns bring credit notes. They are reported separately and linked to the original invoice, so keep each credit note PDF beside a copy of the invoice it reduces, or at least put the original number in the file name. Do the same for debit notes. If you corrected a September invoice in October, that amendment belongs in its own small folder with both versions, clearly marked old and new.</p>
 <p>Send the accountant the merged series files, the series summary, and the note on gaps. Keep the single-invoice PDFs on your own drive, because buyers will ask for copies in January when their input credit does not match. Do not edit amounts on a PDF to match the return. If a figure is wrong, the fix is a credit note, a debit note or an amendment, which your accountant will advise. The pack is a record, and a record is only useful when it has not been touched up.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>Does the GST portal need invoice PDFs uploaded with GSTR-1?</strong> No. GSTR-1 takes invoice details as data, typed in or uploaded from your software. The PDFs are for your accountant's tally, for buyers who ask for copies, and for any later notice. That is why the pack should live on your PC in a form you can reopen, not only inside the billing software.</p>
 <p><strong>Should cancelled invoices be in the pack?</strong> Yes. The return asks how many documents in each series were cancelled, so a cancelled invoice is part of the count. Keep its PDF with the word CANCELLED in the file name and leave it in number order. Deleting it creates a gap that someone will have to explain later.</p>
 <p><strong>The merged PDF is too large to mail. What now?</strong> Split it by week or by a block of invoice numbers, then compress each part and open it again to confirm the GSTIN and amounts are still sharp. Name the parts with the range, such as B2B-0401-0450.pdf. Do not compress so hard that a scanned bill becomes unreadable.</p>
 <p>Build the October pack once and the November filing becomes a tally, not a search. Pdf Buddy, by Easy Peeze Tools, is a Windows desktop PDF editor that works on the PC, so your invoices are not uploaded to a random website. The free tier is 2 files a day. Pricing starts at ₹149. Get it from the <a href="../../download/">download page</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

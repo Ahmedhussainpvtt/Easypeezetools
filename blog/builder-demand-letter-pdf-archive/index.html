@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,16 +3145,32 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / Keep builder demand letters as named PDFs by date</p>
       <h1>Keep builder demand letters as named PDFs by date</h1>
-      <p>2026-09-29 · Pdf Editor, India, builder, demand letter</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-09-29">29 September 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/builder-demand-letter-pdf-archive-960.webp" srcset="/images/blog/builder-demand-letter-pdf-archive-480.webp 480w, /images/blog/builder-demand-letter-pdf-archive-960.webp 960w, /images/blog/builder-demand-letter-pdf-archive-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Keep builder demand letters as named PDFs by date" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#save-the-letter-the-day-it-arrives">Save the letter the day it arrives</a></li>
+              <li><a href="#put-the-date-and-the-amount-in-the-name">Put the date and the amount in the name</a></li>
+              <li><a href="#what-the-bank-usually-wants-later">What the bank usually wants later</a></li>
+              <li><a href="#a-folder-you-can-hand-to-a-lawyer-or-a-lender">A folder you can hand to a lawyer or a lender</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/builder-demand-letter-pdf-archive-960.webp" srcset="/images/blog/builder-demand-letter-pdf-archive-480.webp 480w, /images/blog/builder-demand-letter-pdf-archive-960.webp 960w, /images/blog/builder-demand-letter-pdf-archive-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Keep builder demand letters as named PDFs by date" width="1400" height="900" />
 <p>Home buyers receive demand letters by mail and on builder portals: a milestone, an amount, a due date, and a flat number. The file is often named Demand.pdf every time, so the new letter replaces the old one in Downloads. Months later, when the bank or a consumer complaint needs the April demand, only the September file remains. Save each letter on Windows the day it arrives, with the date and the amount in the file name, and leave the previous letter untouched. You are archiving letters the builder sent you. Do not edit the figure to match what you wish you owed.</p>
-<h2>Save the letter the day it arrives</h2>
+<h2 id="save-the-letter-the-day-it-arrives">Save the letter the day it arrives</h2>
 <p>Download the PDF from the builder portal or from the mail, open it, and confirm the flat number and the milestone name. Then save a copy into a folder for that project before you do anything else. Do not leave it in Downloads. The next letter will reuse the same file name and Windows will ask you to replace the file, and under time pressure people click yes. A folder such as Flat-A-1204/Demands holds the history. One letter, one file, even if the amount is small.</p>
 <p>If the portal shows the letter on screen but the download is an image, turn that image into a PDF on the PC and store it the same way. A photo in the gallery will not sort by milestone later. If the mail has both a letter and a ledger, keep them as two files with the same date prefix. Do not merge them until a bank specifically asks for one attachment. Separate files are easier to match to the demand the bank names.</p>
 <ul>
@@ -3016,23 +3179,31 @@ min-height: 42px;
 <li>Ledger or invoice kept beside it, not inside it, until someone asks</li>
 <li>Downloads is not the archive</li>
 </ul>
-<h2>Put the date and the amount in the name</h2>
+<h2 id="put-the-date-and-the-amount-in-the-name">Put the date and the amount in the name</h2>
 <p>A practical name is 2026-04-12-Slab3-Demand-1850000.pdf, using the date on the letter and the total demanded. You can see the sequence in the folder without opening each file. Avoid final.pdf and latest.pdf. Those names are how the cheaper or earlier letter disappears. If a revised demand arrives for the same milestone, keep the first file and add Rev2 to the new one. The revision is a new fact. The original demand still explains what you were told in April.</p>
 <p>Do not put your full loan account number in the file name if the folder might be shared with a family member's laptop backup that is not private. The letter itself has the details. The name needs the date, the milestone, and enough of the amount to tell two letters apart. If two letters share a date, add the milestone word. Spacing and extra dots in the name cause trouble on some bank upload forms, so prefer hyphens.</p>
-<h2>What the bank usually wants later</h2>
+<h2 id="what-the-bank-usually-wants-later">What the bank usually wants later</h2>
 <p>Disbursement teams ask for the current demand and sometimes the previous receipts. Send the file that matches the milestone they named, not the newest file by habit. Open it and check the figure against the mail you are about to write. If they want proof you paid an earlier demand, that is the receipt, not the demand letter. Keep receipts in a sibling folder so you do not attach a demand and call it a payment proof.</p>
 <p>If a letter is sideways or the scan from a site office cut off the flat number, rotate or rescan before you archive it. The copy you store should be readable without tilting your head. Compress only when a mail limit requires it, and read the amount afterward. A demand you cannot read is not an archive. If the builder PDF is locked, use the password from the portal. If you do not have it, use the portal download again while you are logged in. Do not break the lock.</p>
-<h2>A folder you can hand to a lawyer or a lender</h2>
+<h2 id="a-folder-you-can-hand-to-a-lawyer-or-a-lender">A folder you can hand to a lawyer or a lender</h2>
 <p>Sort the folder by name so the dates run in order. When a dispute about delay or an extra charge starts, this list is the timeline. Export a single PDF of the letters only if a counsel asks for one bundle, and keep the separate files. Pdf Buddy can merge that bundle, rotate a bad scan, and save it on the PC. There is no reason to upload every demand to a random locker site. The builder portal is the source. Your disk is the copy you control.</p>
 <p>After possession, do not empty the folder. Warranty issues and the final statement refer to earlier milestones. You are keeping letters you received about a flat you are paying for. If a demand seems wrong, write to the builder and keep their reply as another dated PDF. Do not change the amount on the letter and send that edited file to the bank as if the builder had issued it.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>The builder uses the same file name every month. How do I stop the overwrite?</strong> Save each download into the flat folder with the letter date and milestone in the name, the same day. Leave last month's file where it is. If Windows asks to replace Demand.pdf in Downloads, cancel and save with a new name instead.</p>
 <p><strong>A revised demand replaced the milestone. Do I delete the first letter?</strong> Keep the first letter and file the revision beside it with Rev2 in the name. The first letter shows what was asked earlier. Send the revision to the bank when it is the one they should pay against, and say which file is current.</p>
 <p><strong>Can I merge every demand into one PDF now to stay tidy?</strong> Stay with separate dated files for the archive. Merge a copy only when a bank or a lawyer asks for a single attachment, and do not delete the parts afterward. One bundle is harder to correct when a single milestone is disputed.</p>
 <p>File each demand on the PC the day it arrives, under a name that includes the date. Pdf Buddy, by Easy Peeze Tools, is a Windows desktop PDF editor that works on the PC. Letters are not uploaded to a random website. The free tier is 2 files a day. Pricing starts at ₹149. See <a href="../../pricing/">pricing</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

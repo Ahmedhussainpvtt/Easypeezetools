@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,16 +3145,32 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / Schengen or travel visa file: order, size, and one PDF per instruction</p>
       <h1>Schengen or travel visa file: order, size, and one PDF per instruction</h1>
-      <p>2026-09-19 · Pdf Editor, India, Schengen visa, travel documents</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-09-19">19 September 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/schengen-visa-pdf-pack-on-windows-960.webp" srcset="/images/blog/schengen-visa-pdf-pack-on-windows-480.webp 480w, /images/blog/schengen-visa-pdf-pack-on-windows-960.webp 960w, /images/blog/schengen-visa-pdf-pack-on-windows-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Schengen or travel visa file: order, size, and one PDF per instruction" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#one-pdf-per-checklist-line">One PDF per checklist line</a></li>
+              <li><a href="#file-names-the-counter-can-match">File names the counter can match</a></li>
+              <li><a href="#check-size-on-that-form-not-from-memory">Check size on that form, not from memory</a></li>
+              <li><a href="#what-to-leave-out-of-the-pack">What to leave out of the pack</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/schengen-visa-pdf-pack-on-windows-960.webp" srcset="/images/blog/schengen-visa-pdf-pack-on-windows-480.webp 480w, /images/blog/schengen-visa-pdf-pack-on-windows-960.webp 960w, /images/blog/schengen-visa-pdf-pack-on-windows-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Schengen or travel visa file: order, size, and one PDF per instruction" width="1400" height="900" />
 <p>Travellers in India often meet a Schengen or embassy checklist as a week of downloads: the form, a cover letter, insurance, flight tickets, a hotel voucher, and bank statements from net banking. The counter and the upload link usually want those as separate PDFs, in the order the instruction lists, each under a size cap written on that form. One blended file looks complete and still gets a remark because item six cannot be found. Spend an evening on the PC turning each line into its own named PDF, check the size before you click upload, and carry that folder. The appointment is calmer when you are not renaming camera photos in the waiting room.</p>
-<h2>One PDF per checklist line</h2>
+<h2 id="one-pdf-per-checklist-line">One PDF per checklist line</h2>
 <p>A travel visa checklist is a list of separate proofs, not a request for one long binder. The line for insurance is not the same slot as the line for stay bookings. When those land in a single merged file, the person checking the set has to scroll and guess where one item ends. Make one PDF for each line the instruction names. Leave a merge for the day that centre writes that it wants a single combined file. Until then, separate files are easier to replace if one page is sent back. Keep the originals in a subfolder so a fresh export does not start from a photo.</p>
 <p>Read the checklist twice and number your files in that same order, even if your own logic would put the passport copy first. Some Schengen lists put the application form and photograph sheet ahead of money papers. A file that is correct but out of order still creates a delay at a busy VFS desk. If a line says 'not required' for your employment type, do not upload an empty PDF to fill the gap. Empty files look like missing scans. Skip that line and follow the note beside it.</p>
 <ul>
@@ -3016,23 +3179,31 @@ min-height: 42px;
 <li>Bank statements only for the months the list names</li>
 <li>Employment or leave letter if that line applies to you</li>
 </ul>
-<h2>File names the counter can match</h2>
+<h2 id="file-names-the-counter-can-match">File names the counter can match</h2>
 <p>Name each file with the checklist words, not with the scan shop's default IMG name. A clear pattern is a short trip label, then the document, then the month, such as Schengen-Insurance-Oct2026.pdf. Staff and upload forms search by those words. A poetic file name wastes the few minutes you have at the counter. Avoid spaces if the portal is old, and avoid pasting your full passport number into every file name on a shared PC. The folder can sit on your own machine. The public file name only needs to identify the document type.</p>
 <p>If you download the same voucher twice, the browser will offer a name that ends in a bracket and a number. That copy is easy to upload by mistake. Delete the older download only after you open both and confirm which file has every page. Then rename the keeper. Do the rename on Windows before you connect to the visa site, because some portals keep the original file name in their receipt and a later rename on your PC will not change what they already stored.</p>
-<h2>Check size on that form, not from memory</h2>
+<h2 id="check-size-on-that-form-not-from-memory">Check size on that form, not from memory</h2>
 <p>Visa portals publish a size cap per file, and it is rarely the same number as a bank app or a mail attachment. Open the instruction beside the upload button and write the cap next to the file. If the insurance PDF is over that cap, compress that one file and open it again to see that the policy number and dates are still readable. Do not compress the whole folder to one setting. A photograph sheet and a text form do not need the same treatment. After export, check the page count. A compress step that drops a page is a failed file, even if the size looks perfect.</p>
 <p>Colour scans of stamps can be larger than the text pages around them. If only the passport copy is heavy, export that copy on its own and leave the cover letter alone. Pdf Buddy can compress and can also turn a clean image into a PDF when the insurer sent a picture instead of a file. Work on the PC. Keep a before-and-after pair until the portal accepts the upload. If a statement PDF asks for a password, use the password your bank already sent you. You need that password. Guessing or stripping it is not part of preparing a visa file.</p>
-<h2>What to leave out of the pack</h2>
+<h2 id="what-to-leave-out-of-the-pack">What to leave out of the pack</h2>
 <p>Extra pages feel helpful and often hurt. A 12-month statement, old hotel bookings from a cancelled trip, and a relative's insurance card do not answer the line in front of you. They add size and they invite questions. Include the months and the travellers the instruction names. If a child is on the same appointment, keep that child's passport copy in a clearly named file, not as a surprise page at the end of yours. Mixed identities in one PDF are a common reason a family set is marked incomplete.</p>
 <p>When the set is accepted, copy the folder to a drive you control and do not delete it the same evening. Embassies sometimes ask for a replacement page days later. A camera roll is a poor archive because photos get compressed in chat apps and lose the booking reference. Store the PDFs. You are submitting documents you already have for a visa you are allowed to request, not building papers you do not hold. If a page is missing, go back to the issuer and ask for a fresh copy.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>Should the whole Schengen set be one PDF?</strong> Only when that centre's instruction says one file. Most lists want a separate PDF for insurance, stay, and bank statements. A single merge hides which pages belong to which line, and you cannot swap a rejected insurance page without rebuilding the set. Keep the separate files until the form text asks for a combined upload.</p>
 <p><strong>What if my bank statement PDF is locked?</strong> Use the password the bank already gave you in net banking or by SMS, then export the pages the checklist asks for. If you do not know that password, stop and request it from the bank. Preparing a visa file does not include opening a PDF when you never received the password.</p>
 <p><strong>Can I photograph documents at the scan shop and upload from the phone?</strong> You can capture the pages, but turn them into named PDFs on the PC and upload those files. A row of gallery pictures is easy to mix up, and chat apps reduce quality. Check each page upright, in checklist order, before you leave home.</p>
 <p>Build the visa folder on the laptop you will carry to the appointment. Pdf Buddy, by Easy Peeze Tools, is a Windows desktop PDF editor that works on the PC, so these files are not uploaded to a random website. The free tier is 2 files a day. Pricing starts at ₹149. Start from the <a href="../../download/">download page</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

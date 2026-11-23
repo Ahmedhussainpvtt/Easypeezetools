@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,19 +3145,35 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / Diwali week for a shop: an invoice backup folder that survives the rush</p>
       <h1>Diwali week for a shop: an invoice backup folder that survives the rush</h1>
-      <p>2026-11-02 · Pdf Editor, India, e-invoice, GST, Diwali</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-11-02">2 November 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/diwali-shop-e-invoice-backup-folder-960.webp" srcset="/images/blog/diwali-shop-e-invoice-backup-folder-480.webp 480w, /images/blog/diwali-shop-e-invoice-backup-folder-960.webp 960w, /images/blog/diwali-shop-e-invoice-backup-folder-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Diwali week for a shop: an invoice backup folder that survives the rush" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#the-invoice-portal-is-not-your-archive">The invoice portal is not your archive</a></li>
+              <li><a href="#a-folder-per-day-during-the-rush">A folder per day during the rush</a></li>
+              <li><a href="#check-that-the-qr-and-irn-survived-the-export">Check that the QR and IRN survived the export</a></li>
+              <li><a href="#two-copies-and-a-ten-minute-closing-habit">Two copies and a ten minute closing habit</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/diwali-shop-e-invoice-backup-folder-960.webp" srcset="/images/blog/diwali-shop-e-invoice-backup-folder-480.webp 480w, /images/blog/diwali-shop-e-invoice-backup-folder-960.webp 960w, /images/blog/diwali-shop-e-invoice-backup-folder-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Diwali week for a shop: an invoice backup folder that survives the rush" width="1400" height="900" />
 <p>For a shop, a distributor or a small manufacturer, the days from Dhanteras to Bhai Dooj can carry a month of billing. The billing PC runs twelve hours, the printer jams, and invoices leave by WhatsApp before anyone saves a copy. Then the hard disk makes a noise in the second week of November. An invoice backup folder is a dull habit that costs ten minutes at closing time and protects the busiest week of the year. Set it up before the rush starts, on the same Windows PC that does the billing, and let one named person own it.</p>
-<h2>The invoice portal is not your archive</h2>
+<h2 id="the-invoice-portal-is-not-your-archive">The invoice portal is not your archive</h2>
 <p>Businesses above the e-invoicing turnover limit report B2B invoices to an Invoice Registration Portal and get back an IRN and a signed QR code. That registration proves the invoice exists. It does not make the portal a filing cabinet. Signed invoices are available for download there only for a short time, and after that your own copy is the copy. Smaller shops that are below the limit issue ordinary tax invoices, and the same point applies even more: nobody else is holding your PDFs.</p>
 <p>Billing software does keep the data, but data inside one program on one PC is a single point of failure. A subscription lapses, a database file gets corrupted, or the machine is replaced in a hurry and the old backup turns out to be from August. A plain folder of invoice PDFs can be opened on any computer without the software. It is the cheapest insurance a shop can buy in Diwali week.</p>
-<h2>A folder per day during the rush</h2>
+<h2 id="a-folder-per-day-during-the-rush">A folder per day during the rush</h2>
 <p>Create a parent folder for the month, such as Invoices-2026-11, and inside it one folder per billing day named with the date first: 2026-11-06, 2026-11-07, and so on. At closing, export that day's invoices from the software as PDF into the day's folder. Most billing tools can export a date range in one go. If yours exports one long file, keep it and name it with the date and the first and last invoice number.</p>
 <p>Use names that will still make sense in March. A pattern like INV-1042-Gupta-Electricals.pdf sorts by number and tells you the buyer without opening the file. Pad the number with zeros so the order stays right when the series crosses a thousand. Credit notes for returns go in the same day's folder with CN at the start of the name. Do not mix proforma invoices and quotations into this folder. They are not tax documents.</p>
 <ul>
@@ -3019,20 +3182,28 @@ min-height: 42px;
 <li>Credit notes in the same folder, marked CN</li>
 <li>Quotations and proformas kept somewhere else</li>
 </ul>
-<h2>Check that the QR and IRN survived the export</h2>
+<h2 id="check-that-the-qr-and-irn-survived-the-export">Check that the QR and IRN survived the export</h2>
 <p>Before you trust the folder, open three invoices at random and look at them at normal zoom. The IRN should be complete, the QR code should be sharp with clean edges, and the GSTIN of both parties should be readable. A QR that looks grey or smeared will not scan at a transporter's gate or at the buyer's accounts desk. If the export is poor, change the export setting in the software. Do not screenshot the invoice as a workaround.</p>
 <p>Be careful with compression. A text invoice is already small, and squeezing it further saves little while risking the QR. If one file is heavy because it carries a large logo or a scanned annexure, compress that file alone and scan the QR from the screen with a phone to confirm it still reads. Keep the original export untouched in the day's folder, and put any compressed copy for WhatsApp in a separate Sent folder.</p>
-<h2>Two copies and a ten minute closing habit</h2>
+<h2 id="two-copies-and-a-ten-minute-closing-habit">Two copies and a ten minute closing habit</h2>
 <p>A backup on the same disk is not a backup. At closing, copy the day's folder to a pen drive or an external disk that leaves the shop with the owner, and if you use a cloud drive, let it sync a second copy to an account the business controls. Rotate two pen drives if you can, one for odd dates and one for even, so a single lost drive never takes the whole week with it.</p>
 <p>Give the job to one person by name and write it on the closing checklist next to counting the cash drawer. After Bhai Dooj, merge each day into one PDF with page numbers so the accountant gets six tidy files for the festival instead of nine hundred loose ones. Pdf Buddy does that merge on the PC. Keep the loose files too. When a buyer calls in January for a copy of one invoice, you want to send one page, not a day.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>Do shops below the e-invoice limit need this folder?</strong> Yes. The habit has nothing to do with the turnover limit. Any business that issues GST invoices has to produce them later for returns, buyer queries and notices. A dated folder of PDFs on two drives is the simplest way to do that when the billing PC fails.</p>
 <p><strong>Can I just regenerate the PDF from the software later?</strong> Usually, as long as the software and its data are intact. The backup folder is for the day they are not. It also protects you from a reprint that looks different because a template or a company address was changed in between.</p>
 <p><strong>Is the WhatsApp copy sent to the customer a good enough backup?</strong> No. Chat apps are tied to one phone, and old media gets cleared when storage runs low. A forwarded image of an invoice may also be recompressed until the QR does not scan. Send from the folder, and keep the folder.</p>
 <p>Ten minutes at closing protects the biggest billing week of the year. Pdf Buddy, by Easy Peeze Tools, is a Windows desktop PDF editor that works on the PC, so customer invoices are not uploaded to a random website. The free tier is 2 files a day. Pricing starts at ₹149. See the <a href="../../download/">download page</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,16 +3145,33 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / CA November cleanup: one client folder, named PDFs, no Downloads chaos</p>
       <h1>CA November cleanup: one client folder, named PDFs, no Downloads chaos</h1>
-      <p>2026-11-16 · Pdf Editor, India, CA, client folder, PDF organise</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-11-16">16 November 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/ca-november-client-folder-cleanup-pdf-960.webp" srcset="/images/blog/ca-november-client-folder-cleanup-pdf-480.webp 480w, /images/blog/ca-november-client-folder-cleanup-pdf-960.webp 960w, /images/blog/ca-november-client-folder-cleanup-pdf-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="CA November cleanup: one client folder, named PDFs, no Downloads chaos" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#mirror-the-return-calendar-in-the-folder-tree">Mirror the return calendar in the folder tree</a></li>
+              <li><a href="#rename-before-you-merge">Rename before you merge</a></li>
+              <li><a href="#passwords-and-personal-data">Passwords and personal data</a></li>
+              <li><a href="#a-friday-empty-inbox-rule">A Friday empty-inbox rule</a></li>
+              <li><a href="#a-practical-checklist-you-can-reuse">A practical checklist you can reuse</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/ca-november-client-folder-cleanup-pdf-960.webp" srcset="/images/blog/ca-november-client-folder-cleanup-pdf-480.webp 480w, /images/blog/ca-november-client-folder-cleanup-pdf-960.webp 960w, /images/blog/ca-november-client-folder-cleanup-pdf-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="CA November cleanup: one client folder, named PDFs, no Downloads chaos" width="1400" height="900" />
 <p>November is when client WhatsApp groups start forwarding invoice photos, GSTR working papers, and challan screenshots from festive sales. December will add advance-tax and more return noise. A CA practice that still hunts inside Downloads will lose hours. Spend a cleanup pass now: one folder per client, PDFs named by document type and period, duplicates deleted, passwords handled with the password the client already shared.</p>
-<h2>Mirror the return calendar in the folder tree</h2>
+<h2 id="mirror-the-return-calendar-in-the-folder-tree">Mirror the return calendar in the folder tree</h2>
 <p>Under each client, use period folders such as 2026-10-GST and 2026-11-GST, plus a 2026-27-AdvanceTax folder. Drop GSTR workings, invoice packs, and bank proofs into the period they belong to. Do not keep a single Desktop heap labelled Urgent.</p>
 <p>If a client sends a zip of mixed years, unpack and refile before you merge anything. A wrong-year invoice in a October pack is how notice replies go sideways.</p>
 <ul>
@@ -3016,16 +3180,16 @@ min-height: 42px;
 <li>Separate KYC master that is not rewritten every month</li>
 <li>A _inbox folder emptied every Friday</li>
 </ul>
-<h2>Rename before you merge</h2>
+<h2 id="rename-before-you-merge">Rename before you merge</h2>
 <p>Rename WhatsApp images after converting them to PDF: INV-0412.pdf beats IMG-20261018.jpg. Merge only after names sort in the order you want. Add page numbers on packs you will email back to the client so queries can cite a page.</p>
 <p>Reject blurry festive bill photos early. Ask for a reshoot while the bill book still exists. A cleanup week is the right time, not the night before the portal due date.</p>
-<h2>Passwords and personal data</h2>
+<h2 id="passwords-and-personal-data">Passwords and personal data</h2>
 <p>Bank statements and AIS PDFs often arrive locked. Use the password the client already sent through the channel you both use for secrets. Do not store a master password list inside the same client folder as a plain text file named passwords.txt if that folder syncs to a shared drive.</p>
 <p>When you return a pack to the client, send only what they need. Leave your internal review notes out of the PDF merge.</p>
-<h2>A Friday empty-inbox rule</h2>
+<h2 id="a-friday-empty-inbox-rule">A Friday empty-inbox rule</h2>
 <p>Every Friday, empty _inbox into period folders or into a Rejected pile with a reason note. The habit matters more than the tool. Pdf Buddy helps with convert, merge, and compress on Windows without uploading client files to a random site.</p>
 <p>Free tier is 2 files a day. Practices that batch will want a paid plan from ₹149.</p>
-<h2>A practical checklist you can reuse</h2>
+<h2 id="a-practical-checklist-you-can-reuse">A practical checklist you can reuse</h2>
 <p>Re-open this page the next time the same situation appears. The checklist under CA November cleanup: one client folder, named PDFs, no Downloads chaos is meant to be boring on purpose: same order, same names, same place on the disk or in the Sheet. Boring is how you avoid a second scramble. Write the date you last followed the steps in a note at the top of the folder or the month tab, so you know whether the pack is fresh.</p>
 <p>If two people share the work, put one name as owner for ca november client folder cleanup pdf. Two owners without a rule create two half-finished packs. Keep originals when you merge or categorise, and only send the cleaned pack outward. That habit survives busy weeks better than a perfect system you abandon.</p>
 <p>When a portal, a CA, or a family member asks for one item, send that item. Do not forward the whole archive. Smaller sends are easier to verify and safer when the file carries personal numbers. After they confirm, you still keep your own copy where you can find it without searching chat history.</p>
@@ -3035,15 +3199,23 @@ min-height: 42px;
 <li>Originals kept, cleaned pack sent outward</li>
 <li>Date stamp on the folder or month tab</li>
 </ul>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>Should each invoice be its own PDF forever?</strong> Keep originals. Issue merged packs for filing or email. Originals make substitutions easy.</p>
 <p><strong>Client sends only phone photos. Now what?</strong> Convert to PDF, rotate, reject unreadable pages, and request retakes for GSTIN or amount fields you cannot read.</p>
 <p><strong>Is cloud sync OK for these folders?</strong> Only if your practice already accepts that tool's security model. Otherwise keep working files local and sync deliberately.</p>
 <p><strong>How often should I repeat this cleanup?</strong> Repeat when the season or the deadline returns, not every idle evening. A dated pack or a dated Sheet total is enough to know you are current.</p>
 <p>November cleanup is cheaper than December panic. Pdf Buddy, by Easy Peeze Tools, keeps client PDF work on your Windows PC. Free 2/day. Pricing from ₹149. <a href="../../download/">Download</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

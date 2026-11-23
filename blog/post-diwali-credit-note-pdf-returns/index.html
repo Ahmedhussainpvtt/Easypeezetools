@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,16 +3145,32 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / Post-Diwali returns: credit note PDFs that sit beside the original invoice</p>
       <h1>Post-Diwali returns: credit note PDFs that sit beside the original invoice</h1>
-      <p>2026-11-09 · Pdf Editor, India, credit note, GST, sales returns</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-11-09">9 November 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/post-diwali-credit-note-pdf-returns-960.webp" srcset="/images/blog/post-diwali-credit-note-pdf-returns-480.webp 480w, /images/blog/post-diwali-credit-note-pdf-returns-960.webp 960w, /images/blog/post-diwali-credit-note-pdf-returns-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Post-Diwali returns: credit note PDFs that sit beside the original invoice" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#what-a-credit-note-has-to-point-back-to">What a credit note has to point back to</a></li>
+              <li><a href="#pair-each-credit-note-with-its-invoice">Pair each credit note with its invoice</a></li>
+              <li><a href="#send-the-buyer-a-copy-they-can-act-on">Send the buyer a copy they can act on</a></li>
+              <li><a href="#a-returns-pack-for-the-accountant">A returns pack for the accountant</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/post-diwali-credit-note-pdf-returns-960.webp" srcset="/images/blog/post-diwali-credit-note-pdf-returns-480.webp 480w, /images/blog/post-diwali-credit-note-pdf-returns-960.webp 960w, /images/blog/post-diwali-credit-note-pdf-returns-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Post-Diwali returns: credit note PDFs that sit beside the original invoice" width="1400" height="900" />
 <p>The week after Diwali belongs to returns. A dealer sends back unsold gift boxes, a customer returns a mixer that would not start, a wrong size comes back from a garment shop two towns away. Under GST, a registered seller records each of these with a credit note that reduces the earlier invoice, and those credit notes go into the return for the month. The trouble is rarely the rule. It is that the credit note PDF is in one folder, the original invoice in another, and nobody can match them on the 10th. Pair them as you go, on the billing PC.</p>
-<h2>What a credit note has to point back to</h2>
+<h2 id="what-a-credit-note-has-to-point-back-to">What a credit note has to point back to</h2>
 <p>A credit note is not a free standing document. It exists because of an earlier tax invoice, and it should say which one. A proper credit note carries its own serial number and date, the supplier's and the buyer's details with GSTIN where the buyer is registered, the number and date of the original invoice, and the value and tax being reduced. Businesses covered by e-invoicing also register B2B credit notes and receive an IRN for them, like an invoice.</p>
 <p>Before saving the PDF, check that the original invoice number printed on the credit note is right. A wrong reference is the usual reason a buyer's accountant refuses to accept it, and fixing it after the return is filed is tedious. Check that the tax rate matches the rate on the invoice, and that a partial return shows only the quantity that came back. These are ten second checks while the goods are still on the counter.</p>
 <ul>
@@ -3016,23 +3179,31 @@ min-height: 42px;
 <li>Buyer name and GSTIN for B2B returns</li>
 <li>Quantity, taxable value and tax being reversed</li>
 </ul>
-<h2>Pair each credit note with its invoice</h2>
+<h2 id="pair-each-credit-note-with-its-invoice">Pair each credit note with its invoice</h2>
 <p>Create a Returns folder for the month. For every return, put two files in it: the credit note and a copy of the original invoice. Name them so they sit next to each other when sorted, for example CN-0031-against-INV-1042-Gupta-Electricals.pdf and INV-1042-Gupta-Electricals.pdf. Or merge the two into one PDF with the credit note on top. Either way, anyone opening the folder can see what was sold and what came back without searching.</p>
 <p>If the customer returned goods with a delivery challan, a debit note of their own, or a courier receipt, scan that too and add it behind the pair. For a damaged item, a photo taken at receipt is worth a page. These supporting papers are what you will be asked for if the return is ever questioned, and by then the cartons are long gone. Convert phone photos to PDF, rotate them upright and keep the file modest in size.</p>
-<h2>Send the buyer a copy they can act on</h2>
+<h2 id="send-the-buyer-a-copy-they-can-act-on">Send the buyer a copy they can act on</h2>
 <p>A registered buyer has to reduce their input tax credit when they receive your credit note, so they need a readable copy quickly. Send the PDF as a document by mail or WhatsApp, not as a screenshot. Keep the IRN and QR sharp if the credit note carries them. Use the same file name you saved, so that when they call about CN-0031 both sides are looking at the same file.</p>
 <p>Do not alter an invoice PDF to show a lower amount instead of issuing a credit note. The invoice has already been reported, and the buyer may have claimed credit on it. The credit note is the correction. Similarly, if a credit note itself was made in error, cancel or correct it through the billing software as your accountant advises. A PDF editor is for arranging and presenting these documents, not for changing the figures on them.</p>
-<h2>A returns pack for the accountant</h2>
+<h2 id="a-returns-pack-for-the-accountant">A returns pack for the accountant</h2>
 <p>At month end, merge the pairs into one Returns PDF in credit note number order, add page numbers, and write a one page list at the front: credit note number, date, buyer, original invoice, amount. The accountant can tick the list against the return tables in a few minutes. Report credit notes in the month they are issued and do not let them pile up, since the law sets an outer time limit after the financial year ends.</p>
 <p>Keep the loose pairs as well as the merged pack, on the PC and on a second drive. Pdf Buddy merges, numbers and compresses on Windows, so customer and dealer details stay on your own machine. Cash refunds to walk-in customers who had no GSTIN still need a credit note or a refund voucher in your books. Ask your accountant which one your software should produce, and file those PDFs in the same folder.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>Can I just cancel the original invoice when goods come back?</strong> Usually not, once the invoice has been reported and the goods have moved. The normal route for a return is a credit note that refers to the original invoice. Cancellation is for an invoice raised in error and caught early. Your accountant can confirm which applies to a specific case.</p>
 <p><strong>Does a credit note need the original invoice number on it?</strong> Yes, it should identify the invoice it relates to. That link is what allows the reduction in your tax liability to be matched with the buyer's reduction in credit. A credit note with no reference or the wrong reference will be queried.</p>
 <p><strong>How long should credit note PDFs be kept?</strong> Keep them as long as you keep invoices, which under GST is several years. Store the pair of credit note and invoice together. A credit note found alone five years later, with no invoice beside it, explains very little.</p>
 <p>Pair the credit note with its invoice on the day of the return and the month end is a short list. Pdf Buddy, by Easy Peeze Tools, is a Windows desktop PDF editor that works on the PC, so dealer and customer documents are not uploaded to a random website. The free tier is 2 files a day. Pricing starts at ₹149. Get it from the <a href="../../download/">download page</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

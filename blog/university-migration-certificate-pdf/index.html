@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,16 +3145,32 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / Migration or transfer certificate scan, upright pages, readable file name</p>
       <h1>Migration or transfer certificate scan, upright pages, readable file name</h1>
-      <p>2026-10-03 · Pdf Editor, India, migration certificate, university</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-10-03">3 October 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/university-migration-certificate-pdf-960.webp" srcset="/images/blog/university-migration-certificate-pdf-480.webp 480w, /images/blog/university-migration-certificate-pdf-960.webp 960w, /images/blog/university-migration-certificate-pdf-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Migration or transfer certificate scan, upright pages, readable file name" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#scan-the-full-page-including-the-seal">Scan the full page, including the seal</a></li>
+              <li><a href="#turn-sideways-pages-upright">Turn sideways pages upright</a></li>
+              <li><a href="#a-file-name-that-says-what-it-is">A file name that says what it is</a></li>
+              <li><a href="#keep-a-home-copy-after-the-upload">Keep a home copy after the upload</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/university-migration-certificate-pdf-960.webp" srcset="/images/blog/university-migration-certificate-pdf-480.webp 480w, /images/blog/university-migration-certificate-pdf-960.webp 960w, /images/blog/university-migration-certificate-pdf-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Migration or transfer certificate scan, upright pages, readable file name" width="1400" height="900" />
 <p>A migration certificate or transfer certificate is one or two pages with a seal, a university name, and a date that admissions desks read quickly. Students send a sideways phone photo, a crop that slices the seal, or a file called scan.pdf, and the portal marks it unreadable. On Windows, make an upright PDF of the full page, name it with the university and the year, and keep a copy after you upload. This is your own certificate. Do not edit the dates, the marks, or the seal. If the page is damaged, ask the university for a fresh issue.</p>
-<h2>Scan the full page, including the seal</h2>
+<h2 id="scan-the-full-page-including-the-seal">Scan the full page, including the seal</h2>
 <p>Place the certificate flat and include every edge. Seals and serial numbers sit in corners, and a tight crop removes the part the verifier checks. Use even light so the embossed seal still shows as a mark, not a white hole. If there is a second page or a backside endorsement, scan it next, in order. Turn the images into PDF pages on the PC. A single photo of both pages on the table is harder to read than two pages. Give each side its own page.</p>
 <p>Read the candidate name, the programme, and the certificate number from the PDF, not from the paper beside it. The upload is the PDF. If a word is lost in a crease, rescan. Do not trace the letters over the image. A darkened seal is still the university's seal. A drawn circle is not. If the office gave you a digitally signed PDF, use that file and do not print and scan it. The digital signature is easier to trust than a photo of a print.</p>
 <ul>
@@ -3016,23 +3179,31 @@ min-height: 42px;
 <li>Certificate number readable at normal zoom</li>
 <li>Digital original preferred over a photo of a print</li>
 </ul>
-<h2>Turn sideways pages upright</h2>
+<h2 id="turn-sideways-pages-upright">Turn sideways pages upright</h2>
 <p>Phone scans often land in landscape because the certificate was wider than the frame. Rotate each page until the heading reads left to right in the normal upright way. Then export. Admissions staff will not rotate a dozen files by hand, and some portals flag mixed orientation as a bad upload. Check the preview the portal shows after you attach the file, not only the preview on your PC. They can differ if you attached the raw photo by mistake.</p>
 <p>Do not stretch the page to fill a square. Keep the proportions. A stretched seal looks altered even when you only meant to fit a form. Margins can be white. White margins are better than a cut serial number. If the file is over the portal size cap, compress after the rotation, then read the certificate number again. Stop compressing while the number is still crisp. A readable number beats a smaller file.</p>
-<h2>A file name that says what it is</h2>
+<h2 id="a-file-name-that-says-what-it-is">A file name that says what it is</h2>
 <p>Use the document and the university, such as Migration-Mumbai-University-2026.pdf or TC-SchoolName-2026.pdf. Your own name can be included if the form does not forbid it and you are comfortable with that name in a mail. Avoid doc.pdf and image-final.pdf. If you apply to several colleges, keep one master file and copy it. Do not let each application folder hold a different crop. When a college asks for a clearer scan, replace the master and note the date, so you do not resubmit the blurry file from an old mail.</p>
 <p>If the instructions want the migration certificate and the marksheet in one PDF, merge them in the order written, after each is upright. If they want separate slots, do not merge. A combined file in the wrong slot is a common incomplete status. Name a merged file so it lists both documents. People open the wrong PDF when everything is called certificates.pdf. Include the year so a later scan does not replace it.</p>
-<h2>Keep a home copy after the upload</h2>
+<h2 id="keep-a-home-copy-after-the-upload">Keep a home copy after the upload</h2>
 <p>Universities and employers ask again. Store the PDF in a folder for that qualification, next to the marksheet, and keep a second copy on a drive you control. Portal accounts close. Pdf Buddy can rotate the pages, export the PDF, and compress it on the PC. You do not need to send the certificate to a random enhancer site to make the seal darker. A better photo is the right fix.</p>
 <p>You are submitting a certificate the institution issued, for an admission or a job you are allowed to seek. If the name on it does not match your current ID, follow the university's correction process. Do not patch the name in the PDF. A corrected official certificate replaces the page. The edited image should not. Wait for the fresh certificate and scan that page instead of painting letters on the old one.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>The seal is in the corner and my crop almost cuts it. Should I submit anyway?</strong> Rescan with the full page in the frame, including the seal and the serial number. A partial seal is a common reason the file is marked unreadable. White margin around the page is acceptable. A missing corner is not. Submit the full page.</p>
 <p><strong>The certificate photo is landscape. Will the university portal rotate it?</strong> Do not rely on that. Rotate the page upright on your PC, save the PDF, and check the portal preview after you attach it. Mixed or sideways pages are a frequent reject even when the text is sharp. Fix it before the first upload.</p>
 <p><strong>They want the transfer certificate and the marksheet together. How do I do that without losing the originals?</strong> Rotate each file first, merge a copy in the order the instruction lists, and keep the separate PDFs. Upload the merged copy only in the slot that asked for both. Leave the originals named on their own. Do not throw the parts away.</p>
 <p>Export an upright certificate PDF on the PC and keep that file after you upload. Pdf Buddy, by Easy Peeze Tools, is a Windows desktop PDF editor that works on the PC. The scan is not uploaded to a random website. The free tier is 2 files a day. Pricing starts at ₹149. Use <a href="../../pricing/">pricing</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

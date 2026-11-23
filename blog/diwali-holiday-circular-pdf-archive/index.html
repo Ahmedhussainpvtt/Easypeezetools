@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,16 +3145,32 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / Diwali holiday circulars: issue a fixed PDF and archive it for next year</p>
       <h1>Diwali holiday circulars: issue a fixed PDF and archive it for next year</h1>
-      <p>2026-11-08 · Pdf Editor, India, office circular, HR documents, Diwali</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-11-08">8 November 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/diwali-holiday-circular-pdf-archive-960.webp" srcset="/images/blog/diwali-holiday-circular-pdf-archive-480.webp 480w, /images/blog/diwali-holiday-circular-pdf-archive-960.webp 960w, /images/blog/diwali-holiday-circular-pdf-archive-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Diwali holiday circulars: issue a fixed PDF and archive it for next year" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#what-a-holiday-circular-has-to-carry">What a holiday circular has to carry</a></li>
+              <li><a href="#issue-it-as-a-fixed-pdf">Issue it as a fixed PDF</a></li>
+              <li><a href="#archive-with-a-number-and-make-it-searchable">Archive with a number and make it searchable</a></li>
+              <li><a href="#sending-it-to-phones-without-losing-it">Sending it to phones without losing it</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/diwali-holiday-circular-pdf-archive-960.webp" srcset="/images/blog/diwali-holiday-circular-pdf-archive-480.webp 480w, /images/blog/diwali-holiday-circular-pdf-archive-960.webp 960w, /images/blog/diwali-holiday-circular-pdf-archive-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Diwali holiday circulars: issue a fixed PDF and archive it for next year" width="1400" height="900" />
 <p>Every office, school, clinic and housing society issues a Diwali holiday notice, and most of them write it fresh each year because nobody can find the last one. It goes out as a photo in a WhatsApp group, someone asks whether Saturday is working, and a corrected photo follows. By December neither version can be located. A holiday circular is a small document, but salary cut-offs, fee dates and security rosters hang on it. Issue it as one fixed PDF with a number, and archive it on a Windows PC where next year's admin can find it.</p>
-<h2>What a holiday circular has to carry</h2>
+<h2 id="what-a-holiday-circular-has-to-carry">What a holiday circular has to carry</h2>
 <p>A circular that prevents follow up questions answers them in advance. State the closed days with both date and weekday, the last working day before and the first working day after, and whether any Saturday is a compensatory working day. Say who it applies to: all staff, a particular site, or everyone except essential services. If payroll, fee collection or vendor payments move because of the holidays, put the new dates in the same notice.</p>
 <p>Add a contact for emergencies during the closure, and the name and designation of the person issuing it. Give the circular a reference number and an issue date at the top. Establishments have different rules on holidays depending on the state and the kind of workplace, so the list of days should come from your management's decision and the applicable rules. This article is only about how to put that decision on a page that will not be misread.</p>
 <ul>
@@ -3016,23 +3179,31 @@ min-height: 42px;
 <li>Changed dates for salary, fees or vendor payments</li>
 <li>Emergency contact, reference number and issuing authority</li>
 </ul>
-<h2>Issue it as a fixed PDF</h2>
+<h2 id="issue-it-as-a-fixed-pdf">Issue it as a fixed PDF</h2>
 <p>A circular should not be editable once it is out. Type it on the letterhead, export it to PDF, and send that file. Do not send the Word document, and do not send a photo of the printout pinned to the notice board. A PDF keeps the letterhead, the reference number and the layout intact on every phone. When a forwarded copy reaches someone three groups away, it still looks like it came from the office.</p>
 <p>If a signed and stamped copy is required, sign the PDF on the PC, or print, sign, stamp and scan it once at good quality. Rotate the scan upright and crop it. When a correction is needed, do not quietly replace the file. Issue a new circular with its own number that says it supersedes the earlier one, and name that earlier one. Two unsigned photos with different dates are how a whole department turns up on a holiday.</p>
-<h2>Archive with a number and make it searchable</h2>
+<h2 id="archive-with-a-number-and-make-it-searchable">Archive with a number and make it searchable</h2>
 <p>Create a Circulars folder with a subfolder for each year, and save every notice with its number, date and subject in the file name, such as HR-2026-041-Diwali-Holidays-2026-11-02.pdf. Sorted by name, the folder becomes a register. Keep a superseded circular in the same folder with SUPERSEDED added to its name. Do not delete it, because someone may have acted on it and you may need to show what it said.</p>
 <p>A scanned, signed circular is a picture of text, and Windows search cannot read a picture. Run OCR on scanned copies so the words Diwali, holiday and the dates become searchable, and keep the scanned image as the page people see. Next October, searching the folder for Diwali brings up three years of notices in a second, with the compensatory day arrangements and payroll dates you used before. That is most of next year's drafting already done.</p>
-<h2>Sending it to phones without losing it</h2>
+<h2 id="sending-it-to-phones-without-losing-it">Sending it to phones without losing it</h2>
 <p>Most staff and parents will read the circular on a phone, in a group chat. Send the PDF as a document, not as an image, so it stays sharp and keeps its file name. If the letterhead makes the file heavy, compress it and open it once to see that the dates are still crisp. A one page notice should be small enough to open on a weak connection in a second.</p>
 <p>Also send it by the official channel, whether that is office mail, the school app or the society notice board, and note in your register where and when it went out. A chat group is a convenience, not a record of service. Pdf Buddy can sign, OCR, compress and merge these notices on Windows. At year end, merge the year's circulars into one numbered PDF with bookmarks, and the archive for audit or handover is a single file.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>Why not just post a photo of the notice in the group?</strong> A photo loses sharpness with every forward, has no file name, and cannot be searched later. It is also easy to crop or alter. A PDF sent as a document stays readable, carries the reference number, and can be filed. It takes no more effort than taking the photo.</p>
 <p><strong>How should a correction to the circular be handled?</strong> Issue a fresh circular with a new number and date, stating that it supersedes the earlier one by number. Keep both in the archive. Editing and resending under the same number leaves two versions in circulation with no way to tell which one is final.</p>
 <p><strong>Does a scanned circular need OCR?</strong> It helps a lot. Without OCR the file is only an image and search will not find the words inside it. With OCR you can search the archive by subject or date next year. The visible page remains the signed scan, so nothing about the document changes.</p>
 <p>Number it, fix it as a PDF, and file it where next year's admin will look. Pdf Buddy, by Easy Peeze Tools, is a Windows desktop PDF editor that works on the PC, so office notices are not uploaded to a random website. The free tier is 2 files a day. Pricing starts at ₹149. See the <a href="../../download/">download page</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

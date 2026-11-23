@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,17 +3145,34 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / Life certificate in November: keep pension papers ready as PDF</p>
       <h1>Life certificate in November: keep pension papers ready as PDF</h1>
-      <p>2026-10-30 · Pdf Editor, India, Pension, Life certificate</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-10-30">30 October 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/life-certificate-november-pension-papers-pdf-960.webp" srcset="/images/blog/life-certificate-november-pension-papers-pdf-480.webp 480w, /images/blog/life-certificate-november-pension-papers-pdf-960.webp 960w, /images/blog/life-certificate-november-pension-papers-pdf-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Life certificate in November: keep pension papers ready as PDF" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#what-to-keep-ready-before-you-start">What to keep ready before you start</a></li>
+              <li><a href="#if-your-office-asks-for-a-physical-form">If your office asks for a physical form</a></li>
+              <li><a href="#after-you-submit-keep-the-proof">After you submit: keep the proof</a></li>
+              <li><a href="#keep-the-files-private-and-local">Keep the files private and local</a></li>
+              <li><a href="#a-simple-yearly-routine">A simple yearly routine</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/life-certificate-november-pension-papers-pdf-960.webp" srcset="/images/blog/life-certificate-november-pension-papers-pdf-480.webp 480w, /images/blog/life-certificate-november-pension-papers-pdf-960.webp 960w, /images/blog/life-certificate-november-pension-papers-pdf-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Life certificate in November: keep pension papers ready as PDF" width="1400" height="900" />
 <p>November is life certificate month for pensioners in India. Central Government pensioners submit their annual life certificate between 1 November and 30 November so that pension continues from December. Pensioners aged 80 and above can submit earlier, from 1 October. The certificate is valid until 30 November of the following year. If it is not submitted in time, pension for December and later months is held until the certificate is accepted, and then paid with arrears. EPFO pensioners under the Employees' Pension Scheme follow a different rule: their life certificate stays valid for 12 months from the day it was submitted.</p>
 <p>Many families now help a parent submit the Digital Life Certificate, called Jeevan Pramaan, using Aadhaar face or fingerprint authentication on a phone, at the bank, or through India Post Payments Bank doorstep service. The certificate itself is generated online. But the paperwork around it still matters: the PPO number, bank details, a copy of the pension order, and sometimes a physical certificate form signed by a bank officer. This post shows how to keep those papers ready as clean PDFs on your Windows PC so the process takes minutes, not a second visit.</p>
-<h2>What to keep ready before you start</h2>
+<h2 id="what-to-keep-ready-before-you-start">What to keep ready before you start</h2>
 <p>For Jeevan Pramaan you usually need the Aadhaar number or Virtual ID, the PPO (Pension Payment Order) number, an active mobile number, the pension account details, and the names of the pension-sanctioning and pension-disbursing authorities. Keep these in one place. A single PDF called "Pension papers - Father - 2026" with the PPO, the bank passbook front page, and the latest pension slip is easier than searching drawers on the day.</p>
 <p>Scan or photograph each page in good light. On the PC, put the pages in order, remove blank backs, and check that the PPO number is readable. If a page came out sideways, rotate it. If the file is large, compress it so it is easy to share with the family member who is helping.</p>
 <ul>
@@ -3017,10 +3181,10 @@ min-height: 42px;
 <li>Latest pension slip or credit entry</li>
 <li>Aadhaar details for authentication, kept private</li>
 </ul>
-<h2>If your office asks for a physical form</h2>
+<h2 id="if-your-office-asks-for-a-physical-form">If your office asks for a physical form</h2>
 <p>Some departments still ask pensioners to submit a printed life certificate form, signed by a bank officer or an authorised official, especially for family pensioners or for pensioners living abroad, where an Indian mission signs it. If you receive the form as a PDF, you can fill the typed fields on your PC before printing: name, PPO number, and address. Do not type in the signature or the officer's section. Those must be signed in person. Print, take it to the bank, and keep a scanned copy of the signed form after submission.</p>
 <p>When you scan the signed form, check the seal and the date are clear. A blurred seal is the most common reason a form is sent back. Save it as one PDF with a plain name, for example "Life certificate 2026 signed.pdf", next to the pension papers.</p>
-<h2>After you submit: keep the proof</h2>
+<h2 id="after-you-submit-keep-the-proof">After you submit: keep the proof</h2>
 <p>Generating a Digital Life Certificate does not always mean the bank has accepted it. After submission, the pensioner receives a Pramaan ID by SMS. Note it down. You can check the certificate on the official Jeevan Pramaan portal and download it. Save that download as a PDF in the same folder. If the bank later says it has no record, you have the Pramaan ID, the date, and the certificate on your PC.</p>
 <p>If the certificate is rejected, the bank or the pension-disbursing authority explains why. Common reasons are a mismatch in name or account details. Keep the pension papers PDF handy so you can compare details quickly rather than visiting twice.</p>
 <ul>
@@ -3029,18 +3193,26 @@ min-height: 42px;
 <li>Keep the signed physical form scan if you used one</li>
 <li>Check that the bank shows the certificate as accepted</li>
 </ul>
-<h2>Keep the files private and local</h2>
+<h2 id="keep-the-files-private-and-local">Keep the files private and local</h2>
 <p>Pension papers include Aadhaar details, bank accounts, and PPO numbers. These are exactly the documents you should not upload to a random online PDF converter to merge or compress. Do that work on your own PC. Pdf Buddy is a Windows PDF editor that merges, splits, rotates, compresses, and fills PDFs locally. The files never leave your computer for those tasks. When you need to share a copy with a sibling, send the compressed PDF directly, and remove pages they do not need.</p>
-<h2>A simple yearly routine</h2>
+<h2 id="a-simple-yearly-routine">A simple yearly routine</h2>
 <p>Set a reminder for the last week of October. Open the pension folder, check the papers are current, and update the pension slip page. In November, submit the certificate early in the month rather than near the 30th, when banks are busy. Save the Pramaan ID and the downloaded certificate. Next October, the folder is ready again.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>My father is 82. Can he submit now?</strong> Yes. Pensioners aged 80 and above can submit from 1 October. The certificate stays valid until 30 November of the next year.</p>
 <p><strong>What if we miss 30 November?</strong> Pension from December is held until the certificate is accepted. Once it is updated, the pending pension is paid with arrears on the next payment. Submit as soon as possible and keep proof.</p>
 <p><strong>Is the life certificate a PDF I create myself?</strong> No. The Digital Life Certificate is generated through Jeevan Pramaan after Aadhaar authentication, or a physical form is signed by an authorised officer. Your PDFs are the supporting papers and the downloaded proof.</p>
 <p>Life certificate season is easier with one tidy folder on your PC. Pdf Buddy, by Easy Peeze Tools, merges, rotates, compresses, and fills PDFs on Windows without uploading your pension papers anywhere. It is free for 2 actions a day after Google sign-in, with paid plans from ₹299 a year. <a href="../../download/">Download Pdf Buddy</a> or see <a href="../../pricing/">pricing</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

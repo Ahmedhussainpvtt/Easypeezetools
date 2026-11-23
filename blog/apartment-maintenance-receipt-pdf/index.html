@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,16 +3145,32 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / Society maintenance receipts as a yearly PDF folder</p>
       <h1>Society maintenance receipts as a yearly PDF folder</h1>
-      <p>2026-10-02 · Pdf Editor, India, society maintenance, receipts</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-10-02">2 October 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/apartment-maintenance-receipt-pdf-960.webp" srcset="/images/blog/apartment-maintenance-receipt-pdf-480.webp 480w, /images/blog/apartment-maintenance-receipt-pdf-960.webp 960w, /images/blog/apartment-maintenance-receipt-pdf-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Society maintenance receipts as a yearly PDF folder" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#a-year-folder-beats-a-chat-thread">A year folder beats a chat thread</a></li>
+              <li><a href="#make-the-slip-readable-once">Make the slip readable once</a></li>
+              <li><a href="#what-a-buyer-or-a-bank-asks-to-see">What a buyer or a bank asks to see</a></li>
+              <li><a href="#share-a-copy-not-your-only-file">Share a copy, not your only file</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/apartment-maintenance-receipt-pdf-960.webp" srcset="/images/blog/apartment-maintenance-receipt-pdf-480.webp 480w, /images/blog/apartment-maintenance-receipt-pdf-960.webp 960w, /images/blog/apartment-maintenance-receipt-pdf-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Society maintenance receipts as a yearly PDF folder" width="1400" height="900" />
 <p>Apartment maintenance receipts show up as a WhatsApp image, a thin paper slip, or a portal PDF with a new name every month. At resale or during a home loan top-up, the buyer or the bank asks for a year of paid maintenance, and the chat has already compressed half the slips. Keep a folder on Windows for the financial year, one PDF per month, with the receipt number readable. These are receipts the society issued. Do not type a new amount over a faded slip. If a month is missing, ask the society office for a duplicate.</p>
-<h2>A year folder beats a chat thread</h2>
+<h2 id="a-year-folder-beats-a-chat-thread">A year folder beats a chat thread</h2>
 <p>Create a folder with the society name and the year, and put April through March inside it, or the society's own billing cycle if it differs. Each month should be one PDF. If you only have a photo, turn that photo into a one-page PDF on the PC the same week you pay. Waiting until March means the original image has been forwarded and recompressed. Name the file with the year, the month, and the receipt number, such as 2026-04-Maint-Receipt-1182.pdf. You can see a missing month by looking at the list.</p>
 <p>Do not merge the year into one PDF as your only copy. A buyer may want that bundle later, and you can make it then. The monthly files are how you replace a single bad page. If the society portal lets you download a statement for the whole year, keep that statement and the monthly receipts. They serve different checks. The statement is a summary. The receipt is the payment proof.</p>
 <ul>
@@ -3016,23 +3179,31 @@ min-height: 42px;
 <li>Receipt number visible in the file and on the page</li>
 <li>Chat images converted the week you pay</li>
 </ul>
-<h2>Make the slip readable once</h2>
+<h2 id="make-the-slip-readable-once">Make the slip readable once</h2>
 <p>Society slips are small. Photograph the whole slip, including the stamp and the month, on a plain background. Crop the table out, rotate the page upright, and export the PDF. Read the flat number and the amount at normal zoom. If the stamp hides the month, take a second photo rather than guessing. A receipt that could be March or May is not proof. If the treasurer sends a PDF from a billing app, store that file and skip the photo.</p>
 <p>Some months include a separate sinking-fund or repair line on a second slip. Keep that second slip as its own PDF with the fund name in the title, unless your society issues one combined receipt. Do not crop a line off to make the total look like pure maintenance. The page should match what you paid. Compress only if you are mailing a bundle and the size is over the limit, then recheck the receipt number.</p>
-<h2>What a buyer or a bank asks to see</h2>
+<h2 id="what-a-buyer-or-a-bank-asks-to-see">What a buyer or a bank asks to see</h2>
 <p>They usually want a continuous set, not twelve loose photos. When asked, merge a copy of the monthly PDFs in date order and send that copy, leaving the monthly files in the folder. Put the flat number in the merged file name. If a month was waived, include the society's letter for that waiver instead of a blank page. A blank page looks like a missing payment. A letter explains it.</p>
 <p>Check that every page shows the same flat. A neighbour's receipt forwarded by mistake is an awkward error in a sale file. Split it out. If any PDF from the portal is password protected, open it with the code the society shared with residents. If you do not have the code, ask the office. Do not remove a password you were not given. After it opens, confirm the flat number before you archive the file.</p>
-<h2>Share a copy, not your only file</h2>
+<h2 id="share-a-copy-not-your-only-file">Share a copy, not your only file</h2>
 <p>Mail or upload a copy. Keep the folder on your PC through the sale and after it, until you are sure no one will ask again. Society offices change vendors and old portals disappear. Pdf Buddy can turn the slip photo into a PDF, merge a year copy, and compress it on Windows. The receipts do not need a random website in the middle. Send them to the bank, the buyer, or the society, which are the parties who asked.</p>
 <p>If you are the person who pays for a parent, label the folder with the flat and the owner name so a sibling does not start a second, conflicting set. You are storing receipts that were issued. A missing month is a request to the society, not a homemade slip. Do not recreate a receipt on letterhead you designed. Ask the office for a duplicate with their stamp and the same receipt number.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>Is one merged PDF for the year enough?</strong> Keep one PDF per month as the archive, and merge a copy when a buyer or a bank wants a single file. If the merged file is your only copy, one bad page is harder to replace. The monthly files also show a gap as soon as a month is missing.</p>
 <p><strong>The WhatsApp slip is faded. Can I write the amount in the margin?</strong> Ask the society for a duplicate or download the portal receipt. The amount on the page should be theirs. A handwritten figure on a faded photo is easy to challenge in a sale. Store the clearer official copy. Keep that PDF in the month slot.</p>
 <p><strong>We have two flats in the same society. How should the folders work?</strong> Use one folder per flat per year, even if you pay both from the same account. Names should include the flat number. A shared folder is how a receipt for A-102 gets sent with the loan file for B-204. Split them the day you pay.</p>
 <p>Save each maintenance receipt on the PC in a year folder, one month per file. Pdf Buddy, by Easy Peeze Tools, is a Windows desktop PDF editor that works on the PC. Slips are not uploaded to a random website. The free tier is 2 files a day. Pricing starts at ₹149. See <a href="../../download/">download</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

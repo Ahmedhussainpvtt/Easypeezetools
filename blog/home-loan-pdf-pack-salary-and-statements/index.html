@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,16 +3145,32 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / Home loan document pack on Windows</p>
       <h1>Home loan document pack on Windows</h1>
-      <p>2026-09-20 · Pdf Editor, India, home loan, salary slips</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-09-20">20 September 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/home-loan-pdf-pack-salary-and-statements-960.webp" srcset="/images/blog/home-loan-pdf-pack-salary-and-statements-480.webp 480w, /images/blog/home-loan-pdf-pack-salary-and-statements-960.webp 960w, /images/blog/home-loan-pdf-pack-salary-and-statements-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Home loan document pack on Windows" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#separate-the-income-proofs">Separate the income proofs</a></li>
+              <li><a href="#bank-statements-without-a-full-passbook-dump">Bank statements without a full passbook dump</a></li>
+              <li><a href="#property-papers-stay-in-their-own-set">Property papers stay in their own set</a></li>
+              <li><a href="#a-folder-you-can-send-to-the-next-lender">A folder you can send to the next lender</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/home-loan-pdf-pack-salary-and-statements-960.webp" srcset="/images/blog/home-loan-pdf-pack-salary-and-statements-480.webp 480w, /images/blog/home-loan-pdf-pack-salary-and-statements-960.webp 960w, /images/blog/home-loan-pdf-pack-salary-and-statements-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Home loan document pack on Windows" width="1400" height="900" />
 <p>A home loan file in India is a stack of proofs the lender already listed: identity, income, bank statements, and papers for the flat you want to buy. The delay usually starts when those arrive as mail attachments, photos, and a CD from the builder, all dumped into one PDF the credit team cannot split. On Windows you can keep each proof as its own file, with the applicant name and the month in the title, and resend one item when the bank asks again. Do that before the sanction meeting. A pack that opens cleanly is faster than a long explanation in the branch.</p>
-<h2>Separate the income proofs</h2>
+<h2 id="separate-the-income-proofs">Separate the income proofs</h2>
 <p>Salary slips, Form 16, and appointment letters answer different questions. Slips show recent pay. Form 16 shows tax already reported for a year. The appointment letter shows that the employer exists. Merging them into Income.pdf forces a credit officer to hunt. Export three PDFs, or whatever count the sanction checklist names. If you are paid into two banks, do not hide the second account inside the first statement. Lenders compare credits on the slip with credits on the statement. A missing month creates a query even when your job is stable.</p>
 <p>Name slips with the month, such as Salary-Sep2026.pdf, and keep them in date order inside the folder. If the employer sends a password-protected slip, type the password you already have from HR or from the mail. You cannot finish this pack by removing a password you were never given. Ask HR to resend the open file or the known password. Photographing a slip from a laptop screen is a last resort: the numbers blur, and the bank may ask for the original PDF again.</p>
 <ul>
@@ -3016,23 +3179,31 @@ min-height: 42px;
 <li>Bank statements that show the same salary credit</li>
 <li>Any incentive letter only if the checklist asks for it</li>
 </ul>
-<h2>Bank statements without a full passbook dump</h2>
+<h2 id="bank-statements-without-a-full-passbook-dump">Bank statements without a full passbook dump</h2>
 <p>The sanction form usually wants a set number of months, not every page since you opened the account. Export or download that range and stop. A 40-page passbook adds size and invites questions about old transfers that are not part of this loan. If the PDF from net banking is one long file, split out the months you need and save that smaller file with the date range in the name. Keep the full download in a private folder. Send the shorter one.</p>
 <p>Check that the account holder name on the statement matches the name on the application. A joint account needs the bank's own note of who the holders are, not a cropped header. Do not delete rows to make the balance look different. That is not preparing a file. If a page is sideways, rotate it so the narration can be read without turning the laptop. Officers print these packs. A sideways page is an easy reason to mark the statement unreadable.</p>
-<h2>Property papers stay in their own set</h2>
+<h2 id="property-papers-stay-in-their-own-set">Property papers stay in their own set</h2>
 <p>The builder agreement, the cost sheet, and the society or title notes are not income. Put them in a Property subfolder and follow the names the builder used, plus the flat number. If the builder mailed one scan with blank backs between every page, remove the blank pages before you send it so the page count matches the index. Do not rearrange clauses. The bank and the lawyer need the same order as the signed set. Your job is a clean copy, not a new draft of the contract.</p>
 <p>If you and a co-applicant both earn, give each person a folder. Mixing a spouse's slips into the primary file without a label is how files get sanctioned against the wrong income. The application already has a place for co-applicant documents. Match that place. When a page is rejected, replace that page only and bump a version in the file name, such as Sale-Agreement-v2.pdf, so nobody opens yesterday's mail by habit.</p>
-<h2>A folder you can send to the next lender</h2>
+<h2 id="a-folder-you-can-send-to-the-next-lender">A folder you can send to the next lender</h2>
 <p>People apply to more than one bank. Build the pack once on the PC and copy it, rather than rebuilding from WhatsApp each time. A local folder with Income, Bank, Identity, and Property survives a change of officer. Update only the item that went stale, such as a new salary slip, and leave the rest. Pdf Buddy can merge a short set when one lender insists on a single PDF, and it can split that bundle again for the next lender. Do the work on Windows. Do not upload the whole pack to a random site just to join two slips.</p>
 <p>After sanction, keep the pack. Disbursement often asks for the same statements plus a fresh demand letter from the builder. If your only copy lived in a chat, the quality is already worse. Store PDFs with readable names. You are organising papers you hold for a loan you are applying for. If a document is missing, request it from the employer, the bank, or the builder. Do not recreate figures in an editor to fill a gap.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>Can I send one PDF named Home-Loan.pdf?</strong> Send one file only if that lender's mail says to combine everything. Otherwise keep slips, statements, and property papers separate so a query can be answered with one replacement. A single bundle looks tidy and slows every correction, because the officer must reopen the whole set to swap one month.</p>
 <p><strong>The statement PDF from the bank is password protected. What then?</strong> Open it with the password shown in net banking or the SMS the bank already sent, then save the months the lender asked for. If you do not have that password, request it from the bank. Do not try to strip a lock you cannot unlock.</p>
 <p><strong>Should both co-applicants share one folder?</strong> Use one parent folder for the application and a subfolder per person. Label slips with the person and the month. Shared loose files get attached to the wrong borrower when someone is in a hurry on sanction day, and the credit team then pauses the file.</p>
 <p>Keep the loan folder on your PC and resend a single file when the bank asks. Pdf Buddy, by Easy Peeze Tools, is a Windows desktop PDF editor that works on the PC. Your slips are not uploaded to a random website. The free tier is 2 files a day. Pricing starts at ₹149. See <a href="../../pricing/">pricing</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

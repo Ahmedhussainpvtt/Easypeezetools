@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,16 +3145,32 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / EPF claim attachments that portals reject for size or mix of scans</p>
       <h1>EPF claim attachments that portals reject for size or mix of scans</h1>
-      <p>2026-09-22 · Pdf Editor, India, EPF, claim upload</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-09-22">22 September 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/epfo-claim-attachment-pdf-size-960.webp" srcset="/images/blog/epfo-claim-attachment-pdf-size-480.webp 480w, /images/blog/epfo-claim-attachment-pdf-size-960.webp 960w, /images/blog/epfo-claim-attachment-pdf-size-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="EPF claim attachments that portals reject for size or mix of scans" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#why-mixed-scans-get-rejected">Why mixed scans get rejected</a></li>
+              <li><a href="#size-after-export-on-that-slot">Size after export, on that slot</a></li>
+              <li><a href="#locked-downloads-and-bank-files">Locked downloads and bank files</a></li>
+              <li><a href="#retry-with-a-new-file-name">Retry with a new file name</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/epfo-claim-attachment-pdf-size-960.webp" srcset="/images/blog/epfo-claim-attachment-pdf-size-480.webp 480w, /images/blog/epfo-claim-attachment-pdf-size-960.webp 960w, /images/blog/epfo-claim-attachment-pdf-size-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="EPF claim attachments that portals reject for size or mix of scans" width="1400" height="900" />
 <p>An EPF claim often fails at the attachment step, after the form itself is filled. The portal has slots for specific papers, and it rejects a file that is too heavy or a jumble of JPG pages and a PDF stuck together. Members then retry the same bundle and lose a day. On Windows, split the job into one PDF per slot, check the size the claim screen shows, and upload that file only. This is about the attachment the claim form asked for, using documents you already hold. If a page is missing from the passbook download, fetch it again from the EPFO or bank channel you use. Do not invent a page.</p>
-<h2>Why mixed scans get rejected</h2>
+<h2 id="why-mixed-scans-get-rejected">Why mixed scans get rejected</h2>
 <p>A claim slot expects one document of one type. A cancelled cheque photo, a passbook PDF, and a photo of a Form 15G sitting in one file do not meet three slots. They meet none of them cleanly. The portal may also refuse a file that is still an image with a PDF extension, or a PDF that contains only a tiny embedded picture. Export a real PDF per slot. Open it and turn every page. If you see a photo of a screen, go back to the download. Screen photos lose the member name and the UAN line that the reviewer needs.</p>
 <p>Order inside a single allowed file still matters. If one slot permits several pages of the same statement, keep those pages in date order and drop blank backs. Do not add a cover note as page one unless the claim instruction asked for a letter. Extra pages change the page count and can push the file over the size cap. Build the smallest complete file, then stop. You can always upload a corrected replacement. You cannot easily explain a bundle that mixed your papers with a colleague's by mistake.</p>
 <ul>
@@ -3016,23 +3179,31 @@ min-height: 42px;
 <li>No JPG renamed to PDF</li>
 <li>No second person's papers in your claim</li>
 </ul>
-<h2>Size after export, on that slot</h2>
+<h2 id="size-after-export-on-that-slot">Size after export, on that slot</h2>
 <p>Write down the maximum size printed beside the upload button. It can differ from other government portals you used last year. Export the PDF, then read the file size in Windows, and compress only if you are over the cap. After compression, open the file and read the account number and the dates. If those digits break into blocks, the file is too small to be useful. Raise the quality and try once more, or remove blank pages and export again before you compress harder.</p>
 <p>Colour photos of stamps are the usual reason a short claim file is huge. If the form accepts a greyscale copy of a text-heavy page, use that for the text pages and keep colour only where a seal must be seen. Do this in the desktop tool on your PC. Uploading the raw camera roll to a random compressor exposes the same identifiers you are about to send to EPFO. Finish locally, then upload on the official claim page only.</p>
-<h2>Locked downloads and bank files</h2>
+<h2 id="locked-downloads-and-bank-files">Locked downloads and bank files</h2>
 <p>Passbook PDFs and bank proofs sometimes open only with a password. Use the password you already have from the bank or from the member portal. Then save the pages the claim slot needs. If you do not know the password, use the reset or resend option on that official site, or visit the branch channel you trust. Preparing a claim does not include breaking a lock. A file you cannot open is a file you should not upload, because you cannot check the name on it.</p>
 <p>After it opens, confirm the name and the account match the claim. A statement for a closed account or for a joint holder who is not the member will be rejected later, after you waited. Split away the extra pages if the download included more months than the slot wants. Keep the full download at home. Send the extract. Name it with the claim purpose and the month so a second attempt does not pick the wrong version from Downloads.</p>
-<h2>Retry with a new file name</h2>
+<h2 id="retry-with-a-new-file-name">Retry with a new file name</h2>
 <p>If the portal rejects the upload, do not click the same file again and hope. Read the error. Size, format, and a damaged page are different problems. Fix that problem, save a new name such as EPF-Cheque-v2.pdf, and upload the new file. Some screens keep the previous failed file in the session. A new name makes it obvious which version went up. Clear the slot before you attach the replacement if the form lets you.</p>
 <p>When the claim is submitted, save the acknowledgement and a copy of each attachment in one folder on the PC. Grievances and re-submissions ask for what you sent. A chat thread will not preserve that. Store the PDFs. You are attaching papers for your own claim. If the employer must sign a page, get that signature through the proper channel. Do not paste a signature image you copied from an old form.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>The portal says the file is too large, but it is only four pages. What should I check?</strong> Check the size beside that slot, then look for a colour photo filling each page. Export a cleaner PDF, drop blank sides, and compress once. Read the account number afterward. A tiny file that blurs the digits will fail the next check even if the upload bar turns green.</p>
 <p><strong>Can I upload a ZIP of photos?</strong> Use the format the claim slot names, which is usually a PDF. Turn the pages into one PDF for that slot on your PC. A ZIP or a row of images is a different product, and mixed types are a common reject reason.</p>
 <p><strong>I forgot the PDF password on the bank proof. Can the editor remove it?</strong> No. Use the password the bank already gave you, or download a fresh proof from net banking. If you cannot get it, ask the bank through the official reset. Do not try to remove a password you do not know. Upload only a file you were able to open and read.</p>
 <p>Fix the claim attachment on the PC, then upload it on the official EPF page. Pdf Buddy, by Easy Peeze Tools, is a Windows desktop PDF editor that works on the PC. Files are not uploaded to a random website. The free tier is 2 files a day. Pricing starts at ₹149. Details are on <a href="../../pricing/">pricing</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

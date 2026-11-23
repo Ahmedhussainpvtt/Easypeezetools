@@ -179,6 +179,38 @@ const initMotion = () => {
     revealNodes.push(showcase);
   });
 
+  // Blog posts: TOC, cover, headings, CTA (same feel as Easy Peeze Tech)
+  const blogRoot = document.querySelector('.blog-article-section');
+  if (blogRoot) {
+    const toc = blogRoot.querySelector('.blog-toc');
+    if (toc && !seen.has(toc)) {
+      seen.add(toc);
+      toc.classList.add('motion-reveal', 'motion-enter-left');
+      if (onScreen(toc)) {
+        requestAnimationFrame(() => requestAnimationFrame(() => toc.classList.add('is-visible')));
+      } else {
+        revealNodes.push(toc);
+      }
+    }
+    const cover = blogRoot.querySelector('img.blog-cover');
+    if (cover && !seen.has(cover)) {
+      seen.add(cover);
+      cover.classList.add('motion-reveal', 'motion-enter-scale');
+      if (onScreen(cover)) {
+        requestAnimationFrame(() => requestAnimationFrame(() => cover.classList.add('is-visible')));
+      } else {
+        revealNodes.push(cover);
+      }
+    }
+    blogRoot.querySelectorAll('.blog-article h2, .blog-cta').forEach((node, index) => {
+      if (seen.has(node) || onScreen(node)) return;
+      seen.add(node);
+      node.classList.add('motion-reveal', 'motion-enter-up');
+      node.style.setProperty('--reveal-delay', `${Math.min(index, 6) * 60}ms`);
+      revealNodes.push(node);
+    });
+  }
+
   const reveal = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -444,6 +476,7 @@ const initMotion = () => {
   const isPricingBtn = (el) => {
     if (el.classList.contains("nav-cta")) return true;
     if (el.hasAttribute("data-pay")) return true;
+    if (el.closest(".blog-cta")) return true;
     const href = (el.getAttribute("href") || "").toLowerCase();
     return href.includes("pricing") || /(?:^|\/)pay\/|\bpay\/\?/.test(href);
   };
@@ -647,4 +680,138 @@ const initMotion = () => {
   document.addEventListener("pointerleave", () => {
     active.forEach((entry, el) => release(el, entry));
   });
+})();
+
+/* Blog extras: TOC scrollspy + related guides (Easy Peeze Tech parity). */
+(() => {
+  const articleSection = document.querySelector('.blog-article-section');
+  if (!articleSection) return;
+
+  const tocLinks = [...document.querySelectorAll('.blog-toc a[href^="#"]')];
+  const headings = tocLinks
+    .map((a) => {
+      const id = decodeURIComponent((a.getAttribute('href') || '').slice(1));
+      const el = id ? document.getElementById(id) : null;
+      return el ? { a, el } : null;
+    })
+    .filter(Boolean);
+
+  if (headings.length) {
+    let raf = 0;
+    const mark = () => {
+      raf = 0;
+      const y = window.scrollY + 120;
+      let current = headings[0];
+      for (const row of headings) {
+        if (row.el.offsetTop <= y) current = row;
+      }
+      headings.forEach((row) => {
+        row.a.classList.toggle('is-active', row === current);
+      });
+    };
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!raf) raf = requestAnimationFrame(mark);
+      },
+      { passive: true }
+    );
+    mark();
+  }
+
+  const parts = location.pathname.replace(/\/+$/, '').split('/');
+  const slug = parts[parts.length - 1];
+  if (!slug || slug === 'blog') return;
+  if (document.querySelector('.blog-related')) return;
+
+  const esc = (s) =>
+    String(s || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+
+  const formatDate = (iso) => {
+    const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso || ''));
+    if (!m) return String(iso || '');
+    try {
+      return new Date(`${m[1]}-${m[2]}-${m[3]}T12:00:00`).toLocaleDateString('en-IN', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+    } catch {
+      return String(iso || '');
+    }
+  };
+
+  const pickRelated = (posts, currentSlug) => {
+    const cur = posts.find((p) => p.slug === currentSlug);
+    const tags = new Set((cur?.tags || []).map((t) => String(t).toLowerCase()));
+    return posts
+      .filter((p) => p.slug && p.slug !== currentSlug)
+      .map((p) => ({
+        p,
+        score: (p.tags || []).reduce((n, t) => n + (tags.has(String(t).toLowerCase()) ? 1 : 0), 0)
+      }))
+      .sort((a, b) => b.score - a.score || String(b.p.date || '').localeCompare(String(a.p.date || '')))
+      .slice(0, 3)
+      .map((x) => x.p);
+  };
+
+  fetch('/blog/posts.json', { credentials: 'omit' })
+    .then((r) => (r.ok ? r.json() : null))
+    .then((data) => {
+      if (!data) return;
+      const posts = Array.isArray(data) ? data : Array.isArray(data.posts) ? data.posts : [];
+      const related = pickRelated(posts, slug);
+      if (!related.length) return;
+
+      const section = document.createElement('section');
+      section.className = 'section blog-related';
+      section.innerHTML = `
+    <div class="blog-related__inner">
+      <h2 class="blog-related__title">Related guides</h2>
+      <div class="blog-grid">
+        ${related
+          .map((p) => {
+            const href = p.url || `/blog/${p.slug}/`;
+            const img = p.image || '/og-image.jpg';
+            return `<a class="blog-card" href="${esc(href)}">
+          <div class="blog-card__media"><img src="${esc(img)}" alt="" loading="lazy" width="640" height="360" /></div>
+          <div class="blog-card__body">
+            <span class="blog-card__date">${esc(formatDate(p.date))}</span>
+            <h2>${esc(p.title)}</h2>
+            <p>${esc(p.description || p.desc || '')}</p>
+          </div>
+        </a>`;
+          })
+          .join('')}
+      </div>
+    </div>`;
+
+      const main = document.getElementById('main') || articleSection.parentElement;
+      if (!main) return;
+      articleSection.insertAdjacentElement('afterend', section);
+
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce) return;
+      [...section.querySelectorAll('.blog-card')].forEach((node, index) => {
+        node.classList.add('motion-reveal');
+        node.classList.add(index % 2 === 0 ? 'motion-enter-left' : 'motion-enter-right');
+        node.style.setProperty('--reveal-delay', `${Math.min(index, 5) * 70}ms`);
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add('is-visible');
+              io.unobserve(entry.target);
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }
+        );
+        io.observe(node);
+      });
+    })
+    .catch(() => {});
 })();

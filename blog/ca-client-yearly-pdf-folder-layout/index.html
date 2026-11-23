@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,16 +3145,32 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / A simple yearly folder layout a CA office can reuse for each client</p>
       <h1>A simple yearly folder layout a CA office can reuse for each client</h1>
-      <p>2026-10-04 · Pdf Editor, India, CA office, folder layout</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-10-04">4 October 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/ca-client-yearly-pdf-folder-layout-960.webp" srcset="/images/blog/ca-client-yearly-pdf-folder-layout-480.webp 480w, /images/blog/ca-client-yearly-pdf-folder-layout-960.webp 960w, /images/blog/ca-client-yearly-pdf-folder-layout-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="A simple yearly folder layout a CA office can reuse for each client" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#one-client-one-year-one-tree">One client, one year, one tree</a></li>
+              <li><a href="#file-names-a-colleague-can-open-cold">File names a colleague can open cold</a></li>
+              <li><a href="#what-not-to-mix-in-the-same-pdf">What not to mix in the same PDF</a></li>
+              <li><a href="#a-local-working-set-then-the-final-set">A local working set, then the final set</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/ca-client-yearly-pdf-folder-layout-960.webp" srcset="/images/blog/ca-client-yearly-pdf-folder-layout-480.webp 480w, /images/blog/ca-client-yearly-pdf-folder-layout-960.webp 960w, /images/blog/ca-client-yearly-pdf-folder-layout-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="A simple yearly folder layout a CA office can reuse for each client" width="1400" height="900" />
 <p>A CA office can lose a morning when last year's bank PDF sits in this year's folder, or when two clients share a scan named statements.pdf on a desktop. The fix is a folder layout you reuse for every client: one client, one assessment year, then a short list of drawers such as Bank, GST, ITR, and KYC. This is about names and what not to mix. It is not a month-end processing queue. Staff should be able to open a client cold and know where a file belongs. Keep each client's papers in that client's tree. Do not edit a figure to make a set look complete.</p>
-<h2>One client, one year, one tree</h2>
+<h2 id="one-client-one-year-one-tree">One client, one year, one tree</h2>
 <p>Start with the client name as the parent, then a year folder such as AY-2026-27, then the drawers. Do not make a giant Year folder that holds every client, because a drag-and-drop then drops the wrong PAN into the wrong return. Do not make a drawer called Misc and let it become the real system. If a document type is new, add a named drawer. Bank statements do not belong in KYC. Form 16 does not belong in GST. The year folder should contain only that year's working papers. Prior-year comparisons can be shortcuts, not copies that get edited by mistake.</p>
 <p>Spell the client the same way every year. A folder called Sharma and another called R.K. Sharma will both get files. Pick the name you use on the engagement and stay with it. Inside the year, avoid personal names of staff as folder titles. People leave, and the next article clerk will not know whose desktop alias you meant. The layout is the firm's, not one person's Downloads history. Write that name once and reuse it.</p>
 <ul>
@@ -3016,23 +3179,31 @@ min-height: 42px;
 <li>No Misc drawer as the real filing system</li>
 <li>Same client spelling every year</li>
 </ul>
-<h2>File names a colleague can open cold</h2>
+<h2 id="file-names-a-colleague-can-open-cold">File names a colleague can open cold</h2>
 <p>Inside a drawer, name the PDF with the period and the document, such as Bank-HDFC-Apr2026-to-Mar2027.pdf. The person who did not meet the client should still pick the right file. Avoid scan.pdf, new.pdf, and final-v7.pdf. If a client mails a file with a useless name, rename a copy into the drawer and leave their original name only if you must reply on that thread. Write the period as it appears on the statement. A file that says Q1 when the pages are July will be attached to the wrong working paper.</p>
 <p>When a PDF holds the wrong months, split the months you need into a new file and park the long download in a Raw subfolder. Do not expect everyone to remember which pages were relevant. The file in the main drawer should be the one you would send or rely on. Password-protected bank files should be opened with the password the client gave you, then stored the way your office policy allows. If the client did not give the password, ask them. Do not strip a lock.</p>
-<h2>What not to mix in the same PDF</h2>
+<h2 id="what-not-to-mix-in-the-same-pdf">What not to mix in the same PDF</h2>
 <p>Do not merge two clients into one PDF, even if they are spouses, unless the paper itself is a joint document and you file it under the client the engagement names, with a note. Do not merge two years to save a mail. Do not append KYC images at the back of a bank statement because the portal wanted both on the same day. Those were two uploads. In the office tree they stay two files. Mixing is how a GST invoice set picks up someone else's bill with a similar amount.</p>
 <p>Do not drop a folder of WhatsApp images into the return drawer and call it done. Turn the pages you need into PDFs, named and checked, and keep the chat export out of the year tree or in a clearly marked inbox that gets emptied. A photo of a screen is not a filed statement. Also do not put draft computations and the client's original PDF in one file. The original should remain the original. The computation is your work paper, stored beside it.</p>
-<h2>A local working set, then the final set</h2>
+<h2 id="a-local-working-set-then-the-final-set">A local working set, then the final set</h2>
 <p>Keep an Incoming folder at the client level for unsorted mail, and empty it into the year drawers. The year folder is not the inbox. When the return is filed, you can mark a Final set as copies of the files you actually relied on, without deleting the drawers. Next year, copy the empty layout, not last year's PDFs. Pdf Buddy can split a long statement, merge a pack a portal asked for, and save that pack on the office PC. Client files should not pass through a random website to get a new file name.</p>
 <p>This layout does not decide what the client should claim or how a return is prepared. It stops the wrong PDF from sitting in the wrong year. If a document is missing, ask the client for it. Do not recreate a bank statement or a GST return to fill a drawer. The folder only works if the pages in it are the pages the bank, the portal, or the employer issued.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>Should spouses share one client folder?</strong> Use one tree per engagement. If you file them separately, use two client folders even when the papers arrived in one mail. A joint bank statement can live in the folder of the client whose working papers cite it, with the file name showing it is joint.</p>
 <p><strong>Where do unsorted WhatsApp PDFs go?</strong> Put them in an Incoming folder and move a checked, renamed PDF into the right year drawer. Do not leave the chat export inside the ITR drawer. Incoming is a tray. The year tree is the record. Empty the tray each week.</p>
 <p><strong>Can one PDF hold the full bank download if only four months matter?</strong> Keep the full download in a Raw subfolder if you need it, and put a clearly named extract of the months you are using in the Bank drawer. People attach the file that sits in the main drawer. Make that file the right period.</p>
 <p>Copy the same year tree for each client and keep drawers unmixed. Pdf Buddy, by Easy Peeze Tools, is a Windows desktop PDF editor that works on the PC. Client files are not uploaded to a random website. The free tier is 2 files a day. Pricing starts at ₹149. See <a href="../../pricing/">pricing</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

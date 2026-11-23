@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,16 +3145,32 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / Sending Diwali invoices on WhatsApp: compress the PDF without breaking the QR</p>
       <h1>Sending Diwali invoices on WhatsApp: compress the PDF without breaking the QR</h1>
-      <p>2026-11-10 · Pdf Editor, India, e-invoice, WhatsApp, compress PDF</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-11-10">10 November 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/diwali-day-einvoice-whatsapp-compress-960.webp" srcset="/images/blog/diwali-day-einvoice-whatsapp-compress-480.webp 480w, /images/blog/diwali-day-einvoice-whatsapp-compress-960.webp 960w, /images/blog/diwali-day-einvoice-whatsapp-compress-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Sending Diwali invoices on WhatsApp: compress the PDF without breaking the QR" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#send-a-document-not-a-picture">Send a document, not a picture</a></li>
+              <li><a href="#when-compression-helps-and-when-it-hurts">When compression helps and when it hurts</a></li>
+              <li><a href="#test-the-qr-before-you-trust-the-setting">Test the QR before you trust the setting</a></li>
+              <li><a href="#batches-statements-and-the-sent-copy">Batches, statements and the sent copy</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/diwali-day-einvoice-whatsapp-compress-960.webp" srcset="/images/blog/diwali-day-einvoice-whatsapp-compress-480.webp 480w, /images/blog/diwali-day-einvoice-whatsapp-compress-960.webp 960w, /images/blog/diwali-day-einvoice-whatsapp-compress-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Sending Diwali invoices on WhatsApp: compress the PDF without breaking the QR" width="1400" height="900" />
 <p>During Diwali week the customer wants the bill on WhatsApp before the goods are loaded. The counter staff photograph the printout, the photo arrives tilted and dim, and the buyer's accountant writes back that the GSTIN cannot be read and the QR will not scan. Then the same invoice is sent three more times. Sending invoices over chat is normal business now, and it can be done properly in the same thirty seconds. Send the PDF itself, compress it only when it is truly heavy, and check the QR once before you make it a habit.</p>
-<h2>Send a document, not a picture</h2>
+<h2 id="send-a-document-not-a-picture">Send a document, not a picture</h2>
 <p>Billing software produces a PDF where the text is real text and the QR code is drawn with clean edges. A phone photo of the printed copy throws all of that away. WhatsApp then shrinks images further, and after two forwards the tax amount is a smudge. Export the invoice as a PDF from the software and attach it in WhatsApp as a document. It arrives with its file name, opens sharp at any zoom, and prints cleanly at the other end.</p>
 <p>If you use WhatsApp on the billing PC through the desktop app or the web version, you can drag the PDF straight from the invoice folder into the chat. That removes the step where a file is passed through someone's personal phone gallery. Name the file before it goes: INV-1187-Verma-Stores.pdf tells the buyer what it is without opening it, and they can search their chat for the number later.</p>
 <ul>
@@ -3016,23 +3179,31 @@ min-height: 42px;
 <li>Invoice number and buyer name in the file name</li>
 <li>Send from the PC folder where the original is saved</li>
 </ul>
-<h2>When compression helps and when it hurts</h2>
+<h2 id="when-compression-helps-and-when-it-hurts">When compression helps and when it hurts</h2>
 <p>A normal one page invoice from billing software is small already and needs no compression at all. Files become heavy when the template carries a large logo or background image, when a scanned annexure such as a signed delivery challan is attached, or when twenty invoices for one dealer are merged into a statement pack. Those are the cases where compressing makes sense, because a buyer on mobile data in a godown will not wait for a large download.</p>
 <p>Compression mostly works by reducing the quality of images inside the PDF. Text stays sharp, but a QR code or a scanned stamp is an image, and heavy compression blurs its edges. So compress with a moderate setting, and never run the same file through compression twice. If the logo is the cause, the better fix is a lighter logo in the invoice template, which makes every future invoice small without any extra step.</p>
-<h2>Test the QR before you trust the setting</h2>
+<h2 id="test-the-qr-before-you-trust-the-setting">Test the QR before you trust the setting</h2>
 <p>An e-invoice carries a signed QR code that the buyer, a transporter or an officer can scan to verify the IRN. After compressing a file, open it on the PC screen and scan the QR with a phone. If it reads at once, the setting is safe for that template. If the phone hunts and fails, use a lighter setting or send the original. Do this test once for each invoice format you use, not for every bill.</p>
 <p>Check the small print as well. Zoom to normal size and read both GSTINs, the invoice number and the tax amounts. Compare the page count with the original, particularly for multi page invoices with terms on the last page. A compressed file that lost a page or a digit is not a smaller invoice, it is a wrong one. Keep the untouched export in the day's invoice folder and treat the compressed file as a sending copy only.</p>
-<h2>Batches, statements and the sent copy</h2>
+<h2 id="batches-statements-and-the-sent-copy">Batches, statements and the sent copy</h2>
 <p>Dealers often ask for all invoices of the week in one go. Merge them in invoice number order into a single PDF, add page numbers, and name it with the dealer and the date range. One file with twenty pages is easier for their accounts team than twenty attachments scattered through a chat. If the merged file is large, compress it once, test one QR from the middle of the file, and then send.</p>
 <p>Save what you sent in a Sent subfolder for the day, so there is no doubt later about which version the customer received. Do not rely on the chat as your record, because media is cleared when phones run low on space. Pdf Buddy can merge, number and compress on Windows, which keeps customer invoices on your own PC. A chat is how the invoice travels. The folder is where it lives.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>Is a photo of the invoice acceptable for the buyer's records?</strong> A buyer may accept it informally, but it is a poor record. The QR often will not scan and small figures blur after forwarding. Their accountant will usually ask for the PDF anyway. Sending the PDF as a document the first time avoids the second request.</p>
 <p><strong>Will compressing an e-invoice PDF make it invalid?</strong> Compression does not change the IRN or the invoice data. The risk is practical: a blurred QR that will not scan or figures that cannot be read. Use a moderate setting, scan the QR from the screen once, and keep the original export as your record.</p>
 <p><strong>Does WhatsApp reduce the quality of PDF files?</strong> Not when the PDF is sent as a document. Images and photos are recompressed, which is why photographed invoices look worse after each forward. That difference is the main reason to attach the file as a document from the invoice folder.</p>
 <p>Send the real PDF, compress only the heavy ones, and scan the QR once to be sure. Pdf Buddy, by Easy Peeze Tools, is a Windows desktop PDF editor that works on the PC, so customer invoices are not uploaded to a random website. The free tier is 2 files a day. Pricing starts at ₹149. Start from the <a href="../../download/">download page</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">

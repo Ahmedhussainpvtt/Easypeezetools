@@ -2195,11 +2195,12 @@ border: 1px solid var(--line);
 border-radius: 16px;
 text-decoration: none !important;
 color: inherit;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.4s ease;
 }
 .blog-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 24px rgba(15, 42, 67, 0.1);
+transform: translateY(-8px);
+border-color: rgba(0, 133, 255, 0.35);
+box-shadow: 0 24px 60px rgba(15, 42, 67, 0.12);
 }
 .blog-card__media {
 aspect-ratio: 16 / 9;
@@ -2210,6 +2211,10 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.blog-card:hover .blog-card__media img {
+transform: scale(1.05);
 }
 .blog-card__body {
 display: grid;
@@ -2245,6 +2250,148 @@ box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
 width: 100%;
 aspect-ratio: 16 / 9;
 object-fit: cover;
+}
+.blog-meta {
+display: flex;
+flex-wrap: wrap;
+gap: 0.65rem 1.25rem;
+margin-top: 1rem;
+color: var(--muted);
+font-size: 0.9rem;
+}
+.blog-article-section {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto;
+padding-bottom: 48px;
+}
+.blog-layout {
+display: grid;
+grid-template-columns: 220px minmax(0, 1fr);
+gap: 2rem;
+align-items: start;
+}
+.blog-toc {
+position: sticky;
+top: 5.5rem;
+padding: 1rem;
+border: 1px solid var(--line);
+border-radius: 16px;
+background: var(--surface);
+font-size: 0.86rem;
+}
+.blog-toc strong {
+display: block;
+margin-bottom: 0.65rem;
+font-weight: 700;
+}
+.blog-toc ol {
+margin: 0;
+padding-left: 1.1rem;
+color: var(--muted);
+display: grid;
+gap: 0.4rem;
+}
+.blog-toc a {
+color: var(--muted);
+transition: color 0.2s ease;
+}
+.blog-toc a:hover,
+.blog-toc a.is-active {
+color: var(--primary-text);
+font-weight: 700;
+}
+.blog-layout .prose.blog-article {
+max-width: none;
+margin: 0;
+padding: 0;
+}
+img.blog-cover {
+width: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+border-radius: 18px;
+border: 1px solid var(--line);
+margin: 0 0 1.5rem;
+box-shadow: 0 10px 28px rgba(15, 42, 67, 0.1);
+}
+.blog-article h2 {
+scroll-margin-top: 5.5rem;
+}
+.blog-article h3 {
+font-size: 1.05rem;
+margin: 1.25rem 0 0.45rem;
+letter-spacing: -0.02em;
+}
+.blog-cta {
+margin-top: 2.5rem;
+padding: 1.5rem;
+border-radius: 18px;
+border: 1px solid var(--line);
+background:
+radial-gradient(500px 180px at 10% 0%, rgba(0, 196, 154, 0.14), transparent 60%),
+var(--bg-end);
+}
+.blog-cta h2 {
+margin-top: 0;
+}
+.blog-cta .hero__actions,
+.blog-cta .blog-cta__actions {
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+margin-top: 1rem;
+}
+.blog-related {
+width: min(var(--max), calc(100% - 40px));
+margin: 0 auto 48px;
+padding-top: 8px;
+}
+.blog-related__title {
+margin: 0 0 1rem;
+font-size: 1.35rem;
+letter-spacing: -0.02em;
+}
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: blog-hero-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero:has(+ .blog-article-section) > p {
+animation-delay: 0.08s;
+}
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation-delay: 0.16s;
+}
+@keyframes blog-hero-in {
+from {
+opacity: 0;
+transform: translateY(14px);
+}
+to {
+opacity: 1;
+transform: none;
+}
+}
+@media (max-width: 900px) {
+.blog-layout {
+grid-template-columns: 1fr;
+}
+.blog-toc {
+position: static;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.page-hero:has(+ .blog-article-section) h1,
+.page-hero:has(+ .blog-article-section) > p,
+.page-hero:has(+ .blog-article-section) .blog-meta {
+animation: none;
+}
+.blog-card:hover {
+transform: none;
+}
+.blog-card:hover .blog-card__media img {
+transform: none;
+}
 }
 .prose {
 max-width: 720px;
@@ -2998,17 +3145,34 @@ min-height: 42px;
       </nav>
     </div>
   </header>
-  <main id="main">
-    <div class="page-hero section">
+    <main id="main">
+    <div class="page-hero section" style="width:min(var(--max), calc(100% - 40px));margin:0 auto;">
       <p class="crumbs"><a href="/">Home</a> / <a href="../../blog/">Blog</a> / Festive loan offers: salary slips and bank statements as tidy PDFs</p>
       <h1>Festive loan offers: salary slips and bank statements as tidy PDFs</h1>
-      <p>2026-10-30 · Pdf Editor, India, Loan, Bank statement</p>
+      <div class="blog-meta">
+        <span>Last updated: <time datetime="2026-10-30">30 October 2026</time></span>
+        <span>Written by Easy Peeze Tools</span>
+        <span>Expert written and reviewed</span>
+      </div>
     </div>
-    <article class="section prose">
-<figure class="prose-figure"><img src="/images/blog/festive-loan-documents-salary-slips-statements-pdf-960.webp" srcset="/images/blog/festive-loan-documents-salary-slips-statements-pdf-480.webp 480w, /images/blog/festive-loan-documents-salary-slips-statements-pdf-960.webp 960w, /images/blog/festive-loan-documents-salary-slips-statements-pdf-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Festive loan offers: salary slips and bank statements as tidy PDFs" width="1400" height="900" /><figcaption>Pdf Buddy / Easy Peeze Tools.</figcaption></figure>
+    <section class="section blog-article-section">
+      <div class="blog-layout">
+          <aside class="blog-toc" aria-label="Table of contents">
+            <strong>Table of contents</strong>
+            <ol>
+              <li><a href="#the-usual-documents">The usual documents</a></li>
+              <li><a href="#one-pdf-per-item-in-order">One PDF per item, in order</a></li>
+              <li><a href="#passwords-and-file-size">Passwords and file size</a></li>
+              <li><a href="#keep-a-copy-of-everything-you-send">Keep a copy of everything you send</a></li>
+              <li><a href="#why-to-do-this-locally">Why to do this locally</a></li>
+              <li><a href="#questions-people-actually-ask">Questions people actually ask</a></li>
+            </ol>
+          </aside>
+        <article class="prose blog-article">
+          <img class="blog-cover" src="/images/blog/festive-loan-documents-salary-slips-statements-pdf-960.webp" srcset="/images/blog/festive-loan-documents-salary-slips-statements-pdf-480.webp 480w, /images/blog/festive-loan-documents-salary-slips-statements-pdf-960.webp 960w, /images/blog/festive-loan-documents-salary-slips-statements-pdf-1400.webp 1400w" sizes="(max-width: 760px) 92vw, 760px" decoding="async" alt="Festive loan offers: salary slips and bank statements as tidy PDFs" width="1400" height="900" />
 <p>The festive season brings loan offers: home loan rate cuts, car loans with lower processing fees, and personal loans approved "in minutes". The approval that actually takes minutes is the one where the documents are ready. Most delays come from a missing salary slip, a bank statement in the wrong format, an unreadable scan of an ID, or a password-protected PDF the bank cannot open. This post shows how to prepare a clean set of loan documents on your Windows PC before you apply, so the offer you want does not expire while you search for papers.</p>
 <p>Every lender has its own checklist. Always follow the list the bank or lender gives you. The steps below make that list easy to meet.</p>
-<h2>The usual documents</h2>
+<h2 id="the-usual-documents">The usual documents</h2>
 <p>For salaried applicants, lenders commonly ask for identity and address proof, the last three months of salary slips, the last six months of bank statements for the salary account, and Form 16 or income tax returns for the last two years. Self-employed applicants usually add business proof, income tax returns with computation, and audited or certified financials. A home loan adds property papers: sale agreement, title documents, approved plan, and receipts for any payment already made.</p>
 <p>Make a short list from the lender's checklist and tick items as you collect them. Download statements directly from your bank's net banking where possible. A downloaded PDF statement is cleaner and more trusted than a photo of a printed page.</p>
 <ul>
@@ -3018,10 +3182,10 @@ min-height: 42px;
 <li>Form 16 or ITRs for 2 years</li>
 <li>Property papers for a home loan</li>
 </ul>
-<h2>One PDF per item, in order</h2>
+<h2 id="one-pdf-per-item-in-order">One PDF per item, in order</h2>
 <p>Lenders and their portals usually want each document type separately: one file for salary slips, one for bank statements, one for ITRs. Merge the three salary slips into one PDF in month order, oldest first unless the lender says otherwise. Merge six monthly statements into one file if your bank gives them month by month. Name each file plainly: "Salary slips Jul-Sep 2026 - Name.pdf". Do not merge everything into one giant file unless the form has a single upload box.</p>
 <p>Check each merged file page by page. Pages should be upright, in order, and readable. Remove blank pages from scans. If a statement is long, keep all pages the lender asked for. Do not remove pages from a bank statement to hide transactions. Lenders compare statements carefully, and a missing page looks worse than a large expense.</p>
-<h2>Passwords and file size</h2>
+<h2 id="passwords-and-file-size">Passwords and file size</h2>
 <p>Bank statements and Form 16 often arrive password protected, usually with your PAN, date of birth, or customer ID. Many loan portals cannot open protected files and reject them without a clear message. If the lender asks for unprotected files, remove the password on your own PC after you open the document with its password. Never send the password in the same email as the file.</p>
 <p>Portals also have size limits. Scanned property papers can be very large. Compress them until they fit, then zoom in on names, amounts, and stamps to confirm they are still readable. A readable 2 MB file is better than a blurry 500 KB one.</p>
 <ul>
@@ -3029,18 +3193,26 @@ min-height: 42px;
 <li>Never send a file and its password together</li>
 <li>Compress large scans, then check stamps and amounts are readable</li>
 </ul>
-<h2>Keep a copy of everything you send</h2>
+<h2 id="keep-a-copy-of-everything-you-send">Keep a copy of everything you send</h2>
 <p>Create a folder for the application: "Home loan 2026 - Bank name". Save every file you submitted, the application number, and any sanction letter or email. If the lender asks for a document again, or a different branch takes over the file, you can send the same version in seconds. Loan processing can take weeks, and the files you sent in week one are the ones you will be asked about in week four.</p>
-<h2>Why to do this locally</h2>
+<h2 id="why-to-do-this-locally">Why to do this locally</h2>
 <p>Loan documents are among the most sensitive files you own: income, bank balances, addresses, PAN, and property details. Uploading them to a free online PDF tool to merge or unlock means trusting an unknown server with all of it. Pdf Buddy is a Windows PDF editor that merges, splits, compresses, unlocks, and converts images to PDF on your computer, so your financial documents stay on your disk.</p>
-<h2>Questions people actually ask</h2>
+<h2 id="questions-people-actually-ask">Questions people actually ask</h2>
 <p><strong>The bank wants statements in PDF, but I only have printed copies. What do I do?</strong> Download the official PDF statement from net banking if you can. If not, ask the branch for a stamped statement and scan it clearly. Photos of printed pages are often rejected.</p>
 <p><strong>Can I combine all documents into one PDF?</strong> Only if the lender's form has a single upload box and asks for it. Otherwise upload each document type separately, merged within itself, as the form requests.</p>
 <p><strong>Is it safe to remove the password from a bank statement?</strong> It is your document. Remove it on your own PC if the lender needs an unprotected file, and send it only through the lender's official channel.</p>
 <p>A festive loan offer is only as fast as your paperwork. Collect from the lender's list, merge by type, fix passwords and size on your PC, and keep a copy of everything you sent. Pdf Buddy, by Easy Peeze Tools, does the PDF work on Windows without uploading your financial documents. Free for 2 actions a day after Google sign-in, with plans from ₹299 a year. <a href="../../download/">Download Pdf Buddy</a> or see <a href="../../pricing/">pricing</a>.</p>
-      <p><a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
-      <a class="btn btn--ghost" href="../../pricing/">See pricing</a></p>
-    </article>
+          <div class="blog-cta">
+            <h2>Ready to edit PDFs offline?</h2>
+            <p>Pdf Buddy runs on your Windows PC. No upload for merge, split, compress, or sign.</p>
+            <div class="blog-cta__actions">
+              <a class="btn" href="../../download/" rel="noopener">Download free - 2/day</a>
+              <a class="btn btn--ghost" href="../../pricing/">See pricing</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">
