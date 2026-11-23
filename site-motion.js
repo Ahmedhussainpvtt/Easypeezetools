@@ -848,7 +848,8 @@ const initMotion = () => {
   btn.className = 'back-to-top';
   btn.setAttribute('aria-label', 'Back to top');
   btn.innerHTML =
-    '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 5.5 5.8 11.7a1 1 0 1 0 1.4 1.4L11 9.3V19a1 1 0 1 0 2 0V9.3l3.8 3.8a1 1 0 1 0 1.4-1.4L12 5.5Z"/></svg>';
+    '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 5.5 5.8 11.7a1 1 0 1 0 1.4 1.4L11 9.3V19a1 1 0 1 0 2 0V9.3l3.8 3.8a1 1 0 1 0 1.4-1.4L12 5.5Z"/></svg>' +
+    '<span>Back to top</span>';
   document.body.appendChild(btn);
   btn.addEventListener('click', toTop);
 
