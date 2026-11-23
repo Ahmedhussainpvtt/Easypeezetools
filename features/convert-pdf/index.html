@@ -1115,7 +1115,7 @@ font-size: 0.92rem;
 .cta-band__support a { color: #fff; text-decoration: underline; }
 .site-footer {
 border-top: 1px solid var(--line);
-padding: 40px 0 28px;
+padding: 36px 0 28px;
 background: rgba(255, 255, 255, 0.72);
 overflow: visible;
 }
@@ -1125,7 +1125,7 @@ gap: 28px;
 }
 .site-footer__top {
 display: grid;
-grid-template-columns: minmax(200px, 1.15fr) minmax(0, 2.4fr);
+grid-template-columns: minmax(200px, 240px) minmax(0, 1fr);
 gap: 28px 40px;
 align-items: start;
 }
@@ -1134,7 +1134,7 @@ position: relative;
 display: flex;
 flex-direction: column;
 align-items: flex-start;
-gap: 10px;
+gap: 12px;
 font-weight: 700;
 line-height: 1.35;
 overflow: visible;
@@ -1143,16 +1143,17 @@ overflow: visible;
 display: block;
 line-height: 0;
 text-decoration: none !important;
+overflow: visible;
 }
 .site-footer__brand img,
 .site-footer__logo img {
-width: auto;
+width: 168px;
 height: auto;
-max-width: min(120px, 38vw);
-max-height: 84px;
+max-width: 100%;
+max-height: none;
 border-radius: 0;
 object-fit: contain;
-object-position: left top;
+object-position: left center;
 background: transparent;
 display: block;
 }
@@ -1174,8 +1175,31 @@ margin: 0;
 color: var(--muted);
 font-size: 0.9rem;
 font-weight: 500;
-max-width: 32ch;
+max-width: 28ch;
 line-height: 1.45;
+}
+.site-footer__social {
+display: flex;
+flex-wrap: wrap;
+gap: 8px;
+margin-top: 2px;
+}
+.site-footer__social-btn {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+width: 38px;
+height: 38px;
+border-radius: 10px;
+border: 1px solid var(--line);
+background: #fff;
+color: var(--primary-text, var(--primary));
+text-decoration: none !important;
+}
+.site-footer__social-btn:hover {
+background: var(--primary);
+border-color: var(--primary);
+color: #fff;
 }
 .site-footer__cols {
 display: grid;
@@ -1234,29 +1258,6 @@ text-decoration: none;
 .site-footer__legal a:hover {
 color: var(--primary-text, var(--primary));
 text-decoration: underline;
-}
-.site-footer__social {
-display: flex;
-flex-wrap: wrap;
-gap: 8px;
-margin-top: 6px;
-}
-.site-footer__social-btn {
-display: inline-flex;
-align-items: center;
-justify-content: center;
-width: 38px;
-height: 38px;
-border-radius: 10px;
-border: 1px solid var(--line);
-background: #fff;
-color: var(--primary-text, var(--primary));
-text-decoration: none !important;
-}
-.site-footer__social-btn:hover {
-background: var(--primary);
-border-color: var(--primary);
-color: #fff;
 }
 .site-footer nav,
 .site-footer .footer-resources {
@@ -3292,15 +3293,23 @@ min-height: 42px;
     </article>
 
   </main>
-    <footer class="site-footer">
+      <footer class="site-footer">
     <div class="site-footer__inner">
       <div class="site-footer__top">
         <div class="site-footer__brand">
           <a class="site-footer__logo" href="../../">
-            <img src="/logo-footer.webp" loading="lazy" decoding="async" alt="Easy Peeze Tools" width="120" height="100" />
+            <img src="/logo-footer.webp" loading="lazy" decoding="async" alt="Easy Peeze Tools" width="168" height="145" />
           </a>
           <p class="site-footer__tag">Simple tools. Zero hassle.</p>
           <p class="site-footer__blurb">Pdf Buddy for Windows and Kharch Log for Android - offline-first tools from Easy Peeze Technologies.</p>
+          <div class="site-footer__social">
+            <a class="site-footer__social-btn" href="https://www.linkedin.com/company/easypeezetech" target="_blank" rel="noopener noreferrer" aria-label="Easy Peeze on LinkedIn">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.83v1.5h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.66 4.8 6.13v5.42h-4v-4.8c0-1.14-.02-2.61-1.59-2.61-1.59 0-1.83 1.24-1.83 2.52v4.89h-4v-11Z"/></svg>
+            </a>
+            <a class="site-footer__social-btn" href="https://instagram.com/easypeezetech" target="_blank" rel="noopener noreferrer" aria-label="Easy Peeze on Instagram">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5Zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5Zm5.25-3.25a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1Z"/></svg>
+            </a>
+          </div>
         </div>
         <div class="site-footer__cols">
           <div class="site-footer__col">
@@ -3332,16 +3341,7 @@ min-height: 42px;
             <a href="mailto:support@easypeeze.com">support@easypeeze.com</a>
             <a href="../../contact/">Contact us</a>
           </div>
-        
-            <div class="site-footer__social">
-              <a class="site-footer__social-btn" href="https://www.linkedin.com/company/easypeezetech" target="_blank" rel="noopener noreferrer" aria-label="Easy Peeze on LinkedIn">
-                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.83v1.5h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.66 4.8 6.13v5.42h-4v-4.8c0-1.14-.02-2.61-1.59-2.61-1.59 0-1.83 1.24-1.83 2.52v4.89h-4v-11Z"/></svg>
-              </a>
-              <a class="site-footer__social-btn" href="https://instagram.com/easypeezetech" target="_blank" rel="noopener noreferrer" aria-label="Easy Peeze on Instagram">
-                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5Zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5Zm5.25-3.25a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1Z"/></svg>
-              </a>
-            </div>
-          </div>
+        </div>
       </div>
       <div class="site-footer__bottom">
         <p class="site-footer__copy">© 2026 Easy Peeze Tools. All rights reserved.</p>
