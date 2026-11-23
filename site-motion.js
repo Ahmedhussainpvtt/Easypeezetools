@@ -815,3 +815,57 @@ const initMotion = () => {
     })
     .catch(() => {});
 })();
+
+/* Refresh lands at the top; a back-to-top control appears after scrolling. */
+(() => {
+  try {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  } catch (_) {}
+
+  const toTop = () => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, left: 0, behavior: reduce ? 'auto' : 'smooth' });
+  };
+
+  // pageshow covers normal load and bfcache restore
+  const resetScroll = () => {
+    if ('scrollRestoration' in history) {
+      try { history.scrollRestoration = 'manual'; } catch (_) {}
+    }
+    window.scrollTo(0, 0);
+  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', resetScroll, { once: true });
+  } else {
+    resetScroll();
+  }
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) resetScroll();
+  });
+
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'back-to-top';
+  btn.setAttribute('aria-label', 'Back to top');
+  btn.innerHTML =
+    '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 5.5 5.8 11.7a1 1 0 1 0 1.4 1.4L11 9.3V19a1 1 0 1 0 2 0V9.3l3.8 3.8a1 1 0 1 0 1.4-1.4L12 5.5Z"/></svg>';
+  document.body.appendChild(btn);
+  btn.addEventListener('click', toTop);
+
+  const SHOW_AFTER = 420;
+  let ticking = false;
+  const sync = () => {
+    ticking = false;
+    btn.classList.toggle('is-visible', window.scrollY > SHOW_AFTER);
+  };
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(sync);
+    },
+    { passive: true }
+  );
+  sync();
+})();

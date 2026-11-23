@@ -3141,6 +3141,47 @@ display: none;
 .site-header .brand-lockup {
 min-height: 42px;
 }
+}
+.back-to-top {
+position: fixed;
+right: max(16px, calc((100vw - var(--max)) / 2));
+bottom: 22px;
+z-index: 50;
+width: 44px;
+height: 44px;
+padding: 0;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+border: 1px solid var(--line);
+border-radius: 12px;
+background: #fff;
+color: var(--primary-text);
+box-shadow: var(--shadow);
+cursor: pointer;
+opacity: 0;
+visibility: hidden;
+transform: translateY(8px);
+transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease, background 0.15s ease, color 0.15s ease;
+}
+.back-to-top.is-visible {
+opacity: 1;
+visibility: visible;
+transform: translateY(0);
+}
+.back-to-top:hover {
+background: var(--primary);
+border-color: var(--primary);
+color: #fff;
+}
+.back-to-top:focus-visible {
+outline: 2px solid var(--primary);
+outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+.back-to-top {
+transition: none;
+}
 }</style>
   <style>
     .delete-page .page-hero,
