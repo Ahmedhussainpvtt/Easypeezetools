@@ -3146,11 +3146,13 @@ min-height: 42px;
 }
 .back-to-top {
 position: fixed;
-right: max(16px, calc((100vw - var(--max)) / 2));
-bottom: 22px;
-z-index: 50;
+right: calc(1rem + env(safe-area-inset-right, 0px));
+bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+left: auto;
+z-index: 120;
 width: 44px;
 height: 44px;
+margin: 0;
 padding: 0;
 display: inline-flex;
 align-items: center;
@@ -3163,12 +3165,14 @@ box-shadow: var(--shadow);
 cursor: pointer;
 opacity: 0;
 visibility: hidden;
+pointer-events: none;
 transform: translateY(8px);
-transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease, background 0.15s ease, color 0.15s ease;
+transition: opacity 0.2s ease, transform 0.25s ease, visibility 0.2s ease, background 0.15s ease, color 0.15s ease;
 }
 .back-to-top.is-visible {
 opacity: 1;
 visibility: visible;
+pointer-events: auto;
 transform: translateY(0);
 }
 .back-to-top:hover {
