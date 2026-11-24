@@ -106,7 +106,8 @@ p a:not([class]) { text-decoration: underline; text-underline-offset: 2px; }
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 12px 0;
+  /* Extra vertical room so the mark smile/rays never kiss the bar edge. */
+  padding: 14px 0;
 }
 
 .brand-lockup {
