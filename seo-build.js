@@ -193,7 +193,7 @@ function stripAmplitude(html) {
   );
 }
 
-const INTERNAL_SKIP_PATHS = ['/khsynloyrebnsbyo/'];
+const INTERNAL_SKIP_PATHS = [];
 
 function applyGtagToTree(siteDir, gtagId, dryRun, skipPrefixes = INTERNAL_SKIP_PATHS) {
   let n = 0;
@@ -384,7 +384,7 @@ function applyPageSeo(html, cfg, pagePath, page) {
     ? 'noindex'
     : page.robots || cfg.defaults.robots;
 
-  const isInternal = String(pagePath || '').startsWith('/khsynloyrebnsbyo');
+  const isInternal = false;
   if (isInternal) {
     html = stripAmplitude(stripGtag(html));
   } else {

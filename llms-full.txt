@@ -1,14 +1,14 @@
-# Easy Peeze Tools - llms-full.txt
+# Eazy Peeze Apps - llms-full.txt
 
 Generated: 2026-11-23
 Source: https://easypeeze.com/
 Index: https://easypeeze.com/llms.txt
 
-Easy Peeze Tools makes simple privacy-first apps: Pdf Buddy (100% local Windows PDF editor, 2 free actions/day, then INR 299/year or INR 999 lifetime) and Kharch Log (Android expense tracker on Google Sheets, INR 149 lifetime). Site: easypeeze.com - expenses product also at kharchlog.com.
+Eazy Peeze Apps makes simple privacy-first apps: Pdf Buddy (100% local Windows PDF editor, 2 free actions/day, then INR 299/year or INR 999 lifetime) and Kharch Log (Android expense tracker on Google Sheets, INR 149 lifetime). Site: easypeeze.com - expenses product also at kharchlog.com.
 
 ## Facts
 
-- Brand: Easy Peeze Tools
+- Brand: Eazy Peeze Apps
 - Pdf Buddy: Windows 10/11 desktop PDF editor, local-first (no upload required for edits)
 - Pdf Buddy free: 2 actions/day after Google sign-in; paid: INR 299/year or INR 999 lifetime
 - Kharch Log: Android UPI/SMS expense tracker -> your Google Sheet; INR 149 lifetime
@@ -19,7 +19,7 @@ Easy Peeze Tools makes simple privacy-first apps: Pdf Buddy (100% local Windows 
 
 ### Home
 URL: https://easypeeze.com/
-Easy Peeze Tools - Pdf Buddy (local Windows PDF editor) and Kharch Log (Android expenses).
+Eazy Peeze Apps - Pdf Buddy (local Windows PDF editor) and Kharch Log (Android expenses).
 
 ### About
 URL: https://easypeeze.com/about/
@@ -235,9 +235,9 @@ Blog: Diwali Leave Application Pdf Office.
 URL: https://easypeeze.com/blog/diwali-shop-e-invoice-backup-folder/
 Blog: Diwali Shop E Invoice Backup Folder.
 
-### Easy Peeze Tools Pdf Buddy Kharch Log
+### Eazy Peeze Apps Pdf Buddy Kharch Log
 URL: https://easypeeze.com/blog/easy-peeze-tools-pdf-buddy-kharch-log/
-Blog: Easy Peeze Tools Pdf Buddy Kharch Log.
+Blog: Eazy Peeze Apps Pdf Buddy Kharch Log.
 
 ### Epfo Claim Attachment Pdf Size
 URL: https://easypeeze.com/blog/epfo-claim-attachment-pdf-size/
@@ -445,9 +445,9 @@ Glossary: what “Desktop Pdf Editor” means and how it relates to the product.
 URL: https://easypeeze.com/glossary/dsc-digital-signature/
 Glossary: what “Dsc Digital Signature” means and how it relates to the product.
 
-### Easy Peeze Tools
+### Eazy Peeze Apps
 URL: https://easypeeze.com/glossary/easy-peeze-tools/
-Glossary: what “Easy Peeze Tools” means and how it relates to the product.
+Glossary: what “Eazy Peeze Apps” means and how it relates to the product.
 
 ### Esign Pdf
 URL: https://easypeeze.com/glossary/esign-pdf/

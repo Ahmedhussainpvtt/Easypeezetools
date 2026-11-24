@@ -249,7 +249,7 @@
       var fullName = [buyer.firstName, buyer.lastName].filter(Boolean).join(' ');
       var options = {
         key: orderData.razorpayKeyId || cfg.razorpayKeyId,
-        name: 'Easy Peeze Tools',
+        name: 'Eazy Peeze Apps',
         description: plan.label,
         prefill: { name: fullName, email: buyer.email, contact: buyer.phone || '' },
         notes: {

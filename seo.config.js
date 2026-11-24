@@ -1,23 +1,23 @@
 /**
- * Easy Peeze Tools - SEO source of truth.
+ * Eazy Peeze Apps - SEO source of truth.
  * Run: npm run seo:easypeeze   (or npm run seo)
  * Wired into: scripts/push-easypeeze-website.ps1
  */
 module.exports = {
   site: {
-    name: 'Easy Peeze Tools',
+    name: 'Eazy Peeze Apps',
     origin: 'https://easypeeze.com',
     locale: 'en_IN',
     language: 'en-IN',
     themeColor: '#0085FF',
-    defaultTitle: 'Easy Peeze Tools - Pdf Buddy & Kharch Log',
-    titleTemplate: '%s | Easy Peeze Tools',
+    defaultTitle: 'Eazy Peeze Apps - Pdf Buddy & Kharch Log',
+    titleTemplate: '%s | Eazy Peeze Apps',
     defaultDescription:
-      'Easy Peeze Tools: your data stays yours. Pdf Buddy - local Windows PDF editor. Kharch Log - expenses in your Google Sheet.',
+      'Eazy Peeze Apps: your data stays yours. Pdf Buddy - local Windows PDF editor. Kharch Log - expenses in your Google Sheet.',
     defaultOgImage: 'https://easypeeze.com/og-image.jpg',
     favicon: 'https://easypeeze.com/favicon.png',
     twitterCard: 'summary_large_image',
-    author: 'Easy Peeze Tools',
+    author: 'Eazy Peeze Apps',
     gtagId: 'G-VNHDP7MYHF',
     amplitudeApiKey: '67d580c08d457990405291aae28f5a41',
   },
@@ -25,11 +25,11 @@ module.exports = {
   organization: {
     '@type': 'Organization',
     '@id': 'https://easypeeze.com/#organization',
-    name: 'Easy Peeze Tools',
+    name: 'Eazy Peeze Apps',
     url: 'https://easypeeze.com/',
     logo: 'https://easypeeze.com/logo.png',
     description:
-      'Easy Peeze Tools makes simple, privacy-first apps for India: Pdf Buddy, a local Windows PDF editor, and Kharch Log, an Android expense tracker that writes to your own Google Sheet.',
+      'Eazy Peeze Apps makes simple, privacy-first apps for India: Pdf Buddy, a local Windows PDF editor, and Kharch Log, an Android expense tracker that writes to your own Google Sheet.',
     email: 'support@easypeeze.com',
     contactPoint: {
       '@type': 'ContactPoint',
@@ -79,7 +79,7 @@ module.exports = {
    */
   pages: {
     '/': {
-      title: 'Easy Peeze Tools - Pdf Buddy & Kharch Log',
+      title: 'Eazy Peeze Apps - Pdf Buddy & Kharch Log',
       description:
         'Pdf Buddy: a 100% local Windows PDF editor from ₹299/year. Kharch Log: Android expenses in your own Google Sheet for ₹149 lifetime. Your data stays yours.',
       changefreq: 'weekly',
@@ -120,7 +120,7 @@ module.exports = {
     },
     '/products/': {
       title: 'Products - Pdf Buddy, Kharch Log & Easy Peeze Voice',
-      description: 'Pdf Buddy for Windows, Kharch Log for Android, and Easy Peeze Voice - simple tools from Easy Peeze Tools.',
+      description: 'Pdf Buddy for Windows, Kharch Log for Android, and Easy Peeze Voice - simple tools from Eazy Peeze Apps.',
       priority: 0.7,
       changefreq: 'weekly',
     },
@@ -131,7 +131,7 @@ module.exports = {
       changefreq: 'weekly',
     },
     '/pricing/': {
-      title: 'Pricing - Pdf Buddy & Kharch Log | Easy Peeze Tools',
+      title: 'Pricing - Pdf Buddy & Kharch Log | Eazy Peeze Apps',
       description: 'Pdf Buddy from ₹299/year. Kharch Log lifetime ₹149. Prices in INR for India.',
       priority: 0.8,
       changefreq: 'weekly',
@@ -154,31 +154,31 @@ module.exports = {
       changefreq: 'weekly',
     },
     '/faq/': {
-      title: 'FAQ - Easy Peeze Tools',
+      title: 'FAQ - Eazy Peeze Apps',
       description: 'Answers about Pdf Buddy, Kharch Log, pricing, privacy, and refunds.',
       priority: 0.7,
       schemaType: 'FAQPage',
     },
     '/about/': {
-      title: 'About Easy Peeze Tools',
+      title: 'About Eazy Peeze Apps',
       description: 'Who we are - local-first Pdf Buddy and Kharch Log expense tracking for India.',
       priority: 0.6,
     },
     '/contact/': {
-      title: 'Contact Easy Peeze Tools',
+      title: 'Contact Eazy Peeze Apps',
       description: 'Email support@easypeeze.com for Pdf Buddy and Kharch Log support.',
       priority: 0.5,
       changefreq: 'yearly',
     },
     '/privacy/': {
       title: 'Privacy Policy',
-      description: 'How Easy Peeze Tools handles data for Pdf Buddy, Kharch Log, and Easy Peeze: Twilio Calls & SMS (Easy Peeze Voice).',
+      description: 'How Eazy Peeze Apps handles data for Pdf Buddy, Kharch Log, and Easy Peeze: Twilio Calls & SMS (Easy Peeze Voice).',
       priority: 0.3,
       changefreq: 'yearly',
     },
     '/terms/': {
       title: 'Terms of Service',
-      description: 'Terms for Pdf Buddy, Kharch Log, and Easy Peeze: Twilio Calls & SMS (Easy Peeze Voice) from Easy Peeze Tools.',
+      description: 'Terms for Pdf Buddy, Kharch Log, and Easy Peeze: Twilio Calls & SMS (Easy Peeze Voice) from Eazy Peeze Apps.',
       priority: 0.3,
       changefreq: 'yearly',
     },
@@ -189,14 +189,14 @@ module.exports = {
       changefreq: 'yearly',
     },
     '/pay/': {
-      title: 'Pay - Pdf Buddy | Easy Peeze Tools',
+      title: 'Pay - Pdf Buddy | Eazy Peeze Apps',
       description: 'Unlock Pdf Buddy yearly or lifetime. Free tier: 2 edits/day after Google sign-in.',
       noindex: true,
       sitemap: false,
     },
     '/pay/client/': {
-      title: 'Payment | Easy Peeze Tools',
-      description: 'Secure payment to Easy Peeze Tools.',
+      title: 'Payment | Eazy Peeze Apps',
+      description: 'Secure payment to Eazy Peeze Apps.',
       noindex: true,
       sitemap: false,
     },

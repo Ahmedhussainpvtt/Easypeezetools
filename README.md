@@ -1,4 +1,4 @@
-# Easy Peeze Tools - website
+# Eazy Peeze Apps - website
 
 Static site for **[https://easypeeze.com](https://easypeeze.com)** (GitHub Pages).
 
@@ -24,5 +24,5 @@ Static site for **[https://easypeeze.com](https://easypeeze.com)** (GitHub Pages
 Then GitHub → **Easypeezetools** → Settings → Pages → Custom domain: `easypeeze.com` → check **Enforce HTTPS** (after DNS propagates). Repo already has a `CNAME` file with `easypeeze.com`.
 
 ## Brand
-- Easy Peeze Tools / Pdf Buddy
+- Eazy Peeze Apps / Pdf Buddy
 - Colors: navy `#0085FF` + teal `#00C49A` (Manrope)

@@ -184,7 +184,7 @@
           order_id: order.orderId,
           amount: order.amount,
           currency: order.currency,
-          name: 'Easy Peeze Tools',
+          name: 'Eazy Peeze Apps',
           description: buyer.reference || 'Payment',
           prefill: { name: buyer.name, email: buyer.email, contact: buyer.phone },
           notes: { kind: 'client_payment' },

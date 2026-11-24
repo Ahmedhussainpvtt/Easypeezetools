@@ -1,6 +1,6 @@
-# Easy Peeze Tools
+# Eazy Peeze Apps
 
-> Easy Peeze Tools makes simple privacy-first apps: Pdf Buddy (100% local Windows PDF editor, 2 free actions/day, then INR 299/year or INR 999 lifetime) and Kharch Log (Android expense tracker on Google Sheets, INR 149 lifetime). Site: easypeeze.com - expenses product also at kharchlog.com.
+> Eazy Peeze Apps makes simple privacy-first apps: Pdf Buddy (100% local Windows PDF editor, 2 free actions/day, then INR 299/year or INR 999 lifetime) and Kharch Log (Android expense tracker on Google Sheets, INR 149 lifetime). Site: easypeeze.com - expenses product also at kharchlog.com.
 
 Last updated: 2026-11-23
 Canonical site: https://easypeeze.com/
@@ -10,7 +10,7 @@ Contact: support@easypeeze.com
 
 ## Key facts
 
-- Brand: Easy Peeze Tools
+- Brand: Eazy Peeze Apps
 - Pdf Buddy: Windows 10/11 desktop PDF editor, local-first (no upload required for edits)
 - Pdf Buddy free: 2 actions/day after Google sign-in; paid: INR 299/year or INR 999 lifetime
 - Kharch Log: Android UPI/SMS expense tracker -> your Google Sheet; INR 149 lifetime
@@ -19,7 +19,7 @@ Contact: support@easypeeze.com
 
 ## Product
 
-- [Home](https://easypeeze.com/): Easy Peeze Tools - Pdf Buddy (local Windows PDF editor) and Kharch Log (Android expenses).
+- [Home](https://easypeeze.com/): Eazy Peeze Apps - Pdf Buddy (local Windows PDF editor) and Kharch Log (Android expenses).
 - [About](https://easypeeze.com/about/): About.
 - [Blog index](https://easypeeze.com/blog/): PDF how-tos for Windows India: compress, OCR, e-sign, privacy vs online editors.
 - [Download Pdf Buddy](https://easypeeze.com/download/): Download Pdf Buddy for Windows 10/11.
@@ -81,7 +81,7 @@ Contact: support@easypeeze.com
 - [Diwali Holiday Circular Pdf Archive](https://easypeeze.com/blog/diwali-holiday-circular-pdf-archive/): Blog: Diwali Holiday Circular Pdf Archive.
 - [Diwali Leave Application Pdf Office](https://easypeeze.com/blog/diwali-leave-application-pdf-office/): Blog: Diwali Leave Application Pdf Office.
 - [Diwali Shop E Invoice Backup Folder](https://easypeeze.com/blog/diwali-shop-e-invoice-backup-folder/): Blog: Diwali Shop E Invoice Backup Folder.
-- [Easy Peeze Tools Pdf Buddy Kharch Log](https://easypeeze.com/blog/easy-peeze-tools-pdf-buddy-kharch-log/): Blog: Easy Peeze Tools Pdf Buddy Kharch Log.
+- [Eazy Peeze Apps Pdf Buddy Kharch Log](https://easypeeze.com/blog/easy-peeze-tools-pdf-buddy-kharch-log/): Blog: Eazy Peeze Apps Pdf Buddy Kharch Log.
 - [Epfo Claim Attachment Pdf Size](https://easypeeze.com/blog/epfo-claim-attachment-pdf-size/): Blog: Epfo Claim Attachment Pdf Size.
 - [Festive Loan Documents Salary Slips Statements Pdf](https://easypeeze.com/blog/festive-loan-documents-salary-slips-statements-pdf/): Blog: Festive Loan Documents Salary Slips Statements Pdf.
 - [Festive Orders Gst Invoices Challans Pdf](https://easypeeze.com/blog/festive-orders-gst-invoices-challans-pdf/): Blog: Festive Orders Gst Invoices Challans Pdf.
@@ -136,7 +136,7 @@ Contact: support@easypeeze.com
 - [Compress Pdf](https://easypeeze.com/glossary/compress-pdf/): Glossary: what “Compress Pdf” means and how it relates to the product.
 - [Desktop Pdf Editor](https://easypeeze.com/glossary/desktop-pdf-editor/): Glossary: what “Desktop Pdf Editor” means and how it relates to the product.
 - [Dsc Digital Signature](https://easypeeze.com/glossary/dsc-digital-signature/): Glossary: what “Dsc Digital Signature” means and how it relates to the product.
-- [Easy Peeze Tools](https://easypeeze.com/glossary/easy-peeze-tools/): Glossary: what “Easy Peeze Tools” means and how it relates to the product.
+- [Eazy Peeze Apps](https://easypeeze.com/glossary/easy-peeze-tools/): Glossary: what “Eazy Peeze Apps” means and how it relates to the product.
 - [Esign Pdf](https://easypeeze.com/glossary/esign-pdf/): Glossary: what “Esign Pdf” means and how it relates to the product.
 - [Fillable Pdf](https://easypeeze.com/glossary/fillable-pdf/): Glossary: what “Fillable Pdf” means and how it relates to the product.
 - [Form 16 Pdf](https://easypeeze.com/glossary/form-16-pdf/): Glossary: what “Form 16 Pdf” means and how it relates to the product.
@@ -169,6 +169,6 @@ Contact: support@easypeeze.com
 - [Products/Kidly](https://easypeeze.com/products/kidly/): Kidly.
 - [Products/Pdf Buddy](https://easypeeze.com/products/pdf-buddy/): Pdf Buddy.
 - [Refund](https://easypeeze.com/refund/): Refund.
-- [Terms](https://easypeeze.com/terms/): Terms of use for Easy Peeze Tools products.
+- [Terms](https://easypeeze.com/terms/): Terms of use for Eazy Peeze Apps products.
 - [robots.txt](https://easypeeze.com/robots.txt): Crawl rules and sitemap pointer.
 - [llms-full.txt](https://easypeeze.com/llms-full.txt): Compact product corpus for AI agents.
