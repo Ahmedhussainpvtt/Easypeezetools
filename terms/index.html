@@ -2242,6 +2242,53 @@ width: min(720px, calc(100% - 40px));
 margin: 0 auto;
 padding-bottom: 48px;
 }
+.legal-app-picker {
+margin: 18px 0 8px;
+padding: 16px 18px;
+border: 1px solid var(--line);
+border-radius: var(--radius);
+background: var(--surface);
+box-shadow: var(--shadow);
+}
+.legal-app-picker__label {
+display: block;
+margin-bottom: 8px;
+font-size: 0.95rem;
+font-weight: 700;
+color: var(--text);
+}
+.legal-app-picker__row {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+align-items: stretch;
+}
+.legal-app-picker__select {
+flex: 1 1 220px;
+min-width: 0;
+box-sizing: border-box;
+padding: 12px 14px;
+border: 1px solid var(--line);
+border-radius: 12px;
+font: inherit;
+font-weight: 600;
+background: #fff;
+color: var(--text);
+appearance: auto;
+}
+.legal-app-picker__select:focus {
+outline: 2px solid color-mix(in srgb, var(--primary) 35%, transparent);
+border-color: var(--primary);
+}
+.legal-app-picker__go {
+flex: 0 0 auto;
+min-width: 96px;
+}
+.legal-app-picker__hint {
+margin: 22px 0 8px;
+font-size: 0.92rem;
+color: var(--muted);
+}
 .legal-page__content h2 {
 margin: 28px 0 10px;
 font-size: 1.2rem;
@@ -3320,6 +3367,7 @@ transition: none;
 
     
     
+    
     <div class="page-hero section">
       <p class="crumbs"><a href="/">Home</a> / Terms</p>
       <h1>Terms of Service</h1>
@@ -3327,7 +3375,23 @@ transition: none;
     </div>
     <article id="legal-body" class="section legal-page__content prose">
 
-      <p>Eazy Peeze Apps publishes a separate terms of service for each product. Pick your app:</p>
+      <p>Eazy Peeze Apps publishes a separate terms of service for each product. Select your app to open its page:</p>
+      <div class="legal-app-picker">
+        <label class="legal-app-picker__label" for="legal-app-select">Select app</label>
+        <div class="legal-app-picker__row">
+          <select id="legal-app-select" class="legal-app-picker__select" autocomplete="off">
+            <option value="" selected disabled>Select app...</option>
+          <option value="/terms/kharch-log/">Kharch Log - Kharch Log for Android</option>
+          <option value="/terms/pdf-buddy/">Pdf Buddy - Pdf Buddy for Windows</option>
+          <option value="/terms/business-voice/">Easy Peeze Voice - Easy Peeze: Twilio Calls & SMS</option>
+          <option value="/terms/book-karo/">Book Karo - Book Karo (coming soon)</option>
+          <option value="/terms/kidly/">Kidly - Kidly (coming soon)</option>
+          <option value="/terms/sort-it-out/">Sort It Out - Sorting Games: Sort It Out</option>
+          </select>
+          <button type="button" class="btn legal-app-picker__go" id="legal-app-go">Open</button>
+        </div>
+      </div>
+      <p class="legal-app-picker__hint">Or pick from the list:</p>
       <ul>
         <li><a href="/terms/kharch-log/"><strong>Kharch Log</strong></a> - Kharch Log for Android · also see <a href="/privacy/kharch-log/">Privacy Policy</a></li>
         <li><a href="/terms/pdf-buddy/"><strong>Pdf Buddy</strong></a> - Pdf Buddy for Windows · also see <a href="/privacy/pdf-buddy/">Privacy Policy</a></li>
@@ -3337,6 +3401,18 @@ transition: none;
         <li><a href="/terms/sort-it-out/"><strong>Sort It Out</strong></a> - Sorting Games: Sort It Out · also see <a href="/privacy/sort-it-out/">Privacy Policy</a></li>
       </ul>
       <p>Studio contact: <a href="mailto:info@easypeeze.com">info@easypeeze.com</a>.</p>
+      <script>
+      (function () {
+        var sel = document.getElementById("legal-app-select");
+        var go = document.getElementById("legal-app-go");
+        if (!sel) return;
+        function openApp() {
+          if (sel.value) location.href = sel.value;
+        }
+        sel.addEventListener("change", openApp);
+        if (go) go.addEventListener("click", openApp);
+      })();
+      </script>
 
     </article>
 
