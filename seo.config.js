@@ -206,12 +206,19 @@ module.exports = {
       priority: 0.2,
       changefreq: 'yearly',
     },
-    '/privacy/sort-it-out/': {
-      title: 'Sort It Out Privacy Policy',
-      description: 'Privacy policy for Sorting Games: Sort It Out from Eazy Peeze Apps.',
+    '/privacy/games/': {
+      title: 'Games Privacy Policy',
+      description: 'Privacy policy for all games from Eazy Peeze Apps, including Sort It Out.',
       priority: 0.3,
       changefreq: 'yearly',
     },
+    '/privacy/sort-it-out/': {
+      title: 'Sort It Out Privacy Policy (moved)',
+      description: 'Redirects to the shared Games Privacy Policy.',
+      noindex: true,
+      sitemap: false,
+    },
+
     '/terms/': {
       title: 'Terms of Service - pick your app',
       description: 'Separate terms of service pages for each Eazy Peeze Apps product.',
@@ -248,12 +255,19 @@ module.exports = {
       priority: 0.2,
       changefreq: 'yearly',
     },
-    '/terms/sort-it-out/': {
-      title: 'Sort It Out Terms of Service',
-      description: 'Terms of Service for Sorting Games: Sort It Out from Eazy Peeze Apps.',
+    '/terms/games/': {
+      title: 'Games Terms of Service',
+      description: 'Terms of Service for all games from Eazy Peeze Apps, including Sort It Out.',
       priority: 0.3,
       changefreq: 'yearly',
     },
+    '/terms/sort-it-out/': {
+      title: 'Sort It Out Terms of Service (moved)',
+      description: 'Redirects to the shared Games Terms of Service.',
+      noindex: true,
+      sitemap: false,
+    },
+
     '/refund/': {
       title: 'Refund Policy',
       description: 'Refund policy for Pdf Buddy and Kharch Log digital licenses.',

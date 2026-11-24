@@ -75,6 +75,7 @@ p a:not([class]) { text-decoration: underline; text-underline-offset: 2px; }
   position: sticky;
   top: 0;
   z-index: 40;
+  overflow: visible;
   backdrop-filter: blur(12px);
   background: rgba(234, 240, 246, 0.86);
   border-bottom: 1px solid var(--line);
@@ -96,7 +97,8 @@ p a:not([class]) { text-decoration: underline; text-underline-offset: 2px; }
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 14px 0;
+  padding: 18px 0;
+  overflow: visible;
 }
 
 .brand-lockup {
@@ -113,11 +115,13 @@ p a:not([class]) { text-decoration: underline; text-underline-offset: 2px; }
   max-width: 72px;
   display: block;
   flex-shrink: 0;
-  border-radius: 12px;
+  /* No radius: the mark's hand/sparks sit near the square edges and get clipped. */
+  border-radius: 0;
   box-shadow: none;
   object-fit: contain;
   background: transparent;
   padding: 0;
+  overflow: visible;
 }
 /* White plate ONLY on dark chrome - ~5px around the mark */
 .logo-on-dark,

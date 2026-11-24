@@ -775,6 +775,12 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://easypeeze.com/privacy/games/</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://easypeeze.com/privacy/kharch-log/</loc>
     <lastmod>2026-11-24</lastmod>
     <changefreq>yearly</changefreq>
@@ -788,12 +794,6 @@
   </url>
   <url>
     <loc>https://easypeeze.com/privacy/pdf-buddy/</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://easypeeze.com/privacy/sort-it-out/</loc>
     <lastmod>2026-11-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -865,6 +865,12 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://easypeeze.com/terms/games/</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://easypeeze.com/terms/kharch-log/</loc>
     <lastmod>2026-11-24</lastmod>
     <changefreq>yearly</changefreq>
@@ -878,12 +884,6 @@
   </url>
   <url>
     <loc>https://easypeeze.com/terms/pdf-buddy/</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://easypeeze.com/terms/sort-it-out/</loc>
     <lastmod>2026-11-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
