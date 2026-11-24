@@ -208,7 +208,7 @@ module.exports = {
     },
     '/privacy/games/': {
       title: 'Games Privacy Policy',
-      description: 'Privacy policy for all games from Eazy Peeze Apps, including Sort It Out.',
+      description: 'Privacy policy for all games from Eazy Peeze Apps.',
       priority: 0.3,
       changefreq: 'yearly',
     },
@@ -257,7 +257,7 @@ module.exports = {
     },
     '/terms/games/': {
       title: 'Games Terms of Service',
-      description: 'Terms of Service for all games from Eazy Peeze Apps, including Sort It Out.',
+      description: 'Terms of Service for all games from Eazy Peeze Apps.',
       priority: 0.3,
       changefreq: 'yearly',
     },
