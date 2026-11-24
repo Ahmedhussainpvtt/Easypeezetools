@@ -80,6 +80,7 @@ z-index: 100;
 position: sticky;
 top: 0;
 z-index: 40;
+overflow: visible;
 backdrop-filter: blur(12px);
 background: rgba(234, 240, 246, 0.86);
 border-bottom: 1px solid var(--line);
@@ -99,7 +100,8 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 gap: 16px;
-padding: 14px 0;
+padding: 18px 0;
+overflow: visible;
 }
 .brand-lockup {
 position: relative;
@@ -115,11 +117,12 @@ height: 72px;
 max-width: 72px;
 display: block;
 flex-shrink: 0;
-border-radius: 12px;
+border-radius: 0;
 box-shadow: none;
 object-fit: contain;
 background: transparent;
 padding: 0;
+overflow: visible;
 }
 .logo-on-dark,
 .brand-lockup--on-dark img {
@@ -2232,6 +2235,53 @@ background: #ffe8ec;
 width: min(720px, calc(100% - 40px));
 margin: 0 auto;
 padding-bottom: 48px;
+}
+.legal-app-picker {
+margin: 18px 0 8px;
+padding: 16px 18px;
+border: 1px solid var(--line);
+border-radius: var(--radius);
+background: var(--surface);
+box-shadow: var(--shadow);
+}
+.legal-app-picker__label {
+display: block;
+margin-bottom: 8px;
+font-size: 0.95rem;
+font-weight: 700;
+color: var(--text);
+}
+.legal-app-picker__row {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+align-items: stretch;
+}
+.legal-app-picker__select {
+flex: 1 1 220px;
+min-width: 0;
+box-sizing: border-box;
+padding: 12px 14px;
+border: 1px solid var(--line);
+border-radius: 12px;
+font: inherit;
+font-weight: 600;
+background: #fff;
+color: var(--text);
+appearance: auto;
+}
+.legal-app-picker__select:focus {
+outline: 2px solid color-mix(in srgb, var(--primary) 35%, transparent);
+border-color: var(--primary);
+}
+.legal-app-picker__go {
+flex: 0 0 auto;
+min-width: 96px;
+}
+.legal-app-picker__hint {
+margin: 22px 0 8px;
+font-size: 0.92rem;
+color: var(--muted);
 }
 .legal-page__content h2 {
 margin: 28px 0 10px;
