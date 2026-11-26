@@ -43,7 +43,7 @@ module.exports = {
       '@type': 'PostalAddress',
       addressCountry: 'IN',
     },
-    sameAs: ['https://kharchlog.com/'],
+    sameAs: ['https://kharchlog.com/', 'https://easypeezetech.com/'],
   },
 
   robots: {
