@@ -742,7 +742,7 @@ function buildSite(key, opts) {
     meta.dir,
     cfg.site && cfg.site.amplitudeApiKey,
     opts.dryRun,
-    ['/khsynloyrebnsbyo/']
+    INTERNAL_SKIP_PATHS
   );
   console.log(`  pages touched: ${updated}/${files.length}${opts.dryRun ? ' (dry-run)' : ''}`);
   console.log(`  gtag: ${gtagPages} html file(s)`);
@@ -802,7 +802,7 @@ function buildLocal(siteDir, opts) {
     siteDir,
     cfg.site && cfg.site.amplitudeApiKey,
     opts.dryRun,
-    ['/khsynloyrebnsbyo/']
+    INTERNAL_SKIP_PATHS
   );
   console.log(`  pages touched: ${updated}/${files.length}${opts.dryRun ? ' (dry-run)' : ''}`);
   console.log(`  discovered HTML: ${files.length} | sitemap urls: ${sitemapEntries.length}`);
