@@ -1,6 +1,6 @@
 # Eazy Peeze Apps - llms-full.txt
 
-Generated: 2026-11-23
+Generated: 2026-11-27
 Source: https://easypeeze.com/
 Index: https://easypeeze.com/llms.txt
 
@@ -524,3 +524,309 @@ Glossary: what “Upi Expense Tracker” means and how it relates to the product
 ### Whatsapp Pdf Limit
 URL: https://easypeeze.com/glossary/whatsapp-pdf-limit/
 Glossary: what “Whatsapp Pdf Limit” means and how it relates to the product.
+
+## FAQ Knowledge Base
+
+### Pdf Buddy vs Adobe Acrobat and Foxit
+URL: https://easypeeze.com/faq/pdf-buddy-vs-adobe-acrobat/
+Q: Is Pdf Buddy a realistic replacement for Adobe Acrobat on Windows?
+A: Yes for everyday work like editing text, merging, splitting, compressing, filling forms, signing, and running OCR on scanned PDFs. Pdf Buddy runs locally on Windows 10 and Windows 11 for INR 299/year or INR 999 lifetime, whereas Adobe Acrobat Pro is a recurring monthly subscription. Acrobat still wins for niche prepress, CMYK print production, and heavy enterprise JavaScript forms.
+Q: How much money do you save switching from Adobe Acrobat to Pdf Buddy?
+A: Adobe Acrobat subscriptions in India typically cost several thousand rupees every single year. Pdf Buddy gives you 2 free actions per day forever, or full unlimited access for INR 299 per year or a one-time INR 999 lifetime license. Most students, freelancers, and small offices recover the lifetime price in the first month.
+Q: Does Pdf Buddy work completely offline unlike Adobe Creative Cloud?
+A: Yes. Core Pdf Buddy tools run 100% locally on your Windows PC with no file uploads and no mandatory cloud sync. You only need internet once to sign in and verify your license, after which you can edit, merge, split, compress, sign, and OCR PDFs offline.
+Q: How does Pdf Buddy compare to Foxit PDF Editor?
+A: Foxit PDF Editor is a capable desktop suite, but its paid plans are priced for corporate teams and bundle features most individuals never touch. Pdf Buddy focuses on the 8 tools Indian Windows users actually need daily (edit, merge, split, compress, sign, OCR, unlock, convert) in a fast, uncluttered desktop app at INR 999 lifetime.
+Q: Can Pdf Buddy open PDFs created in Adobe Acrobat without breaking formatting?
+A: Yes. Pdf Buddy uses standard PDF rendering and preserves pages, bookmarks, images, and layout from PDFs created in Adobe Acrobat, Microsoft Word, Chrome Print to PDF, or Indian government and bank portals.
+Q: Does Pdf Buddy add a watermark to edited or exported PDFs?
+A: No. Even on the free tier (2 actions per day), Pdf Buddy never stamps watermarks onto your saved PDFs. Your Aadhaar KYC packs, invoices, resumes, and college forms stay clean and ready to submit.
+Q: What can Adobe Acrobat do that Pdf Buddy intentionally skips?
+A: Acrobat includes specialized publishing tools like CMYK color separation, PDF/X prepress validation, complex XFA/JavaScript dynamic forms, and enterprise e-signature workflows. Pdf Buddy skips that bloat so the app stays fast, simple, and affordable for everyday Windows users.
+Q: Can I switch from Adobe Reader to Pdf Buddy as my default PDF app?
+A: Yes. Right-click any PDF file in Windows, choose Open with, select Pdf Buddy, and check Always use this app. You can view and immediately edit, sign, or compress files without juggling two separate programs.
+
+### Pdf Buddy vs iLovePDF, Smallpdf and online editors
+URL: https://easypeeze.com/faq/pdf-buddy-vs-online-pdf-editors/
+Q: How is Pdf Buddy different from iLovePDF, Smallpdf, or Sejda?
+A: Online PDF sites require you to upload your file to a third-party server, wait for remote processing, and download the result. Pdf Buddy runs natively on your Windows 10/11 PC, so your PDF never leaves your computer during editing, merging, splitting, compressing, signing, or OCR.
+Q: Why should you avoid uploading Aadhaar, PAN, or bank statements to free online PDF tools?
+A: Once you upload a KYC document, salary slip, or bank statement to an external website, you lose control over server logs, retention windows, and third-party storage. Keeping those edits 100% local in Pdf Buddy eliminates upload exposure altogether.
+Q: Are there file size upload limits in Pdf Buddy like on free web tools?
+A: No server upload limits exist because nothing is uploaded. Free web tools frequently cap files at 15 MB to 50 MB or throttle you to one task per hour. Pdf Buddy processes large scanned packs directly using your PC hardware.
+Q: Does Pdf Buddy work when my office or hostel Wi-Fi is slow or down?
+A: Yes. Because all PDF operations happen locally on your Windows machine, a 40 MB scanned PDF merges or compresses in seconds even with zero internet connection.
+Q: Why do online PDF editors ask for expensive monthly subscriptions after 2 files?
+A: Web editors pay ongoing cloud server and bandwidth bills for every file you upload, so they push recurring monthly subscriptions. Because Pdf Buddy uses your own PC CPU locally, Eazy Peeze Apps can offer it at INR 299/year or INR 999 one-time lifetime.
+Q: Does Pdf Buddy require browser extensions or Chrome plugins?
+A: No. Pdf Buddy is a standalone Windows desktop application. You do not need to install any browser extension that reads your tabs or web history.
+Q: Can Pdf Buddy batch-merge dozens of PDFs faster than browser tools?
+A: Yes. Selecting 20 GST invoices or bank statements from a local Windows folder and merging them takes a couple of seconds locally, with no upload queue and no broken downloads.
+Q: Is a local desktop PDF editor safer for chartered accountants and HR teams?
+A: Yes. CAs, HR teams, and small businesses handle client PAN cards, Form 16s, offer letters, and GST invoices every day. Processing them locally on Windows keeps client documents inside the office computer instead of external web servers.
+
+### Offline PDF privacy for Aadhaar, PAN and KYC documents
+URL: https://easypeeze.com/faq/offline-pdf-privacy-kyc-india/
+Q: Where do my PDF files go when I use Pdf Buddy?
+A: Nowhere. Your PDFs stay on your Windows hard drive during every core operation: edit, merge, split, compress, sign, OCR, unlock, and convert. Eazy Peeze Apps never receives, reads, or stores your documents.
+Q: Is Pdf Buddy safe for masked Aadhaar, PAN cards, and bank statements?
+A: Yes. Because processing is 100% local on your PC, sensitive Indian KYC documents like Aadhaar PDFs, PAN copies, cancelled cheques, and salary slips are never transmitted over the internet.
+Q: Does Pdf Buddy train AI models on my PDFs?
+A: No. Pdf Buddy does not upload your PDFs to any server and never uses customer files for AI training, analytics, or advertising.
+Q: What data does Eazy Peeze Apps actually collect when I use Pdf Buddy?
+A: Only the minimal account and license metadata needed to sign you in with Google and verify whether your account is on the free tier, yearly plan, or lifetime plan. Your document contents and file names are never uploaded.
+Q: Can I unlock a password-protected Aadhaar or bank statement PDF offline?
+A: Yes. If you know the document password (such as the standard Aadhaar or bank DOB format), Pdf Buddy can unlock and save an unlocked copy locally on your PC so you can merge it into a KYC pack.
+Q: How can I permanently hide sensitive numbers on a PDF before sharing?
+A: Use the redaction and whiteout tools in Pdf Buddy before exporting. Always save a fresh flattened copy and verify you cannot select or copy the hidden text before emailing or uploading the file.
+Q: Does Pdf Buddy strip hidden PDF metadata like author name or software history?
+A: Yes. Cleaning up titles and metadata before sharing quotes, resumes, or legal drafts prevents accidental leaks of internal file paths or old author names.
+Q: Where can I read the exact privacy policy for Pdf Buddy?
+A: The dedicated Pdf Buddy privacy policy is published at easypeeze.com/privacy/pdf-buddy/. Every Eazy Peeze Apps product has its own separate privacy policy and terms page.
+
+### Pdf Buddy pricing, free tier and lifetime license
+URL: https://easypeeze.com/faq/pdf-buddy-pricing-lifetime-license/
+Q: How much does Pdf Buddy cost in India?
+A: Pdf Buddy has three options: Free (2 actions per day across all tools), Yearly at INR 299 per year, and Lifetime at INR 999 one-time with no recurring subscription. Check easypeeze.com/pricing/ for current checkout options.
+Q: What counts as one action on the Pdf Buddy free tier?
+A: Each completed export or save operation (such as one merge, one compress, one split, or one signed PDF save) counts as one action. You get 2 free actions every day after signing in, with no watermark.
+Q: Is the INR 999 Pdf Buddy lifetime plan really a one-time payment?
+A: Yes. You pay INR 999 once and your account stays unlocked permanently with no auto-renewal, no hidden annual maintenance fee, and no credit card subscription trap.
+Q: Which payment methods are accepted for Pdf Buddy?
+A: You can pay with UPI (GPay, PhonePe, Paytm, BHIM), debit cards, credit cards, and net banking through our checkout on easypeeze.com/pricing/.
+Q: Do free accounts expire if I do not use Pdf Buddy for a long time?
+A: Free accounts that remain completely inactive for 90 days can be removed after reminder emails. Paid yearly and lifetime accounts are never deleted for inactivity.
+Q: Are future updates included in the INR 999 lifetime license?
+A: Yes. Bug fixes, performance improvements, and core Windows updates for Pdf Buddy are included with your lifetime license.
+Q: Can I upgrade from the INR 299 yearly plan to the INR 999 lifetime plan later?
+A: Yes. You can switch to the lifetime plan at any time from the pricing page using the same Google email address.
+Q: Do I need separate licenses for Pdf Buddy and Kharch Log?
+A: Yes. Licenses are per product: Pdf Buddy is INR 299/year or INR 999 lifetime for Windows, and Kharch Log is INR 149 one-time lifetime for Android.
+
+### Compressing PDFs for WhatsApp, EPFO, UPSC and 2MB portals
+URL: https://easypeeze.com/faq/compress-pdf-whatsapp-portals/
+Q: How do I compress a PDF below 2 MB for Indian government or college portals?
+A: Open the file in Pdf Buddy, pick Compress PDF, choose medium or high compression, and save locally. Because Pdf Buddy downsamples oversized scanned images cleanly, a 12 MB phone-camera PDF usually drops under 1.5 MB while keeping Aadhaar, PAN, and mark-sheet text readable.
+Q: Can Pdf Buddy compress PDFs to 200 KB or 300 KB for UPSC, SSC, and EPFO uploads?
+A: Yes. For strict 200 KB to 500 KB limits on EPFO, UPSC, passport, or university portals, first remove blank or extra pages with Split PDF, then run Compress PDF locally and zoom to 100% to verify every digit is crisp.
+Q: Why do phone camera scans create huge 10 MB PDFs?
+A: Phone cameras capture 12 MP to 50 MP full-color photos per page. Saving 5 raw photos into a PDF easily crosses 15 MB. Local compression resizes page images to clean document DPI so the file shrinks dramatically without hurting readability.
+Q: Will compressing a PDF ruin the QR code on Aadhaar or e-PAN?
+A: Not if you keep compression balanced and inspect the output at 100% zoom. Avoid extreme over-compression on QR-heavy pages, and always test the QR code with a phone scanner before uploading to a portal.
+Q: Can I compress a PDF for WhatsApp without losing legibility on mobile screens?
+A: Yes. WhatsApp users read quotes, brochures, and invoices on 6-inch screens. Pdf Buddy optimizes embedded images so the file sends fast on mobile data and stays sharp when pinched to zoom.
+Q: Does Pdf Buddy compress PDFs faster than online compressors?
+A: Yes. There is zero upload or download wait time. A 25 MB multi-page scan compresses in seconds directly on your Windows PC.
+Q: What if a PDF is still slightly above the portal limit after one compression pass?
+A: Check if the PDF contains unused pages, oversized full-color cover photos, or duplicate scans. Drop unnecessary pages first, then run compression again to hit strict portal caps.
+Q: Does compressing a PDF keep my original file intact?
+A: Yes. Pdf Buddy saves the compressed output as a new file so your original high-resolution scan stays untouched in your folder.
+
+### Merging, splitting, rotating and reordering PDF pages
+URL: https://easypeeze.com/faq/merge-split-organize-pdfs/
+Q: How do I merge Aadhaar, PAN, and salary slips into one PDF on Windows?
+A: Open Merge PDF in Pdf Buddy, select your Aadhaar, PAN, and salary slip PDFs from your computer, drag them into the exact order the portal asks for, and save one combined PDF locally.
+Q: Can I split a 40-page bank statement to extract only the last 3 months?
+A: Yes. Open Split PDF in Pdf Buddy, pick the exact page range you need (for example pages 1 to 9), and export a clean smaller PDF without altering your full annual statement.
+Q: How do I delete blank pages from a scanned property or loan agreement?
+A: Duplex office scanners often add empty back sides. Open the document in Pdf Buddy, select the blank page thumbnails, delete them, and save a clean copy with half the clutter.
+Q: Can I fix mixed portrait and landscape pages in one PDF?
+A: Yes. You can rotate individual sideways pages 90 or 180 degrees inside Pdf Buddy without rotating the entire document, which is essential for Indian portal uploads and visa packs.
+Q: Can I reorder pages inside an existing PDF without recreating it?
+A: Yes. Drag and drop page thumbnails into the right sequence and save. This saves time when a scanner feeds pages out of order or you need to move a cover sheet to page 1.
+Q: Is there a limit on how many PDFs I can merge at once?
+A: Pdf Buddy has no artificial 2-file or 5-file cap like free web tools. You can merge full monthly GST invoice packs or college admission checklists in one local batch.
+Q: Will merging PDFs keep hyperlinks and text selectable?
+A: Yes. Merging preserves existing selectable text and page content from the source PDFs instead of turning them into blurry images.
+Q: Can I insert a single new page into the middle of an already-merged PDF?
+A: Yes. Add the extra PDF or image page, drag it to the exact position you want, and export the updated file.
+
+### Editing PDF text, filling forms and typing on flat PDFs
+URL: https://easypeeze.com/faq/edit-pdf-text-forms-windows/
+Q: Can I edit existing text directly inside a PDF using Pdf Buddy?
+A: Yes. Open Edit PDF in Pdf Buddy to modify text, fix typos in dates or invoice numbers, add new text blocks, and place annotations directly on your Windows PC without converting back to Word.
+Q: How do I type on a flat PDF form that does not have clickable boxes?
+A: Many Indian bank, HR, school, and government forms are flat PDFs. Use Pdf Buddy type-on text overlays to click directly above any blank line, type your details cleanly, adjust font size, and save.
+Q: Can I add checkmarks, dates, and initials to application forms?
+A: Yes. Pdf Buddy includes form-filling tools for text, checkmarks, dates, and drawn signatures so you never have to print, fill by pen, and rescan a form.
+Q: Why does editing text in a scanned PDF behave differently from a digital PDF?
+A: A digital PDF exported from Word or billing software stores real text characters. A scanned PDF is just a photograph of paper. For scanned PDFs, run OCR first or use whiteout plus text overlay to replace text cleanly.
+Q: Can I add page numbers or headers to multi-page submission packs?
+A: Yes. Adding clean text labels or page numbers helps CAs, lawyers, and students keep 30-page loan, visa, or project packs organized.
+Q: Will editing a PDF in Pdf Buddy preserve the original layout?
+A: Yes. Unlike converting PDF to Word and back (which often breaks tables and margins), editing directly inside Pdf Buddy keeps your surrounding tables, logos, and borders intact.
+Q: Can I highlight, underline, or add review notes to a contract or textbook PDF?
+A: Yes. Students and professionals can annotate, highlight, and add comments locally before sharing the reviewed file.
+Q: What is the difference between Print to PDF and saving in a real PDF editor?
+A: Print to PDF flattens pages and can strip bookmarks or alter margins. Saving inside Pdf Buddy writes a proper PDF file directly while preserving structure.
+
+### OCR for scanned PDFs and making scans searchable
+URL: https://easypeeze.com/faq/ocr-scanned-pdf-searchable/
+Q: What does OCR in Pdf Buddy actually do?
+A: OCR (Optical Character Recognition) reads the text inside scanned pages or camera photos and embeds an invisible searchable text layer into your PDF. You can then press Ctrl+F to find invoice numbers, names, or clauses and copy-paste text.
+Q: Does Pdf Buddy OCR run offline on my Windows PC?
+A: Yes. OCR runs locally on your Windows machine, which means confidential legal agreements, medical bills, and tax scans are never sent to an external cloud OCR API.
+Q: How do I get the highest OCR accuracy on scanned documents?
+A: Scan at 300 DPI if possible, keep pages straight and evenly lit, and rotate sideways pages upright before running OCR. Clean black-on-white scans routinely achieve near-perfect text recognition.
+Q: Can OCR fix a PDF where I cannot select or copy text?
+A: Yes. If clicking and dragging on a PDF selects nothing, it is an image-only scan. Running OCR in Pdf Buddy turns it into a searchable PDF where text can be selected, copied, and searched.
+Q: Does OCR change how my scanned PDF looks visually?
+A: No. The original scanned page appearance stays intact while a selectable text layer sits cleanly behind it, preserving official stamps, signatures, and letterheads.
+Q: Can I OCR a 20-page scanned PDF in one go?
+A: Yes. Pdf Buddy processes multi-page scanned PDFs locally in a single batch without per-page web upload caps.
+Q: Is OCR useful for CA and small business invoice archives?
+A: Extremely useful. Running OCR on scanned vendor bills and GST challans lets you search across a whole financial year folder by GSTIN, party name, or amount in seconds.
+Q: Can OCR read handwritten notes accurately?
+A: OCR is built primarily for printed and typed text (bills, certificates, contracts, bank statements). Neat block handwriting may partially recognize, while cursive handwriting is not reliable with standard OCR.
+
+### Signing PDFs, drawn eSign vs Class 3 DSC in India
+URL: https://easypeeze.com/faq/sign-pdf-esign-vs-dsc-india/
+Q: How do I sign a PDF on Windows without Adobe Acrobat?
+A: Open Sign PDF in Pdf Buddy, draw your signature with a mouse or trackpad or upload a clean image of your pen signature, place it on the signature line, resize it, and save locally.
+Q: What is the difference between a drawn eSign and a Class 3 DSC in India?
+A: A drawn signature places your visual signature image onto the PDF, which is accepted for everyday HR offer letters, vendor quotes, NDAs, and freelance contracts. A Class 3 DSC (Digital Signature Certificate) uses a USB crypto token issued by an Indian Certifying Authority and is required for MCA, GST, Income Tax, and government tender filings.
+Q: Can Pdf Buddy be used for MCA or Income Tax DSC token signing?
+A: No. Filings that legally mandate a Class 3 cryptographic USB token or Aadhaar eSign OTP must use the portal signer or a licensed DSC utility. Pdf Buddy is for everyday visual PDF signing.
+Q: Can I save my signature inside Pdf Buddy to reuse on future invoices?
+A: Yes. Once you create or import a clean signature, you can reuse it across multiple contracts, quotations, and HR forms without redrawing it every time.
+Q: How do I make a photo of my handwritten signature look clean on a white PDF?
+A: Sign with dark blue or black pen on plain white paper under bright light, crop tightly around the signature, and place it using Sign PDF so there is no grey paper box around it.
+Q: Can I also add a company stamp or seal image alongside my signature?
+A: Yes. You can place a clean PNG company seal or stamp image right next to your signature for Indian business quotations, delivery challans, and invoices.
+Q: Is a PDF signed in Pdf Buddy locked against casual edits?
+A: Saving your signed PDF embeds the signature into the page. For extra protection before emailing a finalized quote or agreement, you can also add a PDF password using Pdf Buddy.
+Q: Are my signature images uploaded to any server?
+A: No. Your signature stays locally on your Windows PC.
+
+### Unlocking, password-protecting and redacting sensitive PDFs
+URL: https://easypeeze.com/faq/unlock-protect-redact-pdf/
+Q: How do I remove a password from my own Aadhaar or bank statement PDF?
+A: Open Unlock PDF in Pdf Buddy, enter the password you already know (for example your bank DOB or Aadhaar format), and save an unlocked local copy. This is handy when a loan or visa portal rejects password-protected uploads.
+Q: Can Pdf Buddy crack or bypass a PDF password I do not know?
+A: No. Pdf Buddy is an authorized document utility, not a password-cracking tool. You must enter the valid password to unlock a protected PDF you own.
+Q: How do I password-protect a PDF before emailing salary slips or financial statements?
+A: Use Protect PDF in Pdf Buddy to set an open password before attaching the file to email or WhatsApp. Share the password separately over a different channel (like SMS or call) for better security.
+Q: Why is drawing a black rectangle in a basic viewer NOT real redaction?
+A: In many basic editors, a black box simply sits on top of the underlying text, so anyone can drag-select and copy the hidden Aadhaar number or salary figure underneath. Proper redaction removes or flattens the sensitive area so the text cannot be extracted.
+Q: Should I unlock a PDF before merging it with other documents?
+A: Yes. Encrypted PDFs often block merging or portal uploads. Unlocking your own bank statement or e-Aadhaar locally first lets you merge, compress, and submit cleanly.
+Q: Does unlocking or locking a PDF in Pdf Buddy send my password over the internet?
+A: Never. Both Unlock PDF and Protect PDF execute 100% locally on your Windows computer.
+Q: What makes a strong password for protected client PDFs?
+A: Use at least 10 to 12 characters mixing letters and numbers, and avoid obvious dates like 01011990 or 123456 when emailing sensitive tax or property documents.
+Q: Can I redact my mobile number or address on a sample invoice before sharing?
+A: Yes. Cover and flatten the sensitive fields in Pdf Buddy, save a new copy, and test with Ctrl+F to confirm the redacted text is completely gone.
+
+### Converting JPG, images and Office files to and from PDF
+URL: https://easypeeze.com/faq/convert-pdf-word-jpg-office/
+Q: How do I convert multiple JPG photos of documents into one PDF on Windows?
+A: Open Convert in Pdf Buddy, select your JPG or PNG photos in order, and combine them into a single properly sized PDF locally. This is ideal for mark sheets, rent receipts, and handwritten assignments.
+Q: Can Pdf Buddy convert a PDF into an editable Word document?
+A: Yes. Pdf Buddy includes local PDF conversion tools so you can turn digital PDFs into editable documents or export pages as crisp PNG/JPG images without uploading files to a website.
+Q: Why do converted scanned PDFs sometimes look like images inside Word?
+A: If the source PDF was a camera scan with no text layer, converting it directly embeds the page photo. Run OCR first so the text is recognized before editing or copying into Word.
+Q: Can I export a single page of a PDF as a high-resolution JPG or PNG?
+A: Yes. Exporting specific pages as images is useful when you want to share one receipt, flyer, or slide on WhatsApp or social media without sending the whole 20-page PDF.
+Q: Does converting images to PDF keep them in A4 portrait size for printing?
+A: Yes. Pdf Buddy formats image-to-PDF pages cleanly so they print evenly on A4 paper and meet Indian government and university portal standards.
+Q: Can I convert WhatsApp receipt screenshots into a single reimbursement PDF?
+A: Yes. Drop all your PNG/JPG screenshots into Pdf Buddy, order them by date, convert to one PDF, and compress if your company HR portal has a 2 MB limit.
+Q: Will converting Word or Excel to PDF keep Indian Rupee symbols and fonts intact?
+A: Yes. Exporting cleanly to PDF locks in your layout, tables, and INR symbols so the recipient sees the exact same document on any phone or computer.
+Q: Is there a daily file size cap when converting images to PDF locally?
+A: No file size cap. On the free tier you get 2 actions per day; yearly (INR 299) and lifetime (INR 999) unlock unlimited conversions.
+
+### Windows 10 and 11 install, SmartScreen and updates
+URL: https://easypeeze.com/faq/windows-install-smartscreen-updates/
+Q: Which versions of Windows does Pdf Buddy support?
+A: Pdf Buddy runs on 64-bit Windows 10 and Windows 11. It does not require high-end hardware and runs smoothly on everyday student and office laptops.
+Q: Why does Windows SmartScreen say "Windows protected your PC" when installing Pdf Buddy?
+A: Microsoft SmartScreen shows that generic warning for every new independent software publisher until enough Windows users download and run the installer to build Microsoft reputation score. As long as you downloaded Pdf Buddy directly from easypeeze.com, it is completely safe.
+Q: How do I get past the Windows SmartScreen prompt to install Pdf Buddy?
+A: Click "More info" on the blue SmartScreen dialog, verify the publisher/file name matches your download from easypeeze.com, and click "Run anyway". Full step-by-step screenshots are on easypeeze.com/install/.
+Q: Is Pdf Buddy available for Mac, Android, or iPhone?
+A: Pdf Buddy is currently built specifically for Windows 10 and Windows 11. Eazy Peeze Apps focuses on native desktop reliability on Windows first before expanding to other platforms.
+Q: Does Pdf Buddy require administrator privileges every time I open it?
+A: No. After installation, you launch Pdf Buddy like any normal Windows app without needing admin UAC prompts.
+Q: How do updates work in Pdf Buddy?
+A: When a new version ships on easypeeze.com, you can download and install the latest update right over your existing installation without losing your license or settings.
+Q: Does Pdf Buddy run background services that slow down Windows startup?
+A: No. Pdf Buddy only runs when you open it. There is no bloated updater daemon or cloud sync agent eating RAM in the background.
+Q: How do I uninstall Pdf Buddy cleanly if I switch laptops?
+A: Uninstall it like any standard Windows program via Settings > Apps > Installed apps. Your license stays tied to your Google account so you can sign in on your new PC.
+
+### CA, GST invoices, Form 16 and ITR PDF workflows
+URL: https://easypeeze.com/faq/ca-gst-itr-form16-pdf-workflows/
+Q: Can I split Form 16 Part A and Part B or combine them for ITR filing?
+A: Yes. Use Split PDF or Merge PDF in Pdf Buddy locally on Windows to prepare clean Form 16, Form 26AS, and AIS document packs without uploading tax data to browser websites. Note that Pdf Buddy is a PDF editor, not tax filing software.
+Q: How do small businesses and CAs merge monthly GST invoices into one archive PDF?
+A: Drop the entire month of GST sales or purchase invoice PDFs into Merge PDF, sort them by invoice number, and save a single searchable GSTR-1 / GSTR-3B backup pack locally.
+Q: Can I combine bank statements, salary slips, and ITR acknowledgements for a home loan pack?
+A: Yes. Banks and NBFCs routinely ask for 6 months of bank statements, 3 salary slips, PAN, Aadhaar, and 2 years of ITR in combined PDFs under 5 MB. Pdf Buddy lets you unlock, merge, reorder, and compress the whole pack offline in minutes.
+Q: How do I keep client documents confidential in a CA practice?
+A: Processing client PDFs 100% locally in Pdf Buddy guarantees that PAN cards, balance sheets, audit reports, and GST returns never touch public cloud PDF converters.
+Q: Can I sign and stamp quotations and tax invoices in Pdf Buddy?
+A: Yes. Place your authorized signatory signature and company seal image on PDF invoices or quotes locally before emailing them to clients.
+Q: How do I shrink a 15 MB scanned hospital bill pack for health insurance reimbursement?
+A: Merge all pharmacy bills, lab reports, and discharge summary scans in chronological order, drop blank pages, and run Compress PDF so it stays comfortably under TPA portal size limits.
+Q: Can Pdf Buddy prepare Schengen or US visa financial document packs?
+A: Yes. Visa portals and VFS uploads require tidy, correctly oriented PDFs under strict MB limits. Rotate sideways pages, merge bank statements with ITRs, and compress locally.
+Q: Does Pdf Buddy work for bulk school fee receipts and HR reimbursement claims?
+A: Yes. Combine quarterly fee receipts or travel bills into one neat PDF, compress for email or HR portals, and save locally.
+
+### About Eazy Peeze Apps and EasyPeeze Technologies
+URL: https://easypeeze.com/faq/eazy-peeze-apps-brand-privacy/
+Q: Who builds and owns Eazy Peeze Apps?
+A: Eazy Peeze Apps is designed and marketed by EasyPeeze Technologies (easypeezetech.com), an independent software company based in India.
+Q: What is the core philosophy behind Eazy Peeze Apps?
+A: Your data stays yours. Every app we ship avoids locking your personal files or finances inside proprietary cloud silos: Pdf Buddy runs 100% locally on your Windows PC, and Kharch Log saves directly to your own Google Sheet.
+Q: Why do Eazy Peeze Apps products offer affordable lifetime plans instead of heavy subscriptions?
+A: Because your files stay on your own PC or your own Google Drive, we do not have to charge you forever to rent our cloud storage. That keeps pricing honest: INR 149 lifetime for Kharch Log and INR 999 lifetime for Pdf Buddy.
+Q: What apps are currently live under Eazy Peeze Apps?
+A: Two flagship apps are live right now: Pdf Buddy (offline Windows PDF editor at easypeeze.com) and Kharch Log (private Android UPI/SMS expense tracker on Google Sheets at kharchlog.com).
+Q: Does EasyPeeze Technologies also build custom software for other businesses?
+A: Yes. Through easypeezetech.com, EasyPeeze Technologies builds custom websites, Flutter and React Native mobile apps, desktop apps, CRM/ERP systems, workflow automation, and technical SEO/AEO/GEO for startups and growing businesses.
+Q: Are Eazy Peeze Apps products ad-free?
+A: Yes. Neither Pdf Buddy nor Kharch Log sells your data to ad networks or clutters your workspace with banner ads.
+Q: Where are Eazy Peeze Apps legal policies hosted?
+A: Every product has its own dedicated Terms of Service and Privacy Policy under easypeeze.com/terms/ and easypeeze.com/privacy/, with a simple app selector.
+Q: How can I contact the Eazy Peeze Apps team directly?
+A: Email support@easypeeze.com or use the contact form at easypeeze.com/contact/. Support replies directly from the team in India.
+
+### Accounts, refunds, device transfers and support
+URL: https://easypeeze.com/faq/accounts-refunds-device-licensing/
+Q: How do I activate my Pdf Buddy license after paying?
+A: Pay using your Google email on easypeeze.com/pricing/, open Pdf Buddy on Windows, and sign in with that exact same Google account. Your yearly or lifetime access activates automatically.
+Q: What happens if I buy a new Windows laptop or format my PC?
+A: Your license is linked to your Google email, not lost on your old hard drive. Sign in on your new Windows PC, and if you hit a device limit, email support@easypeeze.com and we will release the old device.
+Q: What is the refund policy for Eazy Peeze Apps?
+A: Refund terms are published clearly at easypeeze.com/refund/. If you were double-charged or ran into a technical issue we cannot resolve, email support@easypeeze.com with your payment receipt and Google email.
+Q: I paid with a different email than the one I signed into the app with. Can you fix it?
+A: Yes. Email support@easypeeze.com with your Razorpay or Google Play receipt and both email addresses, and we will map the license to the right account.
+Q: How do I request deletion of my account and data?
+A: Visit easypeeze.com/delete-data/ or email support@easypeeze.com from your registered email address. We remove your account record promptly, and any local PDFs or Google Sheets remain untouched on your own device and Drive.
+Q: Why did I receive an inactivity reminder email for my free account?
+A: To keep our database lean and respect data minimization, completely unused free accounts can be deleted after 90 days of inactivity. Simply opening the app or signing in resets the timer. Paid lifetime and active yearly accounts are never deleted for inactivity.
+Q: Can I get a GST invoice or payment receipt for my company expense claim?
+A: Yes. You automatically receive a payment receipt by email after checkout, and you can email support@easypeeze.com if you need your company name added for reimbursement.
+Q: How fast does Eazy Peeze Apps support reply?
+A: Most support emails to support@easypeeze.com are answered within 24 hours on business days.
+
+### Kharch Log, Book Karo and Easy Peeze Voice overview
+URL: https://easypeeze.com/faq/kharch-log-and-upcoming-apps/
+Q: What is Kharch Log and how does it work?
+A: Kharch Log (kharchlog.com) is an Android expense tracker by Eazy Peeze Apps. It reads Indian bank and UPI SMS on your phone (GPay, PhonePe, Paytm, and any UPI app), drafts expenses in a review inbox, and saves them straight to your own Google Sheet with zero cloud sync to our servers.
+Q: How much does Kharch Log cost?
+A: Kharch Log is free to install and try from Google Play, with a one-time INR 149 lifetime unlock and zero monthly subscriptions.
+Q: Does Kharch Log require my bank login or net banking password?
+A: Never. Kharch Log does not link your bank account or ask for net banking credentials, OTPs, or Account Aggregator access.
+Q: What is Book Karo?
+A: Book Karo is an upcoming appointment and booking app from Eazy Peeze Apps, designed for local businesses and service providers who want clean scheduling without bloated monthly software fees.
+Q: What is Easy Peeze Voice?
+A: Easy Peeze Voice is our upcoming business phone and voice communication app designed for small teams that need clean calling, routing, and SMS tools.
+Q: Do all Eazy Peeze Apps products share the same privacy-first approach?
+A: Yes. Every product is designed around minimal server storage, transparent pricing, and clear per-app Privacy Policy and Terms pages.
+Q: Where can I follow new launches and updates from Eazy Peeze Apps?
+A: Check easypeeze.com/products/ or follow EasyPeeze Technologies on LinkedIn and Instagram via the links in our footer.
+Q: Can I suggest a feature for Pdf Buddy or Kharch Log?
+A: Yes. Most of our recent features came directly from user emails. Send your request to support@easypeeze.com or use easypeeze.com/contact/.

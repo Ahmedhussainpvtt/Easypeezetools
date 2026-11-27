@@ -2,7 +2,7 @@
 
 > Eazy Peeze Apps makes simple privacy-first apps: Pdf Buddy (100% local Windows PDF editor, 2 free actions/day, then INR 299/year or INR 999 lifetime) and Kharch Log (Android expense tracker on Google Sheets, INR 149 lifetime). Site: easypeeze.com - expenses product also at kharchlog.com.
 
-Last updated: 2026-11-23
+Last updated: 2026-11-27
 Canonical site: https://easypeeze.com/
 Sitemap: https://easypeeze.com/sitemap.xml
 Full corpus: https://easypeeze.com/llms-full.txt
@@ -156,6 +156,25 @@ Contact: support@easypeeze.com
 - [Unlock Pdf](https://easypeeze.com/glossary/unlock-pdf/): Glossary: what “Unlock Pdf” means and how it relates to the product.
 - [Upi Expense Tracker](https://easypeeze.com/glossary/upi-expense-tracker/): Glossary: what “Upi Expense Tracker” means and how it relates to the product.
 - [Whatsapp Pdf Limit](https://easypeeze.com/glossary/whatsapp-pdf-limit/): Glossary: what “Whatsapp Pdf Limit” means and how it relates to the product.
+
+## FAQ Topics
+
+- [Pdf Buddy vs Adobe Acrobat and Foxit](https://easypeeze.com/faq/pdf-buddy-vs-adobe-acrobat/): Honest comparison of Pdf Buddy against Adobe Acrobat Pro and Foxit PDF Editor for Windows users in India.
+- [Pdf Buddy vs iLovePDF, Smallpdf and online editors](https://easypeeze.com/faq/pdf-buddy-vs-online-pdf-editors/): Why a local Windows PDF editor beats browser upload tools for private documents, speed, and large files.
+- [Offline PDF privacy for Aadhaar, PAN and KYC documents](https://easypeeze.com/faq/offline-pdf-privacy-kyc-india/): How Pdf Buddy protects Indian KYC documents, bank statements, and personal IDs with 100% local Windows processing.
+- [Pdf Buddy pricing, free tier and lifetime license](https://easypeeze.com/faq/pdf-buddy-pricing-lifetime-license/): Clear breakdown of Pdf Buddy free daily actions, INR 299/year plan, and INR 999 one-time lifetime access.
+- [Compressing PDFs for WhatsApp, EPFO, UPSC and 2MB portals](https://easypeeze.com/faq/compress-pdf-whatsapp-portals/): How to shrink large scanned PDFs under 200KB, 500KB, 1MB, or 2MB without making text blurry.
+- [Merging, splitting, rotating and reordering PDF pages](https://easypeeze.com/faq/merge-split-organize-pdfs/): How to combine KYC documents, split bank statements, rotate sideways scans, and drop blank pages on Windows.
+- [Editing PDF text, filling forms and typing on flat PDFs](https://easypeeze.com/faq/edit-pdf-text-forms-windows/): How to fix typos in a PDF, type onto non-fillable forms, and annotate documents on Windows 10 and 11.
+- [OCR for scanned PDFs and making scans searchable](https://easypeeze.com/faq/ocr-scanned-pdf-searchable/): Turn photographed receipts, scanned legal papers, and image-only PDFs into searchable, selectable text offline.
+- [Signing PDFs, drawn eSign vs Class 3 DSC in India](https://easypeeze.com/faq/sign-pdf-esign-vs-dsc-india/): When a drawn signature in Pdf Buddy is enough for offers, rent agreements, and invoices, and when Indian portals require a DSC.
+- [Unlocking, password-protecting and redacting sensitive PDFs](https://easypeeze.com/faq/unlock-protect-redact-pdf/): How to remove known passwords from bank/Aadhaar PDFs, lock files before emailing, and redact private details safely.
+- [Converting JPG, images and Office files to and from PDF](https://easypeeze.com/faq/convert-pdf-word-jpg-office/): Turn phone photos, PNG scans, and Office documents into clean PDFs, or export PDF pages back to images and editable formats.
+- [Windows 10 and 11 install, SmartScreen and updates](https://easypeeze.com/faq/windows-install-smartscreen-updates/): System requirements, why Windows SmartScreen warns on indie apps, and how to install Pdf Buddy safely.
+- [CA, GST invoices, Form 16 and ITR PDF workflows](https://easypeeze.com/faq/ca-gst-itr-form16-pdf-workflows/): Practical offline PDF workflows for chartered accountants, taxpayers, freelancers, and Indian small businesses.
+- [About Eazy Peeze Apps and EasyPeeze Technologies](https://easypeeze.com/faq/eazy-peeze-apps-brand-privacy/): Who builds Eazy Peeze Apps, our local-first philosophy, and how Eazy Peeze Apps relates to EasyPeeze Technologies.
+- [Accounts, refunds, device transfers and support](https://easypeeze.com/faq/accounts-refunds-device-licensing/): How Google sign-in licensing works, switching laptops, refund policy, and how to delete your account.
+- [Kharch Log, Book Karo and Easy Peeze Voice overview](https://easypeeze.com/faq/kharch-log-and-upcoming-apps/): Quick answers about Kharch Log for Android and upcoming apps in the Eazy Peeze Apps lineup.
 
 ## Optional
 
