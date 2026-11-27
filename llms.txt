@@ -176,7 +176,6 @@ Contact: support@easypeeze.com
 - [About Eazy Peeze Apps and EasyPeeze Technologies](https://easypeeze.com/faq/eazy-peeze-apps-brand-privacy/): Who builds Eazy Peeze Apps, our local-first philosophy, and how Eazy Peeze Apps relates to EasyPeeze Technologies.
 - [Accounts, refunds, device transfers and support](https://easypeeze.com/faq/accounts-refunds-device-licensing/): How Google sign-in licensing works, switching laptops, refund policy, and how to delete your account.
 - [Kharch Log, Book Karo and Easy Peeze Voice overview](https://easypeeze.com/faq/kharch-log-and-upcoming-apps/): Quick answers about Kharch Log for Android and upcoming apps in the Eazy Peeze Apps lineup.
-
 ## Optional
 
 - [Contact](https://easypeeze.com/contact/): Support: support@easypeeze.com.

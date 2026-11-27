@@ -580,7 +580,7 @@ A: Yes. If you know the document password (such as the standard Aadhaar or bank 
 Q: How can I permanently hide sensitive numbers on a PDF before sharing?
 A: Use the redaction and whiteout tools in Pdf Buddy before exporting. Always save a fresh flattened copy and verify you cannot select or copy the hidden text before emailing or uploading the file.
 Q: Does Pdf Buddy strip hidden PDF metadata like author name or software history?
-A: Yes. Cleaning up titles and metadata before sharing quotes, resumes, or legal drafts prevents accidental leaks of internal file paths or old author names.
+A: No. Pdf Buddy does not remove the author name or software history already stored in a PDF. Check the file details in your PDF viewer before you share quotes, resumes, or legal drafts.
 Q: Where can I read the exact privacy policy for Pdf Buddy?
 A: The dedicated Pdf Buddy privacy policy is published at easypeeze.com/privacy/pdf-buddy/. Every Eazy Peeze Apps product has its own separate privacy policy and terms page.
 
@@ -652,7 +652,7 @@ A: Yes. Pdf Buddy includes form-filling tools for text, checkmarks, dates, and d
 Q: Why does editing text in a scanned PDF behave differently from a digital PDF?
 A: A digital PDF exported from Word or billing software stores real text characters. A scanned PDF is just a photograph of paper. For scanned PDFs, run OCR first or use whiteout plus text overlay to replace text cleanly.
 Q: Can I add page numbers or headers to multi-page submission packs?
-A: Yes. Adding clean text labels or page numbers helps CAs, lawyers, and students keep 30-page loan, visa, or project packs organized.
+A: Not automatically. Pdf Buddy has no page-number tool yet. You can type a label onto each page with Edit PDF text, then merge the files in the order you want for loan, visa, or project packs.
 Q: Will editing a PDF in Pdf Buddy preserve the original layout?
 A: Yes. Unlike converting PDF to Word and back (which often breaks tables and margins), editing directly inside Pdf Buddy keeps your surrounding tables, logos, and borders intact.
 Q: Can I highlight, underline, or add review notes to a contract or textbook PDF?
