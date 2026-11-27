@@ -22,6 +22,7 @@ Contact: support@easypeeze.com
 - [Home](https://easypeeze.com/): Eazy Peeze Apps - Pdf Buddy (local Windows PDF editor) and Kharch Log (Android expenses).
 - [About](https://easypeeze.com/about/): About.
 - [Blog index](https://easypeeze.com/blog/): PDF how-tos for Windows India: compress, OCR, e-sign, privacy vs online editors.
+- [Free PDF editor for Windows](https://easypeeze.com/free-pdf-editor/): Download Pdf Buddy, a free Windows PDF editor with 2 actions a day.
 - [Download Pdf Buddy](https://easypeeze.com/download/): Download Pdf Buddy for Windows 10/11.
 - [FAQ](https://easypeeze.com/faq/): FAQ for Pdf Buddy licensing, free tier, and local-first privacy.
 - [All features](https://easypeeze.com/features/): Pdf Buddy tools: edit, merge, split, compress, sign, OCR, unlock, convert.

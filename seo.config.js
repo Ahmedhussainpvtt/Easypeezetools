@@ -177,6 +177,14 @@ module.exports = {
       priority: 0.8,
       changefreq: 'weekly',
     },
+    '/free-pdf-editor/': {
+      title: 'Free PDF Editor for Windows - Download Pdf Buddy',
+      description:
+        'Download Pdf Buddy, a free PDF editor for Windows 10 and 11. Edit text, merge, split, compress, sign and OCR PDFs on your PC. Free plan with 2 actions a day.',
+      priority: 0.9,
+      changefreq: 'weekly',
+      faqFromDetails: true,
+    },
     '/download/': {
       title: 'Download Pdf Buddy for Windows',
       description: 'Download Pdf Buddy for Windows. Get 2 free PDF edits every day, even without a paid plan. No surprises or payment required at the end. Files stay local.',
