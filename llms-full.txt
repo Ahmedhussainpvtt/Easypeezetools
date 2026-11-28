@@ -806,7 +806,7 @@ A: Yes. Email support@easypeeze.com with your Razorpay or Google Play receipt an
 Q: How do I request deletion of my account and data?
 A: Visit easypeeze.com/delete-data/ or email support@easypeeze.com from your registered email address. We remove your account record promptly, and any local PDFs or Google Sheets remain untouched on your own device and Drive.
 Q: Why did I receive an inactivity reminder email for my free account?
-A: To keep our database lean and respect data minimization, completely unused free accounts can be deleted after 90 days of inactivity. Simply opening the app or signing in resets the timer. Paid lifetime and active yearly accounts are never deleted for inactivity.
+A: To protect your privacy, completely unused free accounts can be deleted after 90 days of inactivity. Simply opening the app or signing in keeps your account active. Paid lifetime and active yearly accounts are never deleted for inactivity.
 Q: Can I get a GST invoice or payment receipt for my company expense claim?
 A: Yes. You automatically receive a payment receipt by email after checkout, and you can email support@easypeeze.com if you need your company name added for reimbursement.
 Q: How fast does Eazy Peeze Apps support reply?
