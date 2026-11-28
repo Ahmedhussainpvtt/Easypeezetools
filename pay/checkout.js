@@ -22,7 +22,11 @@
   if (productParam === 'kharchlog') planKey = 'lifetime';
   else if (planKey !== 'lifetime') planKey = 'yearly';
   var plan = (cfg.plans && cfg.plans[planKey]) || cfg.plans.yearly || cfg.plans.lifetime;
-  var currency = 'INR';
+  // USD is enabled for Pdf Buddy only; Kharch Log is INR only.
+  var requestedCurrency = (params.get('currency') || 'INR').toUpperCase();
+  var allowUsd = productParam === 'pdfbuddy' && cfg.usdEnabled !== false;
+  var currency = allowUsd && requestedCurrency === 'USD' ? 'USD' : 'INR';
+  var currencyWrap = document.getElementById('pay-currency-wrap');
   var firstNameInput = document.getElementById('firstName');
   var lastNameInput = document.getElementById('lastName');
   var emailInput = document.getElementById('email');
@@ -55,10 +59,28 @@
       paypalWrap.hidden = true;
       paypalWrap.classList.add('is-hidden');
     }
+    if (currencyWrap) {
+      currencyWrap.hidden = !allowUsd;
+      currencyWrap.querySelectorAll('.pay-currency__btn').forEach(function (b) {
+        b.classList.toggle('is-active', b.getAttribute('data-currency') === currency);
+      });
+    }
+    if (phoneInput) {
+      phoneInput.placeholder = currency === 'USD' ? '+1 555 123 4567' : '+91 98765 43210';
+    }
     if (fineEl && productParam !== 'kharchlog') {
       fineEl.innerHTML =
         '<a href="../download/" rel="noopener">Download free instead</a> · <a href="../pricing/">Back to pricing</a>';
     }
+  }
+
+  if (currencyWrap && allowUsd) {
+    currencyWrap.querySelectorAll('.pay-currency__btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        currency = btn.getAttribute('data-currency') === 'USD' ? 'USD' : 'INR';
+        syncPrice();
+      });
+    });
   }
 
   syncPrice();
@@ -75,7 +97,7 @@
   }
   var tipEl = document.querySelector('.pay-email-check');
   if (tipEl && productParam === 'kharchlog') {
-    tipEl.textContent = 'Download the APK from kharchlog.com after payment - sign in with this Google email.';
+    tipEl.textContent = 'Install Kharch Log from Google Play after payment - sign in with this Google email.';
   }
   if (fineEl && productParam === 'kharchlog') {
     fineEl.innerHTML =

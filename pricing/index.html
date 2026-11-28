@@ -3408,37 +3408,26 @@ transition: none;
     <div class="page-hero section page-hero--pricing">
       <p class="crumbs"><a href="/">Home</a> / Pricing</p>
       <h1>Pricing for Pdf Buddy and Kharch Log</h1>
-      <p><strong>Your data stays yours.</strong> Clear INR prices for Pdf Buddy on Windows and Kharch Log on Android. Pay with UPI, cards or net banking via Razorpay. Seller: <strong>Eazy Peeze Apps</strong> (India).</p>
-      <p class="hero__actions" style="margin-top:14px;">
-        <a class="btn btn--ghost" href="#pdf-buddy">Pdf Buddy plans</a>
-        <a class="btn btn--ghost" href="#kharch-log">Kharch Log lifetime</a>
-        <a class="btn" href="../download/">Download Pdf Buddy free</a>
-      </p>
-      <div class="pay-currency pricing-currency" role="group" aria-label="Currency">
-        <button type="button" class="pay-currency__btn is-active" data-currency="INR" id="currencyInr">₹ INR</button>
-        <button type="button" class="pay-currency__btn pay-currency__btn--soon" data-currency="USD" id="currencyUsd"
-                disabled aria-disabled="true">
-          $ USD <span class="pay-currency__soon">Coming soon</span>
-        </button>
-      </div>
+      <p><strong>Your data stays yours.</strong> Simple, transparent pricing for Pdf Buddy (INR or USD) on Windows and Kharch Log (INR) on Android. Pay securely via Razorpay.</p>
     </div>
 
     <section class="section section--pricing-plans" id="pdf-buddy" aria-labelledby="pdf-price-title">
       <h2 id="pdf-price-title">Pdf Buddy (Windows PDF editor)</h2>
-      <p class="section-lead">Download, install on your PC, and work offline. Files stay on your machine for core tools - we care about your privacy.</p>
+      <p class="section-lead">Works locally on your Windows PC. Choose INR or USD for paid plans.</p>
+      <div class="pay-currency pricing-currency" role="group" aria-label="Pdf Buddy currency" style="margin-bottom:20px;">
+        <button type="button" class="pay-currency__btn is-active" data-currency="INR" id="currencyInr">₹ INR</button>
+        <button type="button" class="pay-currency__btn" data-currency="USD" id="currencyUsd">$ USD</button>
+      </div>
       <div class="pricing-grid">
         <div class="pricing-tease pricing-tease--page" style="margin:0;">
           <p class="pricing-tease__kicker">Free</p>
           <h3>2<span style="font-size:1rem;font-weight:600;"> edits / day</span></h3>
-          <p class="pricing-tease__hook">Get 2 free PDF edits every day, even without a paid plan. <strong>No surprises or payment required at the end.</strong> Files stay on your PC.</p>
+          <p class="pricing-tease__hook">Get 2 free PDF edits every day, even without a paid plan. <strong>No surprises or payment required.</strong> Files stay on your PC.</p>
           <ul class="pricing-tease__points">
             <li>Google sign-in required</li>
             <li>100% local on Windows / PC</li>
-            <li>Want unlimited? Unlock yearly or lifetime</li>
+            <li>Upgrade anytime for unlimited edits</li>
           </ul>
-          <p class="hero__actions" style="justify-content:center;margin-top:18px;">
-            <a class="btn" href="../download/" rel="noopener">Download free</a>
-          </p>
         </div>
         <div class="pricing-tease pricing-tease--page" style="margin:0;">
           <p class="pricing-tease__kicker">Yearly</p>
@@ -3454,9 +3443,9 @@ transition: none;
           </ul>
           <p class="hero__actions" style="justify-content:center;margin-top:18px;">
             <a class="btn" data-pay
-               href="../pay/?plan=yearly&currency=INR"
-               data-href-inr="../pay/?plan=yearly&currency=INR"
-               data-href-usd="../pay/?plan=yearly&currency=USD"
+               href="../pay/?plan=yearly&amp;currency=INR"
+               data-href-inr="../pay/?plan=yearly&amp;currency=INR"
+               data-href-usd="../pay/?plan=yearly&amp;currency=USD"
                data-label-inr="Pay ₹299"
                data-label-usd="Pay $5">Pay ₹299</a>
           </p>
@@ -3475,9 +3464,9 @@ transition: none;
           </ul>
           <p class="hero__actions" style="justify-content:center;margin-top:18px;">
             <a class="btn" data-pay
-               href="../pay/?plan=lifetime&currency=INR"
-               data-href-inr="../pay/?plan=lifetime&currency=INR"
-               data-href-usd="../pay/?plan=lifetime&currency=USD"
+               href="../pay/?plan=lifetime&amp;currency=INR"
+               data-href-inr="../pay/?plan=lifetime&amp;currency=INR"
+               data-href-usd="../pay/?plan=lifetime&amp;currency=USD"
                data-label-inr="Pay ₹999"
                data-label-usd="Pay $15">Pay ₹999</a>
           </p>
@@ -3487,31 +3476,25 @@ transition: none;
 
     <section class="section" id="kharch-log" aria-labelledby="kl-price-title">
       <h2 id="kl-price-title">Kharch Log (Android expense tracker)</h2>
-      <p class="section-lead"><strong>Your data stays yours</strong> - the ledger syncs to your Google Sheet in your Drive.</p>
+      <p class="section-lead"><strong>Your data stays yours</strong> - every expense syncs to your own Google Sheet. INR only.</p>
       <div class="pricing-grid pricing-grid--narrow">
         <div class="pricing-tease pricing-tease--page" style="margin:0;">
-          <p class="pricing-tease__kicker">Lifetime</p>
+          <p class="pricing-tease__kicker">Lifetime · INR only</p>
           <h3>
-            <span data-price-inr="₹149" data-price-usd="$2">₹149</span>
-            <span style="font-size:1rem;font-weight:600;" data-suffix-inr="one-time" data-suffix-usd="one-time">one-time</span>
+            <span>₹149</span>
+            <span style="font-size:1rem;font-weight:600;">one-time</span>
           </h3>
-          <p class="pricing-tease__hook">Lifetime access to Kharch Log on Android.</p>
+          <p class="pricing-tease__hook">Lifetime access to Kharch Log on Android. No ads, no subscription.</p>
           <ul class="pricing-tease__points">
             <li>UPI &amp; bank SMS auto-capture</li>
-            <li>Needs-review inbox</li>
-            <li>Google Sheets sync - your Sheet</li>
+            <li>No bank login or third-party bank access</li>
+            <li>Google Sheets sync - your own Sheet</li>
           </ul>
           <p class="hero__actions" style="justify-content:center;margin-top:18px;">
-            <a class="btn btn--play" href="https://play.google.com/store/apps/details?id=com.kharchlog.app" aria-label="Get Kharch Log on Google Play"><span class="btn--play__text"><span class="btn--play__kicker">GET IT ON</span><span class="btn--play__brand">Google Play</span></span></a>
-            <a class="btn" data-pay
-               href="../pay/?product=kharchlog&amp;plan=lifetime&amp;currency=INR"
-               data-href-inr="../pay/?product=kharchlog&amp;plan=lifetime&amp;currency=INR"
-               data-href-usd="../pay/?product=kharchlog&amp;plan=lifetime&amp;currency=USD"
-               data-label-inr="Pay ₹149"
-               data-label-usd="Pay $2">Pay ₹149</a>
+            <a class="btn" href="../pay/?product=kharchlog&amp;plan=lifetime&amp;currency=INR">Pay ₹149</a>
           </p>
           <p style="margin-top:12px;font-size:.9rem;color:var(--muted);text-align:center;">
-            Install free on Play, then unlock. Docs: <a href="https://kharchlog.com/" rel="noopener">kharchlog.com</a>
+            Available on <a href="https://play.google.com/store/apps/details?id=com.kharchlog.app" rel="noopener">Google Play</a> · <a href="https://kharchlog.com/" rel="noopener">kharchlog.com</a>
           </p>
         </div>
       </div>
@@ -3519,42 +3502,95 @@ transition: none;
 
     <section class="section seo-block">
       <h2>Why this pricing model</h2>
-      <p>Online PDF sites monetize uploads and caps. We monetize a desktop license after a fair free daily try - and we don't need your IDs on our servers to edit a PDF. Download free (2 edits/day, no subscription). Unlock yearly or lifetime when you need more. Kharch Log is a one-time unlock with the spreadsheet living in <em>your</em> Google account.</p>
-      <p style="color:var(--muted);">Questions? <a href="mailto:support@easypeeze.com">support@easypeeze.com</a> - <a href="../refund/">Refunds</a> - <a href="../about/">About</a>
-        <a href="../contact/">Contact</a></p>
+      <p>Online PDF sites monetize uploads and caps. We monetize a desktop license after a fair free daily try - and we don't need your IDs on our servers to edit a PDF. Kharch Log is a one-time INR unlock with the spreadsheet living in <em>your</em> Google account.</p>
+      <p style="color:var(--muted);">Questions? <a href="mailto:support@easypeeze.com">support@easypeeze.com</a> - <a href="../refund/">Refunds</a> - <a href="../about/">About</a> - <a href="../contact/">Contact</a></p>
     </section>
 
   </main>
   <footer class="site-footer">
     <div class="site-footer__inner">
-      <div class="site-footer__brand">
-        <img src="/logo-footer.webp" decoding="async" alt="Eazy Peeze Apps" />
-        <span>Eazy Peeze Apps</span>
+      <div class="site-footer__top">
+        <div class="site-footer__brand">
+          <a class="site-footer__logo" href="../">
+            <img src="/logo-footer.webp" decoding="async" alt="Eazy Peeze Apps" width="168" height="145" />
+          </a>
+          <p class="site-footer__tag">Simple tools. Zero hassle.</p>
+          <p class="site-footer__blurb">Pdf Buddy for Windows and Kharch Log for Android - offline-first tools from Easy Peeze Technologies. Eazy Peeze Apps is designed and marketed by <a href="https://easypeezetech.com/">Easy Peeze Technologies</a>.</p>
+        </div>
+        <div class="site-footer__cols">
+          <div class="site-footer__col">
+            <h3>Products</h3>
+            <a href="../products/pdf-buddy/">Pdf Buddy</a>
+            <a href="https://kharchlog.com/" rel="noopener">Kharch Log</a>
+            <a href="../products/">All products</a>
+            <a href="../pricing/">Pricing</a>
+          </div>
+          <div class="site-footer__col">
+            <h3>Resources</h3>
+            <a href="../blog/">Blog</a>
+            <a href="../guides/">Guides</a>
+            <a href="../glossary/">Glossary</a>
+            <a href="../features/">Features</a>
+            <a href="../install/">Install</a>
+            <a href="../faq/">FAQ</a>
+          </div>
+          <div class="site-footer__col">
+            <h3>Company</h3>
+            <a href="https://easypeezetech.com/">Easy Peeze Technologies</a>
+            <a href="../about/">About</a>
+            <a href="../contact/">Contact</a>
+            <a href="../refund/">Refunds</a>
+            <a href="../privacy/">Privacy</a>
+            <a href="../terms/">Terms</a>
+          </div>
+          <div class="site-footer__col">
+            <h3>Get in touch</h3>
+            <a href="mailto:support@easypeeze.com">support@easypeeze.com</a>
+            <a href="../contact/">Contact us</a>
+          </div>
+        </div>
       </div>
-            <nav aria-label="Footer">
-        <a href="../">Home</a>
-        <a href="../products/">Products</a>
-        <a href="../pricing/">Pricing</a>
+      <div class="site-footer__bottom">
+        <p class="site-footer__copy">© 2026 Eazy Peeze Apps. All rights reserved.</p>
+        <div class="site-footer__legal">
+          <a href="../privacy/">Privacy</a>
+          <a href="../terms/">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script>
+  (function () {
+    var section = document.getElementById('pdf-buddy');
+    if (!section) return;
+    var currency = 'INR';
+    var btns = section.querySelectorAll('.pay-currency__btn');
+    function apply() {
+      btns.forEach(function (b) {
+        b.classList.toggle('is-active', b.getAttribute('data-currency') === currency);
+      });
+      section.querySelectorAll('[data-price-inr]').forEach(function (el) {
+        el.textContent = currency === 'USD' ? el.getAttribute('data-price-usd') : el.getAttribute('data-price-inr');
+      });
+      section.querySelectorAll('[data-suffix-inr]').forEach(function (el) {
+        el.textContent = currency === 'USD' ? el.getAttribute('data-suffix-usd') : el.getAttribute('data-suffix-inr');
+      });
+      section.querySelectorAll('a[data-pay]').forEach(function (a) {
         a.setAttribute('href', currency === 'USD' ? a.getAttribute('data-href-usd') : a.getAttribute('data-href-inr'));
         a.textContent = currency === 'USD' ? a.getAttribute('data-label-usd') : a.getAttribute('data-label-inr');
       });
     }
-    document.querySelectorAll('.pay-currency__btn').forEach(function (btn) {
+    btns.forEach(function (btn) {
       btn.addEventListener('click', function () {
-        // Only enabled currencies are selectable.
-        if (btn.disabled || btn.getAttribute('aria-disabled') === 'true') return;
         currency = btn.getAttribute('data-currency') === 'USD' ? 'USD' : 'INR';
         apply();
       });
     });
-    // Gate USD on Razorpay (/health.usdEnabled).
-    setUsdEnabled(false);
-    fetch(trackerUrl + '/health', { credentials: 'omit' })
-      .then(function (r) { return r.json(); })
-      .then(function (h) {
-        setUsdEnabled(!!(h && h.usdEnabled && h.razorpay));
-      })
-      .catch(function () { setUsdEnabled(false); });
+    var urlCur = (new URLSearchParams(location.search).get('currency') || '').toUpperCase();
+    if (urlCur === 'USD') {
+      currency = 'USD';
+    }
+    apply();
   })();
   </script>
 </body>

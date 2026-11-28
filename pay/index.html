@@ -3384,6 +3384,10 @@ transition: none;
       <p class="meta" id="pay-sub">Use the same Google email you sign in with in the Windows app.</p>
     </div>
     <section class="section" style="max-width:480px;">
+      <div class="pay-currency" id="pay-currency-wrap" role="group" aria-label="Currency" style="margin-bottom:14px;">
+        <button type="button" class="pay-currency__btn is-active" data-currency="INR">₹ INR</button>
+        <button type="button" class="pay-currency__btn" data-currency="USD">$ USD</button>
+      </div>
       <p class="pay-price" id="pay-price">₹299 <span class="pay-once" id="pay-once">/ year</span></p>
       <p class="pay-status" id="status" role="status" aria-live="assertive" hidden></p>
       <label class="pay-label" for="firstName">First name <span class="req" aria-hidden="true">*</span></label>
@@ -3403,7 +3407,7 @@ transition: none;
       window.EASYPEEZE_PAY = {
         trackerUrl: 'https://easypeeze-tools-j6dbitzprq-el.a.run.app',
         razorpayKeyId: 'rzp_live_TVqX95CxZTFsuk',
-        usdEnabled: false,
+        usdEnabled: true,
         product: 'pdfbuddy',
         plans: {
           yearly: {
